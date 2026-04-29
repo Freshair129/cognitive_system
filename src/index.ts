@@ -67,8 +67,30 @@ app.post('/query', async (req, res) => {
 import fs from 'fs/promises'
 import path from 'path'
 
-// Helper to read GKS root
-const GKS_ROOT = process.env.GKS_BROWSE_ROOT || process.env.GKS_ROOT || './data'
+// Brain Management
+const CONFIG_FILE = path.join(process.cwd(), 'brains-config.json')
+let brains: { name: string; path: string }[] = [
+  { name: 'Default', path: process.env.GKS_BROWSE_ROOT || process.env.GKS_ROOT || './data' }
+]
+let activeBrainIndex = 0
+
+async function loadBrains() {
+  try {
+    const data = await fs.readFile(CONFIG_FILE, 'utf-8')
+    const config = JSON.parse(data)
+    brains = config.brains || brains
+    activeBrainIndex = config.activeBrainIndex ?? 0
+  } catch (e) {}
+}
+loadBrains()
+
+async function saveBrains() {
+  await fs.writeFile(CONFIG_FILE, JSON.stringify({ brains, activeBrainIndex }, null, 2))
+}
+
+function getActiveRoot() {
+  return brains[activeBrainIndex]?.path || './data'
+}
 
 // Serve static frontend
 app.use(express.static(path.join(process.cwd(), 'web', 'dist')))
@@ -138,7 +160,7 @@ app.get('/api/atoms', async (req, res) => {
     const typeFilter = req.query.type as string | undefined
     const statusFilter = req.query.status as string | undefined
     
-    const indexPath = path.join(GKS_ROOT, 'gks', '00_index', 'atomic_index.jsonl')
+    const indexPath = path.join(getActiveRoot(), 'gks', '00_index', 'atomic_index.jsonl')
     const atoms: any[] = []
     
     try {
@@ -154,7 +176,7 @@ app.get('/api/atoms', async (req, res) => {
       }
     } catch (e) {
       // Fallback: scan directories if index not found
-      const scanned = await scanAtomsFallback(GKS_ROOT)
+      const scanned = await scanAtomsFallback(getActiveRoot())
       for (const entry of scanned) {
         if (typeFilter && entry.type !== typeFilter) continue
         if (statusFilter && entry.status !== statusFilter) continue
@@ -177,7 +199,7 @@ app.get('/api/atoms/:id', async (req, res) => {
       return
     }
     const type = typeMatch[1].toLowerCase()
-    const filePath = path.join(GKS_ROOT, 'gks', type, `${id}.md`)
+    const filePath = path.join(getActiveRoot(), 'gks', type, `${id}.md`)
     
     const content = await fs.readFile(filePath, 'utf-8')
     
@@ -222,7 +244,7 @@ app.get('/api/atoms/:id', async (req, res) => {
 
 app.get('/api/graph', async (req, res) => {
   try {
-    const indexPath = path.join(GKS_ROOT, 'gks', '00_index', 'atomic_index.jsonl')
+    const indexPath = path.join(getActiveRoot(), 'gks', '00_index', 'atomic_index.jsonl')
     const nodes: any[] = []
     const edges: any[] = []
     let atomEntries: any[] = []
@@ -236,7 +258,7 @@ app.get('/api/graph', async (req, res) => {
         } catch (e) {}
       }
     } catch (e) {
-      atomEntries = await scanAtomsFallback(GKS_ROOT)
+      atomEntries = await scanAtomsFallback(getActiveRoot())
     }
     
     for (const entry of atomEntries) {
@@ -256,7 +278,7 @@ app.get('/api/graph', async (req, res) => {
 
 app.get('/api/inbound', async (req, res) => {
   try {
-    const inboundDir = path.join(GKS_ROOT, '.brain', 'msp', 'projects', 'evaAI', 'inbound')
+    const inboundDir = path.join(getActiveRoot(), '.brain', 'msp', 'projects', 'evaAI', 'inbound')
     let files: string[] = []
     try {
       files = await fs.readdir(inboundDir)
@@ -280,7 +302,7 @@ app.get('/api/inbound', async (req, res) => {
 app.get('/api/hotfixes', async (req, res) => {
   try {
     // Read directly from gks/hotfix/*.md as a simple list
-    const hotfixDir = path.join(GKS_ROOT, 'gks', 'hotfix')
+    const hotfixDir = path.join(getActiveRoot(), 'gks', 'hotfix')
     let files: string[] = []
     try {
       files = await fs.readdir(hotfixDir)
@@ -297,7 +319,7 @@ app.get('/api/hotfixes', async (req, res) => {
 
 app.get('/api/sessions', async (req, res) => {
   try {
-    const sessionDir = path.join(GKS_ROOT, '.brain', 'msp', 'projects', 'evaAI', 'session')
+    const sessionDir = path.join(getActiveRoot(), '.brain', 'msp', 'projects', 'evaAI', 'session')
     let files: string[] = []
     try {
       files = await fs.readdir(sessionDir)
@@ -308,26 +330,27 @@ app.get('/api/sessions', async (req, res) => {
   }
 })
 
-// Alias /query to /api/recall
-app.post('/api/recall', async (req, res) => {
-  // Delegate to existing query handler logic or just redirect internally
-  const { query, topK = 5, strategy } = req.body
-  if (!query) return res.status(400).json({ error: 'query required' })
-  try {
-    const result = await recall(store, query, { topK, strategy })
-    res.json({
-      query: result.query,
-      hits: result.hits.map((h: any) => ({
-        id: h.id,
-        source: h.source,
-        score: h.score,
-        snippet: h.snippet,
-      })),
-      tookMs: result.tookMs,
-    })
-  } catch (e: any) {
-    res.status(500).json({ error: e.message })
+// Brain APIs
+app.get('/api/brains', (req, res) => {
+  res.json({ brains, activeBrainIndex })
+})
+
+app.post('/api/brains', async (req, res) => {
+  const { name, path: brainPath } = req.body
+  if (!name || !brainPath) return res.status(400).json({ error: 'name and path required' })
+  brains.push({ name, path: brainPath })
+  await saveBrains()
+  res.json({ success: true, brains })
+})
+
+app.post('/api/brains/switch', async (req, res) => {
+  const { index } = req.body
+  if (typeof index !== 'number' || index < 0 || index >= brains.length) {
+    return res.status(400).json({ error: 'invalid index' })
   }
+  activeBrainIndex = index
+  await saveBrains()
+  res.json({ success: true, activeBrainIndex })
 })
 
 const PORT = process.env.PORT ?? 3000

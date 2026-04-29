@@ -6,6 +6,7 @@ import GraphView from './components/GraphView'
 import AtomDetail from './components/AtomDetail'
 import SearchBar from './components/SearchBar'
 import StatusBar from './components/StatusBar'
+import BrainSwitcher from './components/BrainSwitcher'
 
 export default function App() {
   const [atoms, setAtoms] = useState<Atom[]>([])
@@ -13,6 +14,7 @@ export default function App() {
   const [selectedAtomId, setSelectedAtomId] = useState<string | null>(null)
   const [inboundCount, setInboundCount] = useState(0)
   const [hotfixCount, setHotfixCount] = useState(0)
+  const [reloadKey, setReloadKey] = useState(0)
   
   useEffect(() => {
     // Initial fetch
@@ -27,11 +29,12 @@ export default function App() {
       setInboundCount(inboundRes.length)
       setHotfixCount(hotfixRes.length)
     }).catch(console.error)
-  }, [])
+  }, [reloadKey])
 
   return (
     <>
-      <div className="top-bar">
+      <div className="top-bar" style={{ justifyContent: 'space-between' }}>
+        <BrainSwitcher onChanged={() => setReloadKey(k => k + 1)} />
         <SearchBar onSelectAtom={setSelectedAtomId} />
       </div>
       

@@ -68,5 +68,28 @@ export const api = {
       body: JSON.stringify({ query, topK })
     })
     return res.json()
+  },
+  
+  getBrains: async (): Promise<{ brains: any[]; activeBrainIndex: number }> => {
+    const res = await fetch('/api/brains')
+    return res.json()
+  },
+  
+  addBrain: async (name: string, path: string): Promise<any> => {
+    const res = await fetch('/api/brains', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, path })
+    })
+    return res.json()
+  },
+  
+  switchBrain: async (index: number): Promise<any> => {
+    const res = await fetch('/api/brains/switch', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ index })
+    })
+    return res.json()
   }
 }
