@@ -6,6 +6,14 @@ import { getStore } from './memory.js'
 const app = express()
 app.use(express.json())
 
+app.use((req, res, next) => {
+  res.setHeader(
+    'Content-Security-Policy',
+    "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'"
+  )
+  next()
+})
+
 const store = getStore()
 
 app.get('/health', (_req, res) => {
