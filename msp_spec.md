@@ -11,7 +11,7 @@
 
 MSP คือ **gatekeeper ของระบบความรู้ (GKS)**. ทุกอย่างที่ agent (Claude/Gemini/SLM) จะเขียนเข้า `gks/` ต้อง
 
-1. ผ่าน **inbound queue** (`/submit-memory` → `.brain/msp/projects/evaAI/inbound/`)
+1. ผ่าน **inbound queue** (`/submit-memory` → `.brain/msp/projects/inbound/`)
 2. ผ่าน **validator** (frontmatter schema + forbidden fields + ID uniqueness + wikilink resolution)
 3. ผ่าน **human review** (สำหรับ artifact ระดับ ADR / FEAT / Blueprint)
 4. ถูก **promoted** โดย MSP เป็นคนเซ็ตฟิลด์ derived (commit_hash, promotion_level, ฯลฯ)
