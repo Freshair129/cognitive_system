@@ -12,7 +12,7 @@ tags:
   - runtime
   - architecture
   - foundation
-crosslinks: {"references":["FRAME--MSP-ARCHITECTURE"]}
+crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2"]}
 created_at: 2026-05-03T16:55:05.485Z
 ---
 
@@ -66,4 +66,4 @@ Everything that is **not** about a single atom on disk:
 
 ## Source
 
-Architectural clarification for M7+. Supersedes the implicit "MSP builds it all" framing in `FRAME--MSP-ARCHITECTURE` (v1).
+Architectural clarification for M7+. Supersedes the implicit "MSP builds it all" framing in `FRAME--MSP-ARCHITECTURE-V2` (v1).
