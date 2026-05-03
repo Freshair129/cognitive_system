@@ -50,8 +50,9 @@ npx gks new-feature msp-validator \
 ## Status
 
 - [x] **M0** — Bootstrap (npm + GKS install + `gks/` tree)
-- [ ] **M1** — Slice `msp_spec.md` into atoms via inbound queue
-- [ ] **M2** — Implement validator under `src/validator/`
+- [x] **M1** — Slice `msp_spec.md` into atoms via inbound queue
+- [x] **M2** — Implement validator under `src/validator/` (49/49 tests)
+- [ ] **M3** — Pre-commit hook + load forbidden-fields list from `atomic_contract.yaml` at runtime
 
 ## License
 
