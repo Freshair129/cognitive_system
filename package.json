@@ -11,7 +11,8 @@
     "msp-validate": "./dist/validator/cli.js",
     "msp-backlinks": "./dist/memory/backlinks/cli.js",
     "msp-run-task": "./dist/codegen/cli.js",
-    "msp-propose": "./scripts/msp/propose.mjs"
+    "msp-propose": "./scripts/msp/propose.mjs",
+    "msp-mcp-server": "./dist/mcp/bin.js"
   },
   "files": [
     "dist/",
@@ -44,7 +45,9 @@
   },
   "dependencies": {
     "@freshair129/gks": "^3.5.6",
-    "yaml": "^2.5.1"
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "yaml": "^2.5.1",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@types/node": "^22.5.0",
