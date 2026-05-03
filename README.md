@@ -69,8 +69,26 @@ npx gks new-feature msp-validator \
 - [x] **M5d** — `required_fields` enforced from `atomic_contract.yaml` runtime
 - [x] **M5e** — `ADR--HUMAN-REVIEW-GATES` + `msp_spec.md` §12 alignment
 - [x] **M5f** — shellcheck CI step
+- [x] **M6** — `msp-mcp-server` exposing 6 MSP-specific tools over stdio MCP (run side-by-side with `gks-mcp-server`)
 
-**218 tests passing across 34 files.** 84 atoms in `gks/` (validator dogfood: 84/84 pass).
+**233 tests passing across 38 files.** 89 atoms in `gks/` (validator dogfood: 89/89 pass).
+
+## MCP server
+
+```jsonc
+// ~/.config/claude/mcp.json
+{
+  "mcpServers": {
+    "msp": {
+      "command": "npx",
+      "args": ["-y", "msp-mcp-server"],
+      "env": { "MSP_ROOT": "/path/to/your/msp/repo" }
+    }
+  }
+}
+```
+
+Tools exposed: `msp_validate`, `msp_propose`, `msp_run_task`, `msp_session_append`, `msp_episode_append`, `msp_backlinks_rebuild`. Run alongside `gks-mcp-server` — the client merges tool surfaces.
 
 ## Pre-commit hook
 
