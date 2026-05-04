@@ -23,6 +23,10 @@ Status legend in titles: 🟡 drafted, 🔵 awaiting upstream review, 🟢 merge
 | 03 | `03-backlinks-api.md` | Stable backlinks derivation API (`gks backlinks --emit=jsonl`) | 🟡 drafted |
 | 04 | `04-smart-connections-parity.md` | Document Smart Connections + nomic-embed-text-v1.5 compatibility | 🟡 drafted |
 
+## How to submit upstream
+
+→ **[`SUBMISSION.md`](./SUBMISSION.md)** — copy-paste-ready issue bodies for relay to `Freshair129/GksV3`. 3 strategies (umbrella issue / 4 separate / 4 draft PRs); recommends separate issues. ~8 min to ship all 4.
+
 ## Why these live in MSP repo
 
 GKS's storage-engine scope (per `SCOPE.md`) is intentionally narrow. These
