@@ -1,10 +1,13 @@
 import { spawn } from 'node:child_process'
+import { existsSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import { fileURLToPath } from 'node:url'
 
 import { describe, expect, it } from 'vitest'
 
 const repoRoot = fileURLToPath(new URL('../..', import.meta.url))
 const binSrc = `${repoRoot}/src/mcp/bin.ts`
+const binDist = `${repoRoot}/dist/mcp/bin.js`
 
 interface JsonRpc {
   jsonrpc: '2.0'
@@ -15,12 +18,36 @@ interface JsonRpc {
   error?: unknown
 }
 
-function callServer(messages: JsonRpc[]): Promise<JsonRpc[]> {
+interface CallOpts {
+  /** Spawn cwd. Defaults to repoRoot. */
+  cwd?: string
+  /** Extra args appended after the script (e.g. ['--root=G:\\msp']). */
+  extraArgs?: string[]
+  /** Replace env entirely — drops MSP_ROOT etc. set by callers above. */
+  env?: NodeJS.ProcessEnv
+}
+
+/**
+ * Pick the fastest reliable way to launch the bin:
+ * - Prefer `node dist/mcp/bin.js` if a build exists (works in CI + Windows
+ *   without depending on npx PATH resolution).
+ * - Fall back to `npx tsx src/mcp/bin.ts` for fresh checkouts where `npm test`
+ *   wasn't preceded by `npm run build`. CI's `npm ci` resolves npx properly.
+ */
+function spawnBin(args: readonly string[], cwd: string, env: NodeJS.ProcessEnv) {
+  if (existsSync(binDist)) {
+    return spawn(process.execPath, [binDist, ...args], { cwd, env })
+  }
+  return spawn('npx', ['tsx', binSrc, ...args], { cwd, env })
+}
+
+function callServer(messages: JsonRpc[], opts: CallOpts = {}): Promise<JsonRpc[]> {
   return new Promise((resolveProm, rejectProm) => {
-    const child = spawn('npx', ['tsx', binSrc], {
-      cwd: repoRoot,
-      env: { ...process.env, MSP_ROOT: repoRoot },
-    })
+    const child = spawnBin(
+      opts.extraArgs ?? [],
+      opts.cwd ?? repoRoot,
+      opts.env ?? { ...process.env, MSP_ROOT: repoRoot },
+    )
     let stdout = ''
     let stderr = ''
     child.stdout.on('data', (d) => (stdout += d.toString()))
@@ -82,4 +109,56 @@ describe('msp-mcp-server bin (spawned)', () => {
       'msp_validate',
     ])
   }, 30_000)
+
+  // Regression test for cwd-resolution bug discovered 2026-05-07: when launched
+  // by Claude Desktop, cwd is C:\Windows\system32 — paths must come from --root.
+  it('uses --root=<path> argv flag when cwd is unrelated and MSP_ROOT is unset', async () => {
+    // Build a clean env that drops MSP_ROOT but keeps PATH (needed for npx/node).
+    const cleanEnv: NodeJS.ProcessEnv = {}
+    for (const k of ['PATH', 'Path', 'SystemRoot', 'TEMP', 'TMP', 'USERPROFILE', 'HOME', 'APPDATA']) {
+      const v = process.env[k]
+      if (v) cleanEnv[k] = v
+    }
+
+    const responses = await callServer(
+      [
+        {
+          jsonrpc: '2.0',
+          id: 1,
+          method: 'initialize',
+          params: {
+            protocolVersion: '2024-11-05',
+            capabilities: {},
+            clientInfo: { name: 'cwd-bug-regression', version: '1' },
+          },
+        },
+        { jsonrpc: '2.0', method: 'notifications/initialized' },
+        {
+          jsonrpc: '2.0',
+          id: 2,
+          method: 'tools/call',
+          params: { name: 'msp_validate', arguments: { all: true } },
+        },
+      ],
+      {
+        // Spawn from a directory that is NOT the repo — emulates Claude Desktop
+        // launching from C:\Windows\system32. tmpdir() works on every platform.
+        cwd: tmpdir(),
+        extraArgs: [`--root=${repoRoot}`],
+        env: cleanEnv,
+      },
+    )
+
+    const validateResponse = responses.find((r) => r.id === 2)
+    expect(validateResponse?.result).toBeDefined()
+
+    // The result is a tool-text-result wrapping JSON. Pull out content[0].text
+    // and parse — we just care that it didn't error out with "atomic index unreadable".
+    const content = (validateResponse!.result as { content: Array<{ text: string }>; isError?: boolean }).content
+    expect(content[0].text).not.toMatch(/atomic index unreadable/)
+    expect(content[0].text).not.toMatch(/C:\\\\Windows\\\\system32/)
+
+    const parsed = JSON.parse(content[0].text) as { ok: boolean }
+    expect(typeof parsed.ok).toBe('boolean')
+  }, 60_000)
 })
