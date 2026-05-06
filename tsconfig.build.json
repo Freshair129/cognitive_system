@@ -8,5 +8,13 @@
     "sourceMap": false
   },
   "include": ["src/**/*"],
-  "exclude": ["test/**/*", "node_modules", "dist", "gks", ".brain"]
+  "exclude": [
+    "test/**/*",
+    "node_modules",
+    "dist",
+    "gks",
+    ".brain",
+    "src/index.ts",
+    "src/memory.ts"
+  ]
 }
