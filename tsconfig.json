@@ -19,8 +19,6 @@
     "dist",
     "gks",
     ".brain",
-    "web",
-    "src/index.ts",
-    "src/memory.ts"
+    "web"
   ]
 }

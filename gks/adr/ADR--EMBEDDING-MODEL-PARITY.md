@@ -18,7 +18,7 @@ created_at: 2026-05-04T02:02:48.728Z
 
 # ADR — embedding model parity
 
-> **Status note (validated 2026-05-04)**: GKS 3.6.0 + `createNomicEmbedder()` are **unreleased on npm** at the time of this ADR — `npm view @freshair129/gks` returns 3.5.6 latest, which exports providers `'ollama' | 'openai' | 'mock'` only (no nomic). 3.6.0 source exists on `Freshair129/GksV3` (CHANGELOG documents `createNomicEmbedder`) but has not been published. This ADR records the **target architecture once 3.6.0 ships**. Until then, MSP uses GKS 3.5.6 with `provider: 'ollama'` (BGE-M3 default) or `'mock'` for tests — see fallback section. Tracked at `upstream/gks-proposals/05-publish-3.6.0.md`.
+> **Status (updated 2026-05-07)**: ✅ GKS 3.6.0 published to npm. `npm view @freshair129/gks dist-tags` → `{ latest: '3.6.0' }`. MSP `package.json` bumped to `^3.6.0`. `createNomicEmbedder()` is now usable directly. Migration tracked in `AUDIT--GKS-3.6.0-PUBLISHED`. The "Fallback while GKS 3.6.0 is unpublished" section below is now historical — kept for traceability of the workaround period (2026-05-04 to 2026-05-07).
 
 ## Context
 

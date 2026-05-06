@@ -22,7 +22,7 @@ Status legend in titles: 🟡 drafted, 🔵 awaiting upstream review, 🟢 merge
 | 02 | `02-verify-flow-through-superseded.md` | `gks verify-flow --through-superseded` flag | 🔵 [GksV3#31](https://github.com/Freshair129/GksV3/issues/31) |
 | 03 | `03-backlinks-api.md` | Stable backlinks derivation API (`gks backlinks --emit=jsonl`) | 🔵 [GksV3#30](https://github.com/Freshair129/GksV3/issues/30) |
 | 04 | `04-smart-connections-parity.md` | Document Smart Connections + nomic-embed-text-v1.5 compatibility | 🔵 [GksV3#29](https://github.com/Freshair129/GksV3/issues/29) |
-| 05 | `05-publish-3.6.0.md` | Publish `@freshair129/gks@3.6.0` to npm (currently latest is 3.5.6) | 🔵 [GksV3#28](https://github.com/Freshair129/GksV3/issues/28) (blocks `ADR--EMBEDDING-MODEL-PARITY`) |
+| 05 | `merged/05-publish-3.6.0.md` | Publish `@freshair129/gks@3.6.0` to npm | 🟢 [GksV3#28](https://github.com/Freshair129/GksV3/issues/28) — published 2026-05-07 |
 
 ## How to submit upstream
 

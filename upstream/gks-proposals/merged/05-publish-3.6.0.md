@@ -1,6 +1,7 @@
-# 🔵 Proposal 05 — Publish `@freshair129/gks@3.6.0` to npm
+# 🟢 Proposal 05 — Publish `@freshair129/gks@3.6.0` to npm
 
 **Filed upstream**: [Freshair129/GksV3#28](https://github.com/Freshair129/GksV3/issues/28) (2026-05-07)
+**Merged upstream**: published to npm 2026-05-07, commit `3ddff50` (`release: v3.6.0`), tag `v3.6.0`. `npm view @freshair129/gks dist-tags` → `{ latest: '3.6.0' }`. MSP `package.json` bumped to `^3.6.0` in [next commit].
 
 ## Why
 
