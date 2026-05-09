@@ -11,6 +11,7 @@ const targets = [
   'dist/codegen/cli.js',
   'dist/codegen/master/cli.js',
   'dist/mcp/bin.js',
+  'dist/symbols/cli.js',
 ]
 
 for (const path of targets) {
