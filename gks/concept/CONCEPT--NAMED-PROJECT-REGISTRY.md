@@ -14,7 +14,7 @@ tags:
   - aspirational
   - cherry-pick
   - agent-agnostic
-crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2","CONCEPT--AGENT-AGNOSTIC","ADR--PATH-ENCODING"]}
+crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2","CONCEPT--AGENT-AGNOSTIC","ADR--PATH-ENCODING","ADR--GLOBAL-VS-WORKSPACE"]}
 created_at: 2026-05-09T00:00:00.000Z
 ---
 
@@ -71,8 +71,8 @@ The resolved name is looked up in `~/.msp/projects.yaml` to obtain the path + se
 ## Open questions
 
 - Schema for `.mspconfig` — TOML, YAML, JSON, or single-line shorthand? Lean toward single-line shorthand for the common case + full file for the rare one.
-- Per-project secrets (e.g. Anthropic key for cross-project consolidation) — registry value or external? External.
-- Identity/soul — global (lives in `~/.msp/identity.json`, shared across projects) or per-project (lives in each `<project>/.brain/.../identity.json`)? Probably global with per-project overrides; decide in Phase B.
+- Per-project secrets (e.g. Anthropic key for cross-project consolidation) — registry value or external? External (per `ADR--GLOBAL-VS-WORKSPACE`).
+- Identity/soul global vs per-project — **resolved** in `ADR--GLOBAL-VS-WORKSPACE`: global at `~/.msp/identity.json` with optional sparse per-project override at `.brain/msp/projects/<ns>/identity.override.json`.
 
 ## Why this fits the agent-agnostic vision
 
