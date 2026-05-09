@@ -65,6 +65,15 @@
 
 Layer 0 (human rule) of `BLUEPRINT--CONTRADICTION-DETECTION-IMPL` shipped: `CLAUDE.md` § "Atom contradiction policy" + `.github/pull_request_template.md` checklist. Reviewers verify supersession discipline at PR-author time before any new mechanical layer (`PROTO--RECIPROCAL-SUPERSESSION`, `PROTO--DOMAIN-UNIQUENESS`, embedding hint, opt-in LLM judge) lands. See `ADR--CONTRADICTION-DETECTION-STACK` for the full 5-layer plan.
 
+## Post-v0.4.0 — inbound → candidates migration
+
+Per `BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION` (4-phase plan):
+
+- **Phase 1 (additive — done, PR #46)**: `msp_candidate` MCP tool + `CandidateWriter` + Knowledge Browser tab. Writes to `.brain/.../candidates/`.
+- **Phase 2 (deprecate — in progress)**: `msp_propose` MCP tool marked `[deprecated]`; handler delegates to `CandidateWriter` (now writes candidates/, not inbound/). CLI wrapper `npm run msp:propose` still works for one cycle.
+- **Phase 3 (delete — pending)**: remove `msp_propose` MCP tool, `scripts/msp/propose.mjs`, `.brain/.../inbound/` dir, gks inbound CLI references.
+- **Phase 4 (atom supersession + audit — pending)**: flip `CONCEPT--INBOUND-QUEUE` → superseded by `CONCEPT--KNOWLEDGE-LAYERS-V2`; same for `ADR--PROMOTION-WORKFLOW` + `ADR--PROMOTION-LEVELS`; final AUDIT atom.
+
 ## Counts at v0.4.0
 
 - **159 atoms** in `gks/`

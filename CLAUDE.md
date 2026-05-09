@@ -67,6 +67,15 @@ npm run typecheck                            # tsc --noEmit
 
 For phase 6 atoms (AUDIT), `msp:propose` patches the `phase: 5` GKS limit up to 6 — see `scripts/msp/propose.mjs`. (Workaround for `@freshair129/gks` 3.5.6 not accepting `phase: 6`; tracked at `upstream/gks-proposals/01-phase-6-acceptance.md`.)
 
+### Deprecation notice — `msp_propose` / inbound queue
+
+As of Phase 2 of `BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION` (2026-05-09):
+
+- **`msp_propose` MCP tool** is deprecated. Description prefixed with `[deprecated]`. Handler still works (delegates to `CandidateWriter` internally) but writes to `.brain/.../candidates/` instead of `.brain/.../inbound/`. Will be removed in Phase 3.
+- **`msp_candidate` MCP tool** is the replacement for runtime agent atom proposals (shipped via PR #46).
+- **`npm run msp:propose` CLI wrapper** still works in Phase 2 for back-compat with existing scripts; will also be removed in Phase 3.
+- **Inbound directory** (`.brain/msp/projects/<ns>/inbound/`) is no longer written to by MCP tools (deprecated `msp_propose` now writes to `candidates/`). Directory removal in Phase 3.
+
 ## Branching + PR conventions
 
 - Branch name: `claude/msp-<milestone>-<slug>` (e.g. `claude/msp-m7c-retrieval`)

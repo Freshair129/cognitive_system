@@ -1,6 +1,6 @@
 import { mkdtemp, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { join, resolve } from 'node:path'
 
 import { afterEach, describe, expect, it } from 'vitest'
 
@@ -13,37 +13,61 @@ afterEach(async () => {
   }
 })
 
-describe('msp_propose tool', () => {
+describe('msp_propose tool (deprecated — Phase 2)', () => {
   it('has the right name', () => {
     expect(name).toBe('msp_propose')
   })
 
-  it('finds its wrapper script even when ctx.root points outside the package', async () => {
-    // Simulates the Claude Desktop on Windows case where the MCP server
-    // launches with cwd=C:\Windows\system32 — ctx.root then defaults there
-    // and used to make the tool resolve `scripts/msp/propose.mjs` to a
-    // non-existent path. The wrapper must be found via the package layout.
-    //
-    // Use a tmpdir for both ctx.root *and* args.root so the wrapper's gks call
-    // writes (or fails) inside the tmpdir — never into the real repo, which
-    // would race with --all validator tests running in parallel.
+  it('writes to candidates/ instead of inbound/ (Phase 2 delegation)', async () => {
+    const root = await mkdtemp(join(tmpdir(), 'msp-propose-phase2-'))
+    tmpRoots.push(root)
+
+    const result = await handler({ root })({
+      id: 'CONCEPT--TEST-PROPOSE-DELEGATES',
+      title: 'phase 2 delegation smoke',
+      body: 'placeholder',
+      phase: 1,
+      type: 'concept',
+    })
+    const payload = JSON.parse(result.content[0]!.text)
+    expect(payload.proposed_id).toBe('CONCEPT--TEST-PROPOSE-DELEGATES')
+    expect(payload.candidate_path).toBe(
+      resolve(root, '.brain/msp/projects/evaAI/candidates/CONCEPT--TEST-PROPOSE-DELEGATES.md'),
+    )
+    // back-compat alias for clients still reading inbound_path
+    expect(payload.inbound_path).toBe(payload.candidate_path)
+    expect(payload._deprecation_notice).toMatch(/msp_candidate/)
+  })
+
+  it('honours args.root over ctx.root (no wrapper-script lookup needed)', async () => {
     const stranger = await mkdtemp(join(tmpdir(), 'msp-propose-stranger-'))
     const projectRoot = await mkdtemp(join(tmpdir(), 'msp-propose-root-'))
     tmpRoots.push(stranger, projectRoot)
 
     const result = await handler({ root: stranger })({
-      id: 'CONCEPT--TEST-MCP-PROPOSE-WRAPPER-LOOKUP',
-      title: 'wrapper lookup smoke',
+      id: 'CONCEPT--TEST-PROPOSE-ARGS-ROOT',
+      title: 'args.root override',
       body: 'placeholder',
       phase: 1,
       type: 'concept',
       root: projectRoot,
     })
-    const text = result.content[0]!.text
-    // Either the propose succeeds, or it fails for a wrapper-internal reason
-    // (e.g. gks rejects the empty project) — but it MUST NOT fail with the
-    // "Cannot find module .../scripts/msp/propose.mjs" symptom from the bug.
-    expect(text).not.toMatch(/Cannot find module/)
-    expect(text).not.toMatch(/scripts[\\/]msp[\\/]propose\.mjs/i)
-  }, 30_000)
+    const payload = JSON.parse(result.content[0]!.text)
+    expect(payload.candidate_path.startsWith(projectRoot)).toBe(true)
+    expect(payload.candidate_path.startsWith(stranger)).toBe(false)
+  })
+
+  it('rejects malformed proposed_id (validation delegated to CandidateWriter)', async () => {
+    const root = await mkdtemp(join(tmpdir(), 'msp-propose-bad-id-'))
+    tmpRoots.push(root)
+    await expect(
+      handler({ root })({
+        id: 'concept--lower',
+        title: 't',
+        body: 'b',
+        phase: 1,
+        type: 'concept',
+      }),
+    ).rejects.toThrow(/Invalid proposed_id/)
+  })
 })

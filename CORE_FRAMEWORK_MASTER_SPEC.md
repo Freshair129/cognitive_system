@@ -451,7 +451,7 @@ Runtime agent  ──►  msp_candidate(proposed_id, type, title, body, rational
 - Promotion เป็น manual PR action — ไม่มี CLI auto-promote (no `gks inbound promote` style)
 - Validator ทำงานตอน CI (PR check) — เป็น shift-right ของ inbound model
 
-#### 7.2.2 Inbound path (legacy — phasing out)
+#### 7.2.2 Inbound path (🔴 deprecated since Phase 2 — to be deleted in Phase 3)
 
 ```
 Agent Draft (.md)
@@ -477,7 +477,7 @@ Agent Draft (.md)
                             human review (optional)
 ```
 
-> 🟡 **Status:** Legacy. Coexists with candidates path during migration. See `BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION` for the 4-phase deprecation plan (Phase 1 additive — done; Phase 2 deprecate / Phase 3 delete / Phase 4 atom supersession — pending).
+> 🔴 **Status:** Deprecated as of Phase 2 (2026-05-09). `msp_propose` MCP tool description prefixed `[deprecated]`; handler still works but delegates to `CandidateWriter` and writes to `candidates/` not `inbound/`. CLI `npm run msp:propose` still functional for one cycle. Phase 3 (delete tool + scripts + dir) and Phase 4 (atom supersession) pending. See `BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION`.
 
 ### 7.3 Frontmatter Contract (ย่อ)
 
