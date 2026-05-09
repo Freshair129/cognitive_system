@@ -4,7 +4,7 @@
 
 ## What this repo is
 
-GKS is a *storage engine*. MSP is the *Memory OS gatekeeper* above it — schema validation, ID-uniqueness, wikilink resolution, forbidden-field guard, and the promote workflow that turns a candidate atom in `.brain/msp/projects/evaAI/inbound/` into a stable artifact under `gks/<type>/`.
+GKS is a *storage engine*. MSP is the *Memory OS gatekeeper* above it — schema validation, ID-uniqueness, wikilink resolution, forbidden-field guard, and the promote workflow that turns a candidate atom in `.brain/msp/projects/evaAI/candidates/` into a stable artifact under `gks/<type>/`.
 
 On top of those gatekeeper surfaces, the repo also ships an optional **Knowledge Browser** web UI: an interactive graph view, semantic recall, and a multi-vault Brain Switcher for navigating any GKS-compatible folder.
 
@@ -20,7 +20,7 @@ msp/
 │   ├── concept/  adr/  feat/  blueprint/  frame/
 │   └── audit/  task/  issues/
 ├── .brain/msp/projects/evaAI/        runtime state (mostly gitignored)
-│   ├── inbound/                      candidate atoms awaiting review
+│   ├── candidates/                   candidate atoms awaiting human PR promotion
 │   ├── audit/  session/  memory/  vector/
 ├── src/                              MSP gatekeeper (validator, codegen, MCP, memory)
 │   ├── validator/  codegen/  memory/  mcp/  identity/  obsidian/  orchestrator/
@@ -35,9 +35,9 @@ P1 CONCEPT → P2 ADR/FEAT → P3 BLUEPRINT → P4 TASK → P5 src/ → P6 AUDIT
 ```
 
 ```sh
-npm run msp:propose -- CONCEPT--MSP-VALIDATOR --title="..."
-npm run msp:list                                    # what's in inbound
-npm run msp:promote CONCEPT--MSP-VALIDATOR          # → gks/concept/
+# Runtime atom proposals: use the msp_candidate MCP tool (writes to
+# .brain/msp/projects/<ns>/candidates/). Promotion to gks/<type>/ is a
+# human PR action — see ADR--AGENT-WRITE-BOUNDARIES.
 npm run msp:verify FEAT--MSP-VALIDATOR              # gate before src/
 npm run msp:validate                                # MSP's own validator
 ```
@@ -101,7 +101,7 @@ Tools exposed: `msp_validate`, `msp_propose`, `msp_run_task`, `msp_session_appen
 bash examples/hooks/install.sh
 ```
 
-After install, `git commit` blocks if any staged `.md` under `gks/` or `.brain/msp/projects/<ns>/inbound/` fails the validator. Skip with the standard `git commit --no-verify`. Full docs: [`examples/hooks/README.md`](./examples/hooks/README.md).
+After install, `git commit` blocks if any staged `.md` under `gks/` fails the validator. Skip with the standard `git commit --no-verify`. Full docs: [`examples/hooks/README.md`](./examples/hooks/README.md).
 
 ## Memory + codegen surfaces
 
@@ -132,7 +132,7 @@ import { runTask }           from '@/codegen/runner'
 
 ## Knowledge Browser (web UI)
 
-A visual interface for exploring the GKS atom graph: interactive 2D graph (Cytoscape.js), semantic recall, multi-vault Brain Switcher, atom inspector with frontmatter, and live counts for hotfixes / inbound queue.
+A visual interface for exploring the GKS atom graph: interactive 2D graph (Cytoscape.js), semantic recall, multi-vault Brain Switcher, atom inspector with frontmatter, and live counts for hotfixes / candidates queue.
 
 ### Prerequisites
 

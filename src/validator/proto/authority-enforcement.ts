@@ -19,8 +19,8 @@
  *        each containing T1/T2/T3 keys whose values are string arrays.
  *      - no user appears in more than one tier (sets are disjoint).
  *      - every tier's `allowed_paths` includes at least one entry that
- *        matches the inbound queue (substring `inbound`) so T1 has somewhere
- *        legal to write.
+ *        matches the candidates queue (substring `candidates`) so T1 has
+ *        somewhere legal to drop proposals (per ADR--AGENT-WRITE-BOUNDARIES).
  *      - every path entry is a non-empty string.
  *
  * The CI workflow that does the actual git-author + diff matching is
@@ -171,15 +171,15 @@ function validateShape(parsed: unknown): PredicateViolation[] {
     tierPaths[t] = collected
   }
 
-  // Every tier should be able to write to inbound (so T1 has somewhere legal).
+  // Every tier should be able to write to candidates (so T1 has somewhere legal).
   for (const t of TIERS) {
     const paths = tierPaths[t]
     if (paths.length === 0) continue // already warned
-    const hasInbound = paths.some((p) => p.includes('inbound'))
-    if (!hasInbound) {
+    const hasCandidates = paths.some((p) => p.includes('candidates'))
+    if (!hasCandidates) {
       violations.push(
         violation(
-          `authority.yaml: allowed_paths.${t} must include at least one inbound-queue path (T1 needs somewhere to drop proposals)`,
+          `authority.yaml: allowed_paths.${t} must include at least one candidates-queue path (T1 needs somewhere to drop proposals)`,
         ),
       )
     }

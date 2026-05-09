@@ -31,7 +31,8 @@ the file must be well-formed and internally consistent:
 - tier membership sets are disjoint (no user in two tiers)
 - every entry under `tiers.<T>` and `allowed_paths.<T>` is a non-empty string
 - each tier's `allowed_paths` includes at least one entry referencing the
-  inbound queue (so T1 has somewhere legal to write)
+  candidates queue (so T1 has somewhere legal to write — per
+  `ADR--AGENT-WRITE-BOUNDARIES`)
 
 If the file is absent the predicate passes vacuously — projects can opt in
 when they're ready.

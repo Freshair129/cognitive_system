@@ -40,9 +40,9 @@ describe('PROTO--AUTHORITY-ENFORCEMENT predicate', () => {
         '  T2: ["alice"]',
         '  T3: ["boss"]',
         'allowed_paths:',
-        '  T1: [".brain/msp/projects/*/inbound/**"]',
-        '  T2: [".brain/msp/projects/*/inbound/**", "gks/concept/**", "gks/feat/**"]',
-        '  T3: [".brain/msp/projects/*/inbound/**", "**"]',
+        '  T1: [".brain/msp/projects/*/candidates/**"]',
+        '  T2: [".brain/msp/projects/*/candidates/**", "gks/concept/**", "gks/feat/**"]',
+        '  T3: [".brain/msp/projects/*/candidates/**", "**"]',
       ].join('\n'),
     )
     const result = await predicate({
@@ -75,9 +75,9 @@ describe('PROTO--AUTHORITY-ENFORCEMENT predicate', () => {
         '  T2: ["alice"]',
         '  T3: ["boss"]',
         'allowed_paths:',
-        '  T1: [".brain/msp/projects/*/inbound/**"]',
-        '  T2: [".brain/msp/projects/*/inbound/**"]',
-        '  T3: [".brain/msp/projects/*/inbound/**", "**"]',
+        '  T1: [".brain/msp/projects/*/candidates/**"]',
+        '  T2: [".brain/msp/projects/*/candidates/**"]',
+        '  T3: [".brain/msp/projects/*/candidates/**", "**"]',
       ].join('\n'),
     )
     const result = await predicate({
@@ -100,8 +100,8 @@ describe('PROTO--AUTHORITY-ENFORCEMENT predicate', () => {
         '  T3: ["boss"]',
         'allowed_paths:',
         '  T1: []',
-        '  T2: [".brain/msp/projects/*/inbound/**", "gks/concept/**"]',
-        '  T3: [".brain/msp/projects/*/inbound/**", "**"]',
+        '  T2: [".brain/msp/projects/*/candidates/**", "gks/concept/**"]',
+        '  T3: [".brain/msp/projects/*/candidates/**", "**"]',
       ].join('\n'),
     )
     const result = await predicate({
@@ -115,7 +115,7 @@ describe('PROTO--AUTHORITY-ENFORCEMENT predicate', () => {
     expect(empty!.severity).toBe('warning')
   })
 
-  it('flags a tier whose allowed_paths lacks an inbound entry', async () => {
+  it('flags a tier whose allowed_paths lacks an candidates entry', async () => {
     const root = await freshRoot()
     await writeAuthority(
       root,
@@ -126,8 +126,8 @@ describe('PROTO--AUTHORITY-ENFORCEMENT predicate', () => {
         '  T3: ["boss"]',
         'allowed_paths:',
         '  T1: ["gks/concept/**"]',
-        '  T2: [".brain/msp/projects/*/inbound/**", "gks/concept/**"]',
-        '  T3: [".brain/msp/projects/*/inbound/**", "**"]',
+        '  T2: [".brain/msp/projects/*/candidates/**", "gks/concept/**"]',
+        '  T3: [".brain/msp/projects/*/candidates/**", "**"]',
       ].join('\n'),
     )
     const result = await predicate({
@@ -136,7 +136,7 @@ describe('PROTO--AUTHORITY-ENFORCEMENT predicate', () => {
     })
     expect(result.ok).toBe(false)
     expect(
-      result.violations.some((v) => /allowed_paths\.T1.*inbound/.test(v.message)),
+      result.violations.some((v) => /allowed_paths\.T1.*candidates/.test(v.message)),
     ).toBe(true)
   })
 
@@ -167,9 +167,9 @@ describe('PROTO--AUTHORITY-ENFORCEMENT predicate', () => {
         '  T2: ["alice"]',
         '  T3: ["boss"]',
         'allowed_paths:',
-        '  T1: [".brain/msp/projects/*/inbound/**"]',
-        '  T2: [".brain/msp/projects/*/inbound/**"]',
-        '  T3: [".brain/msp/projects/*/inbound/**", "**"]',
+        '  T1: [".brain/msp/projects/*/candidates/**"]',
+        '  T2: [".brain/msp/projects/*/candidates/**"]',
+        '  T3: [".brain/msp/projects/*/candidates/**", "**"]',
       ].join('\n'),
     )
     const result = await predicate({

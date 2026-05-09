@@ -102,7 +102,6 @@ describe('msp-mcp-server bin (spawned)', () => {
       'msp_episode_append',
       'msp_identity_get',
       'msp_identity_set',
-      'msp_propose',
       'msp_recall',
       'msp_remember',
       'msp_run_task',

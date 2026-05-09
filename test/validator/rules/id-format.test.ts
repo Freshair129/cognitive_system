@@ -63,7 +63,7 @@ describe('idFormat rule', () => {
     expect(errors[0]!.rule).toBe('id-format')
   })
 
-  it('falls back to proposed_id for inbound atoms', () => {
+  it('falls back to proposed_id for candidate atoms', () => {
     expect(idFormat(atom({ proposed_id: 'CONCEPT--FOO' }), ctx)).toEqual([])
   })
 })

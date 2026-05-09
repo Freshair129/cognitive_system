@@ -6,7 +6,6 @@ import * as compressTool from './tools/compress.js'
 import * as episodeAppend from './tools/episode-append.js'
 import * as identityGet from './tools/identity-get.js'
 import * as identitySet from './tools/identity-set.js'
-import * as propose from './tools/propose.js'
 import * as recallTool from './tools/recall.js'
 import * as remember from './tools/remember.js'
 import * as runTask from './tools/run-task.js'
@@ -21,7 +20,6 @@ export interface ServerOpts {
 
 const TOOLS = [
   validateTool,
-  propose,
   candidate,
   runTask,
   sessionAppend,

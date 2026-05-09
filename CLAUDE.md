@@ -56,8 +56,6 @@ The PR reviewer must verify the above before approving any PR that adds or modif
 ## Useful commands
 
 ```bash
-npm run msp:propose -- TYPE--SLUG --title="..." --body="..." --phase=N --type=concept|adr|feat|blueprint|audit
-npm run msp:promote -- TYPE--SLUG --force   # move from inbound to gks/<type>/
 npm run msp:index                            # regen atomic_index.jsonl
 npm run msp:check-links                      # verify all crosslinks resolve
 npx tsx src/validator/cli.ts --all           # full atom validation
@@ -65,16 +63,21 @@ npm test                                     # vitest run
 npm run typecheck                            # tsc --noEmit
 ```
 
-For phase 6 atoms (AUDIT), `msp:propose` patches the `phase: 5` GKS limit up to 6 — see `scripts/msp/propose.mjs`. (Workaround for `@freshair129/gks` 3.5.6 not accepting `phase: 6`; tracked at `upstream/gks-proposals/01-phase-6-acceptance.md`.)
+Atom proposals at runtime go through the `msp_candidate` MCP tool (writes to
+`.brain/msp/projects/<ns>/candidates/`); promotion to `gks/<type>/` is a
+human PR action — there is no `gks inbound promote` or `msp:promote` CLI.
+See `ADR--AGENT-WRITE-BOUNDARIES`.
 
-### Deprecation notice — `msp_propose` / inbound queue
+### Inbound queue removed (Phase 3)
 
-As of Phase 2 of `BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION` (2026-05-09):
+As of Phase 3 of `BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION` (2026-05-09):
 
-- **`msp_propose` MCP tool** is deprecated. Description prefixed with `[deprecated]`. Handler still works (delegates to `CandidateWriter` internally) but writes to `.brain/.../candidates/` instead of `.brain/.../inbound/`. Will be removed in Phase 3.
-- **`msp_candidate` MCP tool** is the replacement for runtime agent atom proposals (shipped via PR #46).
-- **`npm run msp:propose` CLI wrapper** still works in Phase 2 for back-compat with existing scripts; will also be removed in Phase 3.
-- **Inbound directory** (`.brain/msp/projects/<ns>/inbound/`) is no longer written to by MCP tools (deprecated `msp_propose` now writes to `candidates/`). Directory removal in Phase 3.
+- `msp_propose` MCP tool — **removed**. Use `msp_candidate` instead.
+- `npm run msp:propose` / `msp:list` / `msp:promote` scripts — **removed**.
+- `scripts/msp/propose.mjs` — **deleted**.
+- `.brain/msp/projects/<ns>/inbound/` — no longer written; remove the empty
+  directory if present (it's gitignored). Atom supersession of
+  `CONCEPT--INBOUND-QUEUE` happens in Phase 4.
 
 ## Branching + PR conventions
 
