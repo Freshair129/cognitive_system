@@ -16,7 +16,7 @@ Usage:
   msp-validate --json <file>...
 
 Flags:
-  --all              walk gks/ + .brain/msp/projects/<ns>/inbound/ recursively
+  --all              walk gks/ recursively
   --root=<dir>       project root (default: cwd)
   --index=<path>     atomic index path (default: <root>/gks/00_index/atomic_index.jsonl)
   --json             machine-readable output
@@ -27,12 +27,6 @@ Exit codes:
   1  hard-rule violations
   2  internal error (missing index, malformed YAML, unreadable file)
 `
-
-function findProjectInbound(root: string): string {
-  // Spec defaults to .brain/msp/projects/evaAI/inbound/ but we just probe
-  // for any project under .brain/msp/projects/*/inbound/.
-  return resolve(root, '.brain/msp/projects')
-}
 
 interface PrettyOpts {
   json: boolean
@@ -120,7 +114,7 @@ async function main(): Promise<number> {
   let results: ValidationResult[]
 
   if (values.all) {
-    const dirs = [resolve(root, 'gks'), findProjectInbound(root)]
+    const dirs = [resolve(root, 'gks')]
     results = await validateAll(dirs, ctx)
   } else if (positionals.length > 0) {
     results = []

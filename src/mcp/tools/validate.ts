@@ -16,7 +16,7 @@ export const inputSchema = {
     .array(z.string())
     .optional()
     .describe('Absolute or root-relative paths to atom .md files. Mutually exclusive with `all`.'),
-  all: z.boolean().optional().describe('If true, walks gks/ + .brain/.../inbound/. Default false.'),
+  all: z.boolean().optional().describe('If true, walks gks/ recursively. Default false.'),
   root: z.string().optional().describe('Project root (default: server context root).'),
 }
 

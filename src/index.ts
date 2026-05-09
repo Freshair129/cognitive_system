@@ -278,29 +278,6 @@ app.get('/api/graph', async (req, res) => {
   }
 })
 
-app.get('/api/inbound', async (req, res) => {
-  try {
-    const inboundDir = path.join(getActiveRoot(), '.brain', 'msp', 'projects', 'evaAI', 'inbound')
-    let files: string[] = []
-    try {
-      files = await fs.readdir(inboundDir)
-    } catch (e) {
-      // Directory might not exist
-    }
-    
-    const candidates = []
-    for (const f of files) {
-      if (f.endsWith('.json')) {
-        const data = await fs.readFile(path.join(inboundDir, f), 'utf-8')
-        candidates.push(JSON.parse(data))
-      }
-    }
-    res.json(candidates)
-  } catch (error: any) {
-    res.status(500).json({ error: error.message })
-  }
-})
-
 app.get('/api/candidates', async (_req, res) => {
   try {
     const writer = new CandidateWriter({ root: getActiveRoot() })

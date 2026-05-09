@@ -62,11 +62,6 @@ export const api = {
     return res.json()
   },
   
-  getInbound: async (): Promise<any[]> => {
-    const res = await fetch('/api/inbound')
-    return res.json()
-  },
-
   listCandidates: async (): Promise<CandidateSummary[]> => {
     const res = await fetch('/api/candidates')
     return res.json()

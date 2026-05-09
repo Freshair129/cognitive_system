@@ -15,24 +15,20 @@ export default function App() {
   const [atoms, setAtoms] = useState<Atom[]>([])
   const [graphData, setGraphData] = useState<GraphData>({ nodes: [], edges: [] })
   const [selectedAtomId, setSelectedAtomId] = useState<string | null>(null)
-  const [inboundCount, setInboundCount] = useState(0)
   const [hotfixCount, setHotfixCount] = useState(0)
   const [candidatesCount, setCandidatesCount] = useState(0)
   const [leftTab, setLeftTab] = useState<LeftTab>('atoms')
   const [reloadKey, setReloadKey] = useState(0)
 
   useEffect(() => {
-    // Initial fetch
     Promise.all([
       api.getAtoms(),
       api.getGraph(),
-      api.getInbound(),
       api.getHotfixes(),
       api.listCandidates()
-    ]).then(([atomsRes, graphRes, inboundRes, hotfixRes, candidatesRes]) => {
+    ]).then(([atomsRes, graphRes, hotfixRes, candidatesRes]) => {
       setAtoms(atomsRes)
       setGraphData(graphRes)
-      setInboundCount(inboundRes.length)
       setHotfixCount(hotfixRes.length)
       setCandidatesCount(candidatesRes.length)
     }).catch(console.error)
@@ -99,7 +95,6 @@ export default function App() {
 
       <StatusBar
         totalAtoms={atoms.length}
-        inboundCount={inboundCount}
         hotfixCount={hotfixCount}
         candidatesCount={candidatesCount}
       />

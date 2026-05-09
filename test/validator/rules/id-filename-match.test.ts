@@ -28,12 +28,12 @@ describe('idFilenameMatch', () => {
     expect(errs[0]!.rule).toBe('id-filename-match')
   })
 
-  it('strips .rev-XXXX suffix from inbound filenames', () => {
+  it('strips .rev-XXXX suffix from legacy filenames (back-compat for archived inbound revisions)', () => {
     expect(
       idFilenameMatch(
         atom(
           { proposed_id: 'CONCEPT--FOO' },
-          '/x/.brain/.../inbound/CONCEPT--FOO.rev-abc123-deadbeef.md',
+          '/x/legacy/CONCEPT--FOO.rev-abc123-deadbeef.md',
         ),
         ctx,
       ),
