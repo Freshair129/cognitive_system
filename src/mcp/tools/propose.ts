@@ -1,21 +1,14 @@
-import { spawnSync } from 'node:child_process'
-import { dirname, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { resolve } from 'node:path'
 
 import { z } from 'zod'
 
-import { errorResult, jsonResult, type ToolHandlerCtx, type ToolTextResult } from '../types.js'
+import { CandidateWriter } from '../../memory/candidates/writer.js'
+import { jsonResult, type ToolHandlerCtx, type ToolTextResult } from '../types.js'
 
 export const name = 'msp_propose'
 
-// scripts/msp/propose.mjs ships with this package alongside dist/mcp/tools/propose.js,
-// so resolve it relative to this file — not the runtime project root (which may be the
-// caller's cwd, e.g. C:\Windows\system32 when MCP is launched from Claude Desktop).
-const here = dirname(fileURLToPath(import.meta.url))
-const WRAPPER_PATH = resolve(here, '../../../scripts/msp/propose.mjs')
-
 export const description =
-  'Propose a new atom to the MSP inbound queue. Handles phase 0..6 (the wrapper translates phase 6 to GKS phase 5 then patches the file). Returns the proposed_id and inbound file path.'
+  '[deprecated — use msp_candidate instead] Propose a new atom. As of Phase 2 of BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION, this tool delegates to CandidateWriter and writes to .brain/.../candidates/ (not inbound/). Result shape preserved for back-compat. Will be removed in Phase 3.'
 
 export const inputSchema = {
   id: z
@@ -23,7 +16,7 @@ export const inputSchema = {
     .describe('Atomic id (TYPE--SLUG, e.g. CONCEPT--FOO or AUDIT--BAR; ADR-NNN also accepted).'),
   title: z.string().describe('Human-readable title (≤ 100 chars).'),
   body: z.string().describe('Body markdown. Pass "placeholder" if you intend to edit before promoting.'),
-  phase: z.number().int().min(0).max(6).describe('Atom phase 0..6.'),
+  phase: z.number().int().min(0).max(6).describe('Atom phase 0..6 (informational only — no longer routed through phase-6 patching wrapper).'),
   type: z.string().describe('Atom type (concept, adr, feat, blueprint, audit, frame, ...).'),
   root: z.string().optional().describe('Project root (default: server context root).'),
 }
@@ -38,30 +31,20 @@ export function handler(ctx: ToolHandlerCtx) {
     root?: string
   }): Promise<ToolTextResult> => {
     const root = resolve(args.root ?? ctx.root)
-
-    const r = spawnSync(
-      'node',
-      [
-        WRAPPER_PATH,
-        args.id,
-        `--title=${args.title}`,
-        `--body=${args.body}`,
-        `--phase=${args.phase}`,
-        `--type=${args.type}`,
-        `--root=${root}`,
-      ],
-      { encoding: 'utf8', cwd: root },
-    )
-
-    if (r.status !== 0) {
-      return errorResult(`msp:propose failed (exit ${r.status}): ${r.stderr || r.stdout}`)
-    }
-
-    // Wrapper output includes "✓ <id> → <path>"
-    const match = (r.stdout + r.stderr).match(/✓\s+(\S+)\s+→\s+(\S+)/)
-    if (!match) {
-      return jsonResult({ proposed_id: args.id, output: r.stdout })
-    }
-    return jsonResult({ proposed_id: match[1], inbound_path: match[2] })
+    const writer = new CandidateWriter({ root, proposedBy: 'agent' })
+    const result = await writer.write({
+      type: args.type,
+      proposed_id: args.id,
+      title: args.title,
+      body: args.body,
+    })
+    return jsonResult({
+      proposed_id: args.id,
+      inbound_path: result.path,
+      candidate_path: result.path,
+      overwritten: result.overwritten,
+      _deprecation_notice:
+        'msp_propose is deprecated; switch to msp_candidate. File now lives in candidates/ not inbound/.',
+    })
   }
 }
