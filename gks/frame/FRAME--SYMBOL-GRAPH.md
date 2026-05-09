@@ -2,7 +2,7 @@
 id: FRAME--SYMBOL-GRAPH
 phase: 0
 type: frame
-status: draft
+status: stable
 tier: genesis
 source_type: axiomatic
 vault_id: default
