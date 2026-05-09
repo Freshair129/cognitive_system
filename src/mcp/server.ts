@@ -10,6 +10,11 @@ import * as recallTool from './tools/recall.js'
 import * as remember from './tools/remember.js'
 import * as runTask from './tools/run-task.js'
 import * as sessionAppend from './tools/session-append.js'
+import * as symbolCommunity from './tools/symbol-community.js'
+import * as symbolImpact from './tools/symbol-impact.js'
+import * as symbolLookup from './tools/symbol-lookup.js'
+import * as symbolNeighbors from './tools/symbol-neighbors.js'
+import * as symbolSearch from './tools/symbol-search.js'
 import * as validateTool from './tools/validate.js'
 import type { ToolHandlerCtx } from './types.js'
 
@@ -30,6 +35,11 @@ const TOOLS = [
   compressTool,
   identityGet,
   identitySet,
+  symbolLookup,
+  symbolNeighbors,
+  symbolImpact,
+  symbolCommunity,
+  symbolSearch,
 ] as const
 
 export function createMspMcpServer(opts: ServerOpts = {}): McpServer {

@@ -15,8 +15,13 @@
  * "logical module" intuition.
  */
 
-import { UndirectedGraph } from 'graphology'
+// graphology@0.25 publishes a CommonJS module — under Node's ESM-of-CJS rules
+// the named export `UndirectedGraph` is not visible, but the default export
+// exposes all classes. Default-import + destructure is portable.
+import graphology from 'graphology'
 import type { AbstractGraph } from 'graphology-types'
+
+const { UndirectedGraph } = graphology
 
 import type { CommunityDetectionResult, CommunityDetector, Edge, Symbol } from '../types.js'
 

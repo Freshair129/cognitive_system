@@ -15,6 +15,7 @@ coverage/
 .brain/**/session/
 .brain/**/audit/
 .brain/**/memory/*.json
+.brain/**/symbols/
 
 # Claude Code local state (subagent worktrees, transcripts, etc.)
 .claude/
