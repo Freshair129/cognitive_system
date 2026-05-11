@@ -27,6 +27,19 @@ created_at: 2026-05-11T21:48:00.000Z
 
 # FEAT — Framework-aware symbol indexing
 
+> ⚠️ **Superseded on 2026-05-11.** This FEAT bundled four concerns (motivation, decision, algorithms, invariants) which violates atom-type semantics per `KNOWLEDGE-TYPES.md`. It has been decomposed into:
+>
+> - `CONCEPT--SYMBOLS-FRAMEWORK-AWARENESS` (motivation, scope)
+> - `ADR--SYMBOLS-FRAMEWORK-AWARENESS` (decision + decomposition rationale)
+> - `ALGO--SYMBOLS-FRAMEWORK-RECOGNITION` (algorithms per recognizer)
+> - `PROTO--SYMBOLS-FRAMEWORK-INVARIANTS` (validator-enforced graph invariants)
+>
+> See `ADR--SYMBOLS-FRAMEWORK-AWARENESS` for rationale. Implementation work continues per `HANDOFF-SYMBOLS-EXPANSION-PHASE-2.md`.
+>
+> The original content below is preserved verbatim for historical reference.
+
+---
+
 ## User-facing behaviour
 
 ยกระดับความฉลาดของ Symbol Graph ให้เข้าใจ "หน้าที่" ของโค้ดในบริบทของ Framework ต่างๆ ไม่ใช่แค่โครงสร้าง Syntax:
