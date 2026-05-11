@@ -12,7 +12,7 @@ tags:
   - contract
   - schema
   - atomic
-crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2","CONCEPT--KNOWLEDGE-LAYERS-V2"]}
+crosslinks: {"references":["FRAME--MSP-ARCHITECTURE-V2","CONCEPT--KNOWLEDGE-LAYERS-V2","CONCEPT--CODEGEN-MICROTASK-CONTRACT"]}
 created_at: 2026-05-03T07:01:51.814Z
 ---
 
@@ -30,6 +30,7 @@ Every file in `gks/<type>/` obeys a single schema: required frontmatter fields, 
 | Field constraints | §4.4 | same |
 | Anti-hallucination rules | §4.5 | `ADR--ANTI-HALLUCINATION-RULES` |
 | Epistemic + crosslinks block | §4.6 | `CONCEPT--EPISTEMIC-METADATA` + `FRAME--CROSSLINKS-VOCABULARY` |
+| **Codegen Contract** | §5 | [[CONCEPT--CODEGEN-MICROTASK-CONTRACT]] (Sibling contract) |
 
 ## What "atomic" means here
 
@@ -49,7 +50,7 @@ Atoms are **content-addressable through the index** — `gks/00_index/atomic_ind
 
 ## Why a contract at all
 
-Without one, four predictable failure modes appear (see `CONCEPT--INBOUND-QUEUE`). The contract makes each failure mode mechanically detectable.
+Without one, four predictable failure modes appear (see [[CONCEPT--KNOWLEDGE-LAYERS-V2]] § "Legacy Failure Modes"). The contract makes each failure mode mechanically detectable.
 
 ## Source
 

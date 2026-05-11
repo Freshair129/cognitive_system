@@ -53,6 +53,13 @@ The PR reviewer must verify the above before approving any PR that adds or modif
 
 **Why this is human-enforced first:** a few mechanical layers will follow (`PROTO--RECIPROCAL-SUPERSESSION`, `PROTO--DOMAIN-UNIQUENESS`, embedding similarity hint, opt-in LLM judge — all specified in `ADR--CONTRADICTION-DETECTION-STACK`), but the cheapest place to catch a contradiction is at the moment the author is writing it. Mechanical layers are scaffolding around this rule, not replacements for it.
 
+### Mandatory Context Tracing (Crosslinks Rule)
+
+Before modifying any existing atom or writing code based on an atom, agents (and humans) **MUST** read the related atoms listed in the `crosslinks.references` or `Source` sections of that file. 
+
+Atoms in this architecture are not isolated; they form a dependency graph. Modifying an ADR without reading its parent CONCEPT, or implementing a feature without checking its related ADRs, leads to semantic contradictions that schema validators cannot catch. Optimize for accuracy over speed: always trace the context first.
+
+
 ## Useful commands
 
 ```bash

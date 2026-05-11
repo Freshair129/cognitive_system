@@ -38,17 +38,19 @@ The runner could be (a) a long-running daemon that watches `.brain/<ns>/tasks/` 
 | 3 | Escalated to Gemini and **Gemini** succeeded (audit-flagged) |
 | 4 | Escalated to Opus review (human action required) |
 
-### Per-invocation pipeline
+### Per-invocation pipeline (CLI Implementation)
 
 1. Load + validate `T*.task.yaml`.
 2. Resolve `parent_blueprint` from `gks/blueprint/`; refuse if missing or non-stable.
 3. Build SLM prompt from: blueprint geography + task prompt + acceptance criteria.
-4. Call SLM (Qwen 2.5 Coder default).
+4. **Call Primary SLM**: Execute `python G:\qwen-cli\qwen.py --code --no-stream` with the assembled prompt.
 5. Apply `ADR--CODEGEN-POST-PROCESSING` strip pipeline.
 6. Apply `ADR--CODEGEN-FORBIDDEN-PATTERNS` checks.
 7. Write candidate to sandbox; run acceptance test.
 8. On fail, prepare retry prompt per `ADR--CODEGEN-RETRY-POLICY`; jump to 4.
-9. After 3 retries: invoke Gemini (T2) once; if pass → exit 3; if fail → exit 4.
+9. **Escalation (v0.4.0)**: After 3 retries, invoke **Gemini CLI Subagent** via `gemini -p "<escalation_prompt>" -y`.
+    - If Gemini passes acceptance → exit 3.
+    - If Gemini fails → exit 4 (requires human review / Opus layer).
 10. Emit `MSP-ACT-` devlog row.
 
 ## Consequences

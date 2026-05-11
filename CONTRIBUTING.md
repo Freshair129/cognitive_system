@@ -53,9 +53,15 @@ graph TD
     - *Rationale*: Atoms define the contract. Reviewers can validate the design before code is written.
 2. **Implementation PR Second**: Create a new branch for code implementation based on the merged atoms in `main`.
 
-## Tools for AI Agents (Claude Code / Antigravity)
+## Tools for AI Agents (Claude Code / Antigravity / Gemini)
 - **Agent tool with `isolation: "worktree"`**: Automatically manages worktree lifecycle.
 - **Background Subagent (`run_in_background: true`)**: For long tasks (>30 min) that allow the human to continue working.
+- **Gemini CLI Subagent**: Use for boilerplate coding automation to save Claude's quota.
+    - Command: `gemini -p "<prompt>" -y`
+    - Use case: Unit test scaffolding, simple refactors, repetitive documentation.
+- **Qwen CLI (Local)**: Use for microtasks via Ollama to save quota.
+    - Command: `python G:\qwen-cli\qwen.py "prompt"`
+    - Use case: Code explanation, single-function generation, regex patterns.
 - **Foreground Subagent**: For research, lookups, or quick generation tasks that require immediate review.
 
 ## Verification Checklist
