@@ -118,6 +118,10 @@ export const pythonParser: SymbolParser = {
     
     const sourceCode = readFileSync(absolutePath, 'utf8')
     const tree = parser.parse(sourceCode)
+    if (!tree) {
+      // tree-sitter returned null — return empty result instead of throwing
+      return { symbols: [], edges: [] }
+    }
     // console.log(`[python-parser] parsing ${absolutePath}, root type: ${tree.rootNode.type}, children: ${tree.rootNode.childCount}`)
     const relFile = relPosix(absolutePath, repoRoot)
     const moduleId = makeId(relFile, relFile, 'module')

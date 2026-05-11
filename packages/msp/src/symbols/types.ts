@@ -67,7 +67,7 @@ export interface Community {
 export interface SymbolGraphMeta {
   schema_version: number
   last_built_at: string
-  parser: 'typescript' | 'tree-sitter'
+  parser: 'typescript' | 'tree-sitter' | 'multi'
   algorithm: 'leiden' | 'louvain'
   leiden_resolution: number
   leiden_seed: number
