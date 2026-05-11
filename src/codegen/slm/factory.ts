@@ -1,5 +1,6 @@
 import type { SlmCall, SlmClient } from '../types.js'
 import { createOllamaClient } from './ollama.js'
+import { createQwenClient } from './qwen.js'
 import { SlmError } from './errors.js'
 import type { SlmFactoryOpts } from './types.js'
 
@@ -18,6 +19,8 @@ export function createSlmClient(opts: SlmFactoryOpts = {}): SlmClient {
   switch (provider) {
     case 'ollama':
       return createOllamaClient(opts.ollama ?? {})
+    case 'qwen':
+      return createQwenClient(opts.qwen ?? {})
     case 'mock':
       return mockClient
     default:

@@ -28,8 +28,8 @@ We have formalized the following hierarchy:
 3. **Escalation Path**: If an SLM (Qwen) fails a microtask 3 times, it MUST be escalated to the T2 layer (Gemini).
 
 ## 5. Next Steps for Successor Agent
-- [ ] **Genesis Implementation**: Begin composing the first set of Genesis Blocks by linking Concept, Protocol, and Algo atoms.
-- [ ] **Codegen Runner**: Implement the logic in `src/codegen/runner.ts` mapping to the updated `ADR--CODEGEN-MICROTASK-RUNNER.md`.
+- [x] **Genesis Implementation**: Completed IDENTITY module (MOD/PROTOCOL/ALGO) and updated AUDIT logs.
+- [x] **Codegen Runner**: Implemented real SLM (Qwen) and Escalation (Gemini) wiring per ADR.
 - [ ] **Workspace Unification**: Work within the new multi-root workspace to maintain synchronization between GksV3 and MSP.
 
 ---

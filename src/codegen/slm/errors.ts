@@ -1,4 +1,4 @@
-export type SlmErrorKind = 'network' | 'http' | 'parse' | 'timeout' | 'config'
+export type SlmErrorKind = 'network' | 'http' | 'parse' | 'timeout' | 'config' | 'runtime'
 
 export class SlmError extends Error {
   constructor(

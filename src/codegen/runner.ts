@@ -14,6 +14,8 @@ import {
   type RunResult,
   type SlmClient,
 } from './types.js'
+import { createSlmClient } from './slm/factory.js'
+import { createGeminiEscalator } from './escalator/gemini.js'
 
 const DEFAULT_MAX_RETRIES = 3
 const DEFAULT_MODEL = 'mock-slm'
@@ -74,8 +76,9 @@ export async function runTask(
     )
   }
 
-  const slmClient: SlmClient = opts.slmClient ?? defaultMock
+  const slmClient: SlmClient = opts.slmClient ?? createSlmClient({ provider: (process.env.MSP_SLM_PROVIDER as any) ?? 'qwen' })
   const accept = opts.acceptanceRunner ?? defaultAcceptance
+  const escalator = opts.escalator ?? createGeminiEscalator()
   const model = opts.model ?? DEFAULT_MODEL
   const maxRetries = opts.maxRetries ?? DEFAULT_MAX_RETRIES
   const packageDeps = await loadPackageDeps(root)
@@ -154,8 +157,8 @@ export async function runTask(
   }
 
   // All retries exhausted. Optionally escalate.
-  if (opts.escalate !== false && opts.escalator) {
-    const r = await opts.escalator(task, blueprint, attempts)
+  if (opts.escalate !== false && escalator) {
+    const r = await escalator(task, blueprint, attempts)
     if (r.ok) {
       return {
         taskId: task.id,
