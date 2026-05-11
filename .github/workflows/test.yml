@@ -45,11 +45,14 @@ jobs:
       - name: typecheck
         run: npm run typecheck
 
+      - name: msp:index
+        # Must run BEFORE vitest: many tests (validator/cli, hooks, mcp tools) read
+        # gks/00_index/atomic_index.jsonl at runtime via --root=packages/msp.
+        # The .jsonl is gitignored — fresh CI checkout has no file until we generate it.
+        run: npm run msp:index
+
       - name: vitest
         run: npm test
-
-      - name: msp:index
-        run: npm run msp:index
 
       - name: msp:validate (whole tree)
         run: npm run msp:validate --workspace=packages/msp -- --all --root=packages/msp
