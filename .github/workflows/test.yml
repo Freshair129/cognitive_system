@@ -27,11 +27,15 @@ jobs:
           # Ubuntu runners ship shellcheck.
           shellcheck packages/msp/examples/hooks/*.sh
 
+      - name: build
+        # Build must run BEFORE typecheck: MSP imports from `@freshair129/gks/memory`
+        # which is exported via `dist/src/memory/index.d.ts` per packages/gks/package.json#exports.
+        # On a fresh `npm ci` checkout there is no dist/ yet, so typecheck fails to resolve
+        # GKS types unless we build first.
+        run: npm run build
+
       - name: typecheck
         run: npm run typecheck
-
-      - name: build
-        run: npm run build
 
       - name: vitest
         run: npm test
