@@ -64,6 +64,30 @@ describe('InboundQueue', () => {
     ).rejects.toThrow(/invalid phase/)
   })
 
+  it('accepts phase: 6 (post-implementation audit)', async () => {
+    const q = new InboundQueue({ inboundDir: join(dir, 'inbound') })
+    const r = await q.propose({
+      proposed_id: 'AUDIT--TEST-PHASE6',
+      phase: 6,
+      type: 'audit',
+      title: 'Audit atom at phase 6',
+      body: 'Post-implementation audit.',
+    })
+    expect(r.path).toMatch(/AUDIT--TEST-PHASE6/)
+    const md = await readFile(r.path, 'utf8')
+    expect(md).toContain('phase: 6')
+  })
+
+  it('still rejects phase: 7 and phase: -1', async () => {
+    const q = new InboundQueue({ inboundDir: join(dir, 'inbound') })
+    await expect(
+      q.propose({ proposed_id: 'AUDIT--X', phase: 7 as unknown as 6, type: 'audit', title: 'x', body: 'x' }),
+    ).rejects.toThrow(/invalid phase/)
+    await expect(
+      q.propose({ proposed_id: 'AUDIT--Y', phase: -1 as unknown as 0, type: 'audit', title: 'x', body: 'x' }),
+    ).rejects.toThrow(/invalid phase/)
+  })
+
   it('renders linked_symbols as flow-style array entries (ADR-009 cross-reference)', async () => {
     const q = new InboundQueue({ inboundDir: join(dir, 'inbound') })
     const r = await q.propose({

@@ -79,6 +79,7 @@ describe('gks-mcp-server', () => {
         'gks_hotfix_open',
         'gks_hotfix_list',
         'gks_hotfix_close',
+        'gks_backlinks',
       ].sort(),
     )
   })

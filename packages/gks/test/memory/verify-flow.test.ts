@@ -111,4 +111,49 @@ describe('verifyFlow', () => {
     expect(lines.some((l) => l.includes('FAILED'))).toBe(true)
     expect(lines.some((l) => l.includes('ADR--GHOST'))).toBe(true)
   })
+
+  describe('--through-superseded', () => {
+    it('halts at superseded by default with a helpful error message', () => {
+      const byId = map([
+        entry({ id: 'FEAT--Y', crosslinks: { references: ['FRAME--A-V1'] } }),
+        entry({ id: 'FRAME--A-V1', status: 'superseded', crosslinks: { superseded_by: ['FRAME--A-V2'] } }),
+        entry({ id: 'FRAME--A-V2', type: 'frame' }),
+      ])
+      const r = verifyFlow('FEAT--Y', byId)
+      expect(r.ok).toBe(false)
+      expect(r.errors[0]?.id).toBe('FRAME--A-V1')
+      expect(r.errors[0]?.reason).toContain('through-superseded')
+    })
+
+    it('walks through superseded atom via superseded_by when flag is set', () => {
+      const byId = map([
+        entry({ id: 'FEAT--Y', crosslinks: { references: ['FRAME--A-V1'] } }),
+        entry({ id: 'FRAME--A-V1', status: 'superseded', crosslinks: { superseded_by: ['FRAME--A-V2'] } }),
+        entry({ id: 'FRAME--A-V2', type: 'frame', crosslinks: { references: ['CONCEPT--X'] } }),
+        entry({ id: 'CONCEPT--X', type: 'concept' }),
+      ])
+      const r = verifyFlow('FEAT--Y', byId, { throughSuperseded: true })
+      expect(r.ok).toBe(true)
+      expect(r.visited.map((e) => e.id)).toContain('CONCEPT--X')
+    })
+
+    it('reports error when superseded atom has no superseded_by to follow', () => {
+      const byId = map([
+        entry({ id: 'FEAT--Y', crosslinks: { references: ['FRAME--DEAD'] } }),
+        entry({ id: 'FRAME--DEAD', status: 'superseded' }),
+      ])
+      const r = verifyFlow('FEAT--Y', byId, { throughSuperseded: true })
+      expect(r.ok).toBe(false)
+      expect(r.errors[0]?.reason).toContain('no superseded_by')
+    })
+
+    it('detects supersede cycles without infinite loop', () => {
+      const byId = map([
+        entry({ id: 'FRAME--LOOP', status: 'superseded', crosslinks: { superseded_by: ['FRAME--LOOP'] } }),
+      ])
+      const r = verifyFlow('FRAME--LOOP', byId, { throughSuperseded: true })
+      expect(r.ok).toBe(false)
+      expect(r.errors.some((e) => /cycle/.test(e.reason))).toBe(true)
+    })
+  })
 })

@@ -20,42 +20,57 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: npm
 
-      - run: npm ci
+      - name: install
+        # npm bug: platform-specific optional deps (e.g. @rollup/rollup-linux-x64-gnu)
+        # are NOT installed if the lockfile was generated on a different OS — even
+        # with `npm install` (it still honors the existing lockfile structure).
+        # Workaround per Rollup's error message: remove package-lock.json and reinstall.
+        # https://github.com/npm/cli/issues/4828
+        run: |
+          rm -f package-lock.json
+          npm install --no-audit --no-fund
 
-      - name: shellcheck examples/hooks/
+      - name: shellcheck packages/msp/examples/hooks/
         run: |
           # Ubuntu runners ship shellcheck.
-          shellcheck examples/hooks/*.sh
+          shellcheck packages/msp/examples/hooks/*.sh
+
+      - name: build
+        # Build must run BEFORE typecheck: MSP imports from `@freshair129/gks/memory`
+        # which is exported via `dist/src/memory/index.d.ts` per packages/gks/package.json#exports.
+        # On a fresh `npm ci` checkout there is no dist/ yet, so typecheck fails to resolve
+        # GKS types unless we build first.
+        run: npm run build
 
       - name: typecheck
         run: npm run typecheck
 
-      - name: build
-        run: npm run build
+      - name: msp:index
+        # Must run BEFORE vitest: many tests (validator/cli, hooks, mcp tools) read
+        # gks/00_index/atomic_index.jsonl at runtime via --root=packages/msp.
+        # The .jsonl is gitignored — fresh CI checkout has no file until we generate it.
+        run: npm run msp:index
 
       - name: vitest
         run: npm test
 
-      - name: msp:index
-        run: npm run msp:index
-
       - name: msp:validate (whole tree)
-        run: npm run msp:validate -- --all --root=.
+        run: npm run msp:validate --workspace=packages/msp -- --all --root=packages/msp
 
       - name: msp:backlinks (rebuild + determinism check)
         run: |
           # The .jsonl is gitignored — fresh checkout has no file to compare against.
           # Build it once, then run --check to assert a second pass is no-op (deterministic).
-          npm run msp:backlinks
-          npm run msp:backlinks -- --check
+          npm run msp:backlinks --workspace=packages/msp
+          npm run msp:backlinks --workspace=packages/msp -- --check
 
       - name: msp:check-links (gks crosslink integrity)
-        run: npm run msp:check-links
+        run: npm run msp:check-links --workspace=packages/msp
 
       - name: verify-flow per FEAT
         run: |
           set -e
-          for feat in $(ls gks/feat/FEAT--*.md | xargs -I {} basename {} .md); do
+          for feat in $(ls packages/msp/gks/feat/FEAT--*.md | xargs -I {} basename {} .md); do
             echo "→ $feat"
-            npx gks verify-flow "$feat" --root=.
+            npx gks verify-flow "$feat" --root=packages/msp
           done
