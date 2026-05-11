@@ -20,7 +20,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: npm
 
-      - run: npm ci
+      - name: install
+        # Use `npm install` (not `npm ci`) to work around a long-standing npm bug
+        # where platform-specific optional deps (e.g. @rollup/rollup-linux-x64-gnu)
+        # are NOT installed if the lockfile was generated on a different OS.
+        # https://github.com/npm/cli/issues/4828
+        run: npm install
 
       - name: shellcheck packages/msp/examples/hooks/
         run: |
