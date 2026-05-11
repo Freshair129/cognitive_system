@@ -16,7 +16,7 @@ tags:
   - preferences
   - m7e
   - audit
-crosslinks: {"references":["FEAT--IDENTITY-LAYER","BLUEPRINT--IDENTITY-LAYER","ADR--IDENTITY-STORAGE-SHAPE","CONCEPT--IDENTITY-LAYER","FRAME--MSP-ARCHITECTURE-V2"]}
+crosslinks: {"references":["FEAT--IDENTITY-LAYER","BLUEPRINT--IDENTITY-LAYER","ADR--IDENTITY-STORAGE-SHAPE","CONCEPT--IDENTITY-LAYER","FRAME--MSP-ARCHITECTURE-V2","MOD--IDENTITY","PROTOCOL--IDENTITY-API","ALGO--IDENTITY-RESOLUTION"]}
 linked_symbols:
   - {"file":"src/identity/index.ts"}
   - {"file":"src/identity/types.ts"}
@@ -71,10 +71,13 @@ This implementation **replaces** an earlier YAML+zod attempt that landed during 
 | Atom | Phase | Type |
 |---|---|---|
 | `CONCEPT--IDENTITY-LAYER` | 1 | concept (existed) |
+| `PROTOCOL--IDENTITY-API` | 2 | protocol (NEW) |
+| `ALGO--IDENTITY-RESOLUTION` | 2 | algo (NEW) |
 | `ADR--IDENTITY-STORAGE-SHAPE` | 2 | adr (existed) |
 | `FEAT--IDENTITY-LAYER` | 2 | feat (existed) |
+| `MOD--IDENTITY` | 2 | mod (NEW) |
 | `BLUEPRINT--IDENTITY-LAYER` | 3 | blueprint (existed) |
-| `AUDIT--IDENTITY-LAYER` | 6 | audit (this atom) |
+| `AUDIT--IDENTITY-LAYER` | 6 | audit (updated) |
 
 ## Verification
 
