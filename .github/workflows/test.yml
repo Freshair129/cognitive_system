@@ -22,10 +22,10 @@ jobs:
 
       - run: npm ci
 
-      - name: shellcheck examples/hooks/
+      - name: shellcheck packages/msp/examples/hooks/
         run: |
           # Ubuntu runners ship shellcheck.
-          shellcheck examples/hooks/*.sh
+          shellcheck packages/msp/examples/hooks/*.sh
 
       - name: typecheck
         run: npm run typecheck
@@ -40,22 +40,22 @@ jobs:
         run: npm run msp:index
 
       - name: msp:validate (whole tree)
-        run: npm run msp:validate -- --all --root=.
+        run: npm run msp:validate --workspace=packages/msp -- --all --root=packages/msp
 
       - name: msp:backlinks (rebuild + determinism check)
         run: |
           # The .jsonl is gitignored — fresh checkout has no file to compare against.
           # Build it once, then run --check to assert a second pass is no-op (deterministic).
-          npm run msp:backlinks
-          npm run msp:backlinks -- --check
+          npm run msp:backlinks --workspace=packages/msp
+          npm run msp:backlinks --workspace=packages/msp -- --check
 
       - name: msp:check-links (gks crosslink integrity)
-        run: npm run msp:check-links
+        run: npm run msp:check-links --workspace=packages/msp
 
       - name: verify-flow per FEAT
         run: |
           set -e
-          for feat in $(ls gks/feat/FEAT--*.md | xargs -I {} basename {} .md); do
+          for feat in $(ls packages/msp/gks/feat/FEAT--*.md | xargs -I {} basename {} .md); do
             echo "→ $feat"
-            npx gks verify-flow "$feat" --root=.
+            npx gks verify-flow "$feat" --root=packages/msp
           done
