@@ -119,6 +119,28 @@ npx msp-graph                             # symbol-graph CLI
 npx msp-mcp-server                        # MCP stdio server
 ```
 
+## Atom workflow scripts (dev ergonomics)
+
+Helper scripts to eliminate recurring frontmatter bugs (wrong timezone, wrong enum, reciprocal-link mistakes):
+
+```sh
+# Get a correctly-offset (+07:00 ICT) timestamp for `created_at`
+npm run msp:atom-date
+# → 2026-05-12T22:05:01.171+07:00
+
+# Or UTC absolute (Z form)
+npm run msp:atom-date -- --utc
+
+# Scaffold a new atom — generates valid frontmatter + body skeleton
+npm run msp:scaffold-atom -- --type=concept --slug=NEW-FEATURE
+# → creates packages/msp/gks/concept/CONCEPT--NEW-FEATURE.md (validates clean)
+
+# Supersede an existing atom with one or more replacements (atomic reciprocal update)
+npm run msp:supersede -- --old=FEAT--FOO --new=CONCEPT--FOO,ADR--FOO,ALGO--FOO,PROTO--FOO
+```
+
+See [`AUDIT--ATOM-WORKFLOW-SCRIPTS`](./gks/audit/AUDIT--ATOM-WORKFLOW-SCRIPTS.md) for the bugs these fix and test coverage.
+
 ## Workflow (doc-to-code)
 
 ```
