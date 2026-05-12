@@ -78,7 +78,17 @@ jobs:
       - name: verify-flow per FEAT
         run: |
           set -e
-          for feat in $(ls packages/msp/gks/feat/FEAT--*.md | xargs -I {} basename {} .md); do
+          for feat_path in packages/msp/gks/feat/FEAT--*.md; do
+            feat=$(basename "$feat_path" .md)
+            # Skip FEATs whose status marks them as terminal — `superseded`
+            # and `deprecated` are valid lifecycle states (per the supersession
+            # policy in MSP CLAUDE.md), and verify-flow correctly refuses to
+            # treat them as healthy chain heads. Their successors are walked
+            # via crosslinks.superseded_by from whatever cites them.
+            if grep -qE '^status: (superseded|deprecated)$' "$feat_path"; then
+              echo "→ $feat (skipped: terminal status)"
+              continue
+            fi
             echo "→ $feat"
             npx gks verify-flow "$feat" --root=packages/msp
           done
