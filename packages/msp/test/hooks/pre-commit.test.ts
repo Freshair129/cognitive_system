@@ -75,7 +75,7 @@ async function makeFixtureRepo(): Promise<string> {
         name: 'msp-hook-fixture',
         private: true,
         scripts: {
-          'msp:validate': `tsx ${join(repoRoot, 'src/validator/cli.ts')} --root=${repoRoot}`,
+          'msp:validate': `tsx ${join(packageRoot, 'src/validator/cli.ts')} --root=${repoRoot}`,
         },
       },
       null,
