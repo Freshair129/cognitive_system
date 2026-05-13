@@ -151,3 +151,6 @@ Slightly better disk usage and stricter dependency hoisting than npm workspaces.
 - `CONCEPT--MONOREPO-MIGRATION` — motivation
 - npm workspaces docs (https://docs.npmjs.com/cli/v10/using-npm/workspaces)
 - Prior art: Vite (`packages/vite`, `packages/create-vite`), tRPC (`packages/server`, `packages/client`, …), Turborepo
+
+---
+**Post-2026-05-13 amendment:** The project has pivoted to an agentic monorepo architecture per `ADR--AGENTIC-MONOREPO-PIVOT`. The canonical layout defined in `FRAMEWORK_MASTER_SPEC.md §4.2` will be materialized, centralizing knowledge, scripts, and documentation at the root level.

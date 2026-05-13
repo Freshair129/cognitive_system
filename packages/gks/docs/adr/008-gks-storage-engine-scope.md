@@ -156,3 +156,6 @@ implementation showing how a Memory OS plugs in lives at
   philosophy applied at the storage layer
 - ADR 004 (Namespace as first-class) — the multi-tenant primitive
   Memory OS layers rely on
+
+---
+**Post-2026-05-13 note:** GKS remains a storage-engine in scope as defined above, but it is no longer published as a standalone library. Production deployment and distribution are now handled via the unified agentic monorepo architecture (see `ADR--AGENTIC-MONOREPO-PIVOT`).

@@ -127,6 +127,12 @@ packages/msp/src/
 - Index หลัก: `gks/00_index/atomic_index.jsonl` — agent ควร scan ไฟล์นี้ก่อนเสมอ
 - เขียนตรงโดย agent ไม่ได้ — ต้องผ่าน `msp_candidate` → PR (ดู §7)
 
+#### 3.3.1 Genesis Block Engine (High-Performance Backend)
+นอกจาก JSONL index มาตรฐาน GKS ยังรองรับ **Genesis Block Engine** (Specified by `CONCEPT--GENESIS-BLOCK-ENGINE`):
+- **บทบาท:** เป็น `GraphBackend` ประสิทธิภาพสูง (Rust-based) สำหรับงานที่ต้อง Query ซับซ้อน
+- **ความสามารถ:** รองรับ OpenCypher query, Bi-temporal time-travel (ย้อนดูสถานะ graph ในอดีต), และ columnar indexing
+- **การใช้งาน:** ทำงานแบบ process-local addon (.node) ไม่ต้องมี database server แยกต่างหาก (zero-dependency design)
+
 ### 👁️ 3.4 Viewer — Obsidian (`.obsidian/`, optional)
 **สำหรับ human review** — ไม่บังคับสำหรับ agent
 - **Primary read path สำหรับ agent:** MCP tools — `gks_recall` (semantic), `gks_lookup` (id), `gks_backlinks` (graph)
@@ -279,7 +285,7 @@ packages/msp/src/
 
 ### 4.4 ประเภทความรู้ระดับอะตอม (Atomic Knowledge)
 - **เป้าหมาย:** สกัดความรู้จาก Concept เป็น "อะตอม" — 1 ไฟล์ 1 เรื่อง เพื่อให้ AI ค้นแม่นยำ
-- **ผู้ใช้หลัก:** Architect agent ผ่าน Obsidian MCP
+- **ผู้ใช้หลัก:** Agents ผ่าน GKS MCP Tools (Headless) และ Humans ผ่าน Obsidian (Viewer)
 - **หน้าที่:** **SSOT** ของระบบ
 - **โครงสร้างโฟลเดอร์ตาม Types:** แยกเก็บในโฟลเดอร์ของตัวเองเพื่อความชัดเจน
 
@@ -289,8 +295,9 @@ packages/msp/src/
 |---|---|---|---|
 | `ADR--` | `adrs/` หรือ `adr/` | Architecture Decision Record | การตัดสินใจทางสถาปัตยกรรม |
 | `MASTER--`| `master/` | Root-level Policy | กฎระดับ root (เช่น contradiction policy, write boundaries) |
-| `FRAMEWORK--` | `framework/` | Framework Rules (v2.3+) | มาตรฐานโค้ด + สถาปัตยกรรม / governance (เดิม `FRAME--`) |
-| `GENESIS--` | `genesis/` | Block Manifest (v2.3+) | runtime entry-point ของ Genesis Block (contract: `SPEC--GENESIS-BLOCK-MANIFEST`). Initially placeholdered as `FRAME--`; retired. |
+| `FRAMEWORK--` | `framework/` | Framework Rules (v2.3+) | มาตรฐานโค้ด + สถาปัตยกรรม / governance (เดิมคือ `FRAME--`) |
+| `FRAME--` | `frame/` | Block Manifest (v2.3+) | runtime entry-point ของ Genesis Block (contract: `SPEC--GENESIS-BLOCK-MANIFEST`) |
+| `GUARD--` | `guard/` | Enforced Policy (v2.3+) | นโยบายบังคับพฤติกรรม (เดิมคือ `GUARDRAIL--`) |
 | `STACK--` | `stack/` | Technology stack (v2.3+) | inventory ของ language / runtime / library |
 | `SPEC--` | `spec/` | Specification (v2.3+) | data contract / wire format / API shape |
 | `COGNITIVE--` | `cognitive/` | Mental model (v2.3+) | interpretive lens (Erikson, Qualia, ฯลฯ) |
