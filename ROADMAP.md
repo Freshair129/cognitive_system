@@ -2,7 +2,37 @@
 
 > **Source of truth**: [`gks/concept/CONCEPT--MSP-ROADMAP.md`](./gks/concept/CONCEPT--MSP-ROADMAP.md). For close-out audits: [`AUDIT--ALL-M-MILESTONES`](./gks/audit/AUDIT--ALL-M-MILESTONES.md) (v0.3.0) + [`AUDIT--V0-4-0`](./gks/audit/AUDIT--V0-4-0.md) (v0.4.0) + [`AUDIT--ARCH-DOC-CLEANUP`](./gks/audit/AUDIT--ARCH-DOC-CLEANUP.md) (Phase A, 2026-05-09) + [`AUDIT--PHASE-B-IMPL-COMPLETE`](./gks/audit/AUDIT--PHASE-B-IMPL-COMPLETE.md) (Phase B impl) + [`AUDIT--PHASE-C-AGENT-INTEGRATION-DOCS`](./gks/audit/AUDIT--PHASE-C-AGENT-INTEGRATION-DOCS.md) (Phase C).
 
+## Status — Phase D (Agentic Runtime) COMPLETE (2026-05-14)
+
+The **Agentic Monorepo Pivot Phase D** (per `ULTRAPLAN--AGENTIC-MONOREPO-PIVOT`) shipped the three-tier agent dispatch runtime + Two-Brain memory bridge as a sequence of small, atomic PRs. All streams (A–D) landed; CI green on Node 20 + 22 throughout.
+
+| Stream | Scope | PRs |
+|---|---|---|
+| **A — Routing core** | `routing.ts` + `cost-policy.ts` + pure unit tests | #103, #104 |
+| **B — Tier adapters** | `tiers/{qwen,gemini,claude}.ts` + `spawn-helper.ts` + mocked spawn tests | #107, #108, #109 |
+| **C — Dispatch + episode** | `dispatch.ts` + `registry.ts` + `result-recorder.ts` + `cli.ts` + `FRAMEWORK--AGENT-DISPATCH` | #110, #111, #112 |
+| **D — Two-Brain bridge** | `msp_brain_resolve` MCP tool + `CONCEPT--TWO-BRAIN-ARCHITECTURE` + integration test | #113, #114, #115, #116 |
+| **Closeout** | Audit + framework atom + `SPEC--EPISODE-ATOM` + contract update + ROADMAP update | #TBD |
+
+Net effect: MSP can now route any task through T1 (Qwen) / T2 (Gemini) / T3 (Claude) via a single `dispatch()` entry point, record episodes as immutable atoms, and resolve queries against the dispatched-agent's memory via MCP — fulfilling `CONCEPT--AGENT-TIER-ROUTING` + `ADR--AGENT-TIER-COST-POLICY` + `BLUEPRINT--AGENT-DISPATCHER`.
+
+## Phase E — candidate milestones (next)
+
+Phase D landed the *plumbing*; Phase E wires it to real backends and extends the surface. Candidates (in rough priority order — final selection at Phase-E kickoff):
+
+| Candidate | What | Source atom(s) |
+|---|---|---|
+| **E1 — Real tier CLIs** | Wire actual `qwen` / `gemini` / `claude` CLI invocation in each adapter (current implementations are scaffolds returning `not implemented` for offline CI). | `BLUEPRINT--AGENT-DISPATCHER` §P3 |
+| **E2 — MCP `msp_dispatch`** | Expose the dispatcher to remote agents as an MCP tool (parallel to `msp_brain_resolve`). | `FRAMEWORK--AGENT-DISPATCH` §Surface |
+| **E3 — Cost tracking** | Add `cost-tracker.ts` hook per tier; emit `USAGE--*` atoms; budget enforcement at the dispatch boundary. | `BLUEPRINT--AGENT-DISPATCHER` §Open-questions |
+| **E4 — Master Block promotion** | Consolidator pipeline: episodes → consolidated lessons → `MASTER--*` promotions (gated by `PROTO--MASTER-BODY-SCHEMA` + `PROTO--MASTER-TOKEN-CAP`). | `ADR--MASTER-PROMOTION-DOC-TO-CODE`, `MASTER--MSP-DOC-TO-CODE` |
+| **E5 — Genesis Block runtime** | Loader/executor for `FRAME--*` Block Manifest atoms (first real Block: `GENESIS--IDENTITY-ENGINE`). | `SPEC--GENESIS-BLOCK-MANIFEST` §Deferred follow-ups |
+
+---
+
 ## Status — post-Phase-D (architecture re-base, 2026-05-10)
+
+> The label "Phase D" is overloaded historically. The section below refers to the **architecture re-base** Phase D (PRs #65/#67/#66/#68, May 2026). The newer **Agentic Runtime** Phase D (May 2026, PRs #103/#104/#107–#116) is documented above.
 
 After Phase A+B+C+D (PRs #65/#67/#66/#68) MSP is now explicitly **agent-agnostic** (`CONCEPT--AGENT-AGNOSTIC`) and ships a global-vs-workspace storage split (`ADR--GLOBAL-VS-WORKSPACE`).
 
