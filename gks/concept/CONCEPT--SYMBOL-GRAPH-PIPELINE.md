@@ -13,7 +13,7 @@ tags:
   - symbol-graph
   - pipeline
   - dag
-crosslinks: {"references":["CONCEPT--SYMBOL-GRAPH","FRAMEWORK--SYMBOL-GRAPH","SPEC--GENESIS-GRAPH-BACKEND","FEAT--META-LEARNING-LOOP"]}
+crosslinks: {"references":["CONCEPT--SYMBOL-GRAPH","FRAMEWORK--SYMBOL-GRAPH","SPEC--GENESIS-GRAPH-BACKEND"]}
 created_at: 2026-05-13T19:45:00.000+07:00
 ---
 

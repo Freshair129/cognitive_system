@@ -12,7 +12,7 @@ tags:
   - gks
   - adr
   - graph-processing
-crosslinks: {"references":["CONCEPT--SYMBOL-GRAPH-PIPELINE","FRAMEWORK--SYMBOL-GRAPH","FEAT--META-LEARNING-LOOP"]}
+crosslinks: {"references":["CONCEPT--SYMBOL-GRAPH-PIPELINE","FRAMEWORK--SYMBOL-GRAPH"]}
 created_at: 2026-05-13T19:46:00.000+07:00
 ---
 
