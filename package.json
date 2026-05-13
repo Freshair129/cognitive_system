@@ -15,8 +15,8 @@
     "test": "npm test --workspaces",
     "build": "npm run build --workspaces",
     "typecheck": "npm run typecheck --workspaces",
-    "msp:index": "npm run msp:index --workspace=packages/msp",
-    "msp:validate": "npm run msp:validate --workspace=packages/msp",
-    "msp:check-links": "npm run msp:check-links --workspace=packages/msp"
+    "msp:index": "tsx packages/msp/scripts/msp/re-indexer.ts --root=.",
+    "msp:validate": "tsx packages/msp/src/validator/cli.ts --all --root=.",
+    "msp:check-links": "gks validate --links --root=."
   }
 }

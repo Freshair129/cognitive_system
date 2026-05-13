@@ -18,7 +18,7 @@ export interface AtomicContract {
   warnings: string[]
 }
 
-const DEFAULT_CONTRACT_PATH = '.brain/msp/LLM_Contract/atomic_contract.yaml'
+const DEFAULT_CONTRACT_PATH = 'msp/LLM_Contract/atomic_contract.yaml'
 
 /**
  * Load the atomic contract from `atomic_contract.yaml`. If the file is

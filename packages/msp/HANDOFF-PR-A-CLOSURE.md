@@ -85,7 +85,7 @@ Check that `framework-invariants.ts` is automatically discovered by `src/validat
 
 ### 2.3 AUDIT atom
 
-Write `packages/msp/gks/audit/AUDIT--SYMBOLS-FRAMEWORK-AWARENESS.md` following the pattern of `AUDIT--SYMBOLS-PROCESS-TRACING.md` (most recent reference):
+Write `gks/audit/AUDIT--SYMBOLS-FRAMEWORK-AWARENESS.md` following the pattern of `AUDIT--SYMBOLS-PROCESS-TRACING.md` (most recent reference):
 
 - Cite CONCEPT + ADR + ALGO + PROTO atoms
 - List test results (X / Y tests passing)
@@ -112,15 +112,15 @@ packages/msp/src/symbols/parser/index.ts          (your modification)
 packages/msp/src/validator/proto/framework-invariants.ts
 packages/msp/test/symbols/framework/**/*.test.ts  (you author — 6+ files)
 packages/msp/test/validator/proto/framework-invariants.test.ts  (you author)
-packages/msp/gks/audit/AUDIT--SYMBOLS-FRAMEWORK-AWARENESS.md  (you author)
+gks/audit/AUDIT--SYMBOLS-FRAMEWORK-AWARENESS.md  (you author)
 ```
 
 **Exclude (other agents' / Boss's WIP):**
 ```
 packages/msp/msp_spec.md           ← Boss editing separately
-packages/msp/gks/audit/AUDIT--CORE-FRAMEWORK-RECONCILE-V1.md
-packages/msp/gks/concept/CONCEPT--CODEGEN-MICROTASK-RUNNER.md
-packages/msp/gks/frame/FRAMEWORK--PHASE-GOVERNANCE.md
+gks/audit/AUDIT--CORE-FRAMEWORK-RECONCILE-V1.md
+gks/concept/CONCEPT--CODEGEN-MICROTASK-RUNNER.md
+gks/frame/FRAMEWORK--PHASE-GOVERNANCE.md
 AGENT.md, GEMINI.md  ← user/agent personal config
 ```
 

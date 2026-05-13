@@ -1178,12 +1178,12 @@ Resolved questions have moved to §0. The following remain open. Each is annotat
 
 ### Existing MSP / GKS atoms (load-bearing for this spec)
 
-- `packages/msp/gks/frame/FRAMEWORK--MSP-ARCHITECTURE-V2.md` — top-level MSP architecture.
-- `packages/msp/gks/concept/CONCEPT--AGENT-AGNOSTIC.md` — agent-agnostic boundary contract.
-- `packages/msp/gks/concept/CONCEPT--MSP-ROADMAP.md` — milestone plan.
-- `packages/gks/docs/adr/004-namespace-as-first-class.md` — Namespace primitive.
-- `packages/gks/docs/adr/008-gks-storage-engine-scope.md` — GKS as storage engine.
-- `packages/gks/docs/adr/009-msp-as-orchestrator.md` — MSP as orchestrator.
+- `gks/frame/FRAMEWORK--MSP-ARCHITECTURE-V2.md` — top-level MSP architecture.
+- `gks/concept/CONCEPT--AGENT-AGNOSTIC.md` — agent-agnostic boundary contract.
+- `gks/concept/CONCEPT--MSP-ROADMAP.md` — milestone plan.
+- `docs/gks/adr/004-namespace-as-first-class.md` — Namespace primitive.
+- `docs/gks/adr/008-gks-storage-engine-scope.md` — GKS as storage engine.
+- `docs/gks/adr/009-msp-as-orchestrator.md` — MSP as orchestrator.
 - `FRAMEWORK_MASTER_SPEC.md` — master spec; this document complements it, does not replace it.
 
 ### Atoms to be produced from this spec (P1–P3 of doc-to-code)

@@ -14,10 +14,10 @@
 
 The `cognitive_system` monorepo was originally built with `packages/gks/` as a **standalone publishable library** (`@freshair129/gks` on npm). That design imposed constraints — each package owned its own docs, scripts, and atom vault. The result is duplication:
 
-- `packages/gks/gks/` ← gks-engine atom vault (~9 atoms)
-- `packages/msp/gks/` ← msp-orchestrator atom vault (~245 atoms)
-- `packages/gks/docs/` + `packages/msp/docs/` ← two doc trees
-- `packages/gks/scripts/` + `packages/msp/scripts/` ← two script roots
+- `gks/` ← gks-engine atom vault (~9 atoms)
+- `gks/` ← msp-orchestrator atom vault (~245 atoms)
+- `docs/gks/` + `docs/msp/` ← two doc trees
+- `scripts/msp/` + `packages/msp/scripts/` ← two script roots
 - `packages/{gks,msp}/CLAUDE.md` ← two sub-package agent guides
 
 The user has pivoted: **drop standalone publish**. The monorepo is the product — an agentic system that orchestrates pluggable cognitive agents (Claude Code, Gemini CLI, Qwen CLI, Hermes-like, etc.). With this constraint dropped, the canonical layout from `FRAMEWORK_MASTER_SPEC.md §4.2` applies:
@@ -97,11 +97,11 @@ cognitive_system/                          # monorepo root
 ├── msp/                                   # 🛡️ project governance
 │   ├── ARCHITECTURE_OVERVIEW.md          # (NEW; can be a pointer to FRAMEWORK--MSP-ARCHITECTURE-V2)
 │   ├── LLM_Contract/
-│   │   └── atomic_contract.yaml          # moved from packages/msp/.brain/msp/LLM_Contract/
+│   │   └── atomic_contract.yaml          # moved from msp/LLM_Contract/
 │   └── rules/                             # (NEW empty dir for project-specific agent rules)
 │
 ├── scripts/                               # unified tooling
-│   ├── msp/                              # was packages/msp/scripts/msp/
+│   ├── msp/                              # was scripts/msp/
 │   │   ├── re-indexer.ts
 │   │   ├── validator-cli.ts (entry shim)
 │   │   ├── migrate-genesisblock-to-genesisgraph.mjs   # historical, keep
@@ -112,17 +112,17 @@ cognitive_system/                          # monorepo root
 │   └── (gks engine scripts merged into scripts/msp/ since validator IS msp's; gks scripts are minor)
 │
 ├── docs/                                  # unified documentation
-│   ├── gks/                              # was packages/gks/docs/
+│   ├── gks/                              # was docs/gks/
 │   │   ├── ARCHITECTURE.md  KNOWLEDGE-TYPES.md  TECHNICAL-OVERVIEW.md
 │   │   ├── WORKFLOW.md  ONBOARDING.md  MSP_RELATIONSHIP.md
 │   │   ├── MIGRATIONS.md  OBSERVABILITY.md  BENCHMARKS.md  ULTRAPLAN.md
 │   │   ├── embedder-compatibility.md
 │   │   └── adr/  (the numbered legacy ADRs — 001–015)
-│   ├── msp/                              # was packages/msp/docs/
+│   ├── msp/                              # was docs/msp/
 │   │   ├── AGENT-INTEGRATION.md
 │   │   └── UNIVERSAL-CONTEXT-FRAMEWORK_spec.md
 │   └── plans/
-│       └── ULTRAPLAN--AGENTIC-MONOREPO-PIVOT.md  ← THIS FILE moves here after PR-B
+│       └── docs/plans/ULTRAPLAN--AGENTIC-MONOREPO-PIVOT.md  ← THIS FILE moves here after PR-B
 │
 └── packages/
     ├── gks/                              # @freshair129/gks (workspace-only, not published)
@@ -146,11 +146,11 @@ cognitive_system/                          # monorepo root
 ```
 
 **Removed from `packages/<x>/`:**
-- `packages/gks/gks/`     → merged into root `gks/`
-- `packages/gks/docs/`    → moved to root `docs/gks/`
-- `packages/gks/scripts/` → moved to root `scripts/msp/` (consolidated)
-- `packages/msp/gks/`     → merged into root `gks/`
-- `packages/msp/docs/`    → moved to root `docs/msp/`
+- `gks/`     → merged into root `gks/`
+- `docs/gks/`    → moved to root `docs/gks/`
+- `scripts/msp/` → moved to root `scripts/msp/` (consolidated)
+- `gks/`     → merged into root `gks/`
+- `docs/msp/`    → moved to root `docs/msp/`
 - `packages/msp/scripts/` → moved to root `scripts/msp/`
 - `packages/msp/.brain/`  → only LLM_Contract is canonical (moved to root `msp/`); rest is runtime-generated and stays gitignored
 
@@ -164,7 +164,7 @@ cognitive_system/                          # monorepo root
 
 #### A.1 New ADR — pivot documentation
 
-Author atom: `packages/msp/gks/adr/ADR--AGENTIC-MONOREPO-PIVOT.md` (BEFORE atom moves; will move with PR-B).
+Author atom: `gks/adr/ADR--AGENTIC-MONOREPO-PIVOT.md` (BEFORE atom moves; will move with PR-B).
 
 Required frontmatter (validator-compliant):
 
@@ -193,8 +193,8 @@ Body sections to include:
 
 #### A.2 Amend existing ADRs
 
-- `packages/gks/docs/adr/008-gks-storage-engine-scope.md` — append a "Post-2026-05-13 note" stating that GKS remains a storage-engine in scope but is no longer published standalone; production deployment is via the agentic monorepo.
-- `packages/msp/gks/adr/ADR--MONOREPO-STRUCTURE.md` — append "Post-2026-05-13 amendment: pivot to agentic monorepo per `ADR--AGENTIC-MONOREPO-PIVOT`; canonical layout per FRAMEWORK_MASTER_SPEC §4.2 will be materialised in PR-B."
+- `docs/gks/adr/008-gks-storage-engine-scope.md` — append a "Post-2026-05-13 note" stating that GKS remains a storage-engine in scope but is no longer published standalone; production deployment is via the agentic monorepo.
+- `gks/adr/ADR--MONOREPO-STRUCTURE.md` — append "Post-2026-05-13 amendment: pivot to agentic monorepo per `ADR--AGENTIC-MONOREPO-PIVOT`; canonical layout per FRAMEWORK_MASTER_SPEC §4.2 will be materialised in PR-B."
 
 #### A.3 Add `qwen.md` skeleton at root
 
@@ -280,15 +280,15 @@ Script responsibilities (mirror the structure of `scripts/msp/migrate-genesisblo
    - Create target dir if needed
    - Move file (preserve content; do not rewrite frontmatter beyond what step 4 demands)
    - Delete empty source directories afterwards
-2. **Index move** — `packages/msp/gks/00_index/atomic_index.jsonl` is regenerated, not moved. The script SHOULD delete both old indexes after move completes.
-3. **`atomic_contract.yaml` move** — `packages/msp/.brain/msp/LLM_Contract/atomic_contract.yaml` → `msp/LLM_Contract/atomic_contract.yaml`. Update any path constants in `packages/msp/src/validator/contract.ts` (or wherever loaded — search for the string).
+2. **Index move** — `gks/00_index/atomic_index.jsonl` is regenerated, not moved. The script SHOULD delete both old indexes after move completes.
+3. **`atomic_contract.yaml` move** — `msp/LLM_Contract/atomic_contract.yaml` → `msp/LLM_Contract/atomic_contract.yaml`. Update any path constants in `packages/msp/src/validator/contract.ts` (or wherever loaded — search for the string).
 4. **Frontmatter `linked_symbols` rewrites** — every `linked_symbols.file` that says `packages/gks/...` or `packages/msp/...` STAYS unchanged (those still point at src/). But any `linked_symbols.file` that says `gks/...` or relative paths from the atom file's POV needs updating since the atom file moved. Audit each manually if the script can't safely rewrite.
 5. **Body path-string rewrites** — across ALL markdown files in the repo, rewrite:
-   - `packages/gks/gks/<type>/<ID>.md` → `gks/<type>/<ID>.md`
-   - `packages/msp/gks/<type>/<ID>.md` → `gks/<type>/<ID>.md`
-   - `packages/msp/.brain/msp/LLM_Contract/` → `msp/LLM_Contract/`
-   - `packages/msp/scripts/msp/` → `scripts/msp/`
-   - `packages/gks/scripts/` → `scripts/msp/` (consolidated)
+   - `gks/<type>/<ID>.md` → `gks/<type>/<ID>.md`
+   - `gks/<type>/<ID>.md` → `gks/<type>/<ID>.md`
+   - `msp/LLM_Contract/` → `msp/LLM_Contract/`
+   - `scripts/msp/` → `scripts/msp/`
+   - `scripts/msp/` → `scripts/msp/` (consolidated)
 
 #### B.2 Run dry-run + review
 
@@ -311,12 +311,12 @@ node scripts/msp/migrate-monorepo-pivot.mjs
 
 Files known to hardcode paths (search-replace):
 
-- `packages/gks/scripts/msp/re-indexer.ts` — `GKS_ROOT`, `INDEX_PATH` constants
+- `scripts/msp/msp/re-indexer.ts` — `GKS_ROOT`, `INDEX_PATH` constants
 - `packages/msp/src/validator/cli.ts` — default `--root` (was `packages/msp`, becomes `.`)
 - `packages/msp/src/validator/contract.ts` — `atomic_contract.yaml` resolver
 - `packages/gks/src/memory/index.ts` (`gksLayout()` function) — atomic-index path under `gks/00_index/`
 - `package.json` (root) — npm scripts: `msp:index`, `msp:check-links`, `msp:validate` should all `--root=.` now
-- `.gitignore` — review excluded paths (`packages/msp/gks/00_index/atomic_index.jsonl` was excluded; now `gks/00_index/atomic_index.jsonl`)
+- `.gitignore` — review excluded paths (`gks/00_index/atomic_index.jsonl` was excluded; now `gks/00_index/atomic_index.jsonl`)
 
 #### B.5 Regen index + validate
 
@@ -333,8 +333,8 @@ npm test
 #### B.6 Cleanup empty dirs
 
 ```bash
-rmdir packages/gks/gks/00_index packages/gks/gks/{type,...} packages/gks/gks
-rmdir packages/msp/gks/{00_index,concept,adr,feat,...} packages/msp/gks
+rmdir gks/00_index gks/{type,...} packages/gks/gks
+rmdir gks/{00_index,concept,adr,feat,...} packages/msp/gks
 # (script should do this; double-check)
 ```
 
@@ -362,7 +362,7 @@ git mv packages/msp/scripts/msp scripts/msp-tmp
 mkdir -p scripts/msp
 git mv scripts/msp-tmp/* scripts/msp/
 # any gks-specific scripts merge into scripts/msp/ or scripts/gks/ at reviewer discretion
-git mv packages/gks/scripts/* scripts/msp/   # gks has scaffold helpers; consolidate
+git mv scripts/msp/* scripts/msp/   # gks has scaffold helpers; consolidate
 rmdir packages/{gks,msp}/scripts
 ```
 
@@ -378,16 +378,16 @@ Update root `package.json` workspaces scripts — replace `--workspace=packages/
 
 ```bash
 mkdir -p docs/gks docs/msp docs/plans
-git mv packages/gks/docs/* docs/gks/
-git mv packages/msp/docs/* docs/msp/
-git mv ULTRAPLAN--AGENTIC-MONOREPO-PIVOT.md docs/plans/
+git mv docs/gks/* docs/gks/
+git mv docs/msp/* docs/msp/
+git mv docs/plans/ULTRAPLAN--AGENTIC-MONOREPO-PIVOT.md docs/plans/
 ```
 
 #### C.3 Move `LLM_Contract` (if not done in B.1)
 
 ```bash
 mkdir -p msp/LLM_Contract msp/rules
-git mv packages/msp/.brain/msp/LLM_Contract/atomic_contract.yaml msp/LLM_Contract/
+git mv msp/LLM_Contract/atomic_contract.yaml msp/LLM_Contract/
 # .brain at packages/msp/ is gitignored runtime state — leave alone
 ```
 
@@ -519,11 +519,11 @@ After each phase, Gemini SHOULD post (as PR description or in `docs/plans/AUDIT-
 
 Before approving any PR:
 
-- `packages/msp/gks/concept/CONCEPT--TAXONOMY-V2-3.md` — current taxonomy
-- `packages/msp/gks/spec/SPEC--GENESIS-BLOCK-MANIFEST.md` — Genesis Block contract
+- `gks/concept/CONCEPT--TAXONOMY-V2-3.md` — current taxonomy
+- `gks/spec/SPEC--GENESIS-BLOCK-MANIFEST.md` — Genesis Block contract
 - `FRAMEWORK_MASTER_SPEC.md` §4.2 — the canonical layout being materialised
-- `packages/msp/scripts/msp/migrate-genesisblock-to-genesisgraph.mjs` — template for the new migration script
-- `packages/gks/docs/adr/008-gks-storage-engine-scope.md` — the ADR being amended
+- `scripts/msp/migrate-genesisblock-to-genesisgraph.mjs` — template for the new migration script
+- `docs/gks/adr/008-gks-storage-engine-scope.md` — the ADR being amended
 
 ---
 

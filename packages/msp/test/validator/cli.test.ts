@@ -1,13 +1,14 @@
 import { spawn } from 'node:child_process'
 import { mkdtemp, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { describe, expect, it } from 'vitest'
 
-const cliPath = fileURLToPath(new URL('../../src/validator/cli.ts', import.meta.url))
-const repoRoot = fileURLToPath(new URL('../..', import.meta.url))
+const packageRoot = fileURLToPath(new URL('../..', import.meta.url))
+const repoRoot = resolve(packageRoot, '../..')
+const cliPath = resolve(packageRoot, 'src/validator/cli.ts')
 
 interface RunResult {
   code: number
@@ -16,7 +17,7 @@ interface RunResult {
 }
 
 function run(args: string[]): Promise<RunResult> {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolveResult, reject) => {
     const child = spawn('npx', ['tsx', cliPath, ...args], {
       env: { ...process.env, NO_COLOR: '1' },
       cwd: repoRoot,
@@ -27,7 +28,7 @@ function run(args: string[]): Promise<RunResult> {
     child.stdout.on('data', (d) => (stdout += d.toString()))
     child.stderr.on('data', (d) => (stderr += d.toString()))
     child.on('error', reject)
-    child.on('close', (code) => resolve({ code: code ?? -1, stdout, stderr }))
+    child.on('close', (code) => resolveResult({ code: code ?? -1, stdout, stderr }))
   })
 }
 
@@ -35,7 +36,7 @@ describe('msp-validate CLI', () => {
   it('exits 0 on a valid fixture', async () => {
     const r = await run([
       `--root=${repoRoot}`,
-      `${repoRoot}/test/fixtures/CONCEPT--TEST-VALID.md`,
+      `${packageRoot}/test/fixtures/CONCEPT--TEST-VALID.md`,
     ])
     expect(r.code).toBe(0)
     expect(r.stdout).toMatch(/✓/)
@@ -44,7 +45,7 @@ describe('msp-validate CLI', () => {
   it('exits 1 on a forbidden-field fixture and names the rule', async () => {
     const r = await run([
       `--root=${repoRoot}`,
-      `${repoRoot}/test/fixtures/CONCEPT--TEST-FORBIDDEN.md`,
+      `${packageRoot}/test/fixtures/CONCEPT--TEST-FORBIDDEN.md`,
     ])
     expect(r.code).toBe(1)
     expect(r.stdout).toMatch(/\[forbidden-fields\]/)
@@ -53,7 +54,7 @@ describe('msp-validate CLI', () => {
   it('exits 1 on a dangling wikilink fixture', async () => {
     const r = await run([
       `--root=${repoRoot}`,
-      `${repoRoot}/test/fixtures/CONCEPT--TEST-DANGLING.md`,
+      `${packageRoot}/test/fixtures/CONCEPT--TEST-DANGLING.md`,
     ])
     expect(r.code).toBe(1)
     expect(r.stdout).toMatch(/\[dangling-wikilink\]/)
@@ -63,7 +64,7 @@ describe('msp-validate CLI', () => {
     const r = await run([
       '--json',
       `--root=${repoRoot}`,
-      `${repoRoot}/test/fixtures/CONCEPT--TEST-FORBIDDEN.md`,
+      `${packageRoot}/test/fixtures/CONCEPT--TEST-FORBIDDEN.md`,
     ])
     expect(r.code).toBe(1)
     const parsed = JSON.parse(r.stdout)

@@ -99,7 +99,7 @@ Instead of a local `inbound/` queue, GKS now integrates with standard git workfl
 ```sh
 git checkout -b feat/rate-limit
 # Author atoms (either via 'gks new-feature' or manual write)
-git add packages/msp/gks/
+git add gks/
 git commit -m "docs: define rate-limiting knowledge chain"
 git push origin feat/rate-limit
 ```
@@ -146,7 +146,7 @@ After CI is green and the feature is merged:
 ```sh
 # Author the audit atom directly in gks/audit/
 # or use a template
-git add packages/msp/gks/audit/AUDIT--RATE-LIMIT.md
+git add gks/audit/AUDIT--RATE-LIMIT.md
 git commit -m "audit: verify rate-limiting"
 ```
 

@@ -12,7 +12,7 @@ companion.
 
 > **Taxonomy reference (v2.3+)**: when authoring atoms via `msp_candidate`,
 > use the prefix taxonomy in `gks/concept/CONCEPT--TAXONOMY-V2-3.md` (canonical
-> docs: `packages/gks/docs/KNOWLEDGE-TYPES.md`). Note the two distinct meanings
+> docs: `docs/gks/KNOWLEDGE-TYPES.md`). Note the two distinct meanings
 > of "Genesis Block": (1) the **storage-engine** backend (`CONCEPT--GENESIS-GRAPH-BACKEND`,
 > `packages/gks/src/memory/graph/genesis-graph.ts`) — DB layer; (2) the
 > **Genesis Block** composite (`SPEC--GENESIS-BLOCK-MANIFEST`) — a `GENESIS--`

@@ -1,10 +1,12 @@
+import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { describe, expect, it } from 'vitest'
 
 import { handler, name } from '../../../src/mcp/tools/validate.js'
 
-const repoRoot = fileURLToPath(new URL('../../..', import.meta.url))
+const packageRoot = fileURLToPath(new URL('../../..', import.meta.url))
+const repoRoot = resolve(packageRoot, '../..')
 
 describe('msp_validate tool', () => {
   it('has the right name', () => {
@@ -26,7 +28,7 @@ describe('msp_validate tool', () => {
 
   it('files=[<known-bad fixture>] returns ok=false with errors', async () => {
     const result = await handler({ root: repoRoot })({
-      files: [`${repoRoot}/test/fixtures/CONCEPT--TEST-FORBIDDEN.md`],
+      files: [`${packageRoot}/test/fixtures/CONCEPT--TEST-FORBIDDEN.md`],
       root: repoRoot,
     })
     const parsed = JSON.parse(result.content[0]!.text)

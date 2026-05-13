@@ -20,11 +20,11 @@ This work consolidates what an earlier `packages/codex` proposal would have buil
 Read these in order before touching any code:
 
 1. **`packages/msp/CLAUDE.md`** — repo conventions, doc-to-code workflow, contradiction policy, worktree gotchas
-2. **`packages/gks/docs/KNOWLEDGE-TYPES.md`** — canonical atom type taxonomy (~30 types)
+2. **`docs/gks/KNOWLEDGE-TYPES.md`** — canonical atom type taxonomy (~30 types)
 3. **`packages/gks/SCOPE.md`** — what GKS is/isn't; key: **code intelligence is OUT of GKS scope** by design
-4. **`packages/gks/docs/MSP_RELATIONSHIP.md`** — GKS/MSP separation, GitNexus pattern
+4. **`docs/gks/MSP_RELATIONSHIP.md`** — GKS/MSP separation, GitNexus pattern
 5. **`FRAMEWORK_MASTER_SPEC.md`** (repo root) §3.2.1 (Smart Proxy Pattern) + §4.6 (Microtasks) + §8 (Codegen)
-6. **`packages/msp/gks/adr/ADR--MSP-INTERFACE-LAYER.md`** — interfaces/orchestrator/clients/domain split
+6. **`gks/adr/ADR--MSP-INTERFACE-LAYER.md`** — interfaces/orchestrator/clients/domain split
 
 **Existing infra to extend (not rebuild):**
 
@@ -50,17 +50,17 @@ packages/msp/src/mcp/tools/
 **Atoms already in place (P2 done):**
 
 ```
-packages/msp/gks/feat/
+gks/feat/
 ├── FEAT--SYMBOLS-MULTI-LANG.md           ← Python + COBOL parsers
 ├── FEAT--SYMBOLS-FRAMEWORK-AWARENESS.md  ← Routes + ORM + MCP discovery
 └── FEAT--SYMBOLS-PROCESS-TRACING.md      ← entry-point → leaf tracing
 
-packages/msp/gks/blueprint/BLUEPRINT--SYMBOL-GRAPH-CORE.md   ← prior blueprint (reference)
-packages/msp/gks/frame/FRAMEWORK--SYMBOL-GRAPH.md
-packages/msp/gks/concept/CONCEPT--SYMBOL-GRAPH.md
-packages/msp/gks/concept/CONCEPT--PARSER-CHOICE.md
-packages/msp/gks/adr/ADR--SYMBOL-GRAPH-PERSISTENCE.md
-packages/msp/gks/adr/ADR--LEIDEN-COMMUNITY-DETECTION.md
+gks/blueprint/BLUEPRINT--SYMBOL-GRAPH-CORE.md   ← prior blueprint (reference)
+gks/frame/FRAMEWORK--SYMBOL-GRAPH.md
+gks/concept/CONCEPT--SYMBOL-GRAPH.md
+gks/concept/CONCEPT--PARSER-CHOICE.md
+gks/adr/ADR--SYMBOL-GRAPH-PERSISTENCE.md
+gks/adr/ADR--LEIDEN-COMMUNITY-DETECTION.md
 ```
 
 ---
@@ -71,7 +71,7 @@ A separate `packages/codex/` was proposed but rejected because:
 
 1. **Name collision:** "Codex" clashes with OpenAI Codex (their main coding-agent product as of 2025) → confusing branding
 2. **Reinvention:** MSP already ships parser + JSONL/SQLite stores + Leiden + 5 MCP tools for the same use case
-3. **Scope split is unnecessary:** code intelligence is an orchestrator concern (per `ADR-009 msp-as-orchestrator` in `packages/gks/docs/adr/`), and MSP is the orchestrator
+3. **Scope split is unnecessary:** code intelligence is an orchestrator concern (per `ADR-009 msp-as-orchestrator` in `docs/gks/adr/`), and MSP is the orchestrator
 4. **Microtask reuse:** MSP already has `msp:run-task` for parallel codegen pipelines — the proposed 12-stage DAG maps cleanly to microtasks, no new orchestrator needed
 5. **GKS rejected the work explicitly:** `packages/gks/SCOPE.md` says "Code intelligence → use GitNexus or similar"; GKS won't accept this code
 
