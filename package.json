@@ -1,7 +1,7 @@
 {
-  "name": "msp-monorepo",
+  "name": "@freshair129/cognitive-system",
   "version": "0.4.0",
-  "description": "Memory & Soul Passport — monorepo",
+  "description": "Cognitive System — agentic monorepo (GKS storage engine + MSP orchestrator + multi-tier agent runtime)",
   "private": true,
   "type": "module",
   "workspaces": [
