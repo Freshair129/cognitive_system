@@ -1,12 +1,33 @@
-import { describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+
+// Mock the spawn helper BEFORE importing adapters so they pick up the mock.
+vi.mock('../../../src/agents/tiers/spawn-helper.js', () => ({
+  runCli: vi.fn(),
+}))
+
 import { claudeAdapter } from '../../../src/agents/tiers/claude.js'
 import { geminiAdapter } from '../../../src/agents/tiers/gemini.js'
 import { qwenAdapter } from '../../../src/agents/tiers/qwen.js'
-import type { TierAdapter } from '../../../src/agents/tiers/types.js'
+import { runCli } from '../../../src/agents/tiers/spawn-helper.js'
+import type { RunResult, TierAdapter } from '../../../src/agents/tiers/types.js'
 
 const DEFAULT_OPTS = { timeout_ms: 1000, capture_stderr: true }
+const mockedRunCli = vi.mocked(runCli)
 
-describe('tier adapter scaffolds', () => {
+function mockResult(overrides: Partial<RunResult> = {}): RunResult {
+  return {
+    ok: true,
+    output: '',
+    exit_code: 0,
+    ...overrides,
+  }
+}
+
+beforeEach(() => {
+  mockedRunCli.mockReset()
+})
+
+describe('tier adapter structural conformance', () => {
   it('qwenAdapter has name T1', () => {
     expect(qwenAdapter.name).toBe('T1')
   })
@@ -17,42 +38,6 @@ describe('tier adapter scaffolds', () => {
 
   it('claudeAdapter has name T3', () => {
     expect(claudeAdapter.name).toBe('T3')
-  })
-
-  it('qwenAdapter healthcheck returns false (stub)', async () => {
-    expect(await qwenAdapter.healthcheck()).toBe(false)
-  })
-
-  it('geminiAdapter healthcheck returns false (stub)', async () => {
-    expect(await geminiAdapter.healthcheck()).toBe(false)
-  })
-
-  it('claudeAdapter healthcheck returns false (stub)', async () => {
-    expect(await claudeAdapter.healthcheck()).toBe(false)
-  })
-
-  it('qwenAdapter run returns not-implemented sentinel', async () => {
-    const result = await qwenAdapter.run('hello', DEFAULT_OPTS)
-    expect(result.ok).toBe(false)
-    expect(result.exit_code).toBe(-1)
-    expect(result.output).toMatch(/not implemented/i)
-    expect(result.output).toMatch(/qwen/i)
-  })
-
-  it('geminiAdapter run returns not-implemented sentinel', async () => {
-    const result = await geminiAdapter.run('hello', DEFAULT_OPTS)
-    expect(result.ok).toBe(false)
-    expect(result.exit_code).toBe(-1)
-    expect(result.output).toMatch(/not implemented/i)
-    expect(result.output).toMatch(/gemini/i)
-  })
-
-  it('claudeAdapter run returns not-implemented sentinel', async () => {
-    const result = await claudeAdapter.run('hello', DEFAULT_OPTS)
-    expect(result.ok).toBe(false)
-    expect(result.exit_code).toBe(-1)
-    expect(result.output).toMatch(/not implemented/i)
-    expect(result.output).toMatch(/claude/i)
   })
 
   it('all three adapters conform structurally to TierAdapter', async () => {
@@ -67,13 +52,83 @@ describe('tier adapter scaffolds', () => {
       expect(typeof adapter.healthcheck).toBe('function')
       expect(typeof adapter.run).toBe('function')
 
+      mockedRunCli.mockResolvedValueOnce(mockResult({ ok: true, exit_code: 0 }))
       const health = await adapter.healthcheck()
       expect(typeof health).toBe('boolean')
 
+      mockedRunCli.mockResolvedValueOnce(mockResult({ output: 'probe-out' }))
       const result = await adapter.run('probe', DEFAULT_OPTS)
       expect(typeof result.ok).toBe('boolean')
       expect(typeof result.output).toBe('string')
       expect(typeof result.exit_code).toBe('number')
     }
+  })
+})
+
+describe('qwenAdapter (T1) delegates to runCli', () => {
+  it('healthcheck spawns `qwen --version` and returns true on exit 0', async () => {
+    mockedRunCli.mockResolvedValueOnce(mockResult({ ok: true, exit_code: 0 }))
+    const ok = await qwenAdapter.healthcheck()
+    expect(ok).toBe(true)
+    expect(mockedRunCli).toHaveBeenCalledOnce()
+    const [bin, args] = mockedRunCli.mock.calls[0]!
+    expect(bin).toBe('qwen')
+    expect(args).toEqual(['--version'])
+  })
+
+  it('healthcheck returns false on non-zero exit', async () => {
+    mockedRunCli.mockResolvedValueOnce(mockResult({ ok: false, exit_code: -1 }))
+    expect(await qwenAdapter.healthcheck()).toBe(false)
+  })
+
+  it('run() spawns `qwen --prompt <prompt>` and forwards opts', async () => {
+    mockedRunCli.mockResolvedValueOnce(mockResult({ output: 'hello' }))
+    const result = await qwenAdapter.run('hi there', DEFAULT_OPTS)
+    expect(result.output).toBe('hello')
+    expect(mockedRunCli).toHaveBeenCalledOnce()
+    const [bin, args, opts] = mockedRunCli.mock.calls[0]!
+    expect(bin).toBe('qwen')
+    expect(args).toEqual(['--prompt', 'hi there'])
+    expect(opts).toEqual(DEFAULT_OPTS)
+  })
+})
+
+describe('geminiAdapter (T2) delegates to runCli', () => {
+  it('healthcheck spawns `gemini --version`', async () => {
+    mockedRunCli.mockResolvedValueOnce(mockResult({ ok: true, exit_code: 0 }))
+    expect(await geminiAdapter.healthcheck()).toBe(true)
+    const [bin, args] = mockedRunCli.mock.calls[0]!
+    expect(bin).toBe('gemini')
+    expect(args).toEqual(['--version'])
+  })
+
+  it('run() spawns `gemini --approval-mode yolo -p <prompt>`', async () => {
+    mockedRunCli.mockResolvedValueOnce(mockResult({ output: 'g-out' }))
+    const result = await geminiAdapter.run('do thing', DEFAULT_OPTS)
+    expect(result.output).toBe('g-out')
+    const [bin, args, opts] = mockedRunCli.mock.calls[0]!
+    expect(bin).toBe('gemini')
+    expect(args).toEqual(['--approval-mode', 'yolo', '-p', 'do thing'])
+    expect(opts).toEqual(DEFAULT_OPTS)
+  })
+})
+
+describe('claudeAdapter (T3) delegates to runCli', () => {
+  it('healthcheck spawns `claude --version`', async () => {
+    mockedRunCli.mockResolvedValueOnce(mockResult({ ok: true, exit_code: 0 }))
+    expect(await claudeAdapter.healthcheck()).toBe(true)
+    const [bin, args] = mockedRunCli.mock.calls[0]!
+    expect(bin).toBe('claude')
+    expect(args).toEqual(['--version'])
+  })
+
+  it('run() spawns `claude --print <prompt>`', async () => {
+    mockedRunCli.mockResolvedValueOnce(mockResult({ output: 'c-out' }))
+    const result = await claudeAdapter.run('plan something', DEFAULT_OPTS)
+    expect(result.output).toBe('c-out')
+    const [bin, args, opts] = mockedRunCli.mock.calls[0]!
+    expect(bin).toBe('claude')
+    expect(args).toEqual(['--print', 'plan something'])
+    expect(opts).toEqual(DEFAULT_OPTS)
   })
 })
