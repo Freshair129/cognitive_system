@@ -85,6 +85,13 @@ required_fields:
       - status
       - title
       - created_at
+    episode:
+      - id
+      - phase
+      - type
+      - status
+      - title
+      - created_at
 
 # Reserved for M6: per-field constraints (length, regex, type).
 # Currently the loader ignores this section; summary length/placeholder
