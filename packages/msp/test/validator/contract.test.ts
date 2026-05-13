@@ -12,7 +12,7 @@ async function freshRoot(): Promise<string> {
 }
 
 async function writeContract(root: string, content: string): Promise<void> {
-  const dir = join(root, '.brain/msp/LLM_Contract')
+  const dir = join(root, 'msp/LLM_Contract')
   await mkdir(dir, { recursive: true })
   await writeFile(join(dir, 'atomic_contract.yaml'), content)
 }

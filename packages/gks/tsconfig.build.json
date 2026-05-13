@@ -9,7 +9,7 @@
     "sourceMap": true,
     "removeComments": false,
     "isolatedModules": true,
-    "moduleResolution": "Bundler"
+    "moduleResolution": "NodeNext"
   },
   "include": ["src/**/*.ts", "bin/**/*.ts"],
   "exclude": [

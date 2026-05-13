@@ -17,7 +17,7 @@ import { join, resolve } from 'node:path'
 
 import { AtomicLayer } from '../../src/memory/gks.js'
 
-const SCRIPT = resolve(__dirname, '..', '..', 'scripts', 'msp', 're-indexer.ts')
+const SCRIPT = resolve(__dirname, '..', '..', '..', '..', 'scripts', 'msp', 're-indexer.ts')
 const NPX = process.platform === 'win32' ? 'npx.cmd' : 'npx'
 
 function run(args: string[]): { stdout: string; stderr: string; code: number } {

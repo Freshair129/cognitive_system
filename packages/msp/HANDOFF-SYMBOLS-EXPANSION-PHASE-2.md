@@ -31,7 +31,7 @@ Read these in order before touching any code:
    - `gks/adr/ADR--SYMBOLS-FRAMEWORK-AWARENESS.md`
    - `gks/algo/ALGO--SYMBOLS-FRAMEWORK-RECOGNITION.md`
    - `gks/proto/PROTO--SYMBOLS-FRAMEWORK-INVARIANTS.md`
-4. `packages/msp/gks/feat/FEAT--SYMBOLS-PROCESS-TRACING.md` (current — to be decomposed in PR-B)
+4. `gks/feat/FEAT--SYMBOLS-PROCESS-TRACING.md` (current — to be decomposed in PR-B)
 5. `packages/msp/src/validator/proto/scaling-level-gate.ts` — see the grandfather clause and PROTO atom requirement enforcement
 
 ---
@@ -265,7 +265,7 @@ Constraints:
 ### 6.6 Done
 
 - Branch: `claude/msp-atom-workflow-scripts`
-- 3 scripts under `packages/msp/scripts/msp/`
+- 3 scripts under `scripts/msp/`
 - Tests under `packages/msp/test/scripts/`
 - README section in `packages/msp/README.md` documenting the scripts
 - CI green

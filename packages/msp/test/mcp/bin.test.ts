@@ -1,13 +1,15 @@
 import { spawn } from 'node:child_process'
 import { existsSync } from 'node:fs'
 import { tmpdir } from 'node:os'
+import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { describe, expect, it } from 'vitest'
 
-const repoRoot = fileURLToPath(new URL('../..', import.meta.url))
-const binSrc = `${repoRoot}/src/mcp/bin.ts`
-const binDist = `${repoRoot}/dist/mcp/bin.js`
+const packageRoot = fileURLToPath(new URL('../..', import.meta.url))
+const repoRoot = resolve(packageRoot, '../..')
+const binSrc = `${packageRoot}/src/mcp/bin.ts`
+const binDist = `${packageRoot}/dist/mcp/bin.js`
 
 interface JsonRpc {
   jsonrpc: '2.0'

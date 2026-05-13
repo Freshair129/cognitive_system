@@ -9,7 +9,7 @@
 > **License intent:** Boilerplate — fork แล้วแทนที่ `YourProject` / `ExampleFeature` ได้ทันที
 > **สถานะ:** ACTIVE — Master Reference สำหรับแตกออกเป็น Atomic (ADR / Protocol) ต่อไป
 >
-> **Changelog 1.2.0 (2026-05-13):** Taxonomy v2.3 prefix updates. `GENESIS--` แทน **Block Manifest** (runtime entry-point ของ Genesis Block; frontmatter contract อยู่ที่ `SPEC--GENESIS-BLOCK-MANIFEST`) — เริ่มต้น v2.3 ตั้ง placeholder เป็น `FRAME--` แต่ retire เพราะ visual collision กับ `FRAMEWORK--`. ความหมายเดิมของ `FRAME--` ("architectural framework / methodology / code standards") ย้ายไป `FRAMEWORK--`. `GUARDRAIL--` rename เป็น `GUARD--`. Prefixes ใหม่: `STACK--`, `SPEC--`, `COGNITIVE--`, `SAFETY--`, `MOD--`. Reference เก่า `FRAME--` ในเอกสารนี้ (~9 จุดที่เหลือใน §6/§7/§11/§14/§17/§18) ที่หมายถึง "architectural framework" ต้องอ่านเป็น `FRAMEWORK--`. Canonical reference: `packages/gks/docs/KNOWLEDGE-TYPES.md`. Disambiguation: "Genesis Block" มี 2 ความหมาย — **Genesis Graph Backend** (DB ที่ `packages/gks/src/memory/graph/genesis-graph.ts`) vs **Genesis Block** (composite ที่ `GENESIS--` manifest aggregate).
+> **Changelog 1.2.0 (2026-05-13):** Taxonomy v2.3 prefix updates. `GENESIS--` แทน **Block Manifest** (runtime entry-point ของ Genesis Block; frontmatter contract อยู่ที่ `SPEC--GENESIS-BLOCK-MANIFEST`) — เริ่มต้น v2.3 ตั้ง placeholder เป็น `FRAME--` แต่ retire เพราะ visual collision กับ `FRAMEWORK--`. ความหมายเดิมของ `FRAME--` ("architectural framework / methodology / code standards") ย้ายไป `FRAMEWORK--`. `GUARDRAIL--` rename เป็น `GUARD--`. Prefixes ใหม่: `STACK--`, `SPEC--`, `COGNITIVE--`, `SAFETY--`, `MOD--`. Reference เก่า `FRAME--` ในเอกสารนี้ (~9 จุดที่เหลือใน §6/§7/§11/§14/§17/§18) ที่หมายถึง "architectural framework" ต้องอ่านเป็น `FRAMEWORK--`. Canonical reference: `docs/gks/KNOWLEDGE-TYPES.md`. Disambiguation: "Genesis Block" มี 2 ความหมาย — **Genesis Graph Backend** (DB ที่ `packages/gks/src/memory/graph/genesis-graph.ts`) vs **Genesis Block** (composite ที่ `GENESIS--` manifest aggregate).
 >
 > **Changelog 1.1.0:** Inbound queue (`/submit-memory`, `gks/inbound/`, `npm run msp:propose|list|promote`) ถูกแทนที่ด้วย **Candidates flow** (`msp_candidate` MCP tool → `.brain/msp/projects/<ns>/candidates/` → human PR). ดู §7.2 และ §16.5
 
@@ -127,6 +127,19 @@ packages/msp/src/
 - Index หลัก: `gks/00_index/atomic_index.jsonl` — agent ควร scan ไฟล์นี้ก่อนเสมอ
 - เขียนตรงโดย agent ไม่ได้ — ต้องผ่าน `msp_candidate` → PR (ดู §7)
 
+#### 3.3.1 Genesis Block Engine (High-Performance Backend)
+นอกจาก JSONL index มาตรฐาน GKS ยังรองรับ **Genesis Block Engine** (Specified by `CONCEPT--GENESIS-BLOCK-ENGINE`):
+- **บทบาท:** เป็น `GraphBackend` ประสิทธิภาพสูง (Rust-based) สำหรับงานที่ต้อง Query ซับซ้อน
+- **ความสามารถ:** รองรับ OpenCypher query, Bi-temporal time-travel (ย้อนดูสถานะ graph ในอดีต), และ columnar indexing
+- **การใช้งาน:** ทำงานแบบ process-local addon (.node) ไม่ต้องมี database server แยกต่างหาก (zero-dependency design)
+
+#### 3.3.2 Vector Layer & Embedding Strategy
+เพื่อให้ Agent สามารถค้นหาข้อมูลตามความหมาย (Semantic Search) ได้:
+- **Canonical Model:** ใช้ `nomic-embed-text-v1.5` (Specified by `ADR--EMBEDDING-MODEL-PARITY`)
+- **Embedding Pipeline:** GKS ทำหน้าที่เป็น *Canonical Writer* ผ่าน `createNomicEmbedder()` โดยรันโมเดลแบบ Local (ผ่าน `@huggingface/transformers` หรือ Ollama)
+- **Vector Storage:** เก็บที่ `.brain/msp/projects/<ns>/vector/atomic.jsonl` (JSONL format เพื่อให้ทำ git diff ได้ง่าย) หรือขยายไปใช้ `PgVector` ได้
+- **Obsidian Parity:** มนุษย์ที่ใช้ Obsidian + Smart Connections plugin ต้องตั้งค่าให้ใช้โมเดลเดียวกัน เพื่อให้ AI และ Human เห็น "ความเหมือน" ของข้อมูลตรงกัน
+
 ### 👁️ 3.4 Viewer — Obsidian (`.obsidian/`, optional)
 **สำหรับ human review** — ไม่บังคับสำหรับ agent
 - **Primary read path สำหรับ agent:** MCP tools — `gks_recall` (semantic), `gks_lookup` (id), `gks_backlinks` (graph)
@@ -148,7 +161,7 @@ packages/msp/src/
 
 ระบบ GKS ไม่ยึดติดกับโครงสร้างโฟลเดอร์แบบ Phase แต่จะใช้ **ID Prefix** และ **Frontmatter** ในการกำกับดูแล เพื่อจำแนกประเภทความรู้
 
-> ⚠️ **Canonical type registry = `packages/gks/docs/KNOWLEDGE-TYPES.md`**
+> ⚠️ **Canonical type registry = `docs/gks/KNOWLEDGE-TYPES.md`**
 > ตารางในเอกสารนี้เป็น **meta-architecture summary** เพื่อให้เข้าใจภาพรวม — ถ้าขัดแย้งกับ KNOWLEDGE-TYPES.md ให้ยึด KNOWLEDGE-TYPES.md เป็นหลัก รายละเอียดต่อ type (use-cases, don't-use-cases, decision tree) อ่านจาก doc นั้น
 
 **Type Clusters (ตาม KNOWLEDGE-TYPES.md):**
@@ -279,7 +292,7 @@ packages/msp/src/
 
 ### 4.4 ประเภทความรู้ระดับอะตอม (Atomic Knowledge)
 - **เป้าหมาย:** สกัดความรู้จาก Concept เป็น "อะตอม" — 1 ไฟล์ 1 เรื่อง เพื่อให้ AI ค้นแม่นยำ
-- **ผู้ใช้หลัก:** Architect agent ผ่าน Obsidian MCP
+- **ผู้ใช้หลัก:** Agents ผ่าน GKS MCP Tools (Headless) และ Humans ผ่าน Obsidian (Viewer)
 - **หน้าที่:** **SSOT** ของระบบ
 - **โครงสร้างโฟลเดอร์ตาม Types:** แยกเก็บในโฟลเดอร์ของตัวเองเพื่อความชัดเจน
 
@@ -289,8 +302,9 @@ packages/msp/src/
 |---|---|---|---|
 | `ADR--` | `adrs/` หรือ `adr/` | Architecture Decision Record | การตัดสินใจทางสถาปัตยกรรม |
 | `MASTER--`| `master/` | Root-level Policy | กฎระดับ root (เช่น contradiction policy, write boundaries) |
-| `FRAMEWORK--` | `framework/` | Framework Rules (v2.3+) | มาตรฐานโค้ด + สถาปัตยกรรม / governance (เดิม `FRAME--`) |
-| `GENESIS--` | `genesis/` | Block Manifest (v2.3+) | runtime entry-point ของ Genesis Block (contract: `SPEC--GENESIS-BLOCK-MANIFEST`). Initially placeholdered as `FRAME--`; retired. |
+| `FRAMEWORK--` | `framework/` | Framework Rules (v2.3+) | มาตรฐานโค้ด + สถาปัตยกรรม / governance (เดิมคือ `FRAME--`) |
+| `FRAME--` | `frame/` | Block Manifest (v2.3+) | runtime entry-point ของ Genesis Block (contract: `SPEC--GENESIS-BLOCK-MANIFEST`) |
+| `GUARD--` | `guard/` | Enforced Policy (v2.3+) | นโยบายบังคับพฤติกรรม (เดิมคือ `GUARDRAIL--`) |
 | `STACK--` | `stack/` | Technology stack (v2.3+) | inventory ของ language / runtime / library |
 | `SPEC--` | `spec/` | Specification (v2.3+) | data contract / wire format / API shape |
 | `COGNITIVE--` | `cognitive/` | Mental model (v2.3+) | interpretive lens (Erikson, Qualia, ฯลฯ) |
@@ -574,7 +588,15 @@ Pre-commit hook (`packages/msp/src/hooks/pre-commit.ts`) บังคับ vali
 - Frontmatter hallucination (agent แต่งฟิลด์ที่ไม่มีจริง)
 - Link เสีย (wikilink ชี้ไปที่ไม่มี)
 
-### 7.2 Candidates Flow (replaces legacy Inbound Queue)
+### 7.2 Graph Integrity: DAG & Acyclic Invariants
+เพื่อป้องกันการเกิด infinite loop ในการประมวลผลความรู้ และเพื่อให้การวิเคราะห์ผลกระทบ (Impact Analysis) แม่นยำ MSP บังคับใช้กฎ **DAG (Directed Acyclic Graph)** กับโครงสร้างความสัมพันธ์:
+
+- **Acyclic Enforcement:** ทุกความสัมพันธ์เชิงทิศทาง (Directional Crosslinks) เช่น `supersedes`, `implements`, `parent_blueprint`, และ `resolves` **ห้ามมีการวนลูป (No Cycles)**
+- **Supersession Traceability:** สายธารการสืบทอดความรู้ (`supersedes`) ต้องเป็นเส้นตรงหรือกิ่งก้านที่ชัดเจน เพื่อให้ระบบ `asOf` query สามารถโครงการภาพความรู้ ณ จุดใดจุดหนึ่งในอดีตได้อย่างถูกต้อง
+- **Impact Analysis Guarantee:** การตรวจสอบ "แรงระเบิด" (Blast Radius) จากการแก้ไขอะตอมหนึ่งไปยังอะตอมอื่น จะต้องจบลงในเวลาที่กำหนด (Termination guarantee) ซึ่งทำได้เฉพาะในโครงสร้างแบบ DAG เท่านั้น
+- **Enforcement Mechanism:** ตรวจสอบผ่าน **PROTO Invariants** (เช่น `PROTO--TRACE-INVARIANTS`) ในทุกๆ การเสนอ `msp_candidate` หากพบการวนลูป ระบบจะปฏิเสธการเขียนทันที (Reject at write-time)
+
+### 7.3 Candidates Flow (replaces legacy Inbound Queue)
 
 > **Migration note:** ก่อน Phase 3 (2026-05-09) เคยใช้ inbound queue + `/submit-memory` slash command + `npm run msp:propose|list|promote`. ทั้งหมดถูกถอดออกแล้ว ใช้ flow ด้านล่างแทน
 
@@ -675,6 +697,31 @@ crosslinks:         # ความเชื่อมโยงแบบ Knowledge
 ### 7.5 MSP Conversation & Session Memory
 
 MSP มีบทบาทในการดูแลจัดการความจำข้าม session, project และ workspace ด้วยระบบที่เรียบง่ายแต่ผูกพันธ์กับ Atomic Knowledge ที่เกิดขึ้นระหว่างทาง
+
+## 8. Symbol Graph & Processing Pipeline (12-Stage DAG)
+เพื่อให้ Codebase ถูกเปลี่ยนสภาพเป็น **Architectural Knowledge Graph** ที่ AI Agents สามารถเข้าใจความหมายเชิงสถาปัตยกรรมได้ MSP บังคับใช้กระบวนการประมวลผลแบบ **Directed Acyclic Graph (DAG)** ทั้งหมด 12 ระยะหลัก:
+
+### 8.1 The 12 Stages
+1. **Scan (การสแกน):** สำรวจเส้นทางไฟล์ (File paths) และขนาดข้อมูลทั้งหมดเพื่อสร้างแผนผังพื้นฐานของ Repository
+2. **Structure (โครงสร้าง):** จับคู่ความสัมพันธ์โฟลเดอร์/ไฟล์ เพื่อสร้างลำดับชั้น (Hierarchy Tree) ของซอฟต์แวร์
+3. **Specialized Parse - Markdown:** วิเคราะห์ไฟล์ `.md` เพื่อสกัดความรู้ (Atoms) และเชื่อมโยงเนื้อหาอธิบายเข้ากับระบบ
+4. **Specialized Parse - COBOL:** วิเคราะห์โค้ด Legacy (COBOL) เพื่อให้ระบบรองรับการวิเคราะห์ข้ามยุคสมัย
+5. **Symbolic Parse:** สกัดสัญลักษณ์ (Functions, Classes, Methods, Interfaces) โดยใช้ **Tree-sitter AST**
+6. **Framework - Routes:** วิเคราะห์เส้นทาง API (เช่น Next.js App Router) เพื่อระบุ Entry Points ของระบบ
+7. **Framework - Tools:** สกัดคำนิยามของ MCP tools หรือ RPC handlers ที่ระบุไว้ในโค้ด
+8. **Framework - ORM:** วิเคราะห์ระบบจัดการข้อมูล (เช่น Prisma, Supabase) เพื่อดูความสัมพันธ์กับ Database Schema
+9. **Cross-File Resolution:** เชื่อมโยงการ Import/Export สัญลักษณ์ระหว่างไฟล์ที่แยกจากกัน
+10. **MRO (Method Resolution Order):** จัดลำดับชั้นการสืบทอด (Heritage Map) เพื่อระบุการเรียกใช้งานจริงในระบบที่ซับซ้อน
+11. **Communities (การจัดกลุ่มชุมชน):** ใช้ **Leiden Algorithm** จัดกลุ่มสัญลักษณ์ที่มีความเกี่ยวข้องกันในเชิงหน้าที่ (Functional Cohesion)
+12. **Processes (กระบวนการประมวลผล):** ติดตามเส้นทางการไหลของข้อมูล (Execution Flows) จาก Entry Points ไปยังฟังก์ชันปลายทาง
+
+### 8.2 Persistence: GenesisGraphBackend
+ข้อมูลกราฟความรู้ที่ได้จากทั้ง 12 ระยะจะถูกบันทึกลงใน **GenesisGraphBackend (DB)**:
+- **Graph Storage:** จัดเก็บในรูปแบบที่รองรับการ Query ความสัมพันธ์ที่ซับซ้อนและลึก (Deep Traversal)
+- **Agent Accessibility:** ข้อมูลใน DB นี้จะถูก SURFACED ผ่าน MCP tools (เช่น `gks_backlinks`, `symbol_trace`) เพื่อให้ AI Agents สามารถเรียกใช้งานได้ทันที
+
+---
+
 
 - **Project Path Encoding:** กำหนด `<path-encoded>` ตาม location เช่น `D:/company/ProA` จะถูกตั้งค่าเป็น `D--ProA`
 - **Candidates Path:** `.brain/msp/projects/<path-encoded>/candidates/` (gitignored — per-user staging area ก่อน PR)
@@ -1187,7 +1234,7 @@ Obsidian เป็น **GUI ที่แนะนำ** (ไม่บังคั
 ### 12.1 The Obsidian Vault Strategy (เมื่อใช้)
 - **Folder as Vault:** กำหนดให้โฟลเดอร์ `gks/` ทำหน้าที่เป็น Obsidian Vault
 - **SSOT Interface:** ทุกไฟล์ Markdown ใน Vault คือ "ความจริงหนึ่งเดียว" ที่ผ่าน MSP validation + human PR review แล้ว
-- **Embedder parity:** ถ้าเปิด Smart Connections plugin ต้องเลือก model เดียวกับ GKS (default `nomic-embed-text-v1.5`) — ดู `packages/gks/docs/embedder-compatibility.md`
+- **Embedder parity:** ถ้าเปิด Smart Connections plugin ต้องเลือก model เดียวกับ GKS (default `nomic-embed-text-v1.5`) — ดู `docs/gks/embedder-compatibility.md`
 
 ### 12.2 Semantic Linking (Wikilinks)
 ระบบ GKS บังคับใช้การเชื่อมโยงความรู้แบบ **Semantic Web** ผ่าน Wikilinks (ไม่ขึ้นกับว่าเปิด Obsidian ไหม):
@@ -1335,9 +1382,9 @@ npm test --workspace=packages/gks
 ### 16.1 Re-indexer (Deterministic)
 สคริปต์สำหรับรวบรวม ID จากทุกไฟล์ใน `gks/` มาสร้าง L0 atomic index เพื่อให้ agent scan ได้เร็ว
 
-- **Location:** `packages/msp/scripts/msp/re-indexer.ts` (TypeScript — รันผ่าน tsx)
+- **Location:** `scripts/msp/re-indexer.ts` (TypeScript — รันผ่าน tsx)
 - **Command (preferred):** `npm run msp:index`
-- **Command (direct):** `tsx packages/msp/scripts/msp/re-indexer.ts --root=.`
+- **Command (direct):** `tsx scripts/msp/re-indexer.ts --root=.`
 - **Output:** `gks/00_index/atomic_index.jsonl`
 - **Usage:** รันทุกครั้งเมื่อมีการเพิ่ม/ลบ atom; pre-commit hook trigger อัตโนมัติ
 

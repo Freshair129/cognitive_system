@@ -13,7 +13,7 @@ import { fileURLToPath } from 'node:url'
 
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 
-const repoRoot = fileURLToPath(new URL('../..', import.meta.url))
+const repoRoot = fileURLToPath(new URL('../../../..', import.meta.url))
 const atomDateScript = join(repoRoot, 'scripts/msp/atom-date.ts')
 const scaffoldScript = join(repoRoot, 'scripts/msp/scaffold-atom.ts')
 const supersedeScript = join(repoRoot, 'scripts/msp/supersede.ts')

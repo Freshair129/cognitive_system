@@ -1,13 +1,14 @@
 import { spawn, spawnSync } from 'node:child_process'
 import { copyFile, mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
-const repoRoot = fileURLToPath(new URL('../..', import.meta.url))
-const hookSrc = join(repoRoot, 'examples/hooks/pre-commit-validator.sh')
+const packageRoot = fileURLToPath(new URL('../..', import.meta.url))
+const repoRoot = resolve(packageRoot, '../..')
+const hookSrc = join(packageRoot, 'examples/hooks/pre-commit-validator.sh')
 
 const VALID = `---
 id: CONCEPT--TEST-VALID-HOOK
@@ -74,7 +75,7 @@ async function makeFixtureRepo(): Promise<string> {
         name: 'msp-hook-fixture',
         private: true,
         scripts: {
-          'msp:validate': `tsx ${join(repoRoot, 'src/validator/cli.ts')} --root=${repoRoot}`,
+          'msp:validate': `tsx ${join(packageRoot, 'src/validator/cli.ts')} --root=${repoRoot}`,
         },
       },
       null,

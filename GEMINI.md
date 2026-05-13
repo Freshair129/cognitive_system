@@ -36,7 +36,7 @@ Every feature implementation follows a strict phase order:
 - [ ] All required `ADR--` references are `status: stable/active`.
 
 ## ⚛️ Atom Taxonomy (v2.3)
-Canonical reference: `packages/gks/docs/KNOWLEDGE-TYPES.md`.
+Canonical reference: `docs/gks/KNOWLEDGE-TYPES.md`.
 
 | Prefix | Change in v2.3 | Role |
 |---|---|---|
@@ -50,7 +50,7 @@ Canonical reference: `packages/gks/docs/KNOWLEDGE-TYPES.md`.
 **Authoring Rules:**
 - **Inbound**: `msp_propose` is REMOVED. Use the `msp_candidate` MCP tool to draft atoms to `.brain/msp/projects/<ns>/candidates/`.
 - **Promotion**: Atoms are promoted to `gks/<type>/` via **Human PR** only.
-- **Frontmatter**: Check `packages/msp/.brain/msp/LLM_Contract/atomic_contract.yaml` for required fields.
+- **Frontmatter**: Check `msp/LLM_Contract/atomic_contract.yaml` for required fields.
 - **Tier**: Must be one of {`safety`, `master`, `genesis`, `process`}.
 
 ## 🛠️ Tooling & Strategy

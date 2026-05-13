@@ -12,10 +12,10 @@ This is the project-internal contract for how Claude Code (and human contributor
 > **History note.** GKS used to live in a separate repo `Freshair129/GksV3`. As of the 2026-05-11 monorepo migration (`ADR--MONOREPO-STRUCTURE`), that repo is **archived (read-only) on GitHub** and the canonical source lives here at `packages/gks/`. Do not push to `GksV3`; do not look there for current code or docs.
 
 ### Authoritative docs:
-- `packages/msp/gks/framework/FRAMEWORK--MSP-ARCHITECTURE-V2.md` — Top-level architecture
+- `gks/framework/FRAMEWORK--MSP-ARCHITECTURE-V2.md` — Top-level architecture
 - `packages/msp/msp_spec.md` — Full MSP spec
-- `packages/msp/gks/concept/CONCEPT--TAXONOMY-V2-3.md` — atomic-knowledge prefix taxonomy (v2.3)
-- `packages/msp/gks/spec/SPEC--GENESIS-BLOCK-MANIFEST.md` — FRAME-- frontmatter contract
+- `gks/concept/CONCEPT--TAXONOMY-V2-3.md` — atomic-knowledge prefix taxonomy (v2.3)
+- `gks/spec/SPEC--GENESIS-BLOCK-MANIFEST.md` — FRAME-- frontmatter contract
 - `packages/gks/README.md` — GKS engine documentation
 - `packages/msp/ROADMAP.md` — Execution plan
 
@@ -46,12 +46,12 @@ npm run msp:validate --workspace=packages/msp
 ## Doc-to-code workflow (mandatory)
 
 Every milestone follows this phase order:
-1. **FRAMEWORK** (architecture / governance) -> `packages/msp/gks/framework/` (was `FRAME--` pre-v2.3; see `ADR--TAXONOMY-V2-3-MIGRATION`)
-2. **CONCEPT** (intent) -> `packages/msp/gks/concept/`
-3. **ADR/FEAT** (decision) -> `packages/msp/gks/adr/` or `packages/msp/gks/feat/`
-4. **BLUEPRINT** (plan) -> `packages/msp/gks/blueprint/`
+1. **FRAMEWORK** (architecture / governance) -> `gks/framework/` (was `FRAME--` pre-v2.3; see `ADR--TAXONOMY-V2-3-MIGRATION`)
+2. **CONCEPT** (intent) -> `gks/concept/`
+3. **ADR/FEAT** (decision) -> `gks/adr/` or `gks/feat/`
+4. **BLUEPRINT** (plan) -> `gks/blueprint/`
 5. **CODE** (actual src) -> `packages/msp/src/` or `packages/gks/src/`
-6. **AUDIT** (what shipped) -> `packages/msp/gks/audit/`
+6. **AUDIT** (what shipped) -> `gks/audit/`
 
 ## Atom Integrity
 - Atoms must validate (`npm run msp:validate`) before commit.

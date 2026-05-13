@@ -6,7 +6,7 @@ The GKS/MSP ecosystem has been successfully migrated to a formal **npm workspace
 - **Root**: Contains `package.json` (workspace manager), `CLAUDE.md` (unified rules), and `.github/` (unified CI).
 - **`packages/msp`**: The passport orchestrator and memory orchestrator logic.
 - **`packages/gks`**: The core Genesis Knowledge System storage engine.
-- **`packages/msp/gks/`**: The knowledge content (atoms) remains here, as it is the "data" for the MSP.
+- **`gks/`**: The knowledge content (atoms) remains here, as it is the "data" for the MSP.
 
 ## 2. Workspace Configuration
 - Root `package.json` defines `workspaces: ["packages/*"]`.

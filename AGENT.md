@@ -7,7 +7,7 @@ This file documents mandatory rules that all AI agents operating in this reposit
 - **Working directory**: monorepo root is `C:\Users\freshair\cognitive_system`. Two workspaces: `packages/gks/` (engine library) + `packages/msp/` (orchestrator).
 
 ## Atom taxonomy (v2.3)
-The atomic-knowledge prefix set is canonicalised in `packages/gks/docs/KNOWLEDGE-TYPES.md` and `packages/msp/gks/concept/CONCEPT--TAXONOMY-V2-3.md`. Key rules:
+The atomic-knowledge prefix set is canonicalised in `docs/gks/KNOWLEDGE-TYPES.md` and `gks/concept/CONCEPT--TAXONOMY-V2-3.md`. Key rules:
 
 - `GENESIS--` = **Block Manifest** (v2.3+) — runtime entry-point of a Genesis Block. Frontmatter contract: `SPEC--GENESIS-BLOCK-MANIFEST`. (Replaces retired placeholder `FRAME--`.)
 - `FRAMEWORK--` (v2.3+) = governance / architectural framework (the prior `FRAME--` meaning).
@@ -17,7 +17,7 @@ The atomic-knowledge prefix set is canonicalised in `packages/gks/docs/KNOWLEDGE
 
 ## Validation gates
 Before any atom commit:
-- `npm run msp:index` (regen `packages/msp/gks/00_index/atomic_index.jsonl`)
+- `npm run msp:index` (regen `gks/00_index/atomic_index.jsonl`)
 - `npx tsx packages/msp/src/validator/cli.ts --root=packages/msp --all` (target: 246 passed, 0 failed)
 - Crosslink references must resolve (the `dangling-wikilink` rule enforces this).
 - Atom IDs must match the canonical regex `^[A-Z][A-Z0-9_]*--[A-Z0-9][A-Z0-9_-]*$` (no dots, no lowercase).
