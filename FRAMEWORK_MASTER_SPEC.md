@@ -9,7 +9,7 @@
 > **License intent:** Boilerplate — fork แล้วแทนที่ `YourProject` / `ExampleFeature` ได้ทันที
 > **สถานะ:** ACTIVE — Master Reference สำหรับแตกออกเป็น Atomic (ADR / Protocol) ต่อไป
 >
-> **Changelog 1.2.0 (2026-05-13):** Taxonomy v2.3 prefix updates. `FRAME--` ตอนนี้แทน **Block Manifest** (runtime entry-point ของ Knowledge Block; frontmatter contract อยู่ที่ `SPEC--KNOWLEDGE-BLOCK-MANIFEST`). ความหมายเดิม "architectural framework / methodology / code standards" ย้ายไป `FRAMEWORK--`. `GUARDRAIL--` rename เป็น `GUARD--`. Prefixes ใหม่: `STACK--`, `SPEC--`, `COGNITIVE--`, `SAFETY--`, `MOD--`. Reference เก่า `FRAME--` ในเอกสารนี้ (~9 จุดที่เหลือใน §6/§7/§11/§14/§17/§18) ที่หมายถึง "architectural framework" ต้องอ่านเป็น `FRAMEWORK--`. Canonical reference: `packages/gks/docs/KNOWLEDGE-TYPES.md`. Disambiguation: "Genesis Block" มี 2 ความหมาย — **Genesis Block Engine** (DB ที่ `packages/gks/src/memory/graph/genesis-block.ts`) vs **Knowledge Block** (composite ที่ FRAME-- manifest aggregate).
+> **Changelog 1.2.0 (2026-05-13):** Taxonomy v2.3 prefix updates. `FRAME--` ตอนนี้แทน **Block Manifest** (runtime entry-point ของ Genesis Block; frontmatter contract อยู่ที่ `SPEC--GENESIS-BLOCK-MANIFEST`). ความหมายเดิม "architectural framework / methodology / code standards" ย้ายไป `FRAMEWORK--`. `GUARDRAIL--` rename เป็น `GUARD--`. Prefixes ใหม่: `STACK--`, `SPEC--`, `COGNITIVE--`, `SAFETY--`, `MOD--`. Reference เก่า `FRAME--` ในเอกสารนี้ (~9 จุดที่เหลือใน §6/§7/§11/§14/§17/§18) ที่หมายถึง "architectural framework" ต้องอ่านเป็น `FRAMEWORK--`. Canonical reference: `packages/gks/docs/KNOWLEDGE-TYPES.md`. Disambiguation: "Genesis Block" มี 2 ความหมาย — **Genesis Graph Backend** (DB ที่ `packages/gks/src/memory/graph/genesis-graph.ts`) vs **Genesis Block** (composite ที่ FRAME-- manifest aggregate).
 >
 > **Changelog 1.1.0:** Inbound queue (`/submit-memory`, `gks/inbound/`, `npm run msp:propose|list|promote`) ถูกแทนที่ด้วย **Candidates flow** (`msp_candidate` MCP tool → `.brain/msp/projects/<ns>/candidates/` → human PR). ดู §7.2 และ §16.5
 
@@ -290,7 +290,7 @@ packages/msp/src/
 | `ADR--` | `adrs/` หรือ `adr/` | Architecture Decision Record | การตัดสินใจทางสถาปัตยกรรม |
 | `MASTER--`| `master/` | Root-level Policy | กฎระดับ root (เช่น contradiction policy, write boundaries) |
 | `FRAMEWORK--` | `framework/` | Framework Rules (v2.3+) | มาตรฐานโค้ด + สถาปัตยกรรม / governance (เดิม `FRAME--`) |
-| `FRAME--` | `frame/` | Block Manifest (v2.3+) | runtime entry-point ของ Knowledge Block (contract: `SPEC--KNOWLEDGE-BLOCK-MANIFEST`) |
+| `FRAME--` | `frame/` | Block Manifest (v2.3+) | runtime entry-point ของ Genesis Block (contract: `SPEC--GENESIS-BLOCK-MANIFEST`) |
 | `STACK--` | `stack/` | Technology stack (v2.3+) | inventory ของ language / runtime / library |
 | `SPEC--` | `spec/` | Specification (v2.3+) | data contract / wire format / API shape |
 | `COGNITIVE--` | `cognitive/` | Mental model (v2.3+) | interpretive lens (Erikson, Qualia, ฯลฯ) |

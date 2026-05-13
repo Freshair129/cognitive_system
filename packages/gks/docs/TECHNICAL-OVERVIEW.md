@@ -25,12 +25,12 @@
 > Canonical reference: [`KNOWLEDGE-TYPES.md`](./KNOWLEDGE-TYPES.md).
 >
 > **Genesis Block disambiguation**: "Genesis Block" appears here in two
-> distinct senses. (1) **Genesis Block Engine** — the embedded graph
-> backend implemented at `src/memory/graph/genesis-block.ts` (Cypher v0,
+> distinct senses. (1) **Genesis Graph Backend** — the embedded graph
+> backend implemented at `src/memory/graph/genesis-graph.ts` (Cypher v0,
 > JSONL log) — pure storage layer, slot under `GraphBackend`. (2)
-> **Knowledge Block** — a composite knowledge unit declared by a
-> `FRAME--<NAME>` manifest atom (frontmatter contract: `SPEC--KNOWLEDGE-BLOCK-MANIFEST`).
-> A Knowledge Block can be stored in a Genesis Block Engine, but they're
+> **Genesis Block** — a composite knowledge unit declared by a
+> `FRAME--<NAME>` manifest atom (frontmatter contract: `SPEC--GENESIS-BLOCK-MANIFEST`).
+> A Genesis Block can be stored in a Genesis Graph Backend, but they're
 > orthogonal concepts.
 
 ---
@@ -1175,7 +1175,7 @@ path. One folder per atom type (singular nouns), no phase prefix.
 │   ├── algo/                             # ALGO--
 │   ├── flow/                             # FLOW--
 │   ├── entity/                           # ENTITY--
-│   ├── frame/                            # FRAME--       (v2.3: Block Manifest — see SPEC--KNOWLEDGE-BLOCK-MANIFEST)
+│   ├── frame/                            # FRAME--       (v2.3: Block Manifest — see SPEC--GENESIS-BLOCK-MANIFEST)
 │   ├── framework/                        # FRAMEWORK--   (v2.3: governance / architecture, formerly FRAME--)
 │   ├── parameters/                       # PARAMS--
 │   ├── module/                           # MOD--

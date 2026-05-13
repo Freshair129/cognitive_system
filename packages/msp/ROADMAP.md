@@ -96,7 +96,7 @@ Per `BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION` (4-phase plan, all done as of 2
 
 See top of file for the table; full context in `AUDIT--ARCH-DOC-CLEANUP`. Net effect: 7 root architecture docs → 2 (`msp_spec.md`, `ROADMAP.md`); MSP declared agent-agnostic; storage split into `~/.msp/` global vs workspace per-project; MCP tool count 16 → 19.
 
-## Post-v0.4.0 — Taxonomy v2.3 + Knowledge Block (in-flight, 2026-05-13)
+## Post-v0.4.0 — Taxonomy v2.3 + Genesis Block (in-flight, 2026-05-13)
 
 Three PRs landed end-of-day 2026-05-13, each with CI green on Node 20 + 22. Stacked in dependency order:
 
@@ -104,7 +104,7 @@ Three PRs landed end-of-day 2026-05-13, each with CI green on Node 20 + 22. Stac
 |---|---|---|---|
 | **#91** | `claude/msp-windows-test-infra-fixes` | Windows test infra (8 files) — cross-platform `path.sep` normalisation, `shell: true` for spawning `.cmd` shims (gemini/npx), production fix for `src/codegen/slm/gemini.ts` + `src/codegen/acceptance/vitest.ts`. Reduces local Windows failures 35 → 17 (remaining 15 = `better-sqlite3` native binding, 2 = atom-validity tracked in #90) | ✅ green |
 | **#92** | `claude/msp-taxonomy-v2.3-migration` | **Taxonomy v2.3.** `FRAME--` redefined as Block Manifest; `FRAMEWORK--` carries the prior governance/architecture meaning; `GUARDRAIL--` renamed `GUARD--`. New prefixes: `STACK--`, `SPEC--`, `MOD--`, `COGNITIVE--`, `SAFETY--`. 9 atom renames, 293 ref rewrites across 128 markdown files, 6 source-file enum updates, 2 governing atoms (`CONCEPT--TAXONOMY-V2-3`, `ADR--TAXONOMY-V2-3-MIGRATION`), migration script with `--dry-run` + `--inverse`. Base: `main` | ✅ green |
-| **#93** | `claude/msp-spec-knowledge-block-manifest` | `SPEC--KNOWLEDGE-BLOCK-MANIFEST` — frontmatter contract for `FRAME--` Block Manifest atoms. Disambiguates "Knowledge Block" (composite knowledge unit, defined here) from "Genesis Block Engine" (DB backend, `CONCEPT--GENESIS-BLOCK-ENGINE`). Members trio (Cognitive + Algo + Guard) mandatory, optional (Runbook/Protocol/Stack/Safety) conditional. Base: `claude/msp-taxonomy-v2.3-migration` (PR #92) | ✅ green |
+| **#93** | `claude/msp-spec-genesis-block-manifest` | `SPEC--GENESIS-BLOCK-MANIFEST` — frontmatter contract for `FRAME--` Block Manifest atoms. Disambiguates "Genesis Block" (composite knowledge unit, defined here) from "Genesis Graph Backend" (DB backend, `CONCEPT--GENESIS-GRAPH-BACKEND`). Members trio (Cognitive + Algo + Guard) mandatory, optional (Runbook/Protocol/Stack/Safety) conditional. Base: `claude/msp-taxonomy-v2.3-migration` (PR #92) | ✅ green |
 
 **Open issue [#90](https://github.com/Freshair129/cognitive_system/issues/90)** tracks 5 pre-existing atom-validity errors surfaced during v2.3 verification: `ALGO--IDENTITY-RESOLUTION` / `MOD--IDENTITY` / `PROTOCOL--IDENTITY-API` missing `created_at`, `BLUEPRINT--GENESIS-BLOCK-{INTEGRATION,TS-FIRST}` missing `linked_symbols`, plus 9 Phase-6 audits without backing blueprints. Not caused by the three PRs above; pre-existing on `main`.
 
@@ -112,7 +112,7 @@ Three PRs landed end-of-day 2026-05-13, each with CI green on Node 20 + 22. Stac
 
 | Item | What |
 |---|---|
-| `PROTO--KNOWLEDGE-BLOCK-MEMBERSHIP` | Machine-enforces `members.*` resolution + status cascade declared in `SPEC--KNOWLEDGE-BLOCK-MANIFEST` |
+| `PROTO--KNOWLEDGE-BLOCK-MEMBERSHIP` | Machine-enforces `members.*` resolution + status cascade declared in `SPEC--GENESIS-BLOCK-MANIFEST` |
 | `BLUEPRINT--KNOWLEDGE-BLOCK-RUNTIME` | The loader/executor that reads a Block Manifest and invokes members |
 | `FRAME--IDENTITY-ENGINE` | First real Block Manifest — blocked on `COGNITIVE--EGO-DEATH-PASSPORT`, `STACK--MSP-NODE-RUNTIME`, `GUARD--IDENTITY-SCHEMA`, `SAFETY--PII-REDACTION` (none authored yet) |
 | `SPEC--RESONANCE-INDEX` | From v1.2 draft; calculation of RI for block outputs |
