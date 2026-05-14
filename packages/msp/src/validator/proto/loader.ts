@@ -169,6 +169,7 @@ export async function runProtos(
   const byStatus: Record<ProtoStatus, number> = {
     draft: 0,
     stable: 0,
+    active: 0,
     superseded: 0,
   }
 

@@ -18,7 +18,7 @@ import type { AtomicIndexEntry } from '../types.js'
 
 export type Severity = 'error' | 'warning' | 'info'
 
-export type ProtoStatus = 'draft' | 'stable' | 'superseded'
+export type ProtoStatus = 'draft' | 'stable' | 'active' | 'superseded'
 
 /** Discovered metadata about a PROTO atom. */
 export interface ProtoMeta {

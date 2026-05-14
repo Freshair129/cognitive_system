@@ -12,7 +12,9 @@ tags:
   - symbol-graph
   - proto
   - invariants
-crosslinks: {"implements":["ADR--SYMBOLS-PROCESS-TRACING"]}
+crosslinks: {"enforces":["ADR--SYMBOLS-PROCESS-TRACING"],"implements":["ADR--SYMBOLS-PROCESS-TRACING"]}
+linked_symbols:
+  - {"file":"packages/msp/src/validator/proto/trace-invariants.ts"}
 created_at: 2026-05-12T14:30:00.000+07:00
 ---
 

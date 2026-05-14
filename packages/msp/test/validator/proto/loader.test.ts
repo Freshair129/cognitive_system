@@ -270,7 +270,7 @@ describe('shouldFailExit', () => {
         total: 0,
         passed: 0,
         failed: 0,
-        byStatus: { draft: 0, stable: 0, superseded: 0 },
+        byStatus: { draft: 0, stable: 0, active: 0, superseded: 0 },
         results: [],
       }),
     ).toBe(false)
@@ -282,7 +282,7 @@ describe('shouldFailExit', () => {
         total: 1,
         passed: 0,
         failed: 1,
-        byStatus: { draft: 0, stable: 1, superseded: 0 },
+        byStatus: { draft: 0, stable: 1, active: 0, superseded: 0 },
         results: [
           {
             meta: {
@@ -309,7 +309,7 @@ describe('shouldFailExit', () => {
         total: 1,
         passed: 0,
         failed: 1,
-        byStatus: { draft: 1, stable: 0, superseded: 0 },
+        byStatus: { draft: 1, stable: 0, active: 0, superseded: 0 },
         results: [
           {
             meta: {
@@ -336,7 +336,7 @@ describe('shouldFailExit', () => {
         total: 1,
         passed: 0,
         failed: 1,
-        byStatus: { draft: 0, stable: 1, superseded: 0 },
+        byStatus: { draft: 0, stable: 1, active: 0, superseded: 0 },
         results: [
           {
             meta: {
