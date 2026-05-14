@@ -7,11 +7,10 @@
   "scripts": {
     "dev": "tsx src/index.ts",
     "build": "tsc",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "echo 'No tests for skeleton app' && exit 0"
   },
   "dependencies": {
-    "@freshair129/gks": "workspace:*",
-    "@freshair129/msp": "workspace:*",
     "ink": "^5.0.0",
     "react": "^18.0.0"
   },
