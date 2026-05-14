@@ -28,12 +28,19 @@ only if every agent respects the boundaries below.
 
 ```
 cognitive_system/                    ← monorepo root (git root)
-  packages/
+  packages/                          ← shared libraries (imported by apps)
     gks/          @freshair129/gks   ← GKS engine library
     msp/          @freshair129/msp   ← MSP orchestrator
-    ui/           @freshair129/genesis-ui  ← Genesis UI frontend (Vite + React)
-    qwen-cli/                        ← Qwen subagent CLI
+    ui/           @freshair129/genesis-ui  ← Genesis UI web app (→ apps/web/ when apps/ matures)
+    qwen-cli/                        ← Qwen subagent CLI (→ apps/qwen/ eventually)
     skill-creator/                   ← Skill authoring tool
+  apps/                              ← deployable clients (NOT imported as libraries)
+    cli/          @freshair129/gks-cli    ← CLI for humans + AI agents (SKELETON)
+    mcp/          @freshair129/gks-mcp    ← MCP server for AI agents (SKELETON)
+    tui/          @freshair129/gks-tui    ← Terminal UI (SKELETON)
+    desktop/                         ← Tauri desktop app (PLACEHOLDER)
+    ios/                             ← Swift iOS app (PLACEHOLDER)
+    android/                         ← Kotlin Android app (PLACEHOLDER)
   gks/                               ← atom store (knowledge files, NOT source code)
   scripts/                           ← repo-level automation
   AGENT.md        ← THIS FILE — read by all agents
@@ -42,11 +49,23 @@ cognitive_system/                    ← monorepo root (git root)
   qwen.md         ← Qwen rules
 ```
 
+**packages/ vs apps/ rule:**
+- `packages/` = things other packages/apps **import** (libraries)
+- `apps/` = things that are **deployed or run** directly (executables, servers, apps)
+- Never import from `apps/` — if code is shared, it belongs in `packages/`
+
+**CLI is also an agent interface:**
+- `apps/cli/` serves both humans (`gks search "..."` in terminal) and AI agents
+  (Claude/Gemini invoke it via Bash tool to query GKS without importing TypeScript)
+- `apps/mcp/` serves AI agents only via Model Context Protocol
+
 **Boundary rules (ADR--MONOREPO-STRUCTURE):**
-- `packages/gks/` MUST NOT import from `packages/msp/` or `packages/ui/`
+- `packages/gks/` MUST NOT import from `packages/msp/` or any `apps/*`
 - `packages/msp/` depends on `packages/gks/` via `workspace:*`
-- `packages/ui/` reads GKS data via a **JSON snapshot only** (`packages/ui/src/data/gksData.json`), never imports gks/msp directly
-- `packages/ui/` has its own `CLAUDE.md` — read it when working in that directory
+- `packages/ui/` reads GKS data via a **JSON snapshot only**, never imports gks/msp directly
+- `apps/cli/` and `apps/mcp/` import `packages/gks` + `packages/msp` directly (same Node.js runtime)
+- `apps/ios/` and `apps/android/` communicate via `server/api/` REST (cannot run Node.js)
+- Every `apps/*` directory has its own `CLAUDE.md` — read it before working in that directory
 
 ---
 
