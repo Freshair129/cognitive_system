@@ -5,6 +5,7 @@ import {
   makeContext,
   makeResource,
   type Action,
+  type Decision,
   type RequestContext,
   type Resource,
   type Subject,
@@ -18,18 +19,26 @@ export interface PepOptions {
   context: RequestContext
 }
 
+export interface PepResult {
+  permitted: boolean
+  decision: Decision
+  requiresStepUp?: boolean
+  stepUpParams?: Record<string, any>
+}
+
 /**
  * Policy Enforcement Point (PEP).
  * Evaluates policy and either permits, denies, or logs (shadow).
  *
- * For UCF Phase 2:
+ * For UCF Phase 2/3/4:
  * - kind: 'subagent' -> Enforced (drop if denied)
+ * - action: 'delete' or 'restricted' -> Enforced for all
  * - other kinds -> Shadow (log and permit)
  */
 export async function enforcePolicy(
   resource: Resource,
   opts: PepOptions,
-): Promise<{ permitted: boolean; decision: any }> {
+): Promise<PepResult> {
   const policySet = getPolicySet()
   const decision = evaluatePolicy(opts.subject, resource, opts.action, opts.context, policySet)
 
@@ -47,16 +56,26 @@ export async function enforcePolicy(
     logPath,
   )
 
-  // UCF Phase 2 enforcement rule:
-  // Subagents are enforced; everyone else is shadow-logged.
-  const isSubagent = opts.subject.kind === 'subagent'
-  const permitted = isSubagent ? decision.effect === 'permit' : true
+  // Step-up Auth check (Phase 4)
+  const stepUpObligation = decision.obligations.find((o) => o.kind === 'request-step-up-auth')
+  
+  const isEnforced = 
+    opts.subject.kind === 'subagent' || 
+    opts.action === 'delete' || 
+    resource.attributes.classification === 'restricted'
 
-  if (isSubagent && decision.effect === 'deny') {
+  const permitted = isEnforced ? decision.effect === 'permit' : true
+
+  if (isEnforced && decision.effect === 'deny') {
     console.warn(
-      `[ucf] PEP: Denied access to ${resource.id} for subagent ${opts.subject.id} (Action: ${opts.action})`,
+      `[ucf] PEP: Denied access to ${resource.id} for ${opts.subject.kind} ${opts.subject.id} (Action: ${opts.action})`,
     )
   }
 
-  return { permitted, decision }
+  return { 
+    permitted, 
+    decision, 
+    requiresStepUp: !!stepUpObligation && decision.effect === 'deny',
+    stepUpParams: stepUpObligation?.params
+  }
 }

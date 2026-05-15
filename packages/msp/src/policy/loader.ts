@@ -12,12 +12,18 @@ const MatchSchema = z.object({
   origin: z.array(z.string()).optional(),
 })
 
+const ObligationSchema = z.object({
+  kind: z.string(),
+  params: z.record(z.any()).optional(),
+})
+
 const RuleSchema = z.object({
   id: z.string(),
   description: z.string().optional(),
   match: MatchSchema.optional(),
   condition: z.any().optional(), // Condition type from operators.ts
   effect: z.enum(['permit', 'deny']),
+  on_deny: z.object({ obligation: ObligationSchema }).optional(),
   priority: z.number().int().optional().default(100),
 })
 

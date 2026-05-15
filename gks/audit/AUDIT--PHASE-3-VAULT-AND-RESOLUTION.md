@@ -5,7 +5,7 @@ type: audit
 status: stable
 tier: process
 source_type: axiomatic
-title: AUDIT — UCF Phase 3: vault composition & resolution gradient
+title: "AUDIT - UCF Phase 3: vault composition and resolution gradient"
 tags:
   - msp
   - ucf
@@ -20,7 +20,7 @@ crosslinks:
 created_at: 2026-05-14T23:00:00+07:00
 ---
 
-# AUDIT — UCF Phase 3: Vaults & Resolution Gradient
+# AUDIT - UCF Phase 3: Vaults & Resolution Gradient
 
 ## Scope
 

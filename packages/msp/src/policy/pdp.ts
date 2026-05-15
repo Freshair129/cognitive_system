@@ -71,9 +71,11 @@ export function evaluatePolicy(
   hits.sort((a, b) => (b.rule.priority ?? 100) - (a.rule.priority ?? 100))
 
   const bestMatch = hits[0]!
+  const obligations = bestMatch.rule.on_deny?.obligation ? [bestMatch.rule.on_deny.obligation] : []
+
   return {
     effect: bestMatch.rule.effect,
-    obligations: [],
+    obligations,
     advice: [],
     reasoning: trace,
   }
