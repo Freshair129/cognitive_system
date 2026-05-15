@@ -33,7 +33,7 @@
     "msp:hotfix:close": "gks hotfix close"
   },
   "dependencies": {
-    "@freshair129/gks": "workspace:*",
+    "@freshair129/gks": "*",
     "@modelcontextprotocol/sdk": "^1.6.0",
     "better-sqlite3": "^11.9.1",
     "chalk": "^5.4.1",
