@@ -5,7 +5,7 @@ type: audit
 status: stable
 tier: process
 source_type: axiomatic
-title: AUDIT — UCF Phase 2: subagent scope filtering & escalation
+title: "AUDIT — UCF Phase 2: subagent scope filtering & escalation"
 tags:
   - msp
   - ucf
