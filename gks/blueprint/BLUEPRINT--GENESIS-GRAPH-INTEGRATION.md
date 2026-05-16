@@ -2,7 +2,7 @@
 id: BLUEPRINT--GENESIS-GRAPH-INTEGRATION
 phase: 3
 type: blueprint
-status: draft
+status: stable
 vault_id: default
 tier: process
 source_type: axiomatic
@@ -92,15 +92,32 @@ Cypher is exposed as a sixth, opt-in method via a downcast.
 | Phase | Output | Definition of done |
 |---|---|---|
 | **P3.1 Scaffold** | `packages/gks/native/genesis-block/Cargo.toml` builds locally; one trivial exported `napi` function returns a constant. CI matrix builds for the five target triples. | `cargo test` green; `napi build` produces a `.node` artifact loadable from Node. |
+| **⛔ HALT GATE 1** | Human reviewer signs off the **storage layout direction** before any persistent on-disk format is committed. | Reviewer comment with `gate-1: approved` label on the P3.1 PR, **OR** a new `ADR--GENESIS-BLOCK-STORAGE-LAYOUT` if the approach diverges from the LadybugDB fork. Required because storage format is the most expensive bit to migrate after data lands. |
 | **P3.2 Storage MVP** | `addNode` / `addEdge` / `query` over a single-column page layout, no temporal awareness yet. | Existing `test/memory/graph/` suite passes with the new backend parametrised in. |
 | **P3.3 Bi-temporal** | `valid_from` / `valid_to` columns; `retractEdge`; `query({ asOf })` honoured. | The bi-temporal sub-suite in `test/memory/graph/` passes. |
 | **P3.4 Cypher v0** | Parser + executor for the minimal subset (see "Cypher v0 scope" below). | New test file `test/memory/graph/genesis-block-cypher.test.ts` covers: exact-id `MATCH`, single-hop, variable-length `[*1..N]`, `WHERE` on properties, `RETURN`. |
+| **⛔ HALT GATE 2** | Human reviewer signs off the **Cypher v0 surface** before benchmarking locks in performance assumptions. | Reviewer comment with `gate-2: approved` label on the P3.4 PR, **OR** an addendum atom extending the Cypher v0 scope. Required because adding Cypher constructs after benchmark targets are committed forces re-runs. |
 | **P3.5 Benchmarks** | `npm run bench:graph` numbers against the existing `GraphStore` baseline, on a 50k-node / 500k-edge fixture. | Report committed under `packages/gks/benchmarks/genesis-block/`; meets the <50 ms p50 success criterion from CONCEPT. |
 | **P3.6 Promote ADR** | All above green; ADR-005 / ADR-001 reconciliation re-reviewed; status flipped `draft` → `stable`. | Single follow-up PR flipping atom status + writing `AUDIT--GENESIS-BLOCK-INTEGRATION`. |
 
 Phases P3.1–P3.2 are the minimum for a "drop-in" experience. P3.3 is
 needed before MSP's `verify-flow` can rely on it. P3.4 is what unlocks
 the Impact-Analysis migration. P3.5 / P3.6 close out the BLUEPRINT.
+
+### HALT gate rationale
+
+Two human-review checkpoints are mandatory between sub-phases — the codegen
+runner must exit non-zero and wait for a reviewer label before continuing:
+
+- **Gate 1 (after P3.1, before P3.2)** — storage layout commitment.
+  Storage format is the single hardest thing to migrate after data lands;
+  approve the layout before MVP writes the first persistent page.
+- **Gate 2 (after P3.4, before P3.5)** — Cypher v0 surface freeze.
+  Benchmark numbers presume a fixed query surface; expanding Cypher v0
+  after P3.5 forces a re-run and invalidates the success criterion.
+
+These gates apply to **autonomous executor** runs (Gemini yolo, codegen
+runner). Solo human contributors may sign off in the PR description itself.
 
 ## Cypher v0 scope
 
