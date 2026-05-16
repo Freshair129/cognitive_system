@@ -152,6 +152,35 @@ describe('composeMasterAtoms', () => {
       'MASTER--ONE',
     ])
   })
+
+  it('applies Phase 3 Resolution Gradient: downgrades 4th+ atom to MENTION', async () => {
+    const root = await freshRoot()
+    const ids = ['M1', 'M2', 'M3', 'M4']
+    for (const id of ids) {
+      await writeFixtureMaster(root, id, { body: `body for ${id}` })
+    }
+
+    const result = await composeMasterAtoms(ids, root)
+    expect(result.composed[0]!.tier).toBe('FULL')
+    expect(result.composed[1]!.tier).toBe('FULL')
+    expect(result.composed[2]!.tier).toBe('FULL')
+    expect(result.composed[3]!.tier).toBe('MENTION')
+    expect(result.composed[3]!.body).toBe('[MENTION: M4]')
+  })
+
+  it('applies Phase 3 Resolution Gradient: enforces maxTokens budget', async () => {
+    const root = await freshRoot()
+    // Each body is ~13 tokens
+    await writeFixtureMaster(root, 'M1', { body: 'word '.repeat(10) })
+    await writeFixtureMaster(root, 'M2', { body: 'word '.repeat(10) })
+
+    // Budget of 15 tokens: M1 (13) + M2 (MENTION 50? No, M2 will be downgraded)
+    // Actually enforceResolutionBudget uses 50 for MENTION.
+    // If maxTokens is 20, M1 (13) fits, M2 (13) + 13 > 20 -> downgraded to MENTION
+    const result = await composeMasterAtoms(['M1', 'M2'], root, { maxTokens: 20 })
+    expect(result.composed[0]!.tier).toBe('FULL')
+    expect(result.composed[1]!.tier).toBe('MENTION')
+  })
 })
 
 describe('formatAsPromptFragment', () => {

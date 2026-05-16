@@ -106,7 +106,7 @@ export const GalaxyView: React.FC<GalaxyViewProps> = ({ notes, edges, focusId: _
 
       const x = Math.cos(spinAng) * radius + scatter;
       const z = Math.sin(spinAng) * radius + scatter;
-      const y = ((h3 % 1000) / 1000 - 0.5) * (7 + radius * 0.014);
+      const y = ((h3 % 1000) / 1000 - 0.5) * (40 + radius * 0.2);
 
       const nd: GalaxyNode = { id: n.id, type: n.type, title: n.title, x, y, z, deg: 0, radius };
       nodeMap[n.id] = nd;
@@ -135,7 +135,7 @@ export const GalaxyView: React.FC<GalaxyViewProps> = ({ notes, edges, focusId: _
       const scat   = (rng() - 0.5) * radius * 0.28;
       const x = Math.cos(spinA) * radius + scat;
       const z = Math.sin(spinA) * radius + scat;
-      const y = (rng() - 0.5) * (5 + radius * 0.014);
+      const y = (rng() - 0.5) * (20 + radius * 0.15);
 
       const t = rFrac;
       particles.push({
@@ -161,7 +161,7 @@ export const GalaxyView: React.FC<GalaxyViewProps> = ({ notes, edges, focusId: _
   }, []);
 
   // ── Projection ───────────────────────────────────────────────────────────────
-  const project = (x: number, y: number, z: number, w: number, h: number): Projected | null => {
+  const project = React.useCallback((x: number, y: number, z: number, w: number, h: number): Projected | null => {
     const c = cam.current, la = lookAt.current;
     x -= la.x; y -= la.y; z -= la.z;
     const cy_ = Math.cos(c.yaw), sy_ = Math.sin(c.yaw);
@@ -177,7 +177,7 @@ export const GalaxyView: React.FC<GalaxyViewProps> = ({ notes, edges, focusId: _
     const baseScale = Math.min(w, h) * 1.1;
     const scale = baseScale / zEye;
     return { sx: x1 * scale, sy: y2 * scale, depth: zEye, scale: scale / (baseScale / 700) };
-  };
+  }, []);
 
   // ── Pick ─────────────────────────────────────────────────────────────────────
   const pickNode = (mx: number, my: number): GalaxyNode | null => {
@@ -210,7 +210,7 @@ export const GalaxyView: React.FC<GalaxyViewProps> = ({ notes, edges, focusId: _
       const dx = e.clientX - drag.current.lx, dy = e.clientY - drag.current.ly;
       camTgt.current.yaw   += dx * 0.005;
       camTgt.current.pitch += dy * 0.005;
-      camTgt.current.pitch = Math.max(-1.45, Math.min(0.05, camTgt.current.pitch));
+      camTgt.current.pitch = Math.max(-1.45, Math.min(1.45, camTgt.current.pitch));
       drag.current.lx = e.clientX; drag.current.ly = e.clientY;
       setParams(p => p.autoRotate ? { ...p, autoRotate: false } : p);
       setHover(null);
@@ -236,39 +236,13 @@ export const GalaxyView: React.FC<GalaxyViewProps> = ({ notes, edges, focusId: _
     }
   };
   const onWheel = (e: React.WheelEvent) => {
-    e.preventDefault();
     camTgt.current.dist = Math.max(100, Math.min(2200, camTgt.current.dist * Math.exp(e.deltaY * 0.001)));
   };
 
-  // ── Animation loop ────────────────────────────────────────────────────────────
-  useEffect(() => {
-    let raf: number, t0 = performance.now();
 
-    const tick = (now: number) => {
-      const dt = Math.min(0.05, (now - t0) / 1000); t0 = now;
-      timeRef.current += dt; // accumulate — survives re-mounts
-
-      if (params.autoRotate) camTgt.current.yaw += dt * 0.2 * params.speed;
-
-      const c = cam.current, ct = camTgt.current;
-      c.yaw   += (ct.yaw   - c.yaw)   * 0.08;
-      c.pitch += (ct.pitch - c.pitch) * 0.08;
-      c.dist  += (ct.dist  - c.dist)  * 0.08;
-      const la = lookAt.current, lt = lookAtTgt.current;
-      la.x += (lt.x - la.x) * 0.07;
-      la.y += (lt.y - la.y) * 0.07;
-      la.z += (lt.z - la.z) * 0.07;
-
-      draw(timeRef.current);
-      raf = requestAnimationFrame(tick);
-    };
-
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [size, params, pinned]);
 
   // ── Draw ──────────────────────────────────────────────────────────────────────
-  const draw = (time: number) => {
+  const draw = React.useCallback((time: number) => {
     const canvas = canvasRef.current; if (!canvas) return;
     const data   = dataRef.current;   if (!data)   return;
     const dpr = window.devicePixelRatio || 1;
@@ -430,7 +404,34 @@ export const GalaxyView: React.FC<GalaxyViewProps> = ({ notes, edges, focusId: _
         }
       }
     }
-  };
+  }, [size, params, pinned, hover, project]);
+  
+  // ── Animation loop ────────────────────────────────────────────────────────────
+  useEffect(() => {
+    let raf: number, t0 = performance.now();
+
+    const tick = (now: number) => {
+      const dt = Math.min(0.05, (now - t0) / 1000); t0 = now;
+      timeRef.current += dt; // accumulate — survives re-mounts
+
+      if (params.autoRotate) camTgt.current.yaw += dt * 0.2 * params.speed;
+
+      const c = cam.current, ct = camTgt.current;
+      c.yaw   += (ct.yaw   - c.yaw)   * 0.08;
+      c.pitch += (ct.pitch - c.pitch) * 0.08;
+      c.dist  += (ct.dist  - c.dist)  * 0.08;
+      const la = lookAt.current, lt = lookAtTgt.current;
+      la.x += (lt.x - la.x) * 0.07;
+      la.y += (lt.y - la.y) * 0.07;
+      la.z += (lt.z - la.z) * 0.07;
+
+      draw(timeRef.current);
+      raf = requestAnimationFrame(tick);
+    };
+
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [params, draw]);
 
   return (
     <div className="graph-wrap" ref={wrapRef}>

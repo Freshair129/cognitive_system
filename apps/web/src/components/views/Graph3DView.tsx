@@ -87,7 +87,7 @@ export const Graph3DView: React.FC<Graph3DViewProps> = ({ notes, edges, focusId,
     dragRef.current = { down: true, lx: e.clientX, ly: e.clientY }; 
   };
   
-  const project = (x: number, y: number, z: number) => {
+  const project = React.useCallback((x: number, y: number, z: number) => {
     const cam = camRef.current;
     const cy = Math.cos(cam.yaw), sy = Math.sin(cam.yaw);
     const cp = Math.cos(cam.pitch), sp = Math.sin(cam.pitch);
@@ -100,9 +100,11 @@ export const Graph3DView: React.FC<Graph3DViewProps> = ({ notes, edges, focusId,
     if (zEye <= 1) return null;
     const s = f / zEye;
     return { sx: x1 * s, sy: y1 * s, depth: zEye, scale: s };
-  };
+  }, []);
 
-  const nodeR = (n: SimNode, scale: number) => Math.max(2.4, (3 + Math.sqrt(n.deg) * 1.4) * scale * 0.9 * params.nodeSize);
+  const nodeR = React.useCallback((n: SimNode, scale: number) => 
+    Math.max(2.4, (3 + Math.sqrt(n.deg) * 1.4) * scale * 0.9 * params.nodeSize), 
+  [params.nodeSize]);
 
   const pickNode = (mx: number, my: number) => {
     const sim = simRef.current; if (!sim) return null;
@@ -232,7 +234,7 @@ export const Graph3DView: React.FC<Graph3DViewProps> = ({ notes, edges, focusId,
     return `rgba(${r},${g},${b},${a})`;
   };
 
-  const draw = () => {
+  const draw = React.useCallback(() => {
     const canvas = canvasRef.current; if (!canvas) return;
     const dpr = window.devicePixelRatio || 1;
     if (canvas.width !== size.w * dpr) { canvas.width = size.w * dpr; canvas.height = size.h * dpr; }
@@ -310,7 +312,7 @@ export const Graph3DView: React.FC<Graph3DViewProps> = ({ notes, edges, focusId,
 
     // Nodes
     const nodesByDepth = sim.nodes.map(n => ({ n, p: projMap.get(n.id) }))
-      .filter(o => o.p)
+      .filter((o): o is { n: SimNode; p: any } => !!o.p)
       .sort((a, b) => b.p.depth - a.p.depth);
 
     for (const { n, p } of nodesByDepth) {
@@ -348,7 +350,69 @@ export const Graph3DView: React.FC<Graph3DViewProps> = ({ notes, edges, focusId,
         ctx.fillText(txt, x, y + r + 14);
       }
     }
-  };
+  }, [size, focusId, params, hexA, nodeR, project]);
+
+  useEffect(() => {
+    let raf: number, t0 = performance.now();
+    const tick = (now: number) => {
+      const dt = Math.min(0.05, (now - t0) / 1000); t0 = now;
+      const sim = simRef.current;
+      
+      if (sim && alphaRef.current > 0.01) {
+        const nodes = sim.nodes, links = sim.links;
+        const alpha = alphaRef.current;
+        const REPEL = 1800 * alpha, LINK_K = 0.05 * alpha, LINK_D = 110, CENTER = 0.012 * alpha;
+        
+        for (let i = 0; i < nodes.length; i++) {
+          const a = nodes[i];
+          for (let j = i + 1; j < nodes.length; j++) {
+            const b = nodes[j];
+            const dx = b.x - a.x, dy = b.y - a.y, dz = b.z - a.z;
+            const d2 = dx * dx + dy * dy + dz * dz + 0.1;
+            if (d2 > 600 * 600) continue;
+            const d = Math.sqrt(d2);
+            const f = REPEL / d2;
+            const fx = (dx / d) * f, fy = (dy / d) * f, fz = (dz / d) * f;
+            a.vx -= fx; a.vy -= fy; a.vz -= fz;
+            b.vx += fx; b.vy += fy; b.vz += fz;
+          }
+        }
+        
+        for (const l of links) {
+          const a = sim.byNode[l.source], b = sim.byNode[l.target]; if (!a || !b) continue;
+          const dx = b.x - a.x, dy = b.y - a.y, dz = b.z - a.z;
+          const d = Math.sqrt(dx * dx + dy * dy + dz * dz) || 0.1;
+          const diff = (d - LINK_D) * LINK_K;
+          const fx = (dx / d) * diff, fy = (dy / d) * diff, fz = (dz / d) * diff;
+          a.vx += fx; a.vy += fy; a.vz += fz;
+          b.vx -= fx; b.vy -= fy; b.vz -= fz;
+        }
+        
+        for (const n of nodes) {
+          n.vx += -n.x * CENTER; n.vy += -n.y * CENTER; n.vz += -n.z * CENTER;
+          n.vx *= 0.8; n.vy *= 0.8; n.vz *= 0.8;
+          n.x += n.vx; n.y += n.vy; n.z += n.vz;
+        }
+        
+        alphaRef.current *= 0.985;
+      }
+
+      if (sim) {
+        if (params.signals) {
+          for (const l of sim.links) {
+            l.phase += dt * (0.35 + (Math.sin(l.phase * 3.0) + 1) * 0.18) * params.speed * 2;
+            if (l.phase > 1) l.phase -= 1;
+          }
+        }
+        if (params.autoRotate) camRef.current.yaw += dt * 0.08 * params.speed;
+      }
+      
+      draw();
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [params, draw]);
 
   return (
     <div className="graph-wrap" ref={wrapRef}>
