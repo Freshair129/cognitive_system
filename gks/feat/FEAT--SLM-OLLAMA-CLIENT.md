@@ -15,9 +15,9 @@ tags:
   - user-facing
 crosslinks: {"implements":["ADR--SLM-OLLAMA-CLIENT"],"references":["CONCEPT--SLM-OLLAMA-CLIENT","FEAT--CODEGEN-MICROTASK-RUNNER"]}
 linked_symbols:
-  - {"file":"src/codegen/slm/ollama.ts"}
-  - {"file":"src/codegen/slm/factory.ts"}
-  - {"file":"src/codegen/slm/types.ts"}
+  - {"file":"packages/msp/src/codegen/slm/ollama.ts"}
+  - {"file":"packages/msp/src/codegen/slm/factory.ts"}
+  - {"file":"packages/msp/src/codegen/slm/types.ts"}
 created_at: 2026-05-03T16:22:31.444+07:00
 ---
 
@@ -78,3 +78,9 @@ MSP_SLM_PROVIDER=ollama npm run msp:run-task -- T1.task.yaml
 - Anthropic / OpenAI clients — separate FEATs when needed.
 - Streaming responses.
 - Model-pull automation (user runs `ollama pull` themselves).
+
+## Connections
+- [[ADR--SLM-OLLAMA-CLIENT]]
+- [[CONCEPT--SLM-OLLAMA-CLIENT]]
+- [[FEAT--CODEGEN-MICROTASK-RUNNER]]
+

@@ -17,10 +17,10 @@ tags:
   - implementation
 crosslinks: {"implements":["FEAT--ACCEPTANCE-VITEST-RUNNER"],"references":["ADR--ACCEPTANCE-VITEST-RUNNER"]}
 linked_symbols:
-  - {"file":"src/codegen/acceptance/vitest.ts"}
-  - {"file":"src/codegen/acceptance/sandbox.ts"}
-  - {"file":"src/codegen/acceptance/parse-results.ts"}
-  - {"file":"src/codegen/acceptance/types.ts"}
+  - {"file":"packages/msp/src/codegen/acceptance/vitest.ts"}
+  - {"file":"packages/msp/src/codegen/acceptance/sandbox.ts"}
+  - {"file":"packages/msp/src/codegen/acceptance/parse-results.ts"}
+  - {"file":"packages/msp/src/codegen/acceptance/types.ts"}
 created_at: 2026-05-03T16:27:18.868+07:00
 ---
 
@@ -105,3 +105,8 @@ verification_plan:
 T1 WRITE-SANDBOX (scaffoldSandbox + writeCandidate)
 T2 SPAWN-VITEST (vitest.ts top-level façade — reuses T1 + T3)
 T3 PARSE-FAILURES (parseVitestJson + stderr fallback)
+
+## Connections
+- [[FEAT--ACCEPTANCE-VITEST-RUNNER]]
+- [[ADR--ACCEPTANCE-VITEST-RUNNER]]
+

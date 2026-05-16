@@ -15,12 +15,12 @@ tags:
   - tool
 crosslinks: {"implements":["ADR--SYMBOL-GRAPH-PERSISTENCE"],"references":["FRAMEWORK--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH","FEAT--MSP-MCP-SERVER"]}
 linked_symbols:
-  - {"file":"src/mcp/tools/symbol-lookup.ts"}
-  - {"file":"src/mcp/tools/symbol-neighbors.ts"}
-  - {"file":"src/mcp/tools/symbol-impact.ts"}
-  - {"file":"src/mcp/tools/symbol-community.ts"}
-  - {"file":"src/mcp/tools/symbol-search.ts"}
-  - {"file":"src/mcp/server.ts"}
+  - {"file":"packages/msp/src/mcp/tools/symbol-lookup.ts"}
+  - {"file":"packages/msp/src/mcp/tools/symbol-neighbors.ts"}
+  - {"file":"packages/msp/src/mcp/tools/symbol-impact.ts"}
+  - {"file":"packages/msp/src/mcp/tools/symbol-community.ts"}
+  - {"file":"packages/msp/src/mcp/tools/symbol-search.ts"}
+  - {"file":"packages/msp/src/mcp/server.ts"}
 created_at: 2026-05-09T16:52:00.000+07:00
 ---
 
@@ -42,7 +42,7 @@ Registered in `src/mcp/server.ts` `TOOLS` array alongside the existing 11 → to
 
 ## Why these 5 (and not more)
 
-These cover the four common queries from `CONCEPT--SYMBOL-GRAPH`:
+These cover the four common queries from `[[CONCEPT--SYMBOL-GRAPH]]`:
 
 | Question | Tool |
 |---|---|
@@ -62,11 +62,16 @@ A 6th tool `msp_symbol_subgraph(community_id)` was considered but deferred — `
 ## Out of scope
 
 - Write tools — symbol graph is read-only knowledge, never mutated by agents
-- Embeddings or semantic search over symbols — covered by `ADR--SEMANTIC-SEARCH-VIA-SMART-CONNECTIONS` boundary
+- Embeddings or semantic search over symbols — covered by `[[ADR--SEMANTIC-SEARCH-VIA-SMART-CONNECTIONS]]` boundary
 - Cross-repo symbol queries — Phase 2 (after upstream to GKS)
 
 ## Source
 
-- `FRAMEWORK--SYMBOL-GRAPH`, `CONCEPT--SYMBOL-GRAPH`
+- `[[FRAMEWORK--SYMBOL-GRAPH]]`, `[[CONCEPT--SYMBOL-GRAPH]]`
 - Existing tool shape: `src/mcp/tools/recall.ts` (zod inputSchema, `handler(ctx)` returning `ToolTextResult`)
 - Tool registration pattern: `src/mcp/server.ts:TOOLS` array (currently 11 entries)
+
+## Connections
+- [[ADR--SYMBOL-GRAPH-PERSISTENCE]]
+- [[FEAT--MSP-MCP-SERVER]]
+

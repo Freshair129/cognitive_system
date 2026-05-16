@@ -9,7 +9,7 @@ tier: genesis
 title: Atom folders by type, not by phase
 tags: [filesystem-layout, taxonomy, governance]
 crosslinks:
-  references: [ADR--EXTENDED-TAXONOMY, FRAMEWORK--FOUR-LAYERS]
+  references: [ADR--EXTENDED-TAXONOMY, FRAMEWORK--FOUR-LAYERS, CONCEPT--TAXONOMY-V2-3]
 linked_symbols:
   - { file: "scripts/msp/re-indexer.ts" }
   - { file: "src/memory/gks.ts", fn: readBody }
@@ -61,3 +61,9 @@ Pure filesystem-layout decision. AtomicLayer is path-agnostic.
 
 - ADR 012 — extended taxonomy (the 30+ types this folder list mirrors)
 - ADR 008 — storage scope (this is convention, not scope change)
+
+## Connections
+- [[ADR--EXTENDED-TAXONOMY]]
+- [[FRAMEWORK--FOUR-LAYERS]]
+- [[CONCEPT--TAXONOMY-V2-3]]
+

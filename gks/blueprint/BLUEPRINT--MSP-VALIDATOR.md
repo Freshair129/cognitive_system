@@ -15,17 +15,17 @@ tags:
   - implementation
 crosslinks: {"implements":["FEAT--MSP-VALIDATOR"],"references":["ADR--MSP-VALIDATOR","CONCEPT--MSP-VALIDATOR"]}
 linked_symbols:
-  - {"file":"src/validator/index.ts"}
-  - {"file":"src/validator/types.ts"}
-  - {"file":"src/validator/parse.ts"}
-  - {"file":"src/validator/rules/forbidden-fields.ts"}
-  - {"file":"src/validator/rules/dangling-wikilinks.ts"}
+  - {"file":"packages/msp/src/validator/index.ts"}
+  - {"file":"packages/msp/src/validator/types.ts"}
+  - {"file":"packages/msp/src/validator/parse.ts"}
+  - {"file":"packages/msp/src/validator/rules/forbidden-fields.ts"}
+  - {"file":"packages/msp/src/validator/rules/dangling-wikilinks.ts"}
   - {"file":"src/validator/rules/id-uniqueness.ts"}
-  - {"file":"src/validator/rules/id-format.ts"}
-  - {"file":"src/validator/rules/future-date.ts"}
-  - {"file":"src/validator/rules/summary-min.ts"}
-  - {"file":"src/validator/atomic-index.ts"}
-  - {"file":"src/validator/cli.ts"}
+  - {"file":"packages/msp/src/validator/rules/id-format.ts"}
+  - {"file":"packages/msp/src/validator/rules/future-date.ts"}
+  - {"file":"packages/msp/src/validator/rules/summary-min.ts"}
+  - {"file":"packages/msp/src/validator/atomic-index.ts"}
+  - {"file":"packages/msp/src/validator/cli.ts"}
 created_at: 2026-05-03T13:24:25.656+07:00
 ---
 
@@ -157,3 +157,9 @@ T9 INTEGRATION-TEST + DOGFOOD
 | Empty body | parser returns `body === ''` | warn (not error — some atoms are pure metadata) |
 | Body has `[[X]]` inside fenced code block | wikilink extractor skips lines between ` ``` ` and ` ``` ` | not flagged as dangling |
 ```
+
+## Connections
+- [[FEAT--MSP-VALIDATOR]]
+- [[ADR--MSP-VALIDATOR]]
+- [[CONCEPT--MSP-VALIDATOR]]
+

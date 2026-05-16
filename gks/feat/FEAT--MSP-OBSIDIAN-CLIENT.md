@@ -15,9 +15,9 @@ tags:
   - user-facing
 crosslinks: {"implements":["ADR--MSP-OBSIDIAN-INTEGRATION"],"references":["CONCEPT--OBSIDIAN-AS-RUNTIME","FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 linked_symbols:
-  - {"file":"src/obsidian/client.ts"}
-  - {"file":"src/obsidian/types.ts"}
-  - {"file":"src/obsidian/filesystem.ts"}
+  - {"file":"packages/msp/src/obsidian/client.ts"}
+  - {"file":"packages/msp/src/obsidian/types.ts"}
+  - {"file":"packages/msp/src/obsidian/filesystem.ts"}
 created_at: 2026-05-04T12:24:39.673+07:00
 ---
 
@@ -60,3 +60,9 @@ const link = client.smartViewDeepLink?.('FRAMEWORK--MSP-ARCHITECTURE-V2')
 - Smart Connections semantic-search bridge (M7c)
 - Companion plugin msp-bridge (future)
 - Any bundled embedder
+
+## Connections
+- [[ADR--MSP-OBSIDIAN-INTEGRATION]]
+- [[CONCEPT--OBSIDIAN-AS-RUNTIME]]
+- [[FRAMEWORK--MSP-ARCHITECTURE-V2]]
+

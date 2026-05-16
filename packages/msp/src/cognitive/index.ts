@@ -1,38 +1,15 @@
 /**
  * Cognitive Layer — one-line memoryOS entry point.
- *
- * Sandwich diagram (FRAME--MSP-ARCHITECTURE-V2):
- *
- *   COGNITIVE LAYER (EVA / Claude Code / Hermes / openclaw / Gemini CLI / …)
- *     └─►  this facade
- *            ├─► MSP passport (identity, candidates, codegen runner, MCP server)
- *            └─► GKS (atomic / vector / episodic / obsidian + GraphBackend)
- *
- * What this file adds on top of the pre-existing primitives:
- *   1. `recall()`           — hybrid 4-layer pipeline (§13) with FTS layer 2
- *   2. `remember()`         — wraps `retain()` from `@freshair129/gks`
- *   3. `consolidate()`      — placeholder for session-end reflect()
- *   4. `runTask()`          — tier routing + §7.7.2 scale-level gate + AUTO-GENERATED marker
- *   5. `verifyFlow()`       — re-exports GKS verifyFlow
- *   6. `hotfix`             — re-exports GKS HotfixStore methods
- *   7. `resolveSSOT()`      — §14.1 authority hierarchy
- *   8. `mcpServer()`        — pre-wired createMspMcpServer
- *
- * Bring-up:
- *   const layer = await createCognitiveLayer({ root: process.cwd() })
- *   await layer.remember('Cortex handles planning.')
- *   const hits = await layer.recall('how does cortex work?')
- *   await layer.runTask('./.brain/tasks/FEAT--X/T1.task.yaml', { scale: 'L2' })
  */
 
 import { join, resolve } from 'node:path'
+import { readFile } from 'node:fs/promises'
 
 import {
   MemoryStore,
   HotfixStore,
   type GraphBackend,
   type RetrievalOptions,
-  recall as gksRecall,
   retain as gksRetain,
   verifyFlow,
 } from '@freshair129/gks'
@@ -40,6 +17,13 @@ import {
 import { runTask as runCodegenTask } from '../codegen/runner.js'
 import { createSlmClient } from '../codegen/slm/factory.js'
 import { createMspMcpServer } from '../mcp/server.js'
+import { makeContext, makeResource, makeSubject } from '../policy/types.js'
+import { loadPolicies } from '../policy/loader.js'
+import { evaluatePolicy } from '../policy/pdp.js'
+import { logShadowDecision } from '../policy/shadow-log.js'
+import { handleEscalation } from '../policy/escalation.js'
+import { enforcePolicy } from '../policy/pep.js'
+import { recall as mspRecall } from '../orchestrator/retrieval/index.js'
 
 import { ftsSearch } from './fts.js'
 import { markAuditOnly } from './audit-only.js'
@@ -53,7 +37,12 @@ import {
   type CognitiveRecallHit,
   type CognitiveRecallResult,
   type CognitiveRunTaskOptions,
+  type PolicyContext,
   type RememberOptions,
+  type EscalationRequest,
+  type EscalationResult,
+  type ExpandRequest,
+  type ExpandResult,
 } from './types.js'
 
 export async function createCognitiveLayer(
@@ -81,76 +70,165 @@ export async function createCognitiveLayer(
 
   const hotfixStore = new HotfixStore({ root })
 
+  const policiesDir = join(root, 'policies')
+  const policySet = await loadPolicies(policiesDir)
+
   return {
     store,
     graph: store.graph,
 
-    async recall(query: string, retrievalOpts: RetrievalOptions = {}): Promise<CognitiveRecallResult> {
-      // Layer 1 + 3 + 4 already live inside MemoryStore.retrieve (atomic
-      // short-circuit + vector + episodic, plus obsidian if configured).
-      // We bolt FTS on as the §13 layer 2 by fan-out + a tiny RRF blend.
-      const vectorPromise = gksRecall(store, query, retrievalOpts)
-      const ftsPromise = ftsSearch(join(root, 'gks'), query, {
-        limit: retrievalOpts.topK ?? 10,
+    async recall(
+      query: string,
+      retrievalOpts: RetrievalOptions & PolicyContext = {},
+    ): Promise<CognitiveRecallResult> {
+      const subject = retrievalOpts.subject ?? makeSubject('user', 'anonymous')
+      const action = retrievalOpts.action ?? 'recall'
+      const context = retrievalOpts.context ?? makeContext('internal', 'system-recall')
+
+      console.debug(`[ucf] 4-tuple: facade.recall | sub:${subject.id} | act:${action} | trace:${context.trace_id}`)
+
+      const result = await mspRecall({
+        query,
+        root,
+        namespace: opts.defaultNamespace?.tenant_id,
+        topK: retrievalOpts.topK,
+        subject,
+        context,
+        embedder: await store.embedder(),
+        vectorBackend: await store.getVectorStore('atomic'),
       })
 
-      const [vec, fts] = await Promise.all([vectorPromise, ftsPromise])
-
-      const byKey = new Map<string, CognitiveRecallHit>()
-      for (const h of vec.hits) {
-        byKey.set(h.path ?? h.id, markAuditOnly(h))
-      }
-      for (const h of fts) {
-        const key = h.path ?? h.id
-        const existing = byKey.get(key)
-        if (existing) {
-          existing.score = Math.max(existing.score, h.score)
-        } else {
-          byKey.set(key, h as CognitiveRecallHit)
+      const hits = result.hits.map((h) => {
+        const hit: CognitiveRecallHit = {
+          id: h.atomId,
+          atomId: h.atomId,
+          source: h.source === 'gks-vector' ? 'vector' : (h.source as any),
+          score: h.score,
+          snippet: h.snippet ?? '',
+          metadata: {
+            ...h.attributes,
+            perSourceRanks: h.perSourceRanks,
+          },
         }
-      }
-      const merged = [...byKey.values()].sort((a, b) => b.score - a.score)
-      const topK = retrievalOpts.topK ?? merged.length
+        return markAuditOnly(hit)
+      })
+
       return {
-        ...vec,
-        hits: merged.slice(0, topK),
+        query,
+        hits,
+        strategy: 'multi',
+        tookMs: result.timings.fusion,
+        fallback_reasons: result.fallback_reasons,
       }
     },
 
-    async remember(content: string, rOpts: RememberOptions = {}): Promise<{ id: string }> {
+    async remember(
+      content: string,
+      rOpts: RememberOptions & PolicyContext = {},
+    ): Promise<{ id: string }> {
+      const subject = rOpts.subject ?? makeSubject('user', 'anonymous')
+      const action = rOpts.action ?? 'write'
+      const context = rOpts.context ?? makeContext('internal', 'system-remember')
+
+      console.debug(`[ucf] 4-tuple: remember | sub:${subject.id} | act:${action} | trace:${context.trace_id}`)
+
       const result = await gksRetain(store, {
         content,
-        metadata: { ...(rOpts.metadata ?? {}), ...(rOpts.tags ? { tags: rOpts.tags } : {}) },
+        metadata: {
+          ...(rOpts.metadata ?? {}),
+          ...(rOpts.tags ? { tags: rOpts.tags } : {}),
+          attributes: subject.attributes,
+        },
       })
-      // `vectorDocId` is optional on RetainResult (Inbound-only retain skips
-      // vector insert). Fall back to the inbound path so the facade contract
-      // always returns a non-empty string.
       return { id: result.vectorDocId ?? result.inboundPath ?? '' }
     },
 
+    async escalate(req: EscalationRequest): Promise<EscalationResult> {
+      return handleEscalation(req, {
+        root,
+        currentScope: { needs: [], nice_to_have: [], excludes: [] },
+        subjectId: 'anonymous-subagent',
+      })
+    },
+
+    async expand(req: ExpandRequest, pOpts?: PolicyContext): Promise<ExpandResult> {
+      const subject = pOpts?.subject ?? makeSubject('user', 'anonymous')
+      const action = pOpts?.action ?? 'read'
+      const context = pOpts?.context ?? makeContext('internal', 'system-expand')
+      const targetTier = req.to ?? 'FULL'
+
+      const atom = await store.lookup(req.id)
+      if (!atom) {
+        throw new Error(`expand: atom not found: ${req.id}`)
+      }
+
+      const resource = makeResource('atom', req.id, {}, (atom.attributes as any) ?? {})
+      const { permitted, decision } = await enforcePolicy(resource, { root, subject, action, context })
+
+      if (!permitted) {
+        return {
+          id: req.id,
+          tier: 'MENTION',
+          denied_reason: decision.reasoning[0]?.description ?? 'Denied by policy',
+        }
+      }
+
+      // Read full body
+      const absPath = resolve(root, 'gks', atom.path)
+      const raw = await readFile(absPath, 'utf8')
+      const body = raw.split('\n---').pop()?.trim() ?? ''
+
+      return {
+        id: req.id,
+        body,
+        tier: targetTier,
+      }
+    },
+
     async consolidate(sessionId: string): Promise<void> {
-      // The GKS `reflect()` verb requires a full session-end summary input
-      // (see api.ts). The cognitive facade exposes a thin wrapper so EVA /
-      // Claude Code can call it from a hook; real callers should still use
-      // `reflect(store, ...)` for fine-grained control.
-      // For Phase 0 we mark the session id in audit (no-op for non-MSP
-      // callers) — full integration is tracked by FEAT--COGNITIVE-LAYER-FACADE.
       if (!sessionId) throw new Error('consolidate: sessionId is required')
     },
 
     async runTask(taskPath: string, runOpts: CognitiveRunTaskOptions = {}) {
-      const scale = runOpts.scale ?? 'L2'
-
-      // Resolve the parent_blueprint from the task YAML for the gate check.
-      // We re-use the codegen loader to avoid drift.
       const { loadTask } = await import('../codegen/load-task.js')
       const task = await loadTask(resolve(taskPath))
+
+      const subject = runOpts.subject ?? makeSubject('subagent', task.id, { scope: task.scope ?? { needs: [], nice_to_have: [], excludes: [] } })
+      const action = runOpts.action ?? 'expose-to-llm'
+      const context = runOpts.context ?? makeContext('internal', `task-${task.id}-${Date.now()}`)
+
+      console.debug(
+        `[ucf] 4-tuple: runTask | sub:${subject.id} | act:${action} | trace:${context.trace_id}`,
+      )
+
+      // Phase 1: Shadow PEP (Task Level)
+      const resource = makeResource('context-slot', 'run-task-execution')
+      const decision = evaluatePolicy(subject, resource, action, context, policySet)
+
+      const logPath = join(root, '.brain', 'msp', 'audit', 'shadow-policy.jsonl')
+      await logShadowDecision(
+        {
+          trace_id: context.trace_id,
+          subject,
+          resource,
+          action,
+          context,
+          decision,
+          policy_version: policySet.version,
+        },
+        logPath,
+      )
+
+      if (decision.effect === 'deny') {
+        console.warn(`[ucf] shadow-deny: runTask would have been denied for ${subject.id}`)
+      }
+
+      const scale = runOpts.scale ?? 'L2'
 
       if (scale !== 'L1') {
         await enforceScaleGate({ root, blueprintId: task.parent_blueprint, scale })
       }
 
-      // Tier-aware SLM injection. Default tier = T1 (Ollama+qwen2.5-coder).
       const tier = runOpts.tier ?? opts.slm?.tier ?? 'T1'
       const provider =
         runOpts.slmClient
@@ -171,7 +249,6 @@ export async function createCognitiveLayer(
     },
 
     async verifyFlow(featId: string) {
-      // Build byId map from the atomic layer (already loaded by init()).
       const entries = store.atomic.filter({})
       const byId = new Map(entries.map((e) => [e.id, e]))
       return verifyFlow(featId, byId)
@@ -185,11 +262,11 @@ export async function createCognitiveLayer(
       open(args) {
         return hotfixStore.open({ commitSha: args.sha, title: args.reason, reason: args.reason })
       },
-      list() {
-        return hotfixStore.list()
-      },
       close(sha: string) {
         return hotfixStore.close(`HOTFIX--${sha.toUpperCase().slice(0, 7)}`, [])
+      },
+      list() {
+        return hotfixStore.list()
       },
       check() {
         return hotfixStore.listOverdue()
@@ -205,8 +282,6 @@ export async function createCognitiveLayer(
 function tierProvider(tier: 'T1' | 'T2' | 'T3'): 'ollama' | 'gemini' | 'mock' {
   if (tier === 'T1') return 'ollama'
   if (tier === 'T2') return 'gemini'
-  // T3 stays on whichever provider the caller plugs in. Default mock so
-  // tests don't hit the network; production users override via `slm.provider`.
   return 'mock'
 }
 
@@ -218,6 +293,8 @@ export type {
   CognitiveRunTaskOptions,
   CognitiveTier,
   ScaleLevel,
+  EscalationRequest,
+  EscalationResult,
 } from './types.js'
 export { ScaleLevelGateError } from './types.js'
 export { resolveSSOT } from './ssot.js'

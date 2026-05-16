@@ -19,7 +19,7 @@ linked_symbols:
   - {"file":"examples/hooks/pre-commit-validator.sh"}
   - {"file":"examples/hooks/install.sh"}
   - {"file":"examples/hooks/README.md"}
-  - {"file":"test/hooks/pre-commit.test.ts"}
+  - {"file":"packages/msp/test/hooks/pre-commit.test.ts"}
 created_at: 2026-05-03T14:39:05.783+07:00
 ---
 
@@ -96,3 +96,8 @@ T1 DETECT-STAGED-MD (the regex + git diff --cached invocation)
 T2 RUN-VALIDATOR (the loop calling `npm run msp:validate`)
 T3 SUMMARISE-FAILURES (re-run without --silent + count + exit code)
 T4 INSTALL-HELPER (idempotent installer with marker comment)
+
+## Connections
+- [[FEAT--MSP-PRECOMMIT-HOOK]]
+- [[ADR--MSP-PRECOMMIT-HOOK]]
+

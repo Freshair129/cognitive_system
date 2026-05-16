@@ -7,9 +7,8 @@ title: Use nomic-embed-text-v1.5 as the local embedding backend
 created_at: 2026-04-29T12:00:00+07:00
 tags: [embedder, local, nomic]
 tier: genesis
-links:
-  - CONCEPT--EMBEDDING-STRATEGY
-  - BLUEPRINT--NOMIC-EMBEDDER
+crosslinks:
+  references: [CONCEPT--EMBEDDING-STRATEGY, BLUEPRINT--NOMIC-EMBEDDER]
 ---
 
 # ADR — Use nomic-embed-text-v1.5 as the local embedding backend
@@ -70,3 +69,8 @@ The GKS embedder must handle this internally — callers do not prepend prefixes
 3. OpenAI (cloud, if OPENAI_API_KEY set)
 4. Mock (random vectors, tests only)
 ```
+
+## Connections
+- [[CONCEPT--EMBEDDING-STRATEGY]]
+- [[BLUEPRINT--NOMIC-EMBEDDER]]
+

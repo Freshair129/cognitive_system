@@ -16,11 +16,11 @@ tags:
   - implementation
 crosslinks: {"implements":["FEAT--MEMORY-BACKLINKS-INDEXER"],"references":["ADR--MEMORY-BACKLINKS-INDEXER","CONCEPT--MEMORY-VECTOR-BACKLINKS"]}
 linked_symbols:
-  - {"file":"src/memory/backlinks/indexer.ts"}
-  - {"file":"src/memory/backlinks/walk.ts"}
-  - {"file":"src/memory/backlinks/edges.ts"}
-  - {"file":"src/memory/backlinks/atomic-write.ts"}
-  - {"file":"src/memory/backlinks/cli.ts"}
+  - {"file":"packages/msp/src/memory/backlinks/indexer.ts"}
+  - {"file":"packages/msp/src/memory/backlinks/walk.ts"}
+  - {"file":"packages/msp/src/memory/backlinks/edges.ts"}
+  - {"file":"packages/msp/src/memory/backlinks/atomic-write.ts"}
+  - {"file":"packages/msp/src/memory/backlinks/cli.ts"}
 created_at: 2026-05-03T14:16:43.374+07:00
 ---
 
@@ -100,3 +100,9 @@ verification_plan:
 T1 WALK-ATOMS (async generator, skip 00_index/)
 T2 EMIT-EDGES (per-atom extraction with all predicate keys)
 T3 SORT-WRITE (atomic write + check mode + CLI)
+
+## Connections
+- [[FEAT--MEMORY-BACKLINKS-INDEXER]]
+- [[ADR--MEMORY-BACKLINKS-INDEXER]]
+- [[CONCEPT--MEMORY-VECTOR-BACKLINKS]]
+

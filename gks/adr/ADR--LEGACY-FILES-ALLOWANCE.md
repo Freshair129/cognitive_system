@@ -12,7 +12,7 @@ tags:
   - legacy
   - exemption
   - validator
-crosslinks: {"references":["ADR--ANTI-HALLUCINATION-RULES","ADR--FORBIDDEN-FIELDS-LIST"]}
+crosslinks: {"references":["ADR--ANTI-HALLUCINATION-RULES","ADR--FORBIDDEN-FIELDS-LIST","CONCEPT--MSP-VALIDATOR"]}
 created_at: 2026-05-03T14:08:43.977+07:00
 ---
 
@@ -74,3 +74,9 @@ To "legacify-then-clean":
 ## Source
 
 `msp_spec.md` §10.2 (Legacy Files).
+
+## Connections
+- [[ADR--ANTI-HALLUCINATION-RULES]]
+- [[ADR--FORBIDDEN-FIELDS-LIST]]
+- [[CONCEPT--MSP-VALIDATOR]]
+

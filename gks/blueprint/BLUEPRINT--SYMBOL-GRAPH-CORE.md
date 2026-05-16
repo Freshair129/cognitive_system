@@ -19,11 +19,11 @@ tags:
   - leiden
 crosslinks: {"implements":["FEAT--MSP-GRAPH-CLI","FEAT--MSP-SYMBOL-MCP"],"references":["FRAMEWORK--SYMBOL-GRAPH","CONCEPT--SYMBOL-GRAPH","CONCEPT--PARSER-CHOICE","ADR--SYMBOL-GRAPH-PERSISTENCE","ADR--LEIDEN-COMMUNITY-DETECTION"]}
 linked_symbols:
-  - {"file":"src/symbols/types.ts"}
-  - {"file":"src/symbols/parser/typescript.ts"}
-  - {"file":"src/symbols/store/sqlite.ts"}
-  - {"file":"src/symbols/store/jsonl.ts"}
-  - {"file":"src/symbols/communities/leiden.ts"}
+  - {"file":"packages/msp/src/symbols/types.ts"}
+  - {"file":"packages/msp/src/symbols/parser/typescript.ts"}
+  - {"file":"packages/msp/src/symbols/store/sqlite.ts"}
+  - {"file":"packages/msp/src/symbols/store/jsonl.ts"}
+  - {"file":"packages/msp/src/symbols/communities/leiden.ts"}
 created_at: 2026-05-09T17:00:00.000+07:00
 ---
 
@@ -36,8 +36,8 @@ This blueprint covers the **foundation layer** of the Symbol Graph rollout
 API parser implementation, the SQLite store, the JSONL exporter / loader, and
 the Leiden community-detection adapter. It does NOT cover:
 
-- The `msp-graph` CLI (PR-4 — see `FEAT--MSP-GRAPH-CLI`)
-- The 5 `msp_symbol_*` MCP tools (PR-4 — see `FEAT--MSP-SYMBOL-MCP`)
+- The `msp-graph` CLI (PR-4 — see `[[FEAT--MSP-GRAPH-CLI]]`)
+- The 5 `msp_symbol_*` MCP tools (PR-4 — see `[[FEAT--MSP-SYMBOL-MCP]]`)
 - The web UI tab (PR-5)
 - The audit atom (PR-6)
 
@@ -156,7 +156,7 @@ Inside a function / method / const initializer body:
 - **Cross-file binding** — `external:<module>:<name>` placeholders are
   resolved at build time by the CLI (PR-4); the parser stays per-file.
 
-## SQLite schema (verbatim from ADR--SYMBOL-GRAPH-PERSISTENCE)
+## SQLite schema (verbatim from [[ADR--SYMBOL-GRAPH-PERSISTENCE]])
 
 ```sql
 CREATE TABLE symbols (
@@ -291,7 +291,7 @@ return value records which one ran, for stamping `meta.algorithm`.
 
 Both algorithms accept an `rng: () => number` callback rather than a
 numeric seed. We derive a deterministic mulberry32 RNG from the integer
-seed (`opts.seed`, default 42 per `ADR--LEIDEN-COMMUNITY-DETECTION`):
+seed (`opts.seed`, default 42 per `[[ADR--LEIDEN-COMMUNITY-DETECTION]]`):
 
 ```typescript
 function mulberry32(seed: number): () => number {
@@ -412,12 +412,12 @@ T7 (DEFER)      : CLI lives in PR-4; MCP tools live in PR-4; web UI in PR-5
 
 ## Source
 
-- `FRAMEWORK--SYMBOL-GRAPH`, `CONCEPT--SYMBOL-GRAPH`
-- `CONCEPT--PARSER-CHOICE` — TS Compiler API in v1
-- `ADR--SYMBOL-GRAPH-PERSISTENCE` — SQLite + JSONL hybrid; schema verbatim
-- `ADR--LEIDEN-COMMUNITY-DETECTION` — Leiden primary, Louvain fallback
-- `FEAT--MSP-GRAPH-CLI` — CLI contract this blueprint underpins
-- `FEAT--MSP-SYMBOL-MCP` — MCP tool contract this blueprint underpins
+- `[[FRAMEWORK--SYMBOL-GRAPH]]`, `[[CONCEPT--SYMBOL-GRAPH]]`
+- `[[CONCEPT--PARSER-CHOICE]]` — TS Compiler API in v1
+- `[[ADR--SYMBOL-GRAPH-PERSISTENCE]]` — SQLite + JSONL hybrid; schema verbatim
+- `[[ADR--LEIDEN-COMMUNITY-DETECTION]]` — Leiden primary, Louvain fallback
+- `[[FEAT--MSP-GRAPH-CLI]]` — CLI contract this blueprint underpins
+- `[[FEAT--MSP-SYMBOL-MCP]]` — MCP tool contract this blueprint underpins
 - Existing pattern: `src/memory/backlinks/` (sorted JSONL writer + check
   round-trip)
 - npm registry inspection 2026-05-09: `better-sqlite3@11.x`,

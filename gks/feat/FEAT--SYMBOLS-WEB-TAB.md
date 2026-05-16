@@ -21,7 +21,7 @@ linked_symbols:
   - {"file":"web/src/components/SymbolGraphView.tsx"}
   - {"file":"web/src/components/SymbolDetail.tsx"}
   - {"file":"web/src/api.ts"}
-  - {"file":"src/index.ts"}
+  - {"file":"packages/msp/src/index.ts"}
 created_at: 2026-05-09T16:54:00.000+07:00
 ---
 
@@ -84,6 +84,6 @@ To avoid shipping an empty tab to users who haven't built the graph yet, the tab
 
 ## Source
 
-- `FRAMEWORK--SYMBOL-GRAPH`, `ADR--SYMBOL-GRAPH-PERSISTENCE`, `FEAT--MSP-SYMBOL-MCP`
+- `[[FRAMEWORK--SYMBOL-GRAPH]]`, `[[ADR--SYMBOL-GRAPH-PERSISTENCE]]`, `[[FEAT--MSP-SYMBOL-MCP]]`
 - Existing Cytoscape pattern: `web/src/components/GraphView.tsx`
 - Existing tab pattern: `web/src/App.tsx` `Atoms | Candidates` toggle

@@ -15,7 +15,7 @@ tags:
   - bin
 crosslinks: {"implements":["ADR--SYMBOL-GRAPH-PERSISTENCE","ADR--LEIDEN-COMMUNITY-DETECTION"],"references":["FRAMEWORK--SYMBOL-GRAPH","CONCEPT--PARSER-CHOICE"]}
 linked_symbols:
-  - {"file":"src/symbols/cli.ts"}
+  - {"file":"packages/msp/src/symbols/cli.ts"}
   - {"file":"package.json"}
 created_at: 2026-05-09T16:53:00.000+07:00
 ---
@@ -86,6 +86,11 @@ The `chmod-bins.mjs` step ensures the dist file is executable post-build.
 
 ## Source
 
-- `ADR--SYMBOL-GRAPH-PERSISTENCE`, `ADR--LEIDEN-COMMUNITY-DETECTION`
+- `[[ADR--SYMBOL-GRAPH-PERSISTENCE]]`, `[[ADR--LEIDEN-COMMUNITY-DETECTION]]`
 - Existing CLI shape: `src/codegen/cli.ts` + `bin/msp-validate` pattern
 - Existing `chmod-bins.mjs` post-build step
+
+## Connections
+- [[FRAMEWORK--SYMBOL-GRAPH]]
+- [[CONCEPT--PARSER-CHOICE]]
+

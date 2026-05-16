@@ -14,17 +14,17 @@ tags:
   - audit
 crosslinks: {"references":["FEAT--CONSOLIDATOR","BLUEPRINT--CONSOLIDATOR","ADR--CONSOLIDATOR-HYBRID-SCORING","CONCEPT--CONSOLIDATOR","FRAMEWORK--MSP-ARCHITECTURE-V2"]}
 linked_symbols:
-  - {"file":"src/orchestrator/consolidator/index.ts"}
-  - {"file":"src/orchestrator/consolidator/types.ts"}
-  - {"file":"src/orchestrator/consolidator/score.ts"}
-  - {"file":"src/orchestrator/consolidator/boundary.ts"}
-  - {"file":"src/orchestrator/consolidator/summarise.ts"}
-  - {"file":"src/orchestrator/consolidator/llm.ts"}
-  - {"file":"test/orchestrator/consolidator/score.test.ts"}
-  - {"file":"test/orchestrator/consolidator/boundary.test.ts"}
-  - {"file":"test/orchestrator/consolidator/summarise.test.ts"}
-  - {"file":"test/orchestrator/consolidator/llm.test.ts"}
-  - {"file":"test/orchestrator/consolidator/index.test.ts"}
+  - {"file":"packages/msp/src/orchestrator/consolidator/index.ts"}
+  - {"file":"packages/msp/src/orchestrator/consolidator/types.ts"}
+  - {"file":"packages/msp/src/orchestrator/consolidator/score.ts"}
+  - {"file":"packages/msp/src/orchestrator/consolidator/boundary.ts"}
+  - {"file":"packages/msp/src/orchestrator/consolidator/summarise.ts"}
+  - {"file":"packages/msp/src/orchestrator/consolidator/llm.ts"}
+  - {"file":"packages/msp/test/orchestrator/consolidator/score.test.ts"}
+  - {"file":"packages/msp/test/orchestrator/consolidator/boundary.test.ts"}
+  - {"file":"packages/msp/test/orchestrator/consolidator/summarise.test.ts"}
+  - {"file":"packages/msp/test/orchestrator/consolidator/llm.test.ts"}
+  - {"file":"packages/msp/test/orchestrator/consolidator/index.test.ts"}
 created_at: 2026-05-04T23:29:00.000+07:00
 ---
 
@@ -32,7 +32,7 @@ created_at: 2026-05-04T23:29:00.000+07:00
 
 ## Scope
 
-M7b deliverable: `consolidate(opts)` orchestrator implementing the hybrid (deterministic + LLM borderline) scoring pipeline per `FEAT--CONSOLIDATOR`, `BLUEPRINT--CONSOLIDATOR`, and `ADR--CONSOLIDATOR-HYBRID-SCORING`. Consumes session.jsonl turns, partitions into topic-coherent chunks, scores each via tier-1 deterministic features, escalates borderline cases to tier-2 LLM, and emits `Episode[]` in memory. Caller decides persistence.
+M7b deliverable: `consolidate(opts)` orchestrator implementing the hybrid (deterministic + LLM borderline) scoring pipeline per `[[FEAT--CONSOLIDATOR]]`, `[[BLUEPRINT--CONSOLIDATOR]]`, and `[[ADR--CONSOLIDATOR-HYBRID-SCORING]]`. Consumes session.jsonl turns, partitions into topic-coherent chunks, scores each via tier-1 deterministic features, escalates borderline cases to tier-2 LLM, and emits `Episode[]` in memory. Caller decides persistence.
 
 ## What shipped
 
@@ -56,18 +56,18 @@ M7b deliverable: `consolidate(opts)` orchestrator implementing the hybrid (deter
 - **No mutation of session.jsonl** — read-only via `createReadStream` + `readline`.
 - **No new LLM bundle** — re-uses `SlmClient` interface from `src/codegen/types.ts` via the alias `LlmClient`. Tests use bare async functions; production callers pass `createSlmClient({ provider: 'auto' })`.
 - **No MCP tool wrapping** — `msp_remember` is M7f scope.
-- **No threshold tuning beyond ADR defaults** — `low: 0.30`, `high: 0.65`, `boundary: 0.25` from `ADR--CONSOLIDATOR-HYBRID-SCORING`. Tunable via `ConsolidateOptions.thresholds`. PARAM atom is M9.
+- **No threshold tuning beyond ADR defaults** — `low: 0.30`, `high: 0.65`, `boundary: 0.25` from `[[ADR--CONSOLIDATOR-HYBRID-SCORING]]`. Tunable via `ConsolidateOptions.thresholds`. PARAM atom is M9.
 - **No edits to `src/memory/episodic/` or `src/memory/sessions/`** — consumed as-is.
 
 ## Atoms landed
 
 | Atom | Phase | Type |
 |---|---|---|
-| `CONCEPT--CONSOLIDATOR` | 1 | concept (existed) |
-| `ADR--CONSOLIDATOR-HYBRID-SCORING` | 2 | adr (existed) |
-| `FEAT--CONSOLIDATOR` | 2 | feat (existed) |
-| `BLUEPRINT--CONSOLIDATOR` | 3 | blueprint (existed) |
-| `AUDIT--CONSOLIDATOR` | 6 | audit (this atom) |
+| `[[CONCEPT--CONSOLIDATOR]]` | 1 | concept (existed) |
+| `[[ADR--CONSOLIDATOR-HYBRID-SCORING]]` | 2 | adr (existed) |
+| `[[FEAT--CONSOLIDATOR]]` | 2 | feat (existed) |
+| `[[BLUEPRINT--CONSOLIDATOR]]` | 3 | blueprint (existed) |
+| `[[AUDIT--CONSOLIDATOR]]` | 6 | audit (this atom) |
 
 ## Verification
 
@@ -86,7 +86,7 @@ Consolidator test files contribute 53 tests:
   - llm.test.ts: 14
   - index.test.ts: 6
 
-## Acceptance criteria from `FEAT--CONSOLIDATOR`
+## Acceptance criteria from `[[FEAT--CONSOLIDATOR]]`
 
 - [x] `consolidate(opts)` reads session turns from `.brain/msp/projects/<ns>/sessions/<sessionId>.jsonl`
 - [x] Returns `Episode[]` — does NOT write to episodic store
@@ -141,7 +141,7 @@ Sub-module entry points are also re-exported from `index.ts` for advanced use:
 - M7c — Retrieval orchestration (cross-session episode dedup)
 - M7d — Context compression (hierarchical summary-of-summaries)
 - M7f — MCP tool wrapper (`msp_remember`)
-- M9 — Threshold tuning (`PARAM--CONSOLIDATOR-THRESHOLDS` atom + real-session calibration)
+- M9 — Threshold tuning (`[[PARAM--CONSOLIDATOR-THRESHOLDS]]` atom + real-session calibration)
 - M9 — Forgetting / decay (`valid_until`)
 - Session-end auto-call hook (lives in agent harness, not in this repo)
 
@@ -150,3 +150,7 @@ Sub-module entry points are also re-exported from `index.ts` for advanced use:
 - Implemented by: @claude-opus-4-7
 - Verified by: 53 new tests + validator (107/107) + check-links OK + typecheck clean
 - Branch: `claude/msp-m7b-consolidator-impl`
+
+## Connections
+- [[FRAMEWORK--MSP-ARCHITECTURE-V2]]
+

@@ -16,11 +16,11 @@ tags:
   - user-facing
 crosslinks: {"implements":["ADR--COMPRESSOR-THREE-TIER"],"references":["CONCEPT--CONTEXT-COMPRESSION","FEAT--CONSOLIDATOR"]}
 linked_symbols:
-  - {"file":"src/orchestrator/compressor/index.ts"}
-  - {"file":"src/orchestrator/compressor/types.ts"}
-  - {"file":"src/orchestrator/compressor/tokens.ts"}
-  - {"file":"src/orchestrator/compressor/trim.ts"}
-  - {"file":"src/orchestrator/compressor/resummarise.ts"}
+  - {"file":"packages/msp/src/orchestrator/compressor/index.ts"}
+  - {"file":"packages/msp/src/orchestrator/compressor/types.ts"}
+  - {"file":"packages/msp/src/orchestrator/compressor/tokens.ts"}
+  - {"file":"packages/msp/src/orchestrator/compressor/trim.ts"}
+  - {"file":"packages/msp/src/orchestrator/compressor/resummarise.ts"}
 created_at: 2026-05-05T16:11:00.000+07:00
 ---
 
@@ -62,7 +62,7 @@ interface CompressedEpisode {
 - [ ] `compress(opts)` returns `CompressResult` with `compressed[]`, `totalTokensUsed`, `tierCounts`
 - [ ] **Total tokens ≤ budgetTokens** — enforced; selection drops episodes if even summaries don't fit
 - [ ] **Importance-descending iteration** — high-importance gets keep/trim, low gets resummarise/truncate/drop
-- [ ] **Tier choice** per `ADR--COMPRESSOR-THREE-TIER`:
+- [ ] **Tier choice** per `[[ADR--COMPRESSOR-THREE-TIER]]`:
   - whole-fits → keep
   - ≥ 30% droppable + trimmed-fits → trim
   - has llm → resummarise (target 0.6 × original)
@@ -89,3 +89,8 @@ interface CompressedEpisode {
 - Cross-episode dedup
 - Hierarchical summary-of-summaries
 - Vector-similarity-based filtering before compression
+
+## Connections
+- [[CONCEPT--CONTEXT-COMPRESSION]]
+- [[FEAT--CONSOLIDATOR]]
+

@@ -9,7 +9,7 @@ tier: genesis
 title: Doc-to-code enforcement model (master-spec §6 → GKS primitives)
 tags: [workflow, enforcement, agent-rule, hotfix, msp-gatekeeper]
 crosslinks:
-  references: [ADR--EXTENDED-TAXONOMY, ADR--FLAT-ATOM-LAYOUT, ADR--REVERSE-CITATION-LOOKUP]
+  references: [ADR--EXTENDED-TAXONOMY, ADR--FLAT-ATOM-LAYOUT, ADR--REVERSE-CITATION-LOOKUP, CONCEPT--MASTER-PROMOTION]
   partially_superseded_by: [ADR--TASK-TRACKING-AT-ORCHESTRATOR]
 linked_symbols:
   - { file: "src/memory/types.ts", fn: normaliseStatus }
@@ -43,7 +43,7 @@ primitives (no new storage semantics, ADR-008 boundary preserved):
 
 | Item | Surface |
 |---|---|
-| 1. ~~`TASK--` prefix~~ | **superseded by ADR--TASK-TRACKING-AT-ORCHESTRATOR (ADR-015)** — task state lives at the orchestrator, not as atoms |
+| 1. ~~`TASK--` prefix~~ | **superseded by [[ADR--TASK-TRACKING-AT-ORCHESTRATOR]] (ADR-015)** — task state lives at the orchestrator, not as atoms |
 | 2. `status: approved` alias | `normaliseStatus` / `isApprovedStatus` map APPROVED→stable |
 | 3. Chain walker | `gks verify-flow <id>` — exits 1 on broken edge / not-stable node |
 | 4. Hotfix escape hatch | `HOTFIX--<sha>` atom + 48 h timer + `gks hotfix check` pre-commit gate |
@@ -75,3 +75,10 @@ spellings at the CLI/MCP boundary.
 - `docs/adr/014-doc-to-code-enforcement.md` — full text
 - `FRAMEWORK_MASTER_SPEC.md` §6 (P1-P6, Agent Rule, Hotfix, CLI), §7 (MSP Gatekeeper)
 - ADR-008 / ADR-009 / ADR-010 / ADR-012 — boundary + read-side primitives
+
+## Connections
+- [[ADR--EXTENDED-TAXONOMY]]
+- [[ADR--FLAT-ATOM-LAYOUT]]
+- [[ADR--REVERSE-CITATION-LOOKUP]]
+- [[CONCEPT--MASTER-PROMOTION]]
+

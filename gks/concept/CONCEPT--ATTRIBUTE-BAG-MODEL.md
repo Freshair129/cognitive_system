@@ -2,11 +2,13 @@
 id: CONCEPT--ATTRIBUTE-BAG-MODEL
 phase: 1
 type: concept
-status: draft
+status: stable
 tier: process
 source_type: axiomatic
 vault_id: default
 title: Attribute bag — bring-your-own open-schema metadata
+attributes:
+  domain: [ucf, msp]
 tags:
   - msp
   - ucf
@@ -95,13 +97,13 @@ The framework cannot distinguish these — and that is the point.
 
 ## Out of scope
 
-- The PDP that consumes attributes — see `FEAT--POLICY-DECISION-POINT`.
-- Specific classifier implementations beyond the built-in five — see `BLUEPRINT--PHASE-6-CLASSIFIERS`.
+- The PDP that consumes attributes — see `[[FEAT--POLICY-DECISION-POINT]]`.
+- Specific classifier implementations beyond the built-in five — see `[[BLUEPRINT--PHASE-6-CLASSIFIERS]]`.
 - Cross-classifier conflict resolution beyond the three-tier precedence rule.
 
 ## Source
 
 - `docs/msp/UNIVERSAL-CONTEXT-FRAMEWORK_spec.md` §4 — bring-your-own-schema rationale, provenance model, classifier interface.
 - Decision §0 D-8 — keep attributes in atom metadata, Namespace untouched.
-- `FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK` — context for where the bag fits in the four-tuple.
-- `CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT` — the request shape that carries the bag.
+- `[[FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK]]` — context for where the bag fits in the four-tuple.
+- `[[CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT]]` — the request shape that carries the bag.

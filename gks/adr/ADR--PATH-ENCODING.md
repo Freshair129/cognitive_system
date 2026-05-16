@@ -12,7 +12,7 @@ tags:
   - path-encoding
   - convention
   - decision
-crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2"]}
+crosslinks: {"references":["FRAMEWORK--MSP-ARCHITECTURE-V2","CONCEPT--TAXONOMY-V2-3"]}
 created_at: 2026-05-03T14:08:44.405+07:00
 ---
 
@@ -61,3 +61,8 @@ We have to pick one and harmonise.
 ## Source
 
 `msp_spec.md` §12 (Project Path Encoding) — explicitly flagged as an open issue in §15.
+
+## Connections
+- [[FRAMEWORK--MSP-ARCHITECTURE-V2]]
+- [[CONCEPT--TAXONOMY-V2-3]]
+

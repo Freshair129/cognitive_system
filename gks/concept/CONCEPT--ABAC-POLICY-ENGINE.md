@@ -2,11 +2,13 @@
 id: CONCEPT--ABAC-POLICY-ENGINE
 phase: 1
 type: concept
-status: draft
+status: stable
 tier: process
 source_type: axiomatic
 vault_id: default
 title: ABAC policy engine — PDP / PEP separation, policy as data
+attributes:
+  domain: [ucf, msp]
 tags:
   - msp
   - ucf
@@ -50,7 +52,7 @@ In:
 - **PDP module** `packages/msp/src/policy/pdp.ts` (new) exporting `evaluatePolicy(subject, resource, action, context): Decision`.
 - **Policy loader** that reads `policies/*.yaml`, parses with minimal operator set (`equals`, `in`, `not_in`, set ∩/∪/∖, arithmetic), hot-reloads on file change.
 - **Decision type** = `{ effect: 'permit' | 'deny' | 'indeterminate', obligations: Obligation[], advice: Advice[], reasoning: ReasonTrace[], ttl_seconds?: number }`.
-- **PEP interfaces** for HTTP middleware, MCP tool wrapper, recall interceptor, compose interceptor, embed interceptor — installed per `ADR--TRANSPORT-AGNOSTIC-ENFORCEMENT`.
+- **PEP interfaces** for HTTP middleware, MCP tool wrapper, recall interceptor, compose interceptor, embed interceptor — installed per `[[ADR--TRANSPORT-AGNOSTIC-ENFORCEMENT]]`.
 - **Decision caching** keyed by `(subject, resource, action)` hash; invalidated on policy-version bump.
 - **Default posture** per D-7: `default-permit` + shadow log in Phase 1; tighten per-endpoint to `default-deny` from Phase 3.
 - **Policy linter** that warns on unknown attributes and contradictory rules at load time.
@@ -59,9 +61,9 @@ Out:
 
 - The **policy language v2** — Cedar / OPA migration is a separate ADR once policy count or expressiveness exceeds YAML v1.
 - **Domain-specific policy packs** — those ship separately (`pack-pii`, `pack-multi-tenant`, `pack-medical`).
-- **Step-up authentication** — triggered by a policy obligation, but the mechanism lives in `CONCEPT--STEP-UP-AUTH`.
-- **The 4-tuple shape** — see `CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT`.
-- **Attribute schema** — see `CONCEPT--ATTRIBUTE-BAG-MODEL`.
+- **Step-up authentication** — triggered by a policy obligation, but the mechanism lives in `[[CONCEPT--STEP-UP-AUTH]]`.
+- **The 4-tuple shape** — see `[[CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT]]`.
+- **Attribute schema** — see `[[CONCEPT--ATTRIBUTE-BAG-MODEL]]`.
 
 ## Why policy-as-data, not code
 
@@ -131,3 +133,7 @@ This is the single most important defense against policy bugs taking down produc
 - XACML (OASIS, 2003) — established PDP/PEP terminology.
 - OPA / Rego — production-deployed pure-function PDP.
 - Cedar (AWS) — modern ergonomic ABAC language; future migration target.
+
+## Connections
+- [[FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK]]
+

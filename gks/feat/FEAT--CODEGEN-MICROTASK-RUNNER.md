@@ -15,9 +15,9 @@ tags:
   - user-facing
 crosslinks: {"implements":["ADR--CODEGEN-MICROTASK-RUNNER"],"references":["CONCEPT--CODEGEN-MICROTASK-RUNNER","ADR--CODEGEN-RETRY-POLICY"]}
 linked_symbols:
-  - {"file":"src/codegen/runner.ts"}
-  - {"file":"src/codegen/post-process.ts"}
-  - {"file":"src/codegen/forbidden-patterns.ts"}
+  - {"file":"packages/msp/src/codegen/runner.ts"}
+  - {"file":"packages/msp/src/codegen/post-process.ts"}
+  - {"file":"packages/msp/src/codegen/forbidden-patterns.ts"}
   - {"file":"src/codegen/escalate.ts"}
 created_at: 2026-05-03T14:16:37.122+07:00
 ---
@@ -30,7 +30,7 @@ created_at: 2026-05-03T14:16:37.122+07:00
 npm run msp:run-task -- .brain/default/tasks/msp-validator/T1_parser-frontmatter.task.yaml
 ```
 
-Reads the YAML, runs the codegen pipeline (SLM → post-process → forbidden-pattern → acceptance), retries on fail per `ADR--CODEGEN-RETRY-POLICY`, and exits 0/1/2/3/4 per `ADR--CODEGEN-MICROTASK-RUNNER`.
+Reads the YAML, runs the codegen pipeline (SLM → post-process → forbidden-pattern → acceptance), retries on fail per `[[ADR--CODEGEN-RETRY-POLICY]]`, and exits 0/1/2/3/4 per `[[ADR--CODEGEN-MICROTASK-RUNNER]]`.
 
 Optional flags:
 - `--model=<name>` — override SLM choice (default: configured Qwen 2.5 Coder)
@@ -64,3 +64,7 @@ Optional flags:
 - BLUEPRINT generation (separate feature in P3 toolchain).
 - Multi-task batch orchestration (composable via `xargs`).
 - Auto-commit on success (always human-gated).
+
+## Connections
+- [[CONCEPT--CODEGEN-MICROTASK-RUNNER]]
+

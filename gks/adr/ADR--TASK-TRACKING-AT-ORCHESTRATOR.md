@@ -9,7 +9,7 @@ tier: genesis
 title: Task tracking belongs to the orchestrator, not GKS
 tags: [scope, taxonomy, lifecycle, msp, supersedes]
 crosslinks:
-  references: [ADR--EXTENDED-TAXONOMY]
+  references: [ADR--EXTENDED-TAXONOMY, CONCEPT--MSP-ROADMAP]
   partially_supersedes: [ADR--DOC-TO-CODE-ENFORCEMENT]
 linked_symbols:
   - { file: "src/memory/types.ts", fn: AtomicType }
@@ -75,3 +75,9 @@ this ADR records that those files live outside `gks/`.
 - ADR 009 — orchestrator pattern
 - ADR 014 — partially superseded (item 1 only)
 - `docs/MSP_RELATIONSHIP.md` § task tracking — the contract
+
+## Connections
+- [[ADR--EXTENDED-TAXONOMY]]
+- [[CONCEPT--MSP-ROADMAP]]
+- [[ADR--DOC-TO-CODE-ENFORCEMENT]]
+

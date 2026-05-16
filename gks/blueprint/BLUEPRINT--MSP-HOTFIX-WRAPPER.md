@@ -17,7 +17,7 @@ crosslinks: {"implements":["FEAT--MSP-HOTFIX-WRAPPER"],"references":["ADR--MSP-H
 linked_symbols:
   - {"file":"examples/hooks/pre-commit-validator.sh"}
   - {"file":"package.json"}
-  - {"file":"test/hooks/pre-commit.test.ts"}
+  - {"file":"packages/msp/test/hooks/pre-commit.test.ts"}
 created_at: 2026-05-03T17:45:50.637+07:00
 ---
 
@@ -90,3 +90,8 @@ verification_plan:
 T1 NPM-SCRIPTS (4 lines in package.json)
 T2 HOOK-INTEGRATION (extend pre-commit-validator.sh)
 T3 TESTS (extend pre-commit.test.ts with 2 new cases)
+
+## Connections
+- [[FEAT--MSP-HOTFIX-WRAPPER]]
+- [[ADR--MSP-HOTFIX-WRAPPER]]
+

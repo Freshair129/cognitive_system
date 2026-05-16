@@ -16,10 +16,10 @@ tags:
   - implementation
 crosslinks: {"implements":["FEAT--MEMORY-SESSIONS-WRITER"],"references":["ADR--MEMORY-SESSIONS-WRITER","CONCEPT--MEMORY-SESSIONS"]}
 linked_symbols:
-  - {"file":"src/memory/sessions/writer.ts"}
-  - {"file":"src/memory/sessions/types.ts"}
-  - {"file":"src/memory/sessions/lock.ts"}
-  - {"file":"src/memory/sessions/schema.ts"}
+  - {"file":"packages/msp/src/memory/sessions/writer.ts"}
+  - {"file":"packages/msp/src/memory/sessions/types.ts"}
+  - {"file":"packages/msp/src/memory/sessions/lock.ts"}
+  - {"file":"packages/msp/src/memory/sessions/schema.ts"}
 created_at: 2026-05-03T14:16:39.446+07:00
 ---
 
@@ -99,3 +99,9 @@ verification_plan:
 T1 OPEN-SESSION (lock + writer factory)
 T2 APPEND-TURN (schema + serialise + appendFile)
 T3 SCHEMA-VALIDATE (extracted module + tests)
+
+## Connections
+- [[FEAT--MEMORY-SESSIONS-WRITER]]
+- [[ADR--MEMORY-SESSIONS-WRITER]]
+- [[CONCEPT--MEMORY-SESSIONS]]
+

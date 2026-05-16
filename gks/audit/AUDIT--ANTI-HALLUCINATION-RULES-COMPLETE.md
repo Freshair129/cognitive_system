@@ -16,10 +16,10 @@ tags:
   - anti-hallucination
 crosslinks: {"references":["ADR--ANTI-HALLUCINATION-RULES","FEAT--MSP-VALIDATOR"]}
 linked_symbols:
-  - {"file":"src/validator/rules/no-invented-versions.ts"}
-  - {"file":"src/validator/rules/evidence-for-decisions.ts"}
-  - {"file":"src/validator/rules/cite-or-mark-inferred.ts"}
-  - {"file":"src/validator/index.ts"}
+  - {"file":"packages/msp/src/validator/rules/no-invented-versions.ts"}
+  - {"file":"packages/msp/src/validator/rules/evidence-for-decisions.ts"}
+  - {"file":"packages/msp/src/validator/rules/cite-or-mark-inferred.ts"}
+  - {"file":"packages/msp/src/validator/index.ts"}
 created_at: 2026-05-03T18:01:45.959+07:00
 ---
 
@@ -27,7 +27,7 @@ created_at: 2026-05-03T18:01:45.959+07:00
 
 ## Scope
 
-Closes the 3-of-6 gap from `ADR--ANTI-HALLUCINATION-RULES`. M2 shipped `dangling-wikilinks`, `adr-monotonic`, `no-future-dates`. M5c lands the remaining three.
+Closes the 3-of-6 gap from `[[ADR--ANTI-HALLUCINATION-RULES]]`. M2 shipped `dangling-wikilinks`, `adr-monotonic`, `no-future-dates`. M5c lands the remaining three.
 
 ## Rules added
 
@@ -58,7 +58,7 @@ Both fixed during the same M5c session; recorded here per the M2/M4a/M5a precede
 
 ## Coverage
 
-All 6 rules from `ADR--ANTI-HALLUCINATION-RULES` now implemented:
+All 6 rules from `[[ADR--ANTI-HALLUCINATION-RULES]]` now implemented:
 
 | Rule | Status |
 |---|---|
@@ -74,3 +74,7 @@ All 6 rules from `ADR--ANTI-HALLUCINATION-RULES` now implemented:
 - Implemented by: @claude-opus-4-7
 - Verified by: 22/22 unit tests + 78/78 atoms still validate
 - Date: 2026-05-03
+
+## Connections
+- [[FEAT--MSP-VALIDATOR]]
+

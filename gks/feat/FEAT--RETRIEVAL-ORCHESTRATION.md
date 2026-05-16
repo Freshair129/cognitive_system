@@ -16,13 +16,13 @@ tags:
   - user-facing
 crosslinks: {"implements":["ADR--RETRIEVAL-RRF-FUSION"],"references":["CONCEPT--RETRIEVAL-ORCHESTRATION","FEAT--MSP-OBSIDIAN-CLIENT","FEAT--CONSOLIDATOR"]}
 linked_symbols:
-  - {"file":"src/orchestrator/retrieval/index.ts"}
-  - {"file":"src/orchestrator/retrieval/types.ts"}
-  - {"file":"src/orchestrator/retrieval/fusion.ts"}
-  - {"file":"src/orchestrator/retrieval/sources/vector.ts"}
-  - {"file":"src/orchestrator/retrieval/sources/obsidian.ts"}
-  - {"file":"src/orchestrator/retrieval/sources/episodic.ts"}
-  - {"file":"src/orchestrator/retrieval/sources/backlinks.ts"}
+  - {"file":"packages/msp/src/orchestrator/retrieval/index.ts"}
+  - {"file":"packages/msp/src/orchestrator/retrieval/types.ts"}
+  - {"file":"packages/msp/src/orchestrator/retrieval/fusion.ts"}
+  - {"file":"packages/msp/src/orchestrator/retrieval/sources/vector.ts"}
+  - {"file":"packages/msp/src/orchestrator/retrieval/sources/obsidian.ts"}
+  - {"file":"packages/msp/src/orchestrator/retrieval/sources/episodic.ts"}
+  - {"file":"packages/msp/src/orchestrator/retrieval/sources/backlinks.ts"}
 created_at: 2026-05-05T15:56:00.000+07:00
 ---
 
@@ -61,7 +61,7 @@ result.timings                      // { vector: 142, episodic: 3, ... }
 - [ ] **Per-source try/catch** — one failing source doesn't break the call
 - [ ] **Per-source timeouts** — each source has its own budget (defaults from ADR); on timeout, omit that source + append to `fallback_reasons`
 - [ ] **Total budget enforced** — `opts.timeoutMs` overrides sum of per-source; orchestration cancels remaining sources at budget
-- [ ] **RRF fusion** per `ADR--RETRIEVAL-RRF-FUSION` — `weight_s / (k + rank)`, summed across sources, sorted desc
+- [ ] **RRF fusion** per `[[ADR--RETRIEVAL-RRF-FUSION]]` — `weight_s / (k + rank)`, summed across sources, sorted desc
 - [ ] **Tie-breaking** — more sources > lower min rank > lexicographic atomId
 - [ ] **No mutation** — read-only on all sources
 - [ ] **Headless-safe** — works without Obsidian (filesystem fallback in `createObsidianClient` mode='filesystem' or `obsidian: undefined`)
@@ -85,3 +85,9 @@ result.timings                      // { vector: 142, episodic: 3, ... }
 - Cache layer → only if perf demands (M9+)
 - Cross-encoder re-rank → M10c
 - Query rewriting / HyDE → out of M7
+
+## Connections
+- [[CONCEPT--RETRIEVAL-ORCHESTRATION]]
+- [[FEAT--MSP-OBSIDIAN-CLIENT]]
+- [[FEAT--CONSOLIDATOR]]
+

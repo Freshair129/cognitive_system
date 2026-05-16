@@ -764,6 +764,7 @@ function atomicHitToRetrieval(h: AtomicHit): RetrievalHit {
       type: note.type,
       status: note.status,
       matchedBy: h.matchedBy,
+      ...(note.attributes !== undefined ? { attributes: note.attributes } : {}),
     },
   }
 }
@@ -837,10 +838,7 @@ export { createPgGraphBackend } from './graph/pg.js'
 export type { PgGraphBackendOptions } from './graph/pg.js'
 export { createGenesisGraphBackend, GenesisGraphBackend } from './graph/genesis-graph.js'
 export type { GenesisGraphBackendOptions } from './graph/genesis-graph.js'
-export {
-  GenesisGraphUnsupportedCypher,
-  GenesisGraphSchemaMismatchError,
-} from './graph/genesis-graph-errors.js'
+export { GenesisGraphUnsupportedCypher } from './graph/genesis-graph-errors.js'
 export { EpisodicLayer } from './episodic.js'
 export { InboundQueue } from './inbound.js'
 export { ATOMIC_ID_PATTERN, isAtomicId, assertAtomicId } from './atomic-id.js'
@@ -931,6 +929,7 @@ export type {
 } from './obsidian-mcp.js'
 export * from './types.js'
 export { deriveBacklinksFromEntries, emitBacklinksJsonl } from './backlinks.js'
+export { forEachJsonl, readJsonl, appendJsonl, writeJsonl, readJson, writeJson } from '../lib/jsonl.js'
 export type { BacklinkEdge, BacklinksOptions } from './backlinks.js'
 export { verifyFlow, formatVerifyFlowResult } from './verify-flow.js'
 export type { VerifyFlowOptions, VerifyFlowResult, VerifyError, WalkedEdge } from './verify-flow.js'

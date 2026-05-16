@@ -16,7 +16,7 @@ crosslinks: {"implements":["ADR--MSP-HOTFIX-WRAPPER"],"references":["CONCEPT--MS
 linked_symbols:
   - {"file":"examples/hooks/pre-commit-validator.sh"}
   - {"file":"package.json"}
-  - {"file":"test/hooks/pre-commit.test.ts"}
+  - {"file":"packages/msp/test/hooks/pre-commit.test.ts"}
 created_at: 2026-05-03T17:45:50.058+07:00
 ---
 
@@ -75,5 +75,12 @@ $ git commit -m "tweak"
 ## Out of scope
 
 - Auto-SHA detection in `msp:hotfix:open` — user passes `$(git rev-parse HEAD)`.
-- Reviewer enforcement on close per `ADR--HUMAN-REVIEW-GATES` — defer.
+- Reviewer enforcement on close per `[[ADR--HUMAN-REVIEW-GATES]]` — defer.
 - Distributed enforcement across machines — orchestrator's job.
+
+## Connections
+- [[ADR--MSP-HOTFIX-WRAPPER]]
+- [[CONCEPT--MSP-HOTFIX-WRAPPER]]
+- [[FEAT--MSP-PRECOMMIT-HOOK]]
+- [[ADR--HOTFIX-ESCAPE-HATCH]]
+

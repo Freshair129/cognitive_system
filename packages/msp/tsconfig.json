@@ -4,7 +4,11 @@
     "outDir": "dist",
     "rootDir": ".",
     "declaration": true,
-    "noUncheckedIndexedAccess": false
+    "noUncheckedIndexedAccess": false,
+    "baseUrl": ".",
+    "paths": {
+      "@freshair129/gks": ["../gks/src"]
+    }
   },
   "include": ["src/**/*", "test/**/*"],
   "exclude": [

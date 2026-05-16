@@ -16,11 +16,11 @@ tags:
   - implementation
 crosslinks: {"implements":["FEAT--MEMORY-EPISODIC-WRITER"],"references":["ADR--MEMORY-EPISODIC-WRITER","CONCEPT--MEMORY-EPISODIC"]}
 linked_symbols:
-  - {"file":"src/memory/episodic/writer.ts"}
-  - {"file":"src/memory/episodic/types.ts"}
-  - {"file":"src/memory/episodic/schema.ts"}
-  - {"file":"src/memory/episodic/atomic-write.ts"}
-  - {"file":"src/memory/episodic/summarisers/heuristic.ts"}
+  - {"file":"packages/msp/src/memory/episodic/writer.ts"}
+  - {"file":"packages/msp/src/memory/episodic/types.ts"}
+  - {"file":"packages/msp/src/memory/episodic/schema.ts"}
+  - {"file":"packages/msp/src/memory/episodic/atomic-write.ts"}
+  - {"file":"packages/msp/src/memory/episodic/summarisers/heuristic.ts"}
 created_at: 2026-05-03T14:16:41.255+07:00
 ---
 
@@ -108,3 +108,9 @@ verification_plan:
 T1 COLLECT-RANGE (read JSONL by turn range)
 T2 SUMMARISE (heuristic plugin)
 T3 APPEND-EPISODE (schema + atomic-write + idempotency)
+
+## Connections
+- [[FEAT--MEMORY-EPISODIC-WRITER]]
+- [[ADR--MEMORY-EPISODIC-WRITER]]
+- [[CONCEPT--MEMORY-EPISODIC]]
+

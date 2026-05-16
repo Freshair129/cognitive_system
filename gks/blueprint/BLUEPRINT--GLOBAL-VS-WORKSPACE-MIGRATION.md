@@ -18,26 +18,26 @@ tags:
   - implementation
 crosslinks: {"references":["ADR--GLOBAL-VS-WORKSPACE","CONCEPT--AGENT-AGNOSTIC","CONCEPT--NAMED-PROJECT-REGISTRY","ADR--PATH-ENCODING"]}
 linked_symbols:
-  - {"file":"src/identity/store.ts"}
-  - {"file":"src/identity/types.ts"}
-  - {"file":"src/identity/migrate.ts"}
-  - {"file":"src/identity/index.ts"}
-  - {"file":"src/projects/registry.ts"}
-  - {"file":"src/projects/resolve.ts"}
-  - {"file":"src/projects/types.ts"}
-  - {"file":"src/lib/msp-home.ts"}
-  - {"file":"src/mcp/tools/identity-get.ts"}
-  - {"file":"src/mcp/tools/identity-set.ts"}
-  - {"file":"test/identity/store.test.ts"}
-  - {"file":"test/identity/migrate.test.ts"}
-  - {"file":"test/projects/registry.test.ts"}
-  - {"file":"test/projects/resolve.test.ts"}
+  - {"file":"packages/msp/src/identity/store.ts"}
+  - {"file":"packages/msp/src/identity/types.ts"}
+  - {"file":"packages/msp/src/identity/migrate.ts"}
+  - {"file":"packages/msp/src/identity/index.ts"}
+  - {"file":"packages/msp/src/projects/registry.ts"}
+  - {"file":"packages/msp/src/projects/resolve.ts"}
+  - {"file":"packages/msp/src/projects/types.ts"}
+  - {"file":"packages/msp/src/lib/msp-home.ts"}
+  - {"file":"packages/msp/src/mcp/tools/identity-get.ts"}
+  - {"file":"packages/msp/src/mcp/tools/identity-set.ts"}
+  - {"file":"packages/msp/test/identity/store.test.ts"}
+  - {"file":"packages/msp/test/identity/migrate.test.ts"}
+  - {"file":"packages/msp/test/projects/registry.test.ts"}
+  - {"file":"packages/msp/test/projects/resolve.test.ts"}
 created_at: 2026-05-09T07:00:00.000+07:00
 ---
 
 # BLUEPRINT — global vs workspace storage migration
 
-> Implements `ADR--GLOBAL-VS-WORKSPACE`. Single-PR scope; ~3-5 days of work.
+> Implements `[[ADR--GLOBAL-VS-WORKSPACE]]`. Single-PR scope; ~3-5 days of work.
 
 ## Goal
 
@@ -120,7 +120,7 @@ export interface ResolvedProject {
 export async function resolveProject(opts: ResolveOptions): Promise<ResolvedProject>
 ```
 
-Resolution order per `CONCEPT--NAMED-PROJECT-REGISTRY`:
+Resolution order per `[[CONCEPT--NAMED-PROJECT-REGISTRY]]`:
 
 1. `cliFlag` if given
 2. `env` if set
@@ -243,7 +243,7 @@ Single PR, no feature flag. Migration is opt-out via `MSP_DISABLE_MIGRATION=1` (
 1. CI passes on Node 20 + 22.
 2. AUDIT atom records what shipped.
 3. Update `msp_spec.md` §12 (project paths) + §16 (references) to reflect new layout.
-4. Update `gks/frame/FRAMEWORK--MSP-ARCHITECTURE-V2.md` storage section.
+4. Update `gks/frame/[[FRAMEWORK--MSP-ARCHITECTURE-V2]].md` storage section.
 5. Update GKS `docs/MSP_RELATIONSHIP.md` upstream (Phase D).
 
 ## Risks
@@ -269,3 +269,8 @@ Single PR, no feature flag. Migration is opt-out via `MSP_DISABLE_MIGRATION=1` (
 - [ ] 3+ new tests for migration + project resolution.
 - [ ] Documentation updated (`msp_spec.md` + FRAME-V2).
 - [ ] AUDIT atom written.
+
+## Connections
+- [[CONCEPT--AGENT-AGNOSTIC]]
+- [[ADR--PATH-ENCODING]]
+

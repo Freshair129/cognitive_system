@@ -1,15 +1,11 @@
 import type { ObsidianClient } from '../../obsidian/client.js'
+import type { RequestContext, Subject } from '../../policy/types.js'
 
 /**
  * Logical retrieval source name. Each source produces ranked hits which
  * RRF fuses into a single result list.
  */
-export type SourceName =
-  | 'gks-vector'
-  | 'obsidian-text'
-  | 'grep'
-  | 'episodic'
-  | 'backlinks'
+export type SourceName = 'gks-vector' | 'obsidian-text' | 'grep' | 'episodic' | 'backlinks'
 
 /**
  * Minimal embedder shape accepted by the vector source. Compatible with the
@@ -46,6 +42,8 @@ export interface SourceHit {
   rank: number
   snippet?: string
   source: SourceName
+  /** §4 — Domain-specific attributes for policy checks (UCF). */
+  attributes?: Record<string, any>
 }
 
 /**
@@ -73,6 +71,8 @@ export interface RetrievalHit {
   rank: number
   snippet?: string
   perSourceRanks: Partial<Record<SourceName, number>>
+  /** §4 — Domain-specific attributes for policy checks (UCF). */
+  attributes?: Record<string, any>
 }
 
 /**
@@ -101,6 +101,8 @@ export interface RecallOptions {
   query: string
   root?: string
   namespace?: string
+  /** §5 — Vault ID for multi-namespace retrieval. If set, 'namespace' is ignored. */
+  vaultId?: string
   /**
    * Optional Obsidian client (M7a). If absent, the obsidian source is
    * skipped (recorded in `fallback_reasons`). Caller owns the lifecycle
@@ -131,6 +133,11 @@ export interface RecallOptions {
   weights?: Partial<Record<SourceName, number>>
   /** RRF k constant. Default 60. */
   rrfK?: number
+
+  /** §3 — UCF Subject (identity / clearance). */
+  subject?: Subject
+  /** §3 — UCF Request Context (trace id / time). */
+  context?: RequestContext
 }
 
 /**

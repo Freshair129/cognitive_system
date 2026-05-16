@@ -16,17 +16,17 @@ tags:
   - m7e
 crosslinks: {"implements":["FEAT--IDENTITY-LAYER"],"references":["ADR--IDENTITY-STORAGE-SHAPE","CONCEPT--IDENTITY-LAYER"]}
 linked_symbols:
-  - {"file":"src/identity/index.ts"}
-  - {"file":"src/identity/types.ts"}
-  - {"file":"src/identity/store.ts"}
-  - {"file":"src/identity/profile.ts"}
-  - {"file":"src/identity/voice.ts"}
-  - {"file":"src/identity/preferences.ts"}
-  - {"file":"test/identity/store.test.ts"}
-  - {"file":"test/identity/profile.test.ts"}
-  - {"file":"test/identity/voice.test.ts"}
-  - {"file":"test/identity/preferences.test.ts"}
-  - {"file":"test/identity/index.test.ts"}
+  - {"file":"packages/msp/src/identity/index.ts"}
+  - {"file":"packages/msp/src/identity/types.ts"}
+  - {"file":"packages/msp/src/identity/store.ts"}
+  - {"file":"packages/msp/src/identity/profile.ts"}
+  - {"file":"packages/msp/src/identity/voice.ts"}
+  - {"file":"packages/msp/src/identity/preferences.ts"}
+  - {"file":"packages/msp/test/identity/store.test.ts"}
+  - {"file":"packages/msp/test/identity/profile.test.ts"}
+  - {"file":"packages/msp/test/identity/voice.test.ts"}
+  - {"file":"packages/msp/test/identity/preferences.test.ts"}
+  - {"file":"packages/msp/test/identity/index.test.ts"}
 created_at: 2026-05-05T00:26:30.000+07:00
 ---
 
@@ -206,7 +206,7 @@ implementation_order:
 
 ## Implementation notes for the implementer
 
-- **Atomic write** is critical. Use `writeFile(tmp, ...)` + `rename(tmp, path)`. Don't write to the destination directly. POSIX rename is atomic; Windows is not (M9 issue per `CONCEPT--MSP-ROADMAP` §3 M9f).
+- **Atomic write** is critical. Use `writeFile(tmp, ...)` + `rename(tmp, path)`. Don't write to the destination directly. POSIX rename is atomic; Windows is not (M9 issue per `[[CONCEPT--MSP-ROADMAP]]` §3 M9f).
 
 - **`mkdir -p`** the parent dir before write — first write creates the namespace dir.
 
@@ -226,3 +226,9 @@ implementation_order:
 - Add a lockfile / multi-process safety (M9)
 - Validate voice values against an enum (formality is constrained, but tone/languagePreference are free-form)
 - Persist transient runtime state beyond profile/voice/preferences (e.g. last session id — that's session-side, not identity)
+
+## Connections
+- [[FEAT--IDENTITY-LAYER]]
+- [[ADR--IDENTITY-STORAGE-SHAPE]]
+- [[CONCEPT--IDENTITY-LAYER]]
+

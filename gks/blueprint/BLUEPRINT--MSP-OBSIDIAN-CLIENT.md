@@ -16,12 +16,12 @@ tags:
   - implementation
 crosslinks: {"implements":["FEAT--MSP-OBSIDIAN-CLIENT"],"references":["ADR--MSP-OBSIDIAN-INTEGRATION","CONCEPT--OBSIDIAN-AS-RUNTIME"]}
 linked_symbols:
-  - {"file":"src/obsidian/client.ts"}
-  - {"file":"src/obsidian/types.ts"}
-  - {"file":"src/obsidian/rest.ts"}
-  - {"file":"src/obsidian/filesystem.ts"}
-  - {"file":"src/obsidian/env.ts"}
-  - {"file":"test/obsidian/client.test.ts"}
+  - {"file":"packages/msp/src/obsidian/client.ts"}
+  - {"file":"packages/msp/src/obsidian/types.ts"}
+  - {"file":"packages/msp/src/obsidian/rest.ts"}
+  - {"file":"packages/msp/src/obsidian/filesystem.ts"}
+  - {"file":"packages/msp/src/obsidian/env.ts"}
+  - {"file":"packages/msp/test/obsidian/client.test.ts"}
 created_at: 2026-05-04T12:25:22.543+07:00
 ---
 
@@ -116,3 +116,9 @@ T3 REST-MODE         (rest.ts: probe + delegate to GKS adapter)
 T4 CLIENT-FACTORY    (client.ts: pick mode, return shape)
 T5 DEEP-LINK         (smartViewDeepLink helper)
 + test/obsidian/client.test.ts + AUDIT
+
+## Connections
+- [[FEAT--MSP-OBSIDIAN-CLIENT]]
+- [[ADR--MSP-OBSIDIAN-INTEGRATION]]
+- [[CONCEPT--OBSIDIAN-AS-RUNTIME]]
+
