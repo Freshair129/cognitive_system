@@ -1,0 +1,24 @@
+[package]
+name = "genesis-block-native"
+version = "0.0.1"
+edition = "2021"
+description = "Genesis Block — embedded graph engine for GKS (Phase 3.1 scaffold)"
+license = "MIT"
+publish = false
+
+[lib]
+# rlib alongside cdylib so `cargo test` can link the in-file unit tests.
+# The cdylib is what napi-rs consumes for the .node artifact.
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+napi = { version = "2.16", default-features = false, features = ["napi8"] }
+napi-derive = "2.16"
+
+[build-dependencies]
+napi-build = "2.1"
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = "symbols"
