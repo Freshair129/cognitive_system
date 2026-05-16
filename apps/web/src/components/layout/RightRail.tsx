@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { GKS_SERVICE } from '../../services/gksService';
 import { RefCard } from '../shared/RefCard';
+import { Icon } from '../shared/Icon';
 
 interface RightRailProps {
   activeId: string | null;
@@ -8,6 +9,7 @@ interface RightRailProps {
   semanticHits: any[];
   semanticState: 'idle' | 'loading' | 'done';
   semanticQuery: string;
+  onClose?: () => void;
 }
 
 export const RightRail: React.FC<RightRailProps> = ({
@@ -15,7 +17,8 @@ export const RightRail: React.FC<RightRailProps> = ({
   onOpen,
   semanticHits,
   semanticState,
-  semanticQuery
+  semanticQuery,
+  onClose
 }) => {
   const [tab, setTab] = useState<'links' | 'related' | 'semantic' | 'agents'>('links');
   const note = activeId ? GKS_SERVICE.NOTE_BY_ID[activeId] : null;
@@ -36,6 +39,9 @@ export const RightRail: React.FC<RightRailProps> = ({
         <button className={tab === "related" ? "active" : ""} onClick={() => setTab("related")}>Related</button>
         <button className={tab === "semantic" ? "active" : ""} onClick={() => setTab("semantic")}>Semantic</button>
         <button className={tab === "agents" ? "active" : ""} onClick={() => setTab("agents")}>Agents</button>
+        <button className="drawer-close" onClick={onClose} title="Close">
+          <Icon name="x" />
+        </button>
       </div>
       <div className="rail-body scroll-thin">
         {tab === "links" && note && (

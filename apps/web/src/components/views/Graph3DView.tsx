@@ -150,6 +150,53 @@ export const Graph3DView: React.FC<Graph3DViewProps> = ({ notes, edges, focusId,
     camRef.current.dist = Math.max(220, Math.min(1800, camRef.current.dist * Math.exp(e.deltaY * 0.001)));
   };
 
+  // Touch: 1 finger = orbit, 2 fingers = pinch-zoom, tap = open
+  const touchRef = useRef({ active: false, sx: 0, sy: 0, lx: 0, ly: 0, moved: false, pinch: 0 });
+  const onTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 1) {
+      const t = e.touches[0];
+      touchRef.current = { active: true, sx: t.clientX, sy: t.clientY, lx: t.clientX, ly: t.clientY, moved: false, pinch: 0 };
+      setHover(null);
+    } else if (e.touches.length === 2) {
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      touchRef.current.active = false;
+      touchRef.current.moved = true;
+      touchRef.current.pinch = Math.hypot(dx, dy);
+    }
+  };
+  const onTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 2 && touchRef.current.pinch > 0) {
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      const d = Math.hypot(dx, dy) || 1;
+      camRef.current.dist = Math.max(220, Math.min(1800, camRef.current.dist * (touchRef.current.pinch / d)));
+      touchRef.current.pinch = d;
+      return;
+    }
+    if (e.touches.length === 1 && touchRef.current.active) {
+      const t = e.touches[0];
+      camRef.current.yaw += (t.clientX - touchRef.current.lx) * 0.005;
+      camRef.current.pitch += (t.clientY - touchRef.current.ly) * 0.005;
+      camRef.current.pitch = Math.max(-1.2, Math.min(1.2, camRef.current.pitch));
+      touchRef.current.lx = t.clientX; touchRef.current.ly = t.clientY;
+      if (Math.abs(t.clientX - touchRef.current.sx) > 6 || Math.abs(t.clientY - touchRef.current.sy) > 6) {
+        touchRef.current.moved = true;
+      }
+      setParams(p => ({ ...p, autoRotate: false }));
+    }
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (e.touches.length > 0) return;
+    const tr = touchRef.current;
+    if (tr.active && !tr.moved && canvasRef.current) {
+      const rect = canvasRef.current.getBoundingClientRect();
+      const hit = pickNode(tr.sx - rect.left, tr.sy - rect.top);
+      if (hit) onOpen?.(hit.id);
+    }
+    touchRef.current = { active: false, sx: 0, sy: 0, lx: 0, ly: 0, moved: false, pinch: 0 };
+  };
+
   const hexA = React.useCallback((hex: string, a: number) => {
     const h = hex.replace("#", "");
     const r = parseInt(h.slice(0, 2), 16), g = parseInt(h.slice(2, 4), 16), b = parseInt(h.slice(4, 6), 16);
@@ -280,7 +327,7 @@ export const Graph3DView: React.FC<Graph3DViewProps> = ({ notes, edges, focusId,
 
   return (
     <div className="graph-wrap" ref={wrapRef}>
-      <canvas ref={canvasRef} className="graph-canvas" onMouseDown={onMouseDown} onMouseMove={onMouseMove} onMouseUp={onMouseUp} onWheel={onWheel} />
+      <canvas ref={canvasRef} className="graph-canvas" onMouseDown={onMouseDown} onMouseMove={onMouseMove} onMouseUp={onMouseUp} onWheel={onWheel} onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd} />
       {hover && (
         <div className="node-hover" style={{ left: hover.x, top: hover.y, pointerEvents: 'none' }}>
           <div style={{ display: "flex", gap: 6, alignItems: "center" }}>

@@ -12,6 +12,7 @@ interface SidebarProps {
   mode: 'files' | 'tags' | 'daily';
   setMode: (mode: 'files' | 'tags' | 'daily') => void;
   onOpenSettings: () => void;
+  onClose?: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -21,7 +22,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
   toggleTag,
   mode,
   setMode,
-  onOpenSettings
+  onOpenSettings,
+  onClose
 }) => {
   const [filter, setFilter] = useState("");
   const [expanded, setExpanded] = useState<Record<string, boolean>>({ "src": true, "adr": true, "concept": true });
@@ -107,6 +109,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </button>
         <button onClick={onOpenSettings} title="Settings">
           <Icon name="settings" />
+        </button>
+        <button className="drawer-close" onClick={onClose} title="Close">
+          <Icon name="x" />
         </button>
       </div>
       <div className="sb-search">
