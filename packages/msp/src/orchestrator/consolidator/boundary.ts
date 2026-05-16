@@ -1,112 +1,95 @@
 import type { Turn, Thresholds } from './types.js'
 import { DEFAULT_THRESHOLDS } from './config.js'
 
-// --- Bag-of-words cosine similarity (from GKS) ---
+// Common function words stripped before similarity comparison.
+const STOP = new Set([
+  'the', 'a', 'an', 'is', 'are', 'was', 'were', 'be', 'been', 'being',
+  'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'should',
+  'could', 'can', 'may', 'might', 'shall', 'must',
+  'in', 'on', 'at', 'to', 'for', 'of', 'and', 'or', 'but', 'not', 'no',
+  'this', 'that', 'these', 'those', 'it', 'its',
+  'i', 'you', 'he', 'she', 'we', 'they',
+  'with', 'as', 'if', 'from', 'by', 'into', 'about',
+])
 
-function textToBag(text: string): Map<string, number> {
-  const bag = new Map<string, number>()
-  const words = text.toLowerCase().match(/\w+/g) ?? []
-  for (const word of words) {
-    bag.set(word, (bag.get(word) ?? 0) + 1)
-  }
-  return bag
+/**
+ * Tokenise text into a filtered word array. Strips stop-words and
+ * tokens shorter than 3 characters so that function words do not
+ * dominate cosine similarity.
+ */
+export function tokenise(text: string): string[] {
+  return (text.toLowerCase().match(/\w+/g) ?? []).filter(
+    (w) => w.length > 2 && !STOP.has(w),
+  )
 }
 
-export function bagCosine(bag1: Map<string, number>, bag2: Map<string, number>): number {
-  if (bag1.size === 0 || bag2.size === 0) return 0
+/**
+ * Cosine similarity between two token arrays (bag-of-words model).
+ * Returns 0 when either array is empty.
+ */
+export function bagCosine(a: string[], b: string[]): number {
+  if (a.length === 0 || b.length === 0) return 0
 
-  const allWords = new Set([...bag1.keys(), ...bag2.keys()])
+  const freqA = new Map<string, number>()
+  const freqB = new Map<string, number>()
+  for (const w of a) freqA.set(w, (freqA.get(w) ?? 0) + 1)
+  for (const w of b) freqB.set(w, (freqB.get(w) ?? 0) + 1)
 
-  let dotProduct = 0
+  const all = new Set([...freqA.keys(), ...freqB.keys()])
+  let dot = 0
   let mag1 = 0
   let mag2 = 0
-
-  for (const word of allWords) {
-    const c1 = bag1.get(word) ?? 0
-    const c2 = bag2.get(word) ?? 0
-    dotProduct += c1 * c2
+  for (const w of all) {
+    const c1 = freqA.get(w) ?? 0
+    const c2 = freqB.get(w) ?? 0
+    dot += c1 * c2
     mag1 += c1 * c1
     mag2 += c2 * c2
   }
-
   if (mag1 === 0 || mag2 === 0) return 0
-  return dotProduct / (Math.sqrt(mag1) * Math.sqrt(mag2))
+  return dot / (Math.sqrt(mag1) * Math.sqrt(mag2))
 }
 
-export function tokenise(text: string): Map<string, number> {
-  return textToBag(text)
+export interface DetectBoundariesOpts {
+  /** Number of preceding turns used as context for comparison. Default: 2. */
+  window?: number
+  thresholds?: Partial<Thresholds>
 }
-
-// --- Boundary detection ---
 
 /**
- * Detects episode boundaries in a session using semantic similarity.
- * Returns an array of [startIndex, endIndex] tuples.
+ * Partition `turns` into topic-coherent episode ranges using a sliding
+ * bag-of-words window. Returns an array of non-overlapping [start, end]
+ * index pairs that together cover the full turn array.
+ *
+ * A boundary is inserted before turn i when the cosine similarity between
+ * the combined tokens of the preceding `window` turns and turn i falls
+ * below `thresholds.boundary`.
  */
-export async function detectBoundaries(
+export function detectBoundaries(
   turns: Turn[],
-  opts: { thresholds?: Partial<Thresholds>, embedder: Embedder }, // Embedder is required
-): Promise<Array<[number, number]>> {
+  opts: DetectBoundariesOpts = {},
+): Array<[number, number]> {
   if (turns.length === 0) return []
 
-  const threshold = opts?.thresholds?.boundary ?? DEFAULT_THRESHOLDS.boundary
-  
+  const threshold = opts.thresholds?.boundary ?? DEFAULT_THRESHOLDS.boundary
+  const window = opts.window ?? 2
+
   const ranges: Array<[number, number]> = []
-  let currentChunkStart = 0;
+  let currentStart = 0
 
-  // Pre-calculate all embeddings to do it in one batch call
-  const allTexts = turns.map(t => t.text)
-  const allVectors = await opts.embedder.embedBatch(allTexts)
+  for (let i = window; i < turns.length; i++) {
+    const prevTokens = turns
+      .slice(i - window, i)
+      .flatMap((t) => tokenise(t.content))
+    const curTokens = tokenise(turns[i]!.content)
+    const similarity = bagCosine(prevTokens, curTokens)
 
-  for (let i = 1; i < turns.length; i++) {
-    const chunkVectors = allVectors.slice(currentChunkStart, i)
-    const chunkVector = averageVectors(chunkVectors)
-    const currentTurnVector = allVectors[i]!
-    
-    const similarity = vectorCosineSimilarity(chunkVector, currentTurnVector)
-    
     if (similarity < threshold) {
-        ranges.push([currentChunkStart, i - 1]);
-        currentChunkStart = i;
+      ranges.push([currentStart, i - 1])
+      currentStart = i
     }
   }
-  
-  ranges.push([currentChunkStart, turns.length - 1]);
 
+  ranges.push([currentStart, turns.length - 1])
   return ranges
-}
-
-function vectorCosineSimilarity(vec1: number[], vec2: number[]): number {
-  if (vec1.length !== vec2.length || vec1.length === 0) return 0
-
-  let dotProduct = 0
-  let mag1 = 0
-  let mag2 = 0
-
-  for (let i = 0; i < vec1.length; i++) {
-    dotProduct += vec1[i]! * vec2[i]!
-    mag1 += vec1[i]! * vec1[i]!
-    mag2 += vec2[i]! * vec2[i]!
-  }
-  
-  if (mag1 === 0 || mag2 === 0) return 0
-  return dotProduct / (Math.sqrt(mag1) * Math.sqrt(mag2))
-}
-
-function averageVectors(vectors: number[][]): number[] {
-  if (vectors.length === 0) return []
-  const dim = vectors[0]!.length
-  const avg = new Array(dim).fill(0)
-  
-  for (const vec of vectors) {
-    for (let i = 0; i < dim; i++) {
-      avg[i] += vec[i]!
-    }
-  }
-  
-  for (let i = 0; i < dim; i++) {
-    avg[i] /= vectors.length
-  }
-  
-  return avg
 }

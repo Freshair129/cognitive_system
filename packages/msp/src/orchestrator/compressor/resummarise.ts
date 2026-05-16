@@ -25,7 +25,7 @@ export function buildResummarisePrompt(
   episode: CompressorEpisode,
   targetTokens: number,
 ): string {
-  const conversation = episode.turns.map((turn) => `${turn.speaker}: ${turn.text}`).join('\n')
+  const conversation = episode.turns.map((turn) => `[${turn.speakerId}] ${turn.content}`).join('\n')
   return `${PROMPT_HEAD} ${targetTokens} ${PROMPT_BODY_HEAD}
 ${conversation}
 ${PROMPT_TAIL}
@@ -41,7 +41,7 @@ export function cleanLlmText(text: string): string {
   let out = text.trim()
 
   // Strip a single fenced block if the entire body is wrapped.
-  const fence = out.match(/^```(?:[a-zA-Z]+)?\s*\n([\\s\\S]*?)\n```\s*$/)
+  const fence = out.match(/^```(?:[a-zA-Z]+)?\s*\n([\s\S]*?)\n```\s*$/)
   if (fence) {
     out = fence[1]!.trim()
   }
@@ -159,7 +159,7 @@ export function truncate(
 
   for (let i = turns.length - 1; i >= 0; i--) {
     const candidate = turns.slice(i, turns.length)
-    const text = candidate.map((t) => `[${t.speaker}] ${t.text}`).join('\n')
+    const text = candidate.map((t) => `[${t.speakerId}] ${t.content}`).join('\n')
     const tokens = estimateText(text, tokeniser)
     if (tokens > target) break
     firstKeptIdx = i

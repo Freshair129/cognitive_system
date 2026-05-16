@@ -1,6 +1,9 @@
 import type { Turn, Episode } from '../consolidator/types.js'
 import type { SlmClient } from '../../codegen/slm/types.js'
 
+export type { Turn } from '../consolidator/types.js'
+export type { SlmClient as LlmClient } from '../../codegen/slm/types.js'
+
 /**
  * An episode within the Compressor. This represents a logical chunk of a
  * conversation that has been scored and summarised by the Consolidator.
