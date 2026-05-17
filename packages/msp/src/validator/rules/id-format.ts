@@ -8,7 +8,7 @@ import type { ParsedAtom, ValidationContext, ValidationError } from '../types.js
 //                     in its own atomic_index even though atomic-id.js
 //                     would reject it on input. We accept on read.)
 export const ID_PATTERN =
-  /^(?:ADR-\d{3}|HOTFIX--[a-f0-9]+|[A-Z][A-Z0-9_]*--[A-Z0-9][A-Z0-9_-]*)$/
+  /^(?:ADR-\d{3}|HOTFIX--[a-f0-9]+|[A-Z][A-Z0-9_]+-\d+--[A-Z0-9][A-Z0-9_-]*(?:--K\d+)?|[A-Z][A-Z0-9_]*--[A-Z0-9][A-Z0-9_-]*)$/
 
 function getId(fm: Record<string, unknown>): string | undefined {
   const id = fm['id']

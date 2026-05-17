@@ -97,6 +97,7 @@ async function* walkMd(dir: string): AsyncGenerator<string> {
     const p = join(dir, entry.name)
     if (entry.isDirectory()) {
       if (entry.name === '00_index') continue
+      if (entry.name === 'candidates') continue // proposed atoms; not yet promoted
       yield* walkMd(p)
     } else if (entry.isFile() && entry.name.endsWith('.md')) {
       yield p

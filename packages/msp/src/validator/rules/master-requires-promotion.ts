@@ -6,8 +6,6 @@ export function masterRequiresPromotion(
   atom: ParsedAtom,
   _ctx: ValidationContext,
 ): ValidationError[] {
-  const type = atom.fm['type']
-  if (type !== 'master') return []
   const tier = atom.fm['tier']
   if (tier !== 'master') return []
   const errors: ValidationError[] = []

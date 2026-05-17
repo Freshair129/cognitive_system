@@ -121,6 +121,7 @@ async function main(): Promise<number> {
     atomicIndex,
     forbiddenFields: contract.forbiddenFields,
     requiredFields: contract.requiredFields,
+    root,
   }
   let results: ValidationResult[]
 

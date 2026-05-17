@@ -46,6 +46,7 @@ export function handler(ctx: ToolHandlerCtx) {
         atomicIndex,
         forbiddenFields: contract.forbiddenFields,
         requiredFields: contract.requiredFields,
+        root,
       }
 
       let results
