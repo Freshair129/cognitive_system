@@ -55,7 +55,78 @@ role: "Strategic intent / PRD"
 
 ---
 
-## 🛠️ 3. เครื่องมือสร้างและจำลองโครงสร้างอะตอม (CLI tool)
+## 🗂️ 3. แผนผังประเภทอะตอม (Atom Types Taxonomy Mapping)
+
+ตามเกณฑ์มาตรฐานในคลังสะสมความรู้ GKS เราได้จำแนกอะตอมออกเป็น **Core (บังคับมี / Required)** ซึ่งจำเป็นสำหรับการส่งมอบฟีเจอร์และวงจรพัฒนาหลัก และ **Optional (มีหรือไม่มีก็ได้ / Optional)** ซึ่งเป็นอะตอมสนับสนุนทางเทคนิคหรือสกัดด้วยเครื่องมืออัตโนมัติ:
+
+### 🌟 3.1 กลุ่มอะตอมหลัก (Core - บังคับมี / Required)
+เหล่านี้คืออะตอมที่ขับเคลื่อนวงจรการสร้างและการันตีคุณภาพของการพัฒนาฟีเจอร์หลัก (Phase-aligned P0 -> P6) ทุกอะตอมในกลุ่มนี้จำเป็นต้องได้รับการสถาปนาและเชื่อมโยงกันอย่างเป็นระบบ:
+
+| รหัสประเภท | ชื่อฟิลด์ `role` (หน้าที่) | หมวดหมู่ `cluster` | รายละเอียดและการใช้งาน | หัวข้อบังคับ (Required Sections) |
+|---|---|---|---|---|
+| **`CONCEPT`** | `"Strategic intent / PRD"` | `implementation_flow` | กำหนดความต้องการทางธุรกิจ ภาพรวม What & Why | Problem, Hypothesis, Scope, Out of scope, Verification, Source |
+| **`ADR`** | `"Architecture decision record"` | `implementation_flow` | บันทึกการตัดสินใจทางสถาปัตยกรรมที่สำคัญ | Context, Decision, Consequences, Alternatives considered, Source |
+| **`FR`** | `"Functional requirement"` | `requirements` | ข้อกำหนดทางเทคนิคและการทำงานเชิงระบบ | Requirement, Verification, Source |
+| **`NFR`** | `"Non-functional requirement"` | `requirements` | ข้อกำหนดด้านคุณภาพระบบ (Performance, Sec, etc.) | Quality attribute, Verification, Source |
+| **`FEAT`** | `"Feature spec"` | `implementation_flow` | พฤติกรรมการตอบสนองหน้างานของผู้ใช้ | User-facing behaviour, Verification, Out of scope, Source |
+| **`ENTITY`** | `"Data schema"` | `implementation_flow` | นิยามของตารางฐานข้อมูลและโมเดลข้อมูลย่อย | Schema definition, Relations, Source |
+| **`ENDPOINT`** | `"One API path / method"` | `implementation_flow` | สัญญาและข้อตกลงของ API แต่ละเส้นทาง | Contract, Request, Response, Errors, Source |
+| **`BLUEPRINT`** | `"Implementation plan"` | `implementation_flow` | แผนขั้นตอนการลงมือพัฒนาเชิงเทคนิค | Geography, Acceptance, Dependencies, Tasks, Source |
+| **`AUDIT`** | `"Test results / quality report"` | `implementation_flow` | ผลลัพธ์การทดสอบและการตรวจสอบความเสี่ยง | Scope verified, Test results, Deviations, Anti-hallucination check, Follow-ups, Source |
+| **`MASTER`** | `"Root-level policy / genesis rule"` | `implementation_flow` | นโยบายระดับสูงสุดหรือกฎการตั้งต้นระบบ | Policy, Scope, Enforcement, Source |
+| **`PROTO`** | `"Machine-enforced invariant"` | `implementation_flow` | กฎเกณฑ์ที่ระบบ Validator จะต้องบังคับตรวจจับ | Rule, Severity, Enforcement, Counter-example, Source |
+
+---
+
+### 🧩 3.2 กลุ่มอะตอมสนับสนุน (Optional - มีหรือไม่มีก็ได้ / Optional)
+อะตอมเหล่านี้จะใช้เพื่อวัตถุประสงค์เฉพาะทาง การควบคุมพฤติกรรมเอเจนต์ (Agent Governance) การบริหารจัดการความปลอดภัย หรือเป็นข้อมูลประมวลผลอัตโนมัติ:
+
+#### A. สถาปัตยกรรมและเทคนิค (Tech & Framework Support)
+*   **`IDEA`** (`role`: `"Raw prompt / spark"`, `cluster`: `implementation_flow`) - ไอเดียร่างแรกที่จุดประกาย มีอายุสั้นก่อนพัฒนาเป็น CONCEPT
+*   **`MOD`** (`role`: `"Module manifest"`, `cluster`: `implementation_flow`) - ประกาศขอบเขตความเป็นเจ้าของและพอร์ตสาธารณะของโมดูล
+*   **`ALGO`** (`role`: `"Algorithm definition"`, `cluster`: `implementation_flow`) - นิยามตรรกะการคำนวณ สูตรคณิตศาสตร์ หรือขั้นตอนการทำงาน
+*   **`FLOW`** (`role`: `"Data / UI flow"`, `cluster`: `implementation_flow`) - แผนภาพความเคลื่อนไหวของข้อมูลหรือพฤติกรรมหน้าจอ
+*   **`API`** (`role`: `"OpenAPI master hub"`, `cluster`: `implementation_flow`) - จุดศูนย์รวมเอกสาร OpenAPI หลัก
+*   **`ENTRYPOINT`** (`role`: `"Auth / middleware / access logic"`, `cluster`: `implementation_flow`) - ตรรกะดักผ่านหรือจัดการสิทธิ์การเข้าถึง
+*   **`PARAMS`** (`role`: `"Constants / business config"`, `cluster`: `implementation_flow`) - ค่าคงที่หรือค่าคอนฟิกธุรกิจของแอปพลิเคชัน
+*   **`GENESIS`** (`role`: `"Block Manifest (v2.3+)"`, `cluster`: `implementation_flow`) - จุดเริ่มต้นการรันของ Genesis Block
+*   **`FRAMEWORK`** (`role`: `"Governance / architectural framework"`, `cluster`: `implementation_flow`) - แม่แบบและกฎเกณฑ์สถาปัตยกรรม
+*   **`STACK`** (`role`: `"Technology stack inventory"`, `cluster`: `implementation_flow`) - รายการและเวอร์ชันเทคโนโลยีที่เลือกใช้
+*   **`SPEC`** (`role`: `"Technical specification"`, `cluster`: `implementation_flow`) - ข้อกำหนดรูปทรงข้อมูลเชิงลึก
+*   **`COGNITIVE`** (`role`: `"Mental model / interpretive lens"`, `cluster`: `implementation_flow`) - กรอบความคิดหรือตัวเลนส์การวิเคราะห์เชิงปัญญา
+*   **`SAFETY`** (`role`: `"Ethical safety / AI alignment"`, `cluster`: `implementation_flow`) - กฎความปลอดภัยทางจริยธรรมและการควบคุมปัญญาประดิษฐ์
+
+#### B. การบริหารเอเจนต์และพฤติกรรม (Agent Governance)
+*   **`LLM`** (`role`: `"Large reasoning engine"`, `cluster`: `agent_governance`) - ตัวกำหนดค่าและการประเมินสติปัญญาของโมเดลตัวใหญ่
+*   **`SLM`** (`role`: `"Small execution engine"`, `cluster`: `agent_governance`) - ตัวประมวลผลตัวเล็กเฉพาะทาง
+*   **`MCP`** (`role`: `"Model Context Protocol tool"`, `cluster`: `agent_governance`) - รายละเอียดเครื่องมือเชื่อมต่อผ่านโปรโตคอล MCP
+*   **`CMD`** (`role`: `"Executable system command"`, `cluster`: `agent_governance`) - ข้อมูลคำสั่งของระบบปฏิบัติการที่อนุญาตให้ใช้งาน
+*   **`SKILL`** (`role`: `"Agent capability"`, `cluster`: `agent_governance`) - ความสามารถพิเศษของตัวแทนเอเจนต์
+*   **`PROTOCOL`** (`role`: `"Interaction contract"`, `cluster`: `agent_governance`) - สัญญาสื่อสารข้อความระหว่างเอเจนต์
+*   **`GUARD`** (`role`: `"Structural / behavioural guardrail"`, `cluster`: `agent_governance`) - ข้อจำกัดการทำงานที่เข้มงวดของเอเจนต์
+*   **`POLICY`** (`role`: `"Operational policy"`, `cluster`: `agent_governance`) - นโยบายการควบคุมเก็บรักษาหรือสิทธิ์การรัน
+*   **`PERSONA`** (`role`: `"Agent identity"`, `cluster`: `agent_governance`) - นิยามตัวตน นิสัย และ Seed System Prompt ของเอเจนต์
+
+#### C. ความต้องการและการดำเนินงานระดับย่อย (Specialized Requirements & Ops)
+*   **`REQ`** (`role`: `"Umbrella requirement"`, `cluster`: `requirements`) - ภาพความต้องการระบบในร่มใหญ่
+*   **`CONSTRAINT`** (`role`: `"Hard external constraint"`, `cluster`: `requirements`) - ข้อจำกัดและกฎหมายจากภายนอกที่ไม่สามารถต่อรองได้
+*   **`INC`** (`role`: `"Incident post-mortem"`, `cluster`: `ops`) - บทเรียนและการวิเคราะห์สาเหตุของวิกฤติระบบในอดีต
+*   **`HOTFIX`** (`role`: `"Hotfix escape-hatch atom"`, `cluster`: `ops`) - ข้อมูลแพทช์ด่วนพิเศษชั่วคราว
+*   **`ISSUE`** (`role`: `"Live issue tracker"`, `cluster`: `ops`) - บันทึกปัญหาการทำงานแบบไลฟ์เรียลไทม์
+*   **`RISK`** (`role`: `"Identified risk + mitigation"`, `cluster`: `ops`) - ข้อมูลความเสี่ยงและทางออกบรรเทาความเสียหาย
+*   **`RUNBOOK`** (`role`: `"Operational response guide"`, `cluster`: `ops`) - คู่มือปฏิบัติการเมื่อเกิดสถานการณ์วิกฤติต่างๆ
+*   **`SLO`** (`role`: `"Service-level objective"`, `cluster`: `ops`) - เป้าหมายความเสถียรและการแจ้งเตือน
+
+#### D. ความรู้สะสมอัตโนมัติ (Derived Memory - สกัดข้อมูลจากระบบ)
+*   **`INSIGHT`** (`role`: `"Session-derived observation"`, `cluster`: `memory`) - ข้อสังเกตและพฤติกรรมที่สกัดมาจากเซสชันการพัฒนา
+*   **`FACT`** (`role`: `"Retain-derived fact"`, `cluster`: `memory`) - ข้อเท็จจริงที่สกัดและกลั่นกรองขึ้นมา
+*   **`RULE`** (`role`: `"Derived behavioural rule"`, `cluster`: `memory`) - กฎเกณฑ์พฤติกรรมที่เรียนรู้จากการทำงานจริง
+*   **`USAGE`** (`role`: `"Usage metrics rollup"`, `cluster`: `memory`) - สารสรุปการประเมินปริมาณการรันและทราฟฟิกข้อมูล
+*   **`EPISODE`** (`role`: `"Execution episode log"`, `cluster`: `memory`) - บันทึกผลการทำงานของเอเจนต์ในเซสชันนั้นๆ
+
+---
+
+## 🛠️ 4. เครื่องมือสร้างและจำลองโครงสร้างอะตอม (CLI tool)
 
 เพื่อลดข้อผิดพลาดในการป้อนข้อมูล YAML เรามีโปรแกรมจัดการอะตอมความรู้ (`msp-atom`) ซึ่งจะทำงานตามค่าคอนฟิกใน `atom_registry.yaml` โดยอัตโนมัติ
 
@@ -86,7 +157,7 @@ npx tsx scripts/msp/msp-atom.ts prompt --type=<ประเภท>
 
 ---
 
-## 🧪 4. การจัดการสารบัญและตรวจสอบความถูกต้อง (Indexing & Validation)
+## 🧪 5. การจัดการสารบัญและตรวจสอบความถูกต้อง (Indexing & Validation)
 
 หลังจากสร้างหรืออัปเดตอะตอมใดๆ ผู้เขียนจำเป็นต้องรันกระบวนการตรวจสอบคุณภาพความเชื่อมโยงก่อนส่งมอบการเปลี่ยนแปลงเสมอ (Pre-push / PR Verification):
 
@@ -109,7 +180,7 @@ npm run msp:validate
 
 ---
 
-## 💡 5. แนวทางการเขียนที่ดี (GKS Best Practices)
+## 💡 6. แนวทางการเขียนที่ดี (GKS Best Practices)
 
 *   **มีเนื้อหากระชับ (One Atom, One Responsibility)**: หากเขียนไปแล้วรู้สึกว่าเริ่มครอบคลุมหลายหัวข้อ ให้พิจารณาตัดแบ่งออกเป็นอะตอมย่อย แล้วโยงความสัมพันธ์ด้วยวงเล็บเหลี่ยมคู่แบบวิกิลิงก์ `[[TYPE--SLUG]]`
 *   **รักษาคุณภาพลิงก์ (No Dangling Links)**: ตรวจสอบให้แน่ใจว่าปลายทางการทำวิกิลิงก์ `[[...]]` มีตัวตนจริงอยู่ในคลัง และมีไฟล์อะตอมพร้อมอยู่แล้วในตอนที่อัปเดตดัชนี
