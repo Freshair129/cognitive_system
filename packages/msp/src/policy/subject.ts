@@ -22,8 +22,8 @@ export function hydrateSubject(identity: Identity): Subject {
   // Carry forward last step-up data if available (e.g. from persisted session)
   // In Phase 5, this might be stored in the identity's extensions or preferences
   if (identity.preferences?.last_step_up_at) {
-    const at = identity.preferences.last_step_up_at as string
-    const method = identity.preferences.last_step_up_method as string
+    const at = identity.preferences.last_step_up_at.value as string
+    const method = identity.preferences.last_step_up_method?.value as string
     subject.last_step_up_at = at
     subject.last_step_up_method = method
     // Also inject into attributes for policy matching compatibility

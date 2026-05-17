@@ -83,6 +83,7 @@ export interface RetrievalTimings {
   obsidian?: number
   episodic?: number
   backlinks?: number
+  graph?: number
   fusion: number
 }
 

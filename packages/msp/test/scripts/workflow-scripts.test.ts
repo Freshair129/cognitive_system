@@ -58,18 +58,23 @@ describe('msp:scaffold-atom', () => {
     // Mock the minimal gks/ tree the script writes into
     mkdirSync(join(tmpRoot, 'gks/concept'), { recursive: true })
     mkdirSync(join(tmpRoot, 'gks/adr'), { recursive: true })
-    // Mock atom_schema.yaml (taxonomy lives here post-split)
+    // Mock minimal atom_registry.yaml
     writeFileSync(
-      join(tmpRoot, 'atom_schema.yaml'),
-      `taxonomy:
-  clusters:
-    process:
-      types:
-        concept:
-          phase: 1
-          folder: concept
-          tier: process
-          sections: [Problem, Hypothesis, Scope]
+      join(tmpRoot, 'atom_registry.yaml'),
+      `
+schema_config:
+  schema_spec:
+    compound_id_format: "{aliases}--{knowledgeId}"
+    atomId_format: "{atom_counter}"
+  taxonomy:
+    clusters:
+      process:
+        types:
+          concept:
+            phase: 1
+            folder: concept
+            tier: process
+            sections: [Problem, Hypothesis, Scope]
 `,
     )
   })

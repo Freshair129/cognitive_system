@@ -5,6 +5,10 @@ on:
     branches: [main]
   pull_request:
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -46,7 +50,80 @@ jobs:
         # which is exported via `dist/src/memory/index.d.ts` per packages/gks/package.json#exports.
         # On a fresh `npm ci` checkout there is no dist/ yet, so typecheck fails to resolve
         # GKS types unless we build first.
-        run: npm run build
+        #
+        # Per-workspace invocation so a failure is attributed to the correct
+        # workspace. `npm run build --workspaces` swallows the workspace name
+        # in stack traces. Each workspace's output is also tee'd to a
+        # per-workspace log file uploaded as an artifact on failure so the
+        # full diagnostic (file:line + surrounding tsc output) is recoverable
+        # even when GH Actions' annotation strips the source location.
+        run: |
+          set +e
+          mkdir -p build-logs
+          echo "::group::node + tsc versions"
+          node --version | tee build-logs/_versions.log
+          npx tsc --version | tee -a build-logs/_versions.log
+          echo "::endgroup::"
+          fail=0
+          for ws in @freshair129/gks msp @freshair129/gks-cli @freshair129/gks-mcp @freshair129/gks-tui @freshair129/genesis-ui; do
+            slug=$(echo "$ws" | tr '/@' '__')
+            echo "::group::build $ws"
+            npm run build --workspace="$ws" --if-present 2>&1 | tee "build-logs/${slug}.log"
+            rc=${PIPESTATUS[0]}
+            echo "::endgroup::"
+            if [ "$rc" -ne 0 ]; then
+              echo "::error title=build failed in $ws::see build-logs artifact (exit $rc)"
+              echo "--- TAIL of $ws build log ---"
+              tail -50 "build-logs/${slug}.log"
+              echo "--- END TAIL ---"
+              fail=1
+            fi
+          done
+          exit $fail
+
+      - name: upload build logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-logs-node${{ matrix.node-version }}
+          path: build-logs/
+          if-no-files-found: ignore
+
+      - name: post build logs to PR on failure
+        # Posts a comment containing the full build-logs/ contents so the
+        # full tsc diagnostic is visible without artifact-download auth.
+        # Only fires on a real PR (event_name) and only when the build step
+        # actually failed (job.status == 'failure' implies a downstream step
+        # set it; we use `steps.<id>.outcome` but we don't have ids — guard
+        # by checking the logs dir exists with a non-empty per-workspace log).
+        if: failure() && github.event_name == 'pull_request' && matrix.node-version == 20
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const dir = 'build-logs';
+            if (!fs.existsSync(dir)) return;
+            const files = fs.readdirSync(dir).filter(f => f.endsWith('.log'));
+            const parts = [];
+            parts.push(`<!-- ci-build-diag -->`);
+            parts.push(`## CI build diagnostic (node ${process.env.NODE_VERSION || '20'})`);
+            parts.push(`Triggered by failure on \`${context.sha}\`.`);
+            parts.push('');
+            for (const f of files) {
+              const full = path.join(dir, f);
+              const body = fs.readFileSync(full, 'utf8');
+              // tail 80 lines so we stay under GH's comment size limit
+              const tail = body.split('\n').slice(-80).join('\n');
+              parts.push(`<details><summary><code>${f}</code> (last 80 lines)</summary>\n\n\`\`\`\n${tail}\n\`\`\`\n</details>`);
+            }
+            const body = parts.join('\n');
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body,
+            });
 
       - name: typecheck
         run: npm run typecheck

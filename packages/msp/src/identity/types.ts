@@ -111,6 +111,10 @@ export interface IdentityOptions {
   root?: string
   namespace?: string
   view?: 'merged' | 'global' | 'project'
+  /** UCF Phase 4: Subject identity for audit trails (optional). */
+  subject?: import('../policy/types.js').Subject
+  /** UCF Phase 4: Request context for audit trails (optional). */
+  context?: import('../policy/types.js').RequestContext
 }
 
 /** Default namespace — matches the sessions / consolidator convention. */

@@ -1,7 +1,6 @@
 import { z } from 'zod'
 
 import { registerProject } from '../../projects/registry.js'
-import { makeContext, makeSubject } from '../../policy/types.js'
 import { errorResult, jsonResult, type ToolHandlerCtx, type ToolTextResult } from '../types.js'
 
 export const name = 'msp_project_register'
@@ -32,15 +31,17 @@ interface ProjectRegisterArgs {
 export function handler(ctx: ToolHandlerCtx) {
   return async (args: ProjectRegisterArgs): Promise<ToolTextResult> => {
     try {
-      const subject = ctx.subject ?? makeSubject('mcp-client', 'default-mcp')
-      const context = ctx.policyContext ?? makeContext('mcp-stdio', `mcp-${Date.now()}`)
+      // Subject/context (UCF Phase 4) reserved; registerProject does not
+      // currently consume policy metadata.
+      void ctx.subject
+      void ctx.policyContext
 
       const entry: { path: string; embedder?: string; description?: string } = {
         path: args.path,
       }
       if (args.embedder) entry.embedder = args.embedder
       if (args.description) entry.description = args.description
-      await registerProject(args.name, entry, { subject, context })
+      await registerProject(args.name, entry)
       return jsonResult({ ok: true, registered: { name: args.name, entry } })
     } catch (err) {
       return errorResult(`project_register failed: ${(err as Error).message}`)

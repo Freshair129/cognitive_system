@@ -105,14 +105,16 @@ describe('geminiAdapter (T2) delegates to runCli', () => {
     expect(args).toEqual(['--version'])
   })
 
-  it('run() spawns `gemini --approval-mode yolo -p <prompt>`', async () => {
+  it('run() spawns `gemini --approval-mode yolo --prompt .` with prompt via stdin', async () => {
     mockedRunCli.mockResolvedValueOnce(mockResult({ output: 'g-out' }))
     const result = await geminiAdapter.run('do thing', DEFAULT_OPTS)
     expect(result.output).toBe('g-out')
     const [bin, args, opts] = mockedRunCli.mock.calls[0]!
     expect(bin).toBe('gemini')
-    expect(args).toEqual(['--approval-mode', 'yolo', '-p', 'do thing'])
-    expect(opts).toEqual(DEFAULT_OPTS)
+    // Production now sends the prompt via stdin (Windows arg-quoting workaround),
+    // passing only a sentinel `.` as the --prompt value so the CLI enters headless mode.
+    expect(args).toEqual(['--approval-mode', 'yolo', '--prompt', '.'])
+    expect(opts).toEqual({ ...DEFAULT_OPTS, stdin: 'do thing' })
   })
 })
 

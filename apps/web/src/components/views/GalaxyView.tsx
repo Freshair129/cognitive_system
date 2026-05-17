@@ -237,6 +237,58 @@ export const GalaxyView: React.FC<GalaxyViewProps> = ({ notes, edges, focusId: _
     camTgt.current.dist = Math.max(100, Math.min(2200, camTgt.current.dist * Math.exp(e.deltaY * 0.001)));
   };
 
+  // Touch: 1 finger = orbit, 2 fingers = pinch-zoom, tap = focus
+  const touch = useRef({ active: false, sx: 0, sy: 0, lx: 0, ly: 0, moved: false, pinch: 0 });
+  const onTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 1) {
+      const t = e.touches[0];
+      touch.current = { active: true, sx: t.clientX, sy: t.clientY, lx: t.clientX, ly: t.clientY, moved: false, pinch: 0 };
+      setHover(null);
+    } else if (e.touches.length === 2) {
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      touch.current.active = false;
+      touch.current.moved = true;
+      touch.current.pinch = Math.hypot(dx, dy);
+    }
+  };
+  const onTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 2 && touch.current.pinch > 0) {
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      const d = Math.hypot(dx, dy) || 1;
+      camTgt.current.dist = Math.max(100, Math.min(2200, camTgt.current.dist * (touch.current.pinch / d)));
+      touch.current.pinch = d;
+      return;
+    }
+    if (e.touches.length === 1 && touch.current.active) {
+      const t = e.touches[0];
+      camTgt.current.yaw += (t.clientX - touch.current.lx) * 0.005;
+      camTgt.current.pitch += (t.clientY - touch.current.ly) * 0.005;
+      camTgt.current.pitch = Math.max(-1.45, Math.min(1.45, camTgt.current.pitch));
+      touch.current.lx = t.clientX; touch.current.ly = t.clientY;
+      if (Math.abs(t.clientX - touch.current.sx) > 6 || Math.abs(t.clientY - touch.current.sy) > 6) {
+        touch.current.moved = true;
+      }
+      setParams(p => ({ ...p, autoRotate: false }));
+    }
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (e.touches.length > 0) return;
+    const tr = touch.current;
+    if (tr.active && !tr.moved && canvasRef.current) {
+      const rect = canvasRef.current.getBoundingClientRect();
+      const hit = pickNode(tr.sx - rect.left, tr.sy - rect.top);
+      if (hit) {
+        setPinned(hit.id);
+        lookAtTgt.current = { x: hit.x, y: hit.y, z: hit.z };
+        camTgt.current.dist = 200;
+        onOpen?.(hit.id);
+      }
+    }
+    touch.current = { active: false, sx: 0, sy: 0, lx: 0, ly: 0, moved: false, pinch: 0 };
+  };
+
   // ── Draw ──────────────────────────────────────────────────────────────────────
   const draw = React.useCallback((time: number) => {
     const canvas = canvasRef.current; if (!canvas) return;
@@ -335,7 +387,7 @@ export const GalaxyView: React.FC<GalaxyViewProps> = ({ notes, edges, focusId: _
 
   return (
     <div className="graph-wrap" ref={wrapRef}>
-      <canvas ref={canvasRef} className="graph-canvas" onMouseDown={onMouseDown} onMouseMove={onMouseMove} onMouseUp={onMouseUp} onWheel={onWheel} />
+      <canvas ref={canvasRef} className="graph-canvas" onMouseDown={onMouseDown} onMouseMove={onMouseMove} onMouseUp={onMouseUp} onWheel={onWheel} onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd} />
       {hover && (
         <div className="node-hover" style={{ left: hover.x, top: hover.y, pointerEvents: 'none' }}>
           <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>

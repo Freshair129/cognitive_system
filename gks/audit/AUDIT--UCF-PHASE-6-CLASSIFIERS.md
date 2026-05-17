@@ -18,6 +18,8 @@ crosslinks: &a2
   references:
     - FEAT--CLASSIFIER-PLUGINS
 created_at: 2026-05-17T09:00:00+07:00
+aliases:
+  - AUDIT
 cluster: implementation_flow
 role: Test results / quality report
 attributes:

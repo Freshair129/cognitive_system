@@ -7,6 +7,8 @@ tier: process
 source_type: axiomatic
 vault_id: default
 title: Task & Management Domain Pack — operational workflow enforcement
+aliases:
+  - CONCEPT
 tags: &a1
   - msp
   - ucf

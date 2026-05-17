@@ -18,6 +18,8 @@ crosslinks: &a2
   references:
     - FEAT--STEP-UP-AUTH-PIN
 created_at: 2026-05-17T08:47:00+07:00
+aliases:
+  - AUDIT
 cluster: implementation_flow
 role: Test results / quality report
 attributes:

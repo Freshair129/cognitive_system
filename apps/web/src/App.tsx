@@ -151,7 +151,7 @@ function App() {
       </div>
 
       {mobileNav && <div className="mobile-backdrop" onClick={() => setMobileNav(false)} />}
-      <Sidebar 
+      <Sidebar
         activeId={focusNoteId}
         onOpen={(id) => { openId(id); setMobileNav(false); }}
         activeTags={activeTags}
@@ -159,6 +159,7 @@ function App() {
         mode={sbMode}
         setMode={setSbMode}
         onOpenSettings={() => setShowSettings(true)}
+        onClose={() => setMobileNav(false)}
       />
 
       <main className="main">
@@ -218,12 +219,13 @@ function App() {
       </main>
 
       {mobileRail && <div className="mobile-backdrop" onClick={() => setMobileRail(false)} />}
-      <RightRail 
-        activeId={focusNoteId} 
+      <RightRail
+        activeId={focusNoteId}
         onOpen={(id) => { openId(id); setMobileRail(false); }}
-        semanticHits={semantic.hits} 
-        semanticState={semantic.state} 
+        semanticHits={semantic.hits}
+        semanticState={semantic.state}
         semanticQuery={semantic.query}
+        onClose={() => setMobileRail(false)}
       />
 
       {tweaks.showStatus && (

@@ -118,6 +118,7 @@ async function main(): Promise<number> {
   }
 
   const ctx = {
+    root,
     atomicIndex,
     forbiddenFields: contract.forbiddenFields,
     requiredFields: contract.requiredFields,

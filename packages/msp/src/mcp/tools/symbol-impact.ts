@@ -5,7 +5,6 @@ import { z } from 'zod'
 import { SymbolStore } from '../../symbols/store/sqlite.js'
 import type { EdgeType, Symbol } from '../../symbols/types.js'
 import { dbPath, graphExists } from '../../symbols/util.js'
-import { makeContext, makeSubject } from '../../policy/types.js'
 import { errorResult, jsonResult, type ToolHandlerCtx, type ToolTextResult } from '../types.js'
 
 export const name = 'msp_symbol_impact'
@@ -49,10 +48,12 @@ export function handler(ctx: ToolHandlerCtx) {
     }
     const store = new SymbolStore()
     try {
-      const subject = ctx.subject ?? makeSubject('mcp-client', 'default-mcp')
-      const context = ctx.policyContext ?? makeContext('mcp-stdio', `mcp-${Date.now()}`)
+      // Subject/context (UCF Phase 4) reserved; SymbolStore.open does not
+      // currently consume policy metadata.
+      void ctx.subject
+      void ctx.policyContext
 
-      store.open(dbPath(root, namespace), { subject, context })
+      store.open(dbPath(root, namespace))
       if (!store.getMeta('last_built_at')) {
         return errorResult("graph not built — run 'npm run msp:graph build' first")
       }
