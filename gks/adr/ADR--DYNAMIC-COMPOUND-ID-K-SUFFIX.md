@@ -13,7 +13,9 @@ cluster: implementation_flow
 role: Architecture decision record
 tags: &a2
   - msp
-crosslinks: &a3 {}
+crosslinks: &a3
+  references:
+    - CONCEPT--CONFIG-AS-SSOT
 created_at: 2026-05-17T09:50:53.301+07:00
 attributes:
   id: ADR-376--DYNAMIC-COMPOUND-ID-K-SUFFIX--K3

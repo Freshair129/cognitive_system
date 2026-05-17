@@ -97,9 +97,9 @@ async function makeFixtureRepo(): Promise<string> {
   // On systems where symlinks are restricted, fall back to a copy. For CI we keep symlinks.
   run('ln', ['-s', join(repoRoot, 'node_modules'), join(dir, 'node_modules')], dir)
 
-  // Symlink atom_registry.yaml so the validator (which loads registry via
-  // walk-up from process.cwd() when ctx.root is unset) can find the type
-  // taxonomy.
+  // Symlink atom_schema.yaml + atom_registry.yaml so the validator can find
+  // the type taxonomy from either the --root flag or fallback walk-up.
+  run('ln', ['-s', join(repoRoot, 'atom_schema.yaml'), join(dir, 'atom_schema.yaml')], dir)
   run('ln', ['-s', join(repoRoot, 'atom_registry.yaml'), join(dir, 'atom_registry.yaml')], dir)
 
   // Install our hook.

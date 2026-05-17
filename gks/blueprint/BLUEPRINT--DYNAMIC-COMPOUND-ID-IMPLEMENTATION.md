@@ -1,5 +1,5 @@
 ---
-id: BLUEPRINT-377--DYNAMIC-COMPOUND-ID-IMPLEMENTATION--K4
+id: BLUEPRINT--DYNAMIC-COMPOUND-ID-IMPLEMENTATION
 knowledgeId: DYNAMIC-COMPOUND-ID-IMPLEMENTATION
 phase: 3
 type: blueprint
@@ -12,6 +12,10 @@ aliases: &a1
   - BLUEPRINT
 cluster: implementation_flow
 role: Implementation plan
+linked_symbols:
+  - file: scripts/msp/msp-atom.ts
+  - file: atom_schema.yaml
+  - file: atom_registry.yaml
 tags: &a2
   - msp
   - codegen
@@ -19,7 +23,7 @@ tags: &a2
   - architecture
 crosslinks: &a3
   references:
-    - ADR-376--DYNAMIC-COMPOUND-ID-K-SUFFIX--K3
+    - ADR--DYNAMIC-COMPOUND-ID-K-SUFFIX
     - CONCEPT--USAGE-ROLLUPS
 created_at: 2026-05-17T10:07:15.100+07:00
 attributes:
