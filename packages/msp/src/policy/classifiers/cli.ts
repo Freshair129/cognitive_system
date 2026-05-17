@@ -7,6 +7,7 @@ import { parse as parseYaml, stringify as stringifyYaml } from 'yaml'
 import { runClassifiers } from './engine.js'
 import { PathClassifier } from './path.js'
 import { ContentClassifier } from './content.js'
+import { CodingClassifier } from './coding.js'
 import type { ClassifiableResource } from './types.js'
 
 const HELP = `msp-tag — Automatic attribute tagging for GKS atoms
@@ -38,7 +39,11 @@ async function main(): Promise<number> {
   }
 
   const root = resolve(values.root ?? '.')
-  const classifiers = [new PathClassifier(), new ContentClassifier()]
+  const classifiers = [
+    new PathClassifier(),
+    new ContentClassifier(),
+    new CodingClassifier(),
+  ]
   
   let updatedCount = 0
   let errorCount = 0

@@ -24,7 +24,8 @@ mkdirSync(promptsDir, { recursive: true })
 
 let typesProcessed = 0
 
-for (const cluster of Object.values(registry.taxonomy.clusters) as any[]) {
+const taxonomy = registry.schema_config?.taxonomy || registry.taxonomy
+for (const cluster of Object.values(taxonomy.clusters) as any[]) {
   for (const [id, config] of Object.entries(cluster.types) as [string, any][]) {
     const typeKey = id.toLowerCase()
     

@@ -42,7 +42,10 @@ export function lookupType(prefix: string, root: string) {
 
   const flat: Record<string, { cluster: string; role: string; phase: number; folder: string; tier: string }> = {}
   try {
-    for (const [clusterName, cluster] of Object.entries(registry.taxonomy.clusters) as [string, any][]) {
+    const taxonomy = registry.schema_config?.taxonomy || registry.taxonomy
+    if (!taxonomy || !taxonomy.clusters) return null
+    
+    for (const [clusterName, cluster] of Object.entries(taxonomy.clusters) as [string, any][]) {
       for (const [typeId, config] of Object.entries(cluster.types) as [string, any][]) {
         flat[typeId.toLowerCase()] = {
           cluster: clusterName,

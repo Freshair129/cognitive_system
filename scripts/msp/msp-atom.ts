@@ -3,7 +3,7 @@
  * msp-atom — 3-mode CLI for registry-driven atom authoring.
  */
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, writeFileSync, readdirSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import { parse as yamlParse } from 'yaml'
 
@@ -66,16 +66,80 @@ try {
 const type = args.type.toLowerCase()
 
 // Flatten taxonomy for quick lookup
-const TYPE_CONFIG: Record<string, { phase: number; folder: string; tier: string; sections: string[]; db_id?: string }> = {}
-for (const cluster of Object.values(registry.taxonomy.clusters) as any[]) {
-  for (const [id, config] of Object.entries(cluster.types) as [string, any][]) {
-    TYPE_CONFIG[id.toLowerCase()] = config
+const TYPE_CONFIG: Record<string, { phase: number; folder: string; tier: string; sections: string[]; db_id?: string; counter?: number; atomId?: string; id?: string; seq_char?: string }> = {}
+const taxonomy = registry.schema_config?.taxonomy || registry.taxonomy
+if (taxonomy && taxonomy.clusters) {
+  for (const cluster of Object.values(taxonomy.clusters) as any[]) {
+    for (const [id, config] of Object.entries(cluster.types) as [string, any][]) {
+      TYPE_CONFIG[id.toLowerCase()] = config
+    }
   }
 }
 
 const config = TYPE_CONFIG[type]
 if (!config) {
   die(`unknown --type '${args.type}' — must be one of: ${Object.keys(TYPE_CONFIG).sort().join(', ')}`)
+}
+
+function getGlobalAtomCount(rootDir: string): number {
+  let count = 0
+  const gksDir = join(rootDir, 'gks')
+  if (!existsSync(gksDir)) return 0
+  
+  function walk(dir: string) {
+    try {
+      const list = readdirSync(dir, { withFileTypes: true })
+      for (const item of list) {
+        const fullPath = join(dir, item.name)
+        if (item.isDirectory()) {
+          if (item.name === '00_index') continue
+          walk(fullPath)
+        } else if (item.isFile() && item.name.endsWith('.md')) {
+          count++
+        }
+      }
+    } catch {}
+  }
+  
+  walk(gksDir)
+  return count
+}
+
+function getTypeAtomCount(folder: string, rootDir: string): number {
+  let count = 0
+  const typeDir = join(rootDir, 'gks', folder)
+  if (!existsSync(typeDir)) return 0
+  try {
+    const list = readdirSync(typeDir)
+    for (const file of list) {
+      if (file.endsWith('.md')) count++
+    }
+  } catch {}
+  return count
+}
+
+function formatTemplate(template: string, vars: {
+  aliases: string
+  atom_counter: number
+  id_counter: number
+  first_char: string
+  atomtype_counter: number
+  atomId?: string
+  knowledgeId?: string
+}): string {
+  let result = template
+  result = result.replace("{aliases}", vars.aliases)
+  result = result.replace("{atom_counter}", String(vars.atom_counter))
+  result = result.replace("{id_counter}", String(vars.id_counter))
+  result = result.replace("{frist cha}", `-${vars.first_char}`)
+  result = result.replace("{atomtype_counter}", String(vars.atomtype_counter))
+  if (vars.atomId) {
+    result = result.replace("{atomId}", vars.atomId)
+  }
+  if (vars.knowledgeId) {
+    result = result.replace("{knowledgeId}", vars.knowledgeId)
+  }
+  return result
 }
 
 // MODE A: PROMPT
@@ -103,7 +167,35 @@ if (!/^[A-Z][A-Z0-9_-]*$/.test(args.slug)) {
 const slug = args.slug
 
 // Compute paths
-const filename = `${type.toUpperCase()}--${slug}.md`
+const globalCounter = getGlobalAtomCount(rootDir) + 1
+const typeCounter = getTypeAtomCount(config.folder, rootDir) + 1
+const firstChar = config.seq_char || type.charAt(0).toUpperCase()
+const atomtypeCounter = config.counter !== undefined ? config.counter : (config.phase !== undefined ? config.phase + 1 : 1)
+
+let atomId = ''
+const schemaSpec = registry.schema_config?.schema_spec || registry.schema_spec
+const atomIdTemplate = config.atomId || schemaSpec?.atomId_format || "{atom_counter}"
+atomId = formatTemplate(atomIdTemplate, {
+  aliases: type.toUpperCase(),
+  atom_counter: globalCounter,
+  id_counter: typeCounter,
+  first_char: firstChar,
+  atomtype_counter: atomtypeCounter
+})
+
+let id = ''
+const idTemplate = config.id || schemaSpec?.compound_id_format || "{aliases}-{atomId}--{knowledgeId}--K{atomtype_counter}"
+id = formatTemplate(idTemplate, {
+  aliases: type.toUpperCase(),
+  atom_counter: globalCounter,
+  id_counter: typeCounter,
+  first_char: firstChar,
+  atomtype_counter: atomtypeCounter,
+  atomId,
+  knowledgeId: slug
+})
+
+const filename = `${id}.md`
 const filepath = join(rootDir, 'gks', config.folder, filename)
 
 if (existsSync(filepath) && !args.force) {
@@ -114,7 +206,6 @@ const now = new Date()
 const shifted = new Date(now.getTime() + 7 * 3600 * 1000)
 const isoTH = `${shifted.getUTCFullYear()}-${String(shifted.getUTCMonth() + 1).padStart(2, '0')}-${String(shifted.getUTCDate()).padStart(2, '0')}T${String(shifted.getUTCHours()).padStart(2, '0')}:${String(shifted.getUTCMinutes()).padStart(2, '0')}:${String(shifted.getUTCSeconds()).padStart(2, '0')}.${String(shifted.getUTCMilliseconds()).padStart(3, '0')}+07:00`
 
-const id = `${type.toUpperCase()}--${slug}`
 const title = args.title ?? slug.toLowerCase().split('-').map(w => w[0]!.toUpperCase() + w.slice(1)).join(' ')
 
 // MODE B: CREATE (Token-optimal)
@@ -161,7 +252,7 @@ if (args.command === 'create') {
 
   const aliases = buildAliases(id, undefined, rootDir)
   const aliasesText = aliases.map(a => `  - ${a}`).join('\n')
-  const typeDef = lookupType(id.split('--')[0]!, rootDir)
+  const typeDef = lookupType(id.split('-')[0]!, rootDir)
   const clusterField = typeDef ? `cluster: ${typeDef.cluster}\n` : ''
   const roleField = typeDef ? `role: ${typeDef.role}\n` : ''
 
@@ -169,8 +260,9 @@ if (args.command === 'create') {
 id: ${id}
 `
   if (config.db_id) {
-    frontmatter += `${config.db_id}: ${id}\n`
+    frontmatter += `${config.db_id}: ${atomId}\n`
   }
+  frontmatter += `knowledgeId: ${slug}\n`
   frontmatter += `phase: ${config.phase}
 type: ${type}
 status: draft
@@ -200,7 +292,7 @@ created_at: ${isoTH}
 if (args.command === 'scaffold') {
   const aliases = buildAliases(id, undefined, rootDir)
   const aliasesText = aliases.map(a => `  - ${a}`).join('\n')
-  const typeDef = lookupType(id.split('--')[0]!, rootDir)
+  const typeDef = lookupType(id.split('-')[0]!, rootDir)
   const clusterField = typeDef ? `cluster: ${typeDef.cluster}\n` : ''
   const roleField = typeDef ? `role: ${typeDef.role}\n` : ''
 
@@ -208,8 +300,9 @@ if (args.command === 'scaffold') {
 id: ${id}
 `
   if (config.db_id) {
-    frontmatter += `${config.db_id}: ${id}\n`
+    frontmatter += `${config.db_id}: ${atomId}\n`
   }
+  frontmatter += `knowledgeId: ${slug}\n`
   frontmatter += `phase: ${config.phase}
 type: ${type}
 status: draft
