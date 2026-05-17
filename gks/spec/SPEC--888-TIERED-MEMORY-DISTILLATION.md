@@ -1,11 +1,16 @@
 ---
 id: SPEC--888-TIERED-MEMORY-DISTILLATION
+phase: 2
 type: spec
 status: draft
 tier: process
 source_type: axiomatic
 vault_id: default
 title: "888 Tiered Memory Distillation — cross-session synthesis protocol for cognitive_system"
+aliases:
+  - SPEC
+cluster: implementation_flow
+role: Technical specification
 tags:
   - msp
   - memory
