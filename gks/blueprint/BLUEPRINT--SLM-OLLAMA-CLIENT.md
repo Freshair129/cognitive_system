@@ -91,12 +91,12 @@ data_logic: |
     }
 
 geography:
-  - "src/codegen/slm/errors.ts"
-  - "src/codegen/slm/ollama.ts"
-  - "src/codegen/slm/factory.ts"
-  - "src/codegen/slm/types.ts"
-  - "test/codegen/slm/ollama.test.ts"
-  - "test/codegen/slm/factory.test.ts"
+  - "packages/msp/src/codegen/slm/errors.ts"
+  - "packages/msp/src/codegen/slm/ollama.ts"
+  - "packages/msp/src/codegen/slm/factory.ts"
+  - "packages/msp/src/codegen/slm/types.ts"
+  - "packages/msp/test/codegen/slm/ollama.test.ts"
+  - "packages/msp/test/codegen/slm/factory.test.ts"
 
 api_contracts:
   - name: createOllamaClient

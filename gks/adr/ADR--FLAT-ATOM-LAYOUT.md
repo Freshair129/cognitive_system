@@ -12,7 +12,7 @@ crosslinks:
   references: [ADR--EXTENDED-TAXONOMY, FRAMEWORK--FOUR-LAYERS, CONCEPT--TAXONOMY-V2-3]
 linked_symbols:
   - { file: "scripts/msp/re-indexer.ts" }
-  - { file: "src/memory/gks.ts", fn: readBody }
+  - { file: "packages/gks/src/memory/gks.ts", fn: readBody }
 aliases:
   - ADR
   - implementation_flow

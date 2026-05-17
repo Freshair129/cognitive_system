@@ -157,19 +157,19 @@ data_logic: |
       }
 
 geography:
-  - "src/orchestrator/retrieval/index.ts"
-  - "src/orchestrator/retrieval/types.ts"
-  - "src/orchestrator/retrieval/fusion.ts"
-  - "src/orchestrator/retrieval/sources/vector.ts"
-  - "src/orchestrator/retrieval/sources/obsidian.ts"
-  - "src/orchestrator/retrieval/sources/episodic.ts"
-  - "src/orchestrator/retrieval/sources/backlinks.ts"
-  - "test/orchestrator/retrieval/fusion.test.ts"          # ~12 tests
-  - "test/orchestrator/retrieval/sources/vector.test.ts"  # ~5 (mock embedder + backend)
-  - "test/orchestrator/retrieval/sources/obsidian.test.ts" # ~6 (mock client both modes)
-  - "test/orchestrator/retrieval/sources/episodic.test.ts" # ~6 (fixture episodic memory)
-  - "test/orchestrator/retrieval/sources/backlinks.test.ts" # ~6 (fixture backlinks.jsonl)
-  - "test/orchestrator/retrieval/index.test.ts"          # ~10 end-to-end (mocks)
+  - "packages/msp/src/orchestrator/retrieval/index.ts"
+  - "packages/msp/src/orchestrator/retrieval/types.ts"
+  - "packages/msp/src/orchestrator/retrieval/fusion.ts"
+  - "packages/msp/src/orchestrator/retrieval/sources/vector.ts"
+  - "packages/msp/src/orchestrator/retrieval/sources/obsidian.ts"
+  - "packages/msp/src/orchestrator/retrieval/sources/episodic.ts"
+  - "packages/msp/src/orchestrator/retrieval/sources/backlinks.ts"
+  - "packages/msp/test/orchestrator/retrieval/fusion.test.ts"          # ~12 tests
+  - "packages/msp/test/orchestrator/retrieval/sources/vector.test.ts"  # ~5 (mock embedder + backend)
+  - "packages/msp/test/orchestrator/retrieval/sources/obsidian.test.ts" # ~6 (mock client both modes)
+  - "packages/msp/test/orchestrator/retrieval/sources/episodic.test.ts" # ~6 (fixture episodic memory)
+  - "packages/msp/test/orchestrator/retrieval/sources/backlinks.test.ts" # ~6 (fixture backlinks.jsonl)
+  - "packages/msp/test/orchestrator/retrieval/index.test.ts"          # ~10 end-to-end (mocks)
 
 api_contracts:
   - name: recall

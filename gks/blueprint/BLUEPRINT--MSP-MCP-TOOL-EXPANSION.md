@@ -120,18 +120,18 @@ data_logic: |
     register the 5 new tools in the existing tool array; tools/list now returns 11.
 
 geography:
-  - "src/mcp/tools/recall.ts"
-  - "src/mcp/tools/remember.ts"
-  - "src/mcp/tools/compress.ts"
-  - "src/mcp/tools/identity-get.ts"
-  - "src/mcp/tools/identity-set.ts"
-  - "src/mcp/server.ts"                          # ← MODIFIED to register new tools
-  - "test/mcp/tools/recall.test.ts"              # ~6 tests
-  - "test/mcp/tools/remember.test.ts"            # ~5 tests (uses mock LLM + temp session.jsonl)
-  - "test/mcp/tools/compress.test.ts"            # ~6 tests
-  - "test/mcp/tools/identity-get.test.ts"        # ~5 tests
-  - "test/mcp/tools/identity-set.test.ts"        # ~10 tests (3 kinds × variations)
-  - "test/mcp/server.test.ts"                    # ← MODIFIED to assert 11 tools registered
+  - "packages/msp/src/mcp/tools/recall.ts"
+  - "packages/msp/src/mcp/tools/remember.ts"
+  - "packages/msp/src/mcp/tools/compress.ts"
+  - "packages/msp/src/mcp/tools/identity-get.ts"
+  - "packages/msp/src/mcp/tools/identity-set.ts"
+  - "packages/msp/src/mcp/server.ts"                          # ← MODIFIED to register new tools
+  - "packages/msp/test/mcp/tools/recall.test.ts"              # ~6 tests
+  - "packages/msp/test/mcp/tools/remember.test.ts"            # ~5 tests (uses mock LLM + temp session.jsonl)
+  - "packages/msp/test/mcp/tools/compress.test.ts"            # ~6 tests
+  - "packages/msp/test/mcp/tools/identity-get.test.ts"        # ~5 tests
+  - "packages/msp/test/mcp/tools/identity-set.test.ts"        # ~10 tests (3 kinds × variations)
+  - "packages/msp/test/mcp/server.test.ts"                    # ← MODIFIED to assert 11 tools registered
 
 verification_plan:
   - vitest recall: 6 tests — passes through; obsidian client absent → still works; weights override; timeout

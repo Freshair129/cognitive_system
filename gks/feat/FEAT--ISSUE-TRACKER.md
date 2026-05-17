@@ -12,8 +12,8 @@ crosslinks:
   implements: [ADR--EXTENDED-TAXONOMY]
   references: [CONCEPT--MEMORY-STORE]
 linked_symbols:
-  - { file: "src/issue/store.ts" }
-  - { file: "src/issue/types.ts" }
+  - { file: "packages/gks/src/issue/store.ts" }
+  - { file: "packages/gks/src/issue/types.ts" }
   - { file: "bin/gks.ts", fn: cmdIssue }
 aliases:
   - FEAT

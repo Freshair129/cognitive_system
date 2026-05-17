@@ -60,13 +60,13 @@ data_logic: |
     2. mark session disposed; further calls throw
 
 geography:
-  - "src/memory/sessions/writer.ts"
-  - "src/memory/sessions/lock.ts"
-  - "src/memory/sessions/schema.ts"
-  - "src/memory/sessions/types.ts"
-  - "test/memory/sessions/writer.test.ts"
-  - "test/memory/sessions/lock.test.ts"
-  - "test/memory/sessions/schema.test.ts"
+  - "packages/msp/src/memory/sessions/writer.ts"
+  - "packages/msp/src/memory/sessions/lock.ts"
+  - "packages/msp/src/memory/sessions/schema.ts"
+  - "packages/msp/src/memory/sessions/types.ts"
+  - "packages/msp/test/memory/sessions/writer.test.ts"
+  - "packages/msp/test/memory/sessions/lock.test.ts"
+  - "packages/msp/test/memory/sessions/schema.test.ts"
 
 api_contracts:
   - name: openSession

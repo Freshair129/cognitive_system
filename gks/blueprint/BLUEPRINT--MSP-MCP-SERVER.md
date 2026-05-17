@@ -69,16 +69,16 @@ data_logic: |
     export function handler(ctx) { return async (args) => {...} }
 
 geography:
-  - "src/mcp/types.ts"          # ToolDef, ToolHandlerCtx
-  - "src/mcp/server.ts"         # createMspMcpServer
-  - "src/mcp/tools/validate.ts"
+  - "packages/msp/src/mcp/types.ts"          # ToolDef, ToolHandlerCtx
+  - "packages/msp/src/mcp/server.ts"         # createMspMcpServer
+  - "packages/msp/src/mcp/tools/validate.ts"
   - "src/mcp/tools/propose.ts"
-  - "src/mcp/tools/run-task.ts"
-  - "src/mcp/tools/session-append.ts"
-  - "src/mcp/tools/episode-append.ts"
-  - "src/mcp/tools/backlinks-rebuild.ts"
+  - "packages/msp/src/mcp/tools/run-task.ts"
+  - "packages/msp/src/mcp/tools/session-append.ts"
+  - "packages/msp/src/mcp/tools/episode-append.ts"
+  - "packages/msp/src/mcp/tools/backlinks-rebuild.ts"
   - "bin/msp-mcp-server.ts"
-  - "test/mcp/server.test.ts"
+  - "packages/msp/test/mcp/server.test.ts"
   - "test/mcp/tools/*.test.ts"
 
 api_contracts:

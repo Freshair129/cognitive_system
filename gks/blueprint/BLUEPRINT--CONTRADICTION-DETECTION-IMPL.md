@@ -329,10 +329,10 @@ geography:
   - "ROADMAP.md"                                                 # MODIFIED phase 0
   - "src/validator/proto/reciprocal-supersession.ts"             # NEW phase 1
   - "gks/proto/PROTO--RECIPROCAL-SUPERSESSION.md"                # NEW phase 1
-  - "src/validator/proto/loader.ts"                              # MODIFIED phase 1
+  - "packages/msp/src/validator/proto/loader.ts"                              # MODIFIED phase 1
   - "test/validator/proto/reciprocal-supersession.test.ts"       # NEW phase 1
   - ".brain/msp/LLM_Contract/atomic_contract.yaml"               # MODIFIED phase 2
-  - "src/validator/contract.ts"                                  # MODIFIED phase 2
+  - "packages/msp/src/validator/contract.ts"                                  # MODIFIED phase 2
   - "src/validator/rules/domain-valid.ts"                        # NEW phase 2
   - "src/validator/rules/domain-required.ts"                     # NEW phase 2
   - "src/validator/proto/domain-uniqueness.ts"                   # NEW phase 2

@@ -73,12 +73,12 @@ data_logic: |
     - smartViewDeepLink = undefined (no Obsidian to link to)
 
 geography:
-  - "src/obsidian/client.ts"        # createObsidianClient factory
-  - "src/obsidian/types.ts"         # ObsidianClient, ClientOpts
-  - "src/obsidian/rest.ts"          # makeRestClient (wraps GKS adapter)
-  - "src/obsidian/filesystem.ts"    # makeFilesystemClient
-  - "src/obsidian/env.ts"           # resolveEnv (handles OBSIDIAN_HOST deprecation)
-  - "test/obsidian/client.test.ts"  # both modes + deprecation + deep-link
+  - "packages/msp/src/obsidian/client.ts"        # createObsidianClient factory
+  - "packages/msp/src/obsidian/types.ts"         # ObsidianClient, ClientOpts
+  - "packages/msp/src/obsidian/rest.ts"          # makeRestClient (wraps GKS adapter)
+  - "packages/msp/src/obsidian/filesystem.ts"    # makeFilesystemClient
+  - "packages/msp/src/obsidian/env.ts"           # resolveEnv (handles OBSIDIAN_HOST deprecation)
+  - "packages/msp/test/obsidian/client.test.ts"  # both modes + deprecation + deep-link
 
 api_contracts:
   - name: createObsidianClient

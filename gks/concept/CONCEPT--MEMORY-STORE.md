@@ -11,10 +11,10 @@ tags: [architecture, core, api]
 crosslinks:
   references: [FRAMEWORK--FOUR-LAYERS, FEAT--LOOKUP-BY-SYMBOL]
 linked_symbols:
-  - { file: "src/memory/index.ts" }
-  - { file: "src/memory/api.ts", fn: retain }
-  - { file: "src/memory/api.ts", fn: recall }
-  - { file: "src/memory/api.ts", fn: reflect }
+  - { file: "packages/gks/src/memory/index.ts" }
+  - { file: "packages/gks/src/memory/api.ts", fn: retain }
+  - { file: "packages/gks/src/memory/api.ts", fn: recall }
+  - { file: "packages/gks/src/memory/api.ts", fn: reflect }
 aliases:
   - CONCEPT
   - implementation_flow

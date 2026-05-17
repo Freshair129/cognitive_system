@@ -12,13 +12,13 @@ crosslinks:
   references: [ADR--EXTENDED-TAXONOMY, ADR--FLAT-ATOM-LAYOUT, ADR--REVERSE-CITATION-LOOKUP, CONCEPT--MASTER-PROMOTION]
   partially_superseded_by: [ADR--TASK-TRACKING-AT-ORCHESTRATOR]
 linked_symbols:
-  - { file: "src/memory/types.ts", fn: normaliseStatus }
-  - { file: "src/memory/types.ts", fn: isApprovedStatus }
-  - { file: "src/memory/verify-flow.ts", fn: verifyFlow }
-  - { file: "src/memory/validate-links.ts", fn: validateLinks }
-  - { file: "src/scaffold/new-feature.ts", fn: scaffoldNewFeature }
-  - { file: "src/hotfix/store.ts" }
-  - { file: "src/hotfix/types.ts" }
+  - { file: "packages/gks/src/memory/types.ts", fn: normaliseStatus }
+  - { file: "packages/gks/src/memory/types.ts", fn: isApprovedStatus }
+  - { file: "packages/gks/src/memory/verify-flow.ts", fn: verifyFlow }
+  - { file: "packages/gks/src/memory/validate-links.ts", fn: validateLinks }
+  - { file: "packages/gks/src/scaffold/new-feature.ts", fn: scaffoldNewFeature }
+  - { file: "packages/gks/src/hotfix/store.ts" }
+  - { file: "packages/gks/src/hotfix/types.ts" }
   - { file: "bin/gks.ts", fn: cmdVerifyFlow }
   - { file: "bin/gks.ts", fn: cmdValidate }
   - { file: "bin/gks.ts", fn: cmdNewFeature }

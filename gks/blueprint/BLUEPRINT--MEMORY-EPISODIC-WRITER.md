@@ -57,13 +57,13 @@ data_logic: |
     4. assemble episode object + call appendEpisode
 
 geography:
-  - "src/memory/episodic/writer.ts"             # public API
-  - "src/memory/episodic/schema.ts"             # validate(episode)
-  - "src/memory/episodic/atomic-write.ts"       # tmp + rename
-  - "src/memory/episodic/summarisers/heuristic.ts"
-  - "src/memory/episodic/types.ts"
-  - "test/memory/episodic/writer.test.ts"
-  - "test/memory/episodic/schema.test.ts"
+  - "packages/msp/src/memory/episodic/writer.ts"             # public API
+  - "packages/msp/src/memory/episodic/schema.ts"             # validate(episode)
+  - "packages/msp/src/memory/episodic/atomic-write.ts"       # tmp + rename
+  - "packages/msp/src/memory/episodic/summarisers/heuristic.ts"
+  - "packages/msp/src/memory/episodic/types.ts"
+  - "packages/msp/test/memory/episodic/writer.test.ts"
+  - "packages/msp/test/memory/episodic/schema.test.ts"
   - "test/memory/episodic/atomic-write.test.ts"
 
 api_contracts:

@@ -11,10 +11,10 @@ tags: [architecture, framework, core]
 crosslinks:
   references: [CONCEPT--MEMORY-STORE]
 linked_symbols:
-  - { file: "src/memory/gks.ts" }
-  - { file: "src/memory/vector/index.ts" }
-  - { file: "src/memory/episodic.ts" }
-  - { file: "src/memory/obsidian-mcp.ts" }
+  - { file: "packages/gks/src/memory/gks.ts" }
+  - { file: "packages/gks/src/memory/vector/index.ts" }
+  - { file: "packages/gks/src/memory/episodic.ts" }
+  - { file: "packages/gks/src/memory/obsidian-mcp.ts" }
 aliases:
   - FRAMEWORK
   - implementation_flow

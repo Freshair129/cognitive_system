@@ -81,7 +81,7 @@ geography:
   - "examples/hooks/pre-push-verify.sh"
   - "examples/hooks/install.sh"
   - "examples/hooks/README.md"
-  - "test/hooks/pre-push.test.ts"
+  - "packages/msp/test/hooks/pre-push.test.ts"
 
 api_contracts:
   - name: pre-push-verify.sh

@@ -63,18 +63,18 @@ data_logic: |
     4. escalateToGemini(task, blueprint, allFailures) → either success(escalated) or escalateOpus()
 
 geography:
-  - "src/codegen/runner.ts"            # public TS API: runTask(path, opts)
-  - "src/codegen/load-task.ts"         # loadTask(path): Promise<Task>
-  - "src/codegen/prompt-builder.ts"    # buildPrompt(task, blueprint, lastFailure?)
+  - "packages/msp/src/codegen/runner.ts"            # public TS API: runTask(path, opts)
+  - "packages/msp/src/codegen/load-task.ts"         # loadTask(path): Promise<Task>
+  - "packages/msp/src/codegen/prompt-builder.ts"    # buildPrompt(task, blueprint, lastFailure?)
   - "src/codegen/slm-client.ts"        # callSlm(prompt, ctx) — pluggable
-  - "src/codegen/post-process.ts"      # ports the strip pipeline from ADR--CODEGEN-POST-PROCESSING
-  - "src/codegen/forbidden-patterns.ts"# ports the regex/import checks from ADR--CODEGEN-FORBIDDEN-PATTERNS
+  - "packages/msp/src/codegen/post-process.ts"      # ports the strip pipeline from ADR--CODEGEN-POST-PROCESSING
+  - "packages/msp/src/codegen/forbidden-patterns.ts"# ports the regex/import checks from ADR--CODEGEN-FORBIDDEN-PATTERNS
   - "src/codegen/acceptance.ts"        # runAcceptance(task) — vitest spawn or vm.runInContext
   - "src/codegen/escalate.ts"          # escalateToGemini, escalateOpus
-  - "src/codegen/cli.ts"               # bin entry
-  - "test/codegen/runner.test.ts"
-  - "test/codegen/post-process.test.ts"
-  - "test/codegen/forbidden-patterns.test.ts"
+  - "packages/msp/src/codegen/cli.ts"               # bin entry
+  - "packages/msp/test/codegen/runner.test.ts"
+  - "packages/msp/test/codegen/post-process.test.ts"
+  - "packages/msp/test/codegen/forbidden-patterns.test.ts"
 
 api_contracts:
   - name: runTask

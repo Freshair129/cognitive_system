@@ -12,10 +12,10 @@ crosslinks:
   implements: [ADR--REVERSE-CITATION-LOOKUP]
   references: [CONCEPT--MEMORY-STORE]
 linked_symbols:
-  - { file: "src/memory/index.ts", fn: lookupBySymbol }
-  - { file: "src/memory/gks.ts", fn: searchBySymbol }
+  - { file: "packages/gks/src/memory/index.ts", fn: lookupBySymbol }
+  - { file: "packages/gks/src/memory/gks.ts", fn: searchBySymbol }
   - { file: "bin/gks.ts", fn: cmdLookupBySymbol }
-  - { file: "src/mcp-server/index.ts" }
+  - { file: "packages/gks/src/mcp-server/index.ts" }
 aliases:
   - FEAT
   - implementation_flow

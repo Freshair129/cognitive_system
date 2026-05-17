@@ -59,14 +59,14 @@ data_logic: |
     9. return { atomCount, edgeCount, changed }
 
 geography:
-  - "src/memory/backlinks/walk.ts"
-  - "src/memory/backlinks/edges.ts"
-  - "src/memory/backlinks/atomic-write.ts"
-  - "src/memory/backlinks/indexer.ts"
-  - "src/memory/backlinks/cli.ts"
-  - "src/memory/backlinks/types.ts"
-  - "test/memory/backlinks/edges.test.ts"
-  - "test/memory/backlinks/indexer.test.ts"
+  - "packages/msp/src/memory/backlinks/walk.ts"
+  - "packages/msp/src/memory/backlinks/edges.ts"
+  - "packages/msp/src/memory/backlinks/atomic-write.ts"
+  - "packages/msp/src/memory/backlinks/indexer.ts"
+  - "packages/msp/src/memory/backlinks/cli.ts"
+  - "packages/msp/src/memory/backlinks/types.ts"
+  - "packages/msp/test/memory/backlinks/edges.test.ts"
+  - "packages/msp/test/memory/backlinks/indexer.test.ts"
   - "test/memory/backlinks/cli.test.ts"
 
 api_contracts:

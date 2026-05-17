@@ -59,13 +59,13 @@ data_logic: |
     }
 
 geography:
-  - "src/codegen/acceptance/types.ts"
-  - "src/codegen/acceptance/sandbox.ts"
-  - "src/codegen/acceptance/parse-results.ts"
-  - "src/codegen/acceptance/vitest.ts"
-  - "test/codegen/acceptance/sandbox.test.ts"
-  - "test/codegen/acceptance/parse-results.test.ts"
-  - "test/codegen/acceptance/vitest.test.ts"
+  - "packages/msp/src/codegen/acceptance/types.ts"
+  - "packages/msp/src/codegen/acceptance/sandbox.ts"
+  - "packages/msp/src/codegen/acceptance/parse-results.ts"
+  - "packages/msp/src/codegen/acceptance/vitest.ts"
+  - "packages/msp/test/codegen/acceptance/sandbox.test.ts"
+  - "packages/msp/test/codegen/acceptance/parse-results.test.ts"
+  - "packages/msp/test/codegen/acceptance/vitest.test.ts"
 
 api_contracts:
   - name: createVitestAcceptance

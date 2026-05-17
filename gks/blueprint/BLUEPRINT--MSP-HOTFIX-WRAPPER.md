@@ -62,7 +62,7 @@ data_logic: |
 geography:
   - "examples/hooks/pre-commit-validator.sh"
   - "package.json"
-  - "test/hooks/pre-commit.test.ts"
+  - "packages/msp/test/hooks/pre-commit.test.ts"
 
 api_contracts:
   - name: "npm run msp:hotfix:open|list|close|check"
@@ -81,7 +81,7 @@ api_contracts:
               1 if `gks hotfix check` exits non-zero (overdue HOTFIX)
 
 verification_plan:
-  - test/hooks/pre-commit.test.ts extended:
+  - packages/msp/test/hooks/pre-commit.test.ts extended:
     - "no overdue HOTFIX → commit succeeds even with src/ change"
     - "fake overdue HOTFIX atom + staged src/foo.ts → commit blocked"
     - both fixtures use a tmp git repo + symlinked node_modules same

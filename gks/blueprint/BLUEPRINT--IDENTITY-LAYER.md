@@ -123,17 +123,17 @@ data_logic: |
     export async function getIdentity(opts) = readIdentity(opts)
 
 geography:
-  - "src/identity/types.ts"          # ~30 lines
-  - "src/identity/store.ts"          # ~80 lines (atomic write + default)
-  - "src/identity/profile.ts"        # ~30 lines
-  - "src/identity/voice.ts"          # ~25 lines
-  - "src/identity/preferences.ts"    # ~70 lines (TTL logic)
-  - "src/identity/index.ts"          # ~30 lines (re-exports)
-  - "test/identity/store.test.ts"
-  - "test/identity/profile.test.ts"
-  - "test/identity/voice.test.ts"
-  - "test/identity/preferences.test.ts"
-  - "test/identity/index.test.ts"
+  - "packages/msp/src/identity/types.ts"          # ~30 lines
+  - "packages/msp/src/identity/store.ts"          # ~80 lines (atomic write + default)
+  - "packages/msp/src/identity/profile.ts"        # ~30 lines
+  - "packages/msp/src/identity/voice.ts"          # ~25 lines
+  - "packages/msp/src/identity/preferences.ts"    # ~70 lines (TTL logic)
+  - "packages/msp/src/identity/index.ts"          # ~30 lines (re-exports)
+  - "packages/msp/test/identity/store.test.ts"
+  - "packages/msp/test/identity/profile.test.ts"
+  - "packages/msp/test/identity/voice.test.ts"
+  - "packages/msp/test/identity/preferences.test.ts"
+  - "packages/msp/test/identity/index.test.ts"
 
 api_contracts:
   - name: getIdentity

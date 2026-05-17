@@ -13,8 +13,8 @@ crosslinks:
   superseded_by: []
   resolves: []
 linked_symbols:
-  - { file: "src/memory/gks.ts", fn: searchBySymbol }
-  - { file: "src/memory/index.ts", fn: lookupBySymbol }
+  - { file: "packages/gks/src/memory/gks.ts", fn: searchBySymbol }
+  - { file: "packages/gks/src/memory/index.ts", fn: lookupBySymbol }
 aliases:
   - ADR
   - implementation_flow

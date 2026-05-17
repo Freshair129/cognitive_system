@@ -60,7 +60,7 @@ geography:
   - "examples/hooks/pre-commit-validator.sh"   # the hook itself
   - "examples/hooks/install.sh"                 # idempotent installer
   - "examples/hooks/README.md"                  # docs (install + uninstall + escape)
-  - "test/hooks/pre-commit.test.ts"             # vitest spawning real bash
+  - "packages/msp/test/hooks/pre-commit.test.ts"             # vitest spawning real bash
 
 api_contracts:
   - name: pre-commit-validator.sh

@@ -12,8 +12,8 @@ crosslinks:
   references: [ADR--EXTENDED-TAXONOMY, CONCEPT--MSP-ROADMAP]
   partially_supersedes: [ADR--DOC-TO-CODE-ENFORCEMENT]
 linked_symbols:
-  - { file: "src/memory/types.ts", fn: AtomicType }
-  - { file: "src/scaffold/new-feature.ts", fn: scaffoldNewFeature }
+  - { file: "packages/gks/src/memory/types.ts", fn: AtomicType }
+  - { file: "packages/gks/src/scaffold/new-feature.ts", fn: scaffoldNewFeature }
   - { file: "bin/gks.ts", fn: cmdNewFeature }
 aliases:
   - ADR
