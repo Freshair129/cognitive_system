@@ -49,20 +49,41 @@ jobs:
         #
         # Per-workspace invocation so a failure is attributed to the correct
         # workspace. `npm run build --workspaces` swallows the workspace name
-        # in stack traces, which made a recent "graph not in RetrievalTimings"
-        # error impossible to attribute (was it msp? gks? gks-cli? It turned
-        # out to be irreproducible — but the per-workspace split keeps any
-        # future regression actionable on first read of the log.)
+        # in stack traces. Each workspace's output is also tee'd to a
+        # per-workspace log file uploaded as an artifact on failure so the
+        # full diagnostic (file:line + surrounding tsc output) is recoverable
+        # even when GH Actions' annotation strips the source location.
         run: |
+          set +e
+          mkdir -p build-logs
           echo "::group::node + tsc versions"
-          node --version
-          npx tsc --version
+          node --version | tee build-logs/_versions.log
+          npx tsc --version | tee -a build-logs/_versions.log
           echo "::endgroup::"
+          fail=0
           for ws in @freshair129/gks msp @freshair129/gks-cli @freshair129/gks-mcp @freshair129/gks-tui @freshair129/genesis-ui; do
+            slug=$(echo "$ws" | tr '/@' '__')
             echo "::group::build $ws"
-            npm run build --workspace="$ws" --if-present
+            npm run build --workspace="$ws" --if-present 2>&1 | tee "build-logs/${slug}.log"
+            rc=${PIPESTATUS[0]}
             echo "::endgroup::"
+            if [ "$rc" -ne 0 ]; then
+              echo "::error title=build failed in $ws::see build-logs artifact (exit $rc)"
+              echo "--- TAIL of $ws build log ---"
+              tail -50 "build-logs/${slug}.log"
+              echo "--- END TAIL ---"
+              fail=1
+            fi
           done
+          exit $fail
+
+      - name: upload build logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-logs-node${{ matrix.node-version }}
+          path: build-logs/
+          if-no-files-found: ignore
 
       - name: typecheck
         run: npm run typecheck
