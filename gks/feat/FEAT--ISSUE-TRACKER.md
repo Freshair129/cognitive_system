@@ -14,7 +14,7 @@ crosslinks:
 linked_symbols:
   - { file: "packages/gks/src/issue/store.ts" }
   - { file: "packages/gks/src/issue/types.ts" }
-  - { file: "bin/gks.ts", fn: cmdIssue }
+  - { file: "packages/gks/bin/gks.ts", fn: cmdIssue }
 aliases:
   - FEAT
   - implementation_flow

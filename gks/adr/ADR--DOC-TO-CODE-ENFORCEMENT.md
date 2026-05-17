@@ -19,10 +19,10 @@ linked_symbols:
   - { file: "packages/gks/src/scaffold/new-feature.ts", fn: scaffoldNewFeature }
   - { file: "packages/gks/src/hotfix/store.ts" }
   - { file: "packages/gks/src/hotfix/types.ts" }
-  - { file: "bin/gks.ts", fn: cmdVerifyFlow }
-  - { file: "bin/gks.ts", fn: cmdValidate }
-  - { file: "bin/gks.ts", fn: cmdNewFeature }
-  - { file: "bin/gks.ts", fn: cmdHotfix }
+  - { file: "packages/gks/bin/gks.ts", fn: cmdVerifyFlow }
+  - { file: "packages/gks/bin/gks.ts", fn: cmdValidate }
+  - { file: "packages/gks/bin/gks.ts", fn: cmdNewFeature }
+  - { file: "packages/gks/bin/gks.ts", fn: cmdHotfix }
 aliases:
   - ADR
   - implementation_flow

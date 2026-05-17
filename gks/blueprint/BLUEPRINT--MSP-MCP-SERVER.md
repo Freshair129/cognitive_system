@@ -50,13 +50,13 @@ architectural_pattern: |
   logic in src/mcp/.
 
 data_logic: |
-  bin/msp-mcp-server.ts:
-    1. import createMspMcpServer from '../src/mcp/server.js'
+  packages/msp/src/mcp/bin.ts:
+    1. import { createMspMcpServer } from './server.js'
     2. const server = createMspMcpServer()
     3. const transport = new StdioServerTransport()
     4. await server.connect(transport)
 
-  src/mcp/server.ts:
+  packages/msp/src/mcp/server.ts:
     function createMspMcpServer({ root? } = {}): Server
       - new Server({ name: 'msp', version: '0.1.0' }, { capabilities: { tools: {} } })
       - for each tool in [validate, propose, runTask, sessionAppend,
@@ -79,7 +79,7 @@ geography:
   - "packages/msp/src/mcp/tools/session-append.ts"
   - "packages/msp/src/mcp/tools/episode-append.ts"
   - "packages/msp/src/mcp/tools/backlinks-rebuild.ts"
-  - "bin/msp-mcp-server.ts"
+  - "packages/msp/src/mcp/bin.ts"
   - "packages/msp/test/mcp/server.test.ts"
   - "test/mcp/tools/*.test.ts"
 

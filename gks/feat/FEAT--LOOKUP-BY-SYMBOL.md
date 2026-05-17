@@ -14,7 +14,7 @@ crosslinks:
 linked_symbols:
   - { file: "packages/gks/src/memory/index.ts", fn: lookupBySymbol }
   - { file: "packages/gks/src/memory/gks.ts", fn: searchBySymbol }
-  - { file: "bin/gks.ts", fn: cmdLookupBySymbol }
+  - { file: "packages/gks/bin/gks.ts", fn: cmdLookupBySymbol }
   - { file: "packages/gks/src/mcp-server/index.ts" }
 aliases:
   - FEAT

@@ -14,7 +14,7 @@ crosslinks:
 linked_symbols:
   - { file: "packages/gks/src/memory/types.ts", fn: AtomicType }
   - { file: "packages/gks/src/scaffold/new-feature.ts", fn: scaffoldNewFeature }
-  - { file: "bin/gks.ts", fn: cmdNewFeature }
+  - { file: "packages/gks/bin/gks.ts", fn: cmdNewFeature }
 aliases:
   - ADR
   - implementation_flow
