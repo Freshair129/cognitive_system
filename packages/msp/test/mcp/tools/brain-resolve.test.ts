@@ -35,7 +35,13 @@ describe('msp_brain_resolve tool', () => {
     const result = await handler({ root: '/tmp/repo' })({ type: 'ADR' })
 
     expect(resolveMock).toHaveBeenCalledTimes(1)
-    expect(resolveMock).toHaveBeenCalledWith({ type: 'ADR' })
+    expect(resolveMock).toHaveBeenCalledWith(
+      { type: 'ADR' },
+      expect.objectContaining({
+        subject: expect.objectContaining({ kind: 'mcp-client' }),
+        context: expect.objectContaining({ origin: 'mcp-stdio' }),
+      }),
+    )
     expect(result.isError).toBeUndefined()
     const parsed = JSON.parse(result.content[0]!.text)
     expect(parsed.ok).toBe(true)
@@ -63,11 +69,17 @@ describe('msp_brain_resolve tool', () => {
       type: 'CONCEPT',
       vault_id: 'eva',
     })
-    expect(resolveMock).toHaveBeenCalledWith({
-      id: 'CONCEPT--FOO',
-      type: 'CONCEPT',
-      vault_id: 'eva',
-    })
+    expect(resolveMock).toHaveBeenCalledWith(
+      {
+        id: 'CONCEPT--FOO',
+        type: 'CONCEPT',
+        vault_id: 'eva',
+      },
+      expect.objectContaining({
+        subject: expect.objectContaining({ kind: 'mcp-client' }),
+        context: expect.objectContaining({ origin: 'mcp-stdio' }),
+      }),
+    )
     const parsed = JSON.parse(result.content[0]!.text)
     expect(parsed.ok).toBe(true)
     expect(parsed.count).toBe(0)

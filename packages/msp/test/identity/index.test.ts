@@ -43,6 +43,10 @@ describe('getIdentity (default values)', () => {
       createdAt: '',
       guardrails: [],
       extensions: {},
+      roles: [],
+      clearance: 0,
+      mfaStatus: false,
+      tenantIds: [],
     })
     expect(id.voice).toEqual({
       tone: [],

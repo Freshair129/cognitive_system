@@ -15,6 +15,11 @@ id: CONCEPT--TEST-VALID-HOOK
 phase: 1
 type: concept
 status: stable
+tier: process
+cluster: implementation_flow
+role: Strategic intent / PRD
+aliases:
+  - CONCEPT
 vault_id: TEST
 title: Valid hook fixture
 tags: [test]
@@ -31,6 +36,11 @@ id: CONCEPT--TEST-FORBIDDEN-HOOK
 phase: 1
 type: concept
 status: stable
+tier: process
+cluster: implementation_flow
+role: Strategic intent / PRD
+aliases:
+  - CONCEPT
 vault_id: TEST
 title: Atom with forbidden field
 commit_hash: deadbeef
@@ -86,6 +96,11 @@ async function makeFixtureRepo(): Promise<string> {
   // Bring in node_modules (validator + tsx) by symlinking to the real one.
   // On systems where symlinks are restricted, fall back to a copy. For CI we keep symlinks.
   run('ln', ['-s', join(repoRoot, 'node_modules'), join(dir, 'node_modules')], dir)
+
+  // Symlink atom_registry.yaml so the validator (which loads registry via
+  // walk-up from process.cwd() when ctx.root is unset) can find the type
+  // taxonomy.
+  run('ln', ['-s', join(repoRoot, 'atom_registry.yaml'), join(dir, 'atom_registry.yaml')], dir)
 
   // Install our hook.
   await mkdir(join(dir, '.git/hooks'), { recursive: true })
@@ -159,6 +174,11 @@ id: HOTFIX--abc1234
 phase: 5
 type: hotfix
 status: stable
+tier: process
+cluster: ops
+role: Hotfix escape-hatch atom
+aliases:
+  - HOTFIX
 title: test overdue
 created_at: 2024-01-01T00:00:00Z
 valid_from: 2024-01-01T00:00:00Z

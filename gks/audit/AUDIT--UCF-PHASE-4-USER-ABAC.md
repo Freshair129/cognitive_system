@@ -18,6 +18,8 @@ crosslinks:
   references:
     - CONCEPT--ABAC-POLICY-ENGINE
 created_at: 2026-05-17T08:45:00+07:00
+aliases:
+  - AUDIT
 cluster: implementation_flow
 role: Test results / quality report
 attributes:

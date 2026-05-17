@@ -1,12 +1,16 @@
 ---
 id: USAGE--DAILY-2026-05-17
-phase: 5
+phase: 6
 type: usage
 status: stable
-tier: genesis
-source_type: episodic
+tier: process
+source_type: learned
 vault_id: default
 title: "USAGE — Daily cost bucket 2026-05-17"
+aliases:
+  - USAGE
+cluster: memory
+role: Usage metrics rollup
 tags:
   - agents
   - usage

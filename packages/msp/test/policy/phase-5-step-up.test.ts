@@ -13,7 +13,7 @@ const TEST_MSP_HOME = resolve(__dirname, '../../../.tmp-msp-home-step-up')
 
 describe('UCF Phase 5: Step-up Auth', () => {
   let policySet: any
-  const root = resolve(__dirname, '../../..')
+  const root = resolve(__dirname, '../../../..')
 
   beforeAll(async () => {
     // Setup clean MSP_HOME
@@ -21,7 +21,7 @@ describe('UCF Phase 5: Step-up Auth', () => {
     await mkdir(TEST_MSP_HOME, { recursive: true })
 
     // Load real policies (including the new 50-step-up.yaml)
-    const policiesDir = resolve(process.cwd(), 'policies')
+    const policiesDir = resolve(root, 'policies')
     policySet = await loadPolicies(policiesDir)
   })
 

@@ -1,6 +1,5 @@
 ---
-id: ADR-376--DYNAMIC-COMPOUND-ID-K-SUFFIX--K3
-knowledgeId: DYNAMIC-COMPOUND-ID-K-SUFFIX
+id: ADR--DYNAMIC-COMPOUND-ID-K-SUFFIX
 phase: 2
 type: adr
 status: draft

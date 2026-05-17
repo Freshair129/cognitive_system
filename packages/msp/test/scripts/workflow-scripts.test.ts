@@ -62,15 +62,19 @@ describe('msp:scaffold-atom', () => {
     writeFileSync(
       join(tmpRoot, 'atom_registry.yaml'),
       `
-taxonomy:
-  clusters:
-    process:
-      types:
-        concept:
-          phase: 1
-          folder: concept
-          tier: process
-          sections: [Problem, Hypothesis, Scope]
+schema_config:
+  schema_spec:
+    compound_id_format: "{aliases}--{knowledgeId}"
+    atomId_format: "{atom_counter}"
+  taxonomy:
+    clusters:
+      process:
+        types:
+          concept:
+            phase: 1
+            folder: concept
+            tier: process
+            sections: [Problem, Hypothesis, Scope]
 `,
     )
   })
