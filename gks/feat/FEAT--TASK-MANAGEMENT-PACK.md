@@ -6,19 +6,46 @@ status: active
 tier: process
 source_type: axiomatic
 vault_id: default
-title: "FEAT — Task & Management Domain Pack — classifier and workflow policies"
-tags:
+title: FEAT — Task & Management Domain Pack — classifier and workflow policies
+tags: &a1
   - msp
   - ucf
   - ops
   - task
-crosslinks: {"implements":["CONCEPT--TASK-MANAGEMENT-PACK"],"references":["FEAT--CLASSIFIER-PLUGINS","FEAT--ISSUE-TRACKER"]}
+crosslinks: &a2
+  implements:
+    - CONCEPT--TASK-MANAGEMENT-PACK
+  references:
+    - FEAT--CLASSIFIER-PLUGINS
+    - FEAT--ISSUE-TRACKER
 created_at: 2026-05-17T10:20:00+07:00
 cluster: implementation_flow
-role: "Feature spec"
-aliases:
+role: Feature spec
+aliases: &a3
   - FEAT
   - implementation_flow
+attributes:
+  id: FEAT--TASK-MANAGEMENT-PACK
+  phase: 2
+  type: feat
+  status: active
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  title: FEAT — Task & Management Domain Pack — classifier and workflow policies
+  tags: *a1
+  crosslinks: *a2
+  created_at: 2026-05-17T10:20:00+07:00
+  cluster: implementation_flow
+  role: Feature spec
+  aliases: *a3
+  domain: feat
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 
 # FEAT — Task & Management Domain Pack
