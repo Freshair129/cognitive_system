@@ -7,6 +7,8 @@ tier: process
 source_type: axiomatic
 vault_id: default
 title: AUDIT — Security & Secret Domain Pack — deep scanner and leak prevention
+aliases:
+  - AUDIT
 tags:
   - msp
   - ucf

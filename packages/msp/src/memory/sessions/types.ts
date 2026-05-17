@@ -1,3 +1,5 @@
+import type { RequestContext, Subject } from '../../policy/types.js'
+
 export interface SessionTurn {
   sessionId: string
   episodicId: string
@@ -12,6 +14,10 @@ export interface OpenOpts {
   episodicId: string
   root: string
   namespace?: string
+  /** UCF Phase 4: Subject identity for audit trails (optional). */
+  subject?: Subject
+  /** UCF Phase 4: Request context for audit trails (optional). */
+  context?: RequestContext
 }
 
 export interface Session {

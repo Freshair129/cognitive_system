@@ -7,10 +7,19 @@ tier: process
 source_type: axiomatic
 vault_id: default
 title: "888 Tiered Memory Distillation — cross-session synthesis protocol for cognitive_system"
-tags: [msp, memory, distillation, 888, spec, narrative, identity, epistemic]
-aliases: [SPEC, implementation_flow, Technical specification]
+aliases:
+  - SPEC
 cluster: implementation_flow
 role: Technical specification
+tags:
+  - msp
+  - memory
+  - distillation
+  - 888
+  - spec
+  - narrative
+  - identity
+  - epistemic
 crosslinks:
   references:
     - CONCEPT--MEMORY-SUBSYSTEM

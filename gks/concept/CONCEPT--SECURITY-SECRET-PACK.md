@@ -7,6 +7,8 @@ tier: process
 source_type: axiomatic
 vault_id: default
 title: Security & Secret Domain Pack — deep content inspection for leak prevention
+aliases:
+  - CONCEPT
 tags: &a1
   - msp
   - ucf

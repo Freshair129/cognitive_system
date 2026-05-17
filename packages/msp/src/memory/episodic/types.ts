@@ -1,3 +1,4 @@
+import type { RequestContext, Subject } from '../../policy/types.js'
 import type { SessionTurn } from '../sessions/types.js'
 
 export interface EpisodeContent {
@@ -41,9 +42,13 @@ export interface Episode {
 export interface AppendOpts {
   root: string
   namespace?: string
+  /** UCF Phase 4: Subject identity for audit trails (optional). */
+  subject?: Subject
+  /** UCF Phase 4: Request context for audit trails (optional). */
+  context?: RequestContext
 }
 
-export interface FromTurnsOpts extends AppendOpts {
+export interface FromTurnsOpts extends Omit<AppendOpts, 'context'> {
   episodicId: string
   sessionId: string
   projectId: string

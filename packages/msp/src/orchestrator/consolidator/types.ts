@@ -62,6 +62,10 @@ export interface ConsolidateOptions {
   llmCallTimeoutMs?: number
   /** Override the current-time factory (useful for deterministic tests). */
   now?: () => Date
+  /** UCF Phase 4: Subject identity for audit trails (optional). */
+  subject?: import('../../policy/types.js').Subject
+  /** UCF Phase 4: Request context for audit trails (optional). */
+  context?: import('../../policy/types.js').RequestContext
 }
 
 /** The final output of consolidation for one contiguous chunk. */

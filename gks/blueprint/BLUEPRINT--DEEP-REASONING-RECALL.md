@@ -7,6 +7,12 @@ tier: process
 source_type: axiomatic
 vault_id: default
 title: "BLUEPRINT — Deep Reasoning via Genesis Graph integration"
+aliases:
+  - BLUEPRINT
+linked_symbols:
+  - file: packages/msp/src/orchestrator/retrieval/sources/graph.ts
+  - file: packages/msp/src/orchestrator/retrieval/index.ts
+  - file: packages/msp/src/orchestrator/retrieval/types.ts
 tags:
   - msp
   - ucf

@@ -11,8 +11,8 @@ function atom(fm: Record<string, unknown>): ParsedAtom {
 
 describe('masterRequiresPromotion', () => {
   it('passes when atom is not tier:master (rule does not apply)', () => {
-    expect(masterRequiresPromotion(atom({ tier: 'genesis' }), ctx)).toEqual([])
-    expect(masterRequiresPromotion(atom({ tier: 'safety' }), ctx)).toEqual([])
+    expect(masterRequiresPromotion(atom({ type: 'master', tier: 'genesis' }), ctx)).toEqual([])
+    expect(masterRequiresPromotion(atom({ type: 'master', tier: 'safety' }), ctx)).toEqual([])
     expect(masterRequiresPromotion(atom({}), ctx)).toEqual([])
   })
 
@@ -20,6 +20,7 @@ describe('masterRequiresPromotion', () => {
     expect(
       masterRequiresPromotion(
         atom({
+          type: 'master',
           tier: 'master',
           promoted_from: 'CONCEPT--FOO',
           promoted_at: '2026-05-09T07:00:00.000Z',
@@ -31,7 +32,7 @@ describe('masterRequiresPromotion', () => {
   })
 
   it('errors for each missing promotion field on a tier:master atom', () => {
-    const errs = masterRequiresPromotion(atom({ tier: 'master' }), ctx)
+    const errs = masterRequiresPromotion(atom({ type: 'master', tier: 'master' }), ctx)
     expect(errs).toHaveLength(3)
     expect(errs.every((e) => e.severity === 'error')).toBe(true)
     expect(errs.map((e) => e.message).join('|')).toMatch(/promoted_from/)
@@ -42,6 +43,7 @@ describe('masterRequiresPromotion', () => {
   it('errors when tier:master carries learned_from (Master is instinct, not learned)', () => {
     const errs = masterRequiresPromotion(
       atom({
+        type: 'master',
         tier: 'master',
         promoted_from: 'CONCEPT--X',
         promoted_at: '2026-05-09T07:00:00.000Z',

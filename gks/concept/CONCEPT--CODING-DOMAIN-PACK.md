@@ -7,6 +7,8 @@ tier: process
 source_type: axiomatic
 vault_id: default
 title: Coding Domain Pack — strategic ABAC for software engineering
+aliases:
+  - CONCEPT
 tags: &a1
   - msp
   - ucf
