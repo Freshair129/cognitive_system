@@ -1,8 +1,5 @@
 import type { Turn, LlmClient } from '../consolidator/types.js'
 
-export type { Turn } from '../consolidator/types.js'
-export type { SlmClient as LlmClient } from '../../codegen/slm/types.js'
-
 /**
  * Pluggable token estimator. The default is a conservative char-count
  * heuristic (`Math.ceil(s.length / 3.5)`) — see `tokens.ts`. Callers
@@ -99,6 +96,10 @@ export interface CompressOptions {
   tokeniser?: Tokeniser
   /** Optional model name forwarded to the SLM client. Default 'compressor'. */
   llmModel?: string
+  /** UCF Phase 4: Subject identity for audit trails (optional). */
+  subject?: import('../../policy/types.js').Subject
+  /** UCF Phase 4: Request context for audit trails (optional). */
+  context?: import('../../policy/types.js').RequestContext
 }
 
 /**

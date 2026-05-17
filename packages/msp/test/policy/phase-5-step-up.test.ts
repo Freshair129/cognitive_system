@@ -68,13 +68,14 @@ describe('UCF Phase 5: Step-up Auth', () => {
     expect(vResult.success).toBe(true)
 
     // 4. Update subject and retry
-    const sUpdated = { 
-      ...s, 
-      last_step_up_at: vResult.verified_at,
+    const verifiedAt = vResult.verified_at ?? new Date().toISOString()
+    const sUpdated = {
+      ...s,
+      last_step_up_at: verifiedAt,
       last_step_up_method: 'pin',
       attributes: {
         ...s.attributes,
-        last_step_up_at: vResult.verified_at,
+        last_step_up_at: verifiedAt,
         last_step_up_method: 'pin'
       }
     }

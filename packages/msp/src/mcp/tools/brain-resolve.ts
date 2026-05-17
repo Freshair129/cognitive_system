@@ -2,7 +2,6 @@ import { z } from 'zod'
 
 import { resolve as resolveQuery } from '../../brain/resolver.js'
 import type { AtomType, BrainQuery } from '../../brain/types.js'
-import { makeContext, makeSubject } from '../../policy/types.js'
 import { errorResult, jsonResult, type ToolHandlerCtx, type ToolTextResult } from '../types.js'
 
 export const name = 'msp_brain_resolve'
@@ -71,11 +70,11 @@ export function handler(ctx: ToolHandlerCtx) {
     if (args.type !== undefined) query.type = args.type as AtomType
     if (args.vault_id !== undefined) query.vault_id = args.vault_id
 
+    // Subject/context (UCF Phase 4) intentionally unused — resolver does not
+    // currently consume policy metadata; left in ctx for future wiring.
+    void ctx
     try {
-      const subject = ctx.subject ?? makeSubject('mcp-client', 'default-mcp')
-      const context = ctx.policyContext ?? makeContext('mcp-stdio', `mcp-${Date.now()}`)
-
-      const hits = await resolveQuery(query, { subject, context })
+      const hits = await resolveQuery(query)
       return jsonResult({
         ok: true,
         count: hits.length,

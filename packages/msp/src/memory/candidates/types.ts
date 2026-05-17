@@ -48,6 +48,10 @@ export interface CandidateWriterOpts {
   root: string
   namespace?: string
   proposedBy?: 'agent' | 'human'
+  /** UCF Phase 4: Subject identity for audit trails (optional). */
+  subject?: import('../../policy/types.js').Subject
+  /** UCF Phase 4: Request context for audit trails (optional). */
+  context?: import('../../policy/types.js').RequestContext
 }
 
 export class CandidateIdError extends Error {

@@ -178,7 +178,7 @@ export async function createCognitiveLayer(
         }
       }
 
-      const hit: CognitiveRecallHit = {
+      const hit: ExpandResult = {
         id: req.id,
         body,
         tier: targetTier,

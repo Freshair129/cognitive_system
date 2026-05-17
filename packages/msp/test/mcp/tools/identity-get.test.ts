@@ -179,6 +179,10 @@ describe('msp_identity_get tool', () => {
         createdAt: '',
         guardrails: [],
         extensions: {},
+        roles: [],
+        clearance: 0,
+        mfaStatus: false,
+        tenantIds: [],
       },
       voice: {
         tone: [],
