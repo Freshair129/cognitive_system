@@ -1,96 +1,59 @@
-import { open, readFile, rm, stat } from 'node:fs/promises'
+import { lock, unlock, check } from 'proper-lockfile'
+import { appendFile } from 'node:fs/promises'
 
-import { SessionLockedError } from './types.js'
+/**
+ * Utility for determining and acquiring a lock for session files.
+ * Provides cross-platform write integrity, specifically for Windows.
+ */
 
-interface LockHandle {
-  release(): Promise<void>
+export interface LockOptions {
+  stale?: number
+  retries?: number
+  minTimeout?: number
 }
 
-export interface AcquireOptions {
-  /**
-   * Max age of a lockfile before it's considered stale regardless of
-   * holder-PID liveness. Defends against zombie PIDs (Windows), reused
-   * PIDs after long-running uptime, and antivirus / network-FS edge cases.
-   * Default: 5 minutes.
-   */
-  maxAgeMs?: number
-  /** Injectable clock for tests; default Date.now. */
-  now?: () => number
-}
-
-const DEFAULT_MAX_AGE_MS = 5 * 60 * 1000
-
-function isAlive(pid: number): boolean {
-  try {
-    // signal 0 is a permission/existence probe — does not actually kill.
-    process.kill(pid, 0)
-    return true
-  } catch (err) {
-    // ESRCH = no such process. EPERM = exists but we can't signal.
-    return (err as NodeJS.ErrnoException).code === 'EPERM'
-  }
+const DEFAULT_LOCK_OPTS: LockOptions = {
+  stale: 10000,
+  retries: 5,
+  minTimeout: 100,
 }
 
 /**
- * Acquire a per-file advisory lock. Sibling `<path>.lock` records the
- * holder's PID + acquisition timestamp.
- *
- * Stale lock detection (in order):
- *   1. mtime older than `opts.maxAgeMs` (default 5 min) → reclaim
- *   2. holder PID dead → reclaim
- *   3. holder PID alive AND mtime fresh → throw SessionLockedError
- *
- * The max-age safeguard is M9f's contribution — closes the
- * Windows / zombie-PID gap without adding new deps.
+ * Acquires a lock for the specified file and returns a release function.
  */
-export async function acquire(
-  lockPath: string,
-  opts: AcquireOptions = {},
-): Promise<LockHandle> {
-  const maxAgeMs = opts.maxAgeMs ?? DEFAULT_MAX_AGE_MS
-  const now = opts.now ?? Date.now
+export async function lockSession(
+  filePath: string,
+  opts: LockOptions = DEFAULT_LOCK_OPTS,
+): Promise<() => Promise<void>> {
+  // proper-lockfile requires the file to exist
+  try {
+    await appendFile(filePath, '', 'utf8')
+  } catch (err) {
+    // Ignore errors here, as the actual locking logic will handle missing files if they are critical
+  }
 
-  for (;;) {
-    try {
-      const fh = await open(lockPath, 'wx') // exclusive create
-      // Line 1: PID (back-compat; older readers parseInt the first line).
-      // Line 2: ISO timestamp (M9f addition; future tools can read directly).
-      await fh.write(`${process.pid}\n${new Date(now()).toISOString()}\n`)
-      await fh.close()
-      return {
-        async release() {
-          await rm(lockPath, { force: true })
-        },
+  let releaseFunc: () => Promise<void>
+  
+  try {
+    releaseFunc = await lock(filePath, {
+      stale: opts.stale,
+      retries: {
+        retries: opts.retries,
+        minTimeout: opts.minTimeout,
+      },
+      onStale: (err) => {
+        console.warn(`[lock] Stale lock detected for ${filePath}: ${(err as Error).message}`)
       }
-    } catch (err) {
-      if ((err as NodeJS.ErrnoException).code !== 'EEXIST') throw err
-    }
+    })
+  } catch (err) {
+    throw new Error(`Failed to acquire session lock for ${filePath}: ${(err as Error).message}`)
+  }
 
-    // Lock exists. Two stale checks before honouring it.
-
-    // (1) Max-age safeguard — handles zombie PIDs / reused PIDs / crashed
-    //     processes whose lockfile is left behind on Windows.
-    let lockStat
+  return async () => {
     try {
-      lockStat = await stat(lockPath)
-    } catch {
-      // Race: lockfile vanished between EEXIST and stat. Loop and retry create.
-      continue
+      await releaseFunc()
+    } catch (err) {
+      console.error(`[lock] Failed to release lock for ${filePath}: ${(err as Error).message}`)
     }
-    if (now() - lockStat.mtimeMs > maxAgeMs) {
-      await rm(lockPath, { force: true })
-      continue
-    }
-
-    // (2) PID-liveness — handles the common "process exited cleanly" case.
-    const holderText = await readFile(lockPath, 'utf8').catch(() => '')
-    const holderPid = Number.parseInt(holderText, 10)
-    if (!Number.isFinite(holderPid) || !isAlive(holderPid)) {
-      // Stale by liveness — remove and retry.
-      await rm(lockPath, { force: true })
-      continue
-    }
-
-    throw new SessionLockedError(holderPid, lockPath)
   }
 }
