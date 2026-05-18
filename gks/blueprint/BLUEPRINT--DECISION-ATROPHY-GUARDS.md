@@ -2,7 +2,7 @@
 id: BLUEPRINT--DECISION-ATROPHY-GUARDS
 phase: 3
 type: blueprint
-status: proposed
+status: draft
 vault_id: default
 tier: genesis
 source_type: axiomatic
