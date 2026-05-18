@@ -18,7 +18,7 @@ crosslinks: &a2
   references:
     - FEAT--STEP-UP-AUTH-PIN
 created_at: 2026-05-17T08:47:00+07:00
-aliases:
+aliases: &a3
   - AUDIT
 cluster: implementation_flow
 role: Test results / quality report
@@ -34,6 +34,7 @@ attributes:
   tags: *a1
   crosslinks: *a2
   created_at: 2026-05-17T08:47:00+07:00
+  aliases: *a3
   cluster: implementation_flow
   role: Test results / quality report
   attributes:
@@ -51,7 +52,29 @@ attributes:
     cluster: implementation_flow
     role: Test results / quality report
     attributes:
+      id: AUDIT--UCF-PHASE-5-STEP-UP-AUTH
+      phase: 6
+      type: audit
+      status: stable
+      tier: process
+      source_type: axiomatic
+      vault_id: default
+      title: AUDIT — UCF Phase 5 — Step-up Auth implementation
+      tags: *a1
+      crosslinks: *a2
+      created_at: 2026-05-17T08:47:00+07:00
+      cluster: implementation_flow
+      role: Test results / quality report
+      attributes:
+        domain: audit
       domain: audit
+      language: markdown
+      is_test: false
+      is_entrypoint: false
+      has_secret: true
+      secret_type: high_entropy_string
+      leak_risk: high
+      encryption_level: none
     domain: audit
     language: markdown
     is_test: false

@@ -6,17 +6,38 @@ status: stable
 tier: process
 source_type: learned
 vault_id: default
-title: "USAGE — Daily cost bucket 2026-05-17"
-aliases:
+title: USAGE — Daily cost bucket 2026-05-17
+aliases: &a1
   - USAGE
 cluster: memory
 role: Usage metrics rollup
-tags:
+tags: &a2
   - agents
   - usage
   - cost
   - daily
 created_at: 2026-05-17T02:10:17.957Z
+attributes:
+  id: USAGE--DAILY-2026-05-17
+  phase: 6
+  type: usage
+  status: stable
+  tier: process
+  source_type: learned
+  vault_id: default
+  title: USAGE — Daily cost bucket 2026-05-17
+  aliases: *a1
+  cluster: memory
+  role: Usage metrics rollup
+  tags: *a2
+  created_at: 2026-05-17T02:10:17.957Z
+  domain: usage
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: false
+  leak_risk: low
+  encryption_level: none
 ---
 # USAGE — Daily cost bucket 2026-05-17
 

@@ -12,22 +12,22 @@ aliases: &a1
   - BLUEPRINT
 cluster: implementation_flow
 role: Implementation plan
-linked_symbols:
+linked_symbols: &a2
   - file: scripts/msp/msp-atom.ts
   - file: atom_schema.yaml
   - file: atom_registry.yaml
-tags: &a2
+tags: &a3
   - msp
   - codegen
   - schema
   - architecture
-crosslinks: &a3
+crosslinks: &a4
   references:
     - ADR--DYNAMIC-COMPOUND-ID-K-SUFFIX
     - CONCEPT--USAGE-ROLLUPS
 created_at: 2026-05-17T10:07:15.100+07:00
 attributes:
-  id: BLUEPRINT-377--DYNAMIC-COMPOUND-ID-IMPLEMENTATION--K4
+  id: BLUEPRINT--DYNAMIC-COMPOUND-ID-IMPLEMENTATION
   knowledgeId: DYNAMIC-COMPOUND-ID-IMPLEMENTATION
   phase: 3
   type: blueprint
@@ -40,8 +40,9 @@ attributes:
   aliases: *a1
   cluster: implementation_flow
   role: Implementation plan
-  tags: *a2
-  crosslinks: *a3
+  linked_symbols: *a2
+  tags: *a3
+  crosslinks: *a4
   created_at: 2026-05-17T10:07:15.100+07:00
   attributes:
     id: BLUEPRINT-377--DYNAMIC-COMPOUND-ID-IMPLEMENTATION--K4
@@ -57,9 +58,34 @@ attributes:
     aliases: *a1
     cluster: implementation_flow
     role: Implementation plan
-    tags: *a2
-    crosslinks: *a3
+    tags: *a3
+    crosslinks: *a4
     created_at: 2026-05-17T10:07:15.100+07:00
+    attributes:
+      id: BLUEPRINT-377--DYNAMIC-COMPOUND-ID-IMPLEMENTATION--K4
+      knowledgeId: DYNAMIC-COMPOUND-ID-IMPLEMENTATION
+      phase: 3
+      type: blueprint
+      status: stable
+      vault_id: default
+      tier: process
+      source_type: axiomatic
+      title: Implementation Plan for Dynamic Compound ID Formatting and Schema
+        Restructuring
+      aliases: *a1
+      cluster: implementation_flow
+      role: Implementation plan
+      tags: *a3
+      crosslinks: *a4
+      created_at: 2026-05-17T10:07:15.100+07:00
+      domain: blueprint
+      language: markdown
+      is_test: false
+      is_entrypoint: false
+      has_secret: true
+      secret_type: high_entropy_string
+      leak_risk: high
+      encryption_level: none
     domain: blueprint
     language: markdown
     is_test: false

@@ -40,6 +40,30 @@ attributes:
   tags: *a2
   crosslinks: *a3
   created_at: 2026-05-17T16:10:00.000+07:00
+  attributes:
+    id: CONCEPT--CONFIG-AS-SSOT
+    phase: 1
+    type: concept
+    status: draft
+    tier: process
+    source_type: axiomatic
+    vault_id: default
+    title: Config as Single Source of Truth (extend atom-registry pattern to all
+      behavior-driving values)
+    aliases: *a1
+    cluster: implementation_flow
+    role: Strategic intent / PRD
+    tags: *a2
+    crosslinks: *a3
+    created_at: 2026-05-17T16:10:00.000+07:00
+    domain: concept
+    language: markdown
+    is_test: false
+    is_entrypoint: false
+    has_secret: true
+    secret_type: high_entropy_string
+    leak_risk: high
+    encryption_level: none
   domain: concept
   language: markdown
   is_test: false

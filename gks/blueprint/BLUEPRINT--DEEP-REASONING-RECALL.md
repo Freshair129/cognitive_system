@@ -6,23 +6,51 @@ status: draft
 tier: process
 source_type: axiomatic
 vault_id: default
-title: "BLUEPRINT — Deep Reasoning via Genesis Graph integration"
-aliases:
+title: BLUEPRINT — Deep Reasoning via Genesis Graph integration
+aliases: &a1
   - BLUEPRINT
-linked_symbols:
+linked_symbols: &a2
   - file: packages/msp/src/orchestrator/retrieval/sources/graph.ts
   - file: packages/msp/src/orchestrator/retrieval/index.ts
   - file: packages/msp/src/orchestrator/retrieval/types.ts
-tags:
+tags: &a3
   - msp
   - ucf
   - graph
   - reasoning
   - blueprint
-crosslinks: {"implements":["BLUEPRINT--GENESIS-GRAPH-INTEGRATION"],"references":["CONCEPT--GENESIS-GRAPH-BACKEND"]}
+crosslinks: &a4
+  implements:
+    - BLUEPRINT--GENESIS-GRAPH-INTEGRATION
+  references:
+    - CONCEPT--GENESIS-GRAPH-BACKEND
 created_at: 2026-05-17T21:00:00+07:00
 cluster: implementation_flow
-role: "Implementation plan"
+role: Implementation plan
+attributes:
+  id: BLUEPRINT--DEEP-REASONING-RECALL
+  phase: 3
+  type: blueprint
+  status: draft
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  title: BLUEPRINT — Deep Reasoning via Genesis Graph integration
+  aliases: *a1
+  linked_symbols: *a2
+  tags: *a3
+  crosslinks: *a4
+  created_at: 2026-05-17T21:00:00+07:00
+  cluster: implementation_flow
+  role: Implementation plan
+  domain: blueprint
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: aws_secret
+  leak_risk: high
+  encryption_level: none
 ---
 
 # BLUEPRINT — Deep Reasoning Recall

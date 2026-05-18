@@ -7,14 +7,14 @@ tier: process
 source_type: axiomatic
 vault_id: default
 title: Task & Management Domain Pack — operational workflow enforcement
-aliases:
+aliases: &a1
   - CONCEPT
-tags: &a1
+tags: &a2
   - msp
   - ucf
   - ops
   - management
-crosslinks: &a2
+crosslinks: &a3
   references:
     - FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK
     - ADR--TASK-TRACKING-AT-ORCHESTRATOR
@@ -30,8 +30,9 @@ attributes:
   source_type: axiomatic
   vault_id: default
   title: Task & Management Domain Pack — operational workflow enforcement
-  tags: *a1
-  crosslinks: *a2
+  aliases: *a1
+  tags: *a2
+  crosslinks: *a3
   created_at: 2026-05-17T10:15:00+07:00
   cluster: implementation_flow
   role: Strategic intent / PRD
@@ -44,11 +45,32 @@ attributes:
     source_type: axiomatic
     vault_id: default
     title: Task & Management Domain Pack — operational workflow enforcement
-    tags: *a1
-    crosslinks: *a2
+    tags: *a2
+    crosslinks: *a3
     created_at: 2026-05-17T10:15:00+07:00
     cluster: implementation_flow
     role: Strategic intent / PRD
+    attributes:
+      id: CONCEPT--TASK-MANAGEMENT-PACK
+      phase: 1
+      type: concept
+      status: stable
+      tier: process
+      source_type: axiomatic
+      vault_id: default
+      title: Task & Management Domain Pack — operational workflow enforcement
+      tags: *a2
+      crosslinks: *a3
+      created_at: 2026-05-17T10:15:00+07:00
+      cluster: implementation_flow
+      role: Strategic intent / PRD
+      domain: concept
+      language: markdown
+      is_test: false
+      is_entrypoint: false
+      has_secret: false
+      leak_risk: low
+      encryption_level: none
     domain: concept
     language: markdown
     is_test: false

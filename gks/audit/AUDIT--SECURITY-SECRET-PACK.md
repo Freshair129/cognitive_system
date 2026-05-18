@@ -7,17 +7,44 @@ tier: process
 source_type: axiomatic
 vault_id: default
 title: AUDIT — Security & Secret Domain Pack — deep scanner and leak prevention
-aliases:
+aliases: &a1
   - AUDIT
-tags:
+tags: &a2
   - msp
   - ucf
   - security
   - audit
-crosslinks: {"implements":["FEAT--SECURITY-SECRET-PACK"],"references":["CONCEPT--SECURITY-SECRET-PACK"]}
+crosslinks: &a3
+  implements:
+    - FEAT--SECURITY-SECRET-PACK
+  references:
+    - CONCEPT--SECURITY-SECRET-PACK
 created_at: 2026-05-17T16:30:00+07:00
 cluster: implementation_flow
-role: "Test results / quality report"
+role: Test results / quality report
+attributes:
+  id: AUDIT--SECURITY-SECRET-PACK
+  phase: 6
+  type: audit
+  status: stable
+  tier: process
+  source_type: axiomatic
+  vault_id: default
+  title: AUDIT — Security & Secret Domain Pack — deep scanner and leak prevention
+  aliases: *a1
+  tags: *a2
+  crosslinks: *a3
+  created_at: 2026-05-17T16:30:00+07:00
+  cluster: implementation_flow
+  role: Test results / quality report
+  domain: audit
+  language: markdown
+  is_test: false
+  is_entrypoint: false
+  has_secret: true
+  secret_type: high_entropy_string
+  leak_risk: high
+  encryption_level: none
 ---
 
 # AUDIT — Security & Secret Pack
