@@ -76,9 +76,19 @@ interface Manifest {
  * caught and logged once at info level. Callers always receive a working
  * `GraphBackend`.
  */
+/**
+ * Public surface both backends satisfy. Extends `GraphBackend` with the
+ * opt-in Cypher v0 method — needed so callers of the factory can use
+ * `.cypher(...)` against the returned object regardless of whether the
+ * native or pure-TS path is in play.
+ */
+export interface GenesisGraphBackendApi extends GraphBackend {
+  cypher(query: string): Promise<Array<Record<string, unknown>>>
+}
+
 export function createGenesisGraphBackend(
   opts: GenesisGraphBackendOptions,
-): GraphBackend {
+): GenesisGraphBackendApi {
   const native = tryLoadNativeBackend(opts)
   if (native) return native
   return new GenesisGraphBackend(opts)
@@ -180,13 +190,14 @@ interface GenesisDatabaseLike {
   retractEdge(id: string, at?: string | null): Promise<EdgeOutputLike | null>
   query(args: QueryInputLike): Promise<EdgeOutputLike[]>
   neighbors(seed: string, args: NeighborInputLike): Promise<NeighborOutputLike[]>
+  cypher(query: string): Promise<unknown>
 }
 
 interface GenesisDatabaseCtor {
   open(opts: { path: string }): GenesisDatabaseLike
 }
 
-class NativeGenesisGraphBackend implements GraphBackend {
+class NativeGenesisGraphBackend implements GenesisGraphBackendApi {
   private readonly nodeCount = { value: 0 }
   private readonly edgeCount = { value: 0 }
 
@@ -255,6 +266,11 @@ class NativeGenesisGraphBackend implements GraphBackend {
       limit: q.limit,
     })
     return out.map(toNeighborResult)
+  }
+
+  async cypher(query: string): Promise<Array<Record<string, unknown>>> {
+    const out = await this.db.cypher(query)
+    return out as Array<Record<string, unknown>>
   }
 }
 
