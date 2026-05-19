@@ -1,13 +1,13 @@
 #!/usr/bin/env node
-import { readFile, writeFile, mkdir } from 'node:fs/promises'
+import { readFile } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 import { parseArgs } from 'node:util'
 import { performance } from 'node:perf_hooks'
 
 import { recall } from './index.js'
 import { evaluateQuery, BenchmarkMetrics, calculateMRR } from './bench-engine.js'
-import { createEmbedder } from '@freshair129/gks'
-import { BgeReranker } from '../../../../../packages/gks/src/memory/vector/reranker.js' // Direct import for now
+// @ts-ignore - Deferred monorepo plumbing resolution
+import { createEmbedder, createBgeReranker } from '@freshair129/gks'
 
 const HELP = `msp-recall bench — evaluate and tune retrieval performance
 
@@ -101,7 +101,7 @@ async function main(): Promise<number> {
 
   // 2. Prepare dependencies
   const embedder = await createEmbedder({ provider: 'nomic' })
-  const reranker = values.rerank ? new BgeReranker() : undefined
+  const reranker = values.rerank ? createBgeReranker() : undefined
 
   // 3. Run queries
   for (let i = 0; i < dataset.queries.length; i++) {

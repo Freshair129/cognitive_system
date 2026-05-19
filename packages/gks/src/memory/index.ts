@@ -826,6 +826,10 @@ function mergeAndRerank(
   return scored.slice(0, opts.maxTotal).map(({ h, s }) => ({ ...h, score: s }))
 }
 
+export function createBgeReranker(opts: BgeRerankerOptions = {}): BgeReranker {
+  return new BgeReranker(opts)
+}
+
 /** Re-export concrete layer types so callers can `import { ... } from '.../memory'`. */
 export { AtomicLayer } from './gks.js'
 export { VectorStore } from './vector/index.js'
@@ -845,6 +849,7 @@ export { ATOMIC_ID_PATTERN, isAtomicId, assertAtomicId } from './atomic-id.js'
 export { createEmbedder, mockEmbedder } from './vector/embedder.js'
 export { createNomicEmbedder } from './vector/embedder-nomic.js'
 export type { Embedder, EmbedderOptions, EmbedderInfo } from './vector/embedder.js'
+export * from './vector/reranker.js'
 export { createReranker, rerank } from './rerank.js'
 export type { Reranker, RerankerOptions } from './rerank.js'
 export { createAnthropicClient, createLlmExtractor } from './consolidator-llm.js'
