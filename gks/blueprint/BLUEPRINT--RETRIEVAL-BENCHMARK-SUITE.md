@@ -2,9 +2,9 @@
 id: BLUEPRINT--RETRIEVAL-BENCHMARK-SUITE
 phase: 3
 type: blueprint
-status: proposed
+status: draft
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: BLUEPRINT — Retrieval Benchmark Suite Implementation Plan
 tags: [msp, retrieval, benchmark, tuning, plan, m10c]
@@ -15,6 +15,9 @@ crosslinks:
   references:
     - FEAT--RETRIEVAL-BENCHMARK-SUITE
     - CONCEPT--MSP-ROADMAP
+linked_symbols:
+  - file: packages/msp/src/orchestrator/retrieval/bench-engine.ts
+  - file: packages/msp/src/orchestrator/retrieval/bench-cli.ts
 created_at: 2026-05-18T15:00:00+07:00
 ---
 

@@ -15,6 +15,9 @@ crosslinks:
   references:
     - CONCEPT--CROSS-ENCODER-RERANKER
     - ADR--RETRIEVAL-RRF-FUSION
+linked_symbols:
+  - file: packages/gks/src/memory/vector/reranker.ts
+  - file: packages/msp/src/orchestrator/retrieval/index.ts
 created_at: 2026-05-18T15:00:00+07:00
 ---
 

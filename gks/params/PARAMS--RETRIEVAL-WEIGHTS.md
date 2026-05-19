@@ -1,10 +1,10 @@
 ---
 id: PARAMS--RETRIEVAL-WEIGHTS
-phase: 1
+phase: 2
 type: params
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: PARAMS — Retrieval RRF Weights — default importance for hybrid search
 tags: [msp, retrieval, rrf, weights, tuning]

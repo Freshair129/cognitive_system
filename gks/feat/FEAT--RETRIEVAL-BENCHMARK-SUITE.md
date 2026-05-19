@@ -2,9 +2,9 @@
 id: FEAT--RETRIEVAL-BENCHMARK-SUITE
 phase: 2
 type: feat
-status: proposed
+status: draft
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: FEAT — Retrieval Benchmark Suite — empirical evaluation for search tuning
 tags: [msp, retrieval, benchmark, metrics, tuning, m10c]
