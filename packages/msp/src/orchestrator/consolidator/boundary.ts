@@ -71,7 +71,7 @@ export function detectBoundaries(
 ): Array<[number, number]> {
   if (turns.length === 0) return []
 
-  const threshold = opts.thresholds?.boundary ?? DEFAULT_THRESHOLDS.boundary
+  const threshold = opts.thresholds?.boundary ?? (DEFAULT_THRESHOLDS.boundary as number)
   const window = opts.window ?? 2
 
   const ranges: Array<[number, number]> = []

@@ -7,7 +7,7 @@ import { performance } from 'node:perf_hooks'
 import { recall } from './index.js'
 import { evaluateQuery, BenchmarkMetrics, calculateMRR } from './bench-engine.js'
 import { createEmbedder } from '@freshair129/gks'
-import { BgeReranker } from '../../../packages/gks/src/memory/vector/reranker.js' // Direct import for now
+import { BgeReranker } from '../../../../../packages/gks/src/memory/vector/reranker.js' // Direct import for now
 
 const HELP = `msp-recall bench — evaluate and tune retrieval performance
 

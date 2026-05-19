@@ -1,5 +1,4 @@
 import { resolve } from 'node:path'
-import { readFile } from 'node:fs/promises'
 import { createGenesisGraphBackend } from '@freshair129/gks'
 import { dispatch } from '../agents/dispatch.js'
 import { parseFile } from './parse.js'
@@ -36,22 +35,21 @@ export async function judgeContradiction(
 
   // 1. Parse the target atom
   const newAtom = await parseFile(filepath)
+  const atomId = newAtom.fm['id'] as string
   
   // 2. Use Genesis Graph to find relevant stable neighbors
   const dbPath = resolve(root, 'gks')
   const backend = createGenesisGraphBackend({ path: dbPath })
   await backend.load()
 
-  const neighbors = await backend.neighbors(newAtom.id, {
+  const neighbors = await backend.neighbors(atomId, {
     depth: hops,
     direction: 'both',
     limit: limit * 2 // Fetch more to filter for stable ones
   })
 
   const stableNeighbors = neighbors
-    .filter(n => n.node.id !== newAtom.id) // Skip self
-    // In a real implementation, we would check if they are 'stable' in the index
-    // For MVP, we treat all graph nodes as potential canon
+    .filter(n => n.node.id !== atomId) // Skip self
     .slice(0, limit)
 
   if (stableNeighbors.length === 0) {
@@ -61,9 +59,6 @@ export async function judgeContradiction(
   // 3. Prepare context for the T3 Agent
   const neighborContents = await Promise.all(
     stableNeighbors.map(async (n) => {
-      // In a real implementation, we'd resolve the actual path from the index
-      // For now, we assume the graph node might have the path or we can infer it
-      // Simplified: we'll just use the props if available or mock
       return `[[${n.node.id}]]:\n${JSON.stringify(n.node.props)}`
     })
   )
@@ -73,7 +68,7 @@ You are the Semantic Contradiction Judge for the cognitive_system knowledge base
 Your task is to identify logical tensions or direct contradictions between a newly proposed atom and the existing stable canon.
 
 ### New Atom (Candidate):
-ID: ${newAtom.id}
+ID: ${atomId}
 Body:
 ${newAtom.body}
 
@@ -85,8 +80,8 @@ ${neighborContents.join('\n\n---\n\n')}
 2. Identify any claims in the new atom that contradict or significantly drift from the stable atoms without explicit supersession.
 3. Cite the specific conflicting passages from both sides.
 4. Assign a severity:
-   - 'definite': Direct logical contradiction (e.g. A says "use X", B says "do NOT use X").
-   - 'possible': Semantic tension or ambiguity that might lead to confusion.
+   - 'definite': Direct logical contradiction.
+   - 'possible': Semantic tension or ambiguity.
    - 'none': No conflict detected.
 
 ### Output Format:
@@ -107,9 +102,10 @@ If no contradictions found, return {"contradictions": []}.
 
   // 4. Dispatch to T3 (Claude)
   const result = await dispatch({
+    type: 'review',
     prompt,
     budget_hint: 'T3',
-    severity: 'high', // Logic integrity is high severity
+    severity: 'critical', // Logic integrity is critical severity
     context_size_tokens: 4000
   })
 

@@ -184,8 +184,8 @@ export function scoreChunk(
   }
   score = clamp01(score)
 
-  const low = thresholds.low ?? DEFAULT_THRESHOLDS.low
-  const high = thresholds.high ?? DEFAULT_THRESHOLDS.high
+  const low = thresholds.low ?? (DEFAULT_THRESHOLDS.low as number)
+  const high = thresholds.high ?? (DEFAULT_THRESHOLDS.high as number)
   let verdict: Verdict
   if (score < low) verdict = 'drop'
   else if (score > high) verdict = 'keep'

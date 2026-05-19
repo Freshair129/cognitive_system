@@ -1,25 +1,45 @@
-import type { SlmClient, SlmCall } from '../../codegen/slm/types.js'
+import type { SessionTurn } from '../../memory/sessions/types.js'
+import type { Embedder } from '@freshair129/gks'
+import type { SlmClient as BaseSlmClient } from '../../codegen/slm/types.js'
+import type { RequestContext, Subject } from '../../policy/types.js'
 
-export type { SlmCall }
+/**
+ * A single turn from session.jsonl. Re-exports the existing memory shape so
+ * the consolidator can be wired to the sessions reader without remapping.
+ */
+export type Turn = SessionTurn
 
-/** A single user/agent turn, read from a session JSONL log. */
-export interface Turn {
-  sessionId: string
-  episodicId: string
-  turnId: number
-  msgId: string
-  speakerId: string
-  content: string
-  learnId?: string
-}
+/**
+ * The canonical SLM client type (function-based) used across MSP.
+ */
+export type LlmClient = BaseSlmClient
 
-/** A sequence of turns forming a logical unit of conversation. */
+/** Alias for LlmClient to support legacy references in tests/modules. */
+export type SlmClient = LlmClient
+
+/**
+ * A contiguous group of turns (one possible episode candidate).
+ */
 export type Chunk = Turn[]
 
 export type Verdict = 'keep' | 'drop' | 'borderline'
 
-/** Discriminant for which scoring tier produced an episode. */
+export type ScoreBreakdown = Record<string, number>
+
+export interface Tier1Result {
+  score: number
+  verdict: Verdict
+  breakdown: ScoreBreakdown
+}
+
 export type ScoreSource = 'tier1' | 'tier2' | 'tier2-default'
+
+export interface Tier2Result {
+  score: number
+  summary: string
+  tags: string[]
+  source: 'tier2' | 'tier2-default'
+}
 
 export interface SessionStats {
   turnCount: number
@@ -28,53 +48,62 @@ export interface SessionStats {
 }
 
 export interface Thresholds {
-  low: number
-  high: number
-  boundary: number
+  low?: number
+  high?: number
+  boundary?: number
 }
 
-/** Result of tier-1 deterministic scoring. */
-export interface Tier1Result {
-  score: number
-  verdict: Verdict
-  breakdown: Record<string, number>
-}
-
-/** Result of tier-2 LLM scoring. */
-export interface Tier2Result {
-  score: number
-  summary: string
-  tags: string[]
-  source: 'tier2' | 'tier2-default'
-}
-
-/** Callable LLM client (alias for SlmClient). */
-export type LlmClient = SlmClient
-
-/** Options for the main `consolidate()` orchestrator. */
 export interface ConsolidateOptions {
   sessionId: string
   root?: string
   namespace?: string
-  llm?: LlmClient
-  thresholds?: Partial<Thresholds>
+  llm?: SlmClient
+  embedder?: Embedder
+  thresholds?: Thresholds
   maxLlmCallsPerSession?: number
   llmCallTimeoutMs?: number
-  /** Override the current-time factory (useful for deterministic tests). */
+  /** Injected clock for testing. */
   now?: () => Date
-  /** UCF Phase 4: Subject identity for audit trails (optional). */
-  subject?: import('../../policy/types.js').Subject
-  /** UCF Phase 4: Request context for audit trails (optional). */
-  context?: import('../../policy/types.js').RequestContext
+  /** UCF Subject for policy enforcement. */
+  subject?: Subject
+  /** UCF Request Context for policy enforcement. */
+  context?: RequestContext
 }
+
+// --- Tiered Memory Enums (Phase A) ---
+
+export type MemoryDomain =
+  | 'safety'
+  | 'identity-relationship'
+  | 'knowledge-skill'
+  | 'contextual'
+  | 'meta'
+
+export type EpistemicState =
+  | 'hypothesis'
+  | 'confirmed'
+  | 'contested'
+  | 'deprecated'
+
+export type EncodingLevel =
+  | 'L0'   // trace
+  | 'L1'   // light
+  | 'L2'   // standard
+  | 'L3'   // deep
+  | 'L4'   // critical
 
 /** The final output of consolidation for one contiguous chunk. */
 export interface Episode {
   sessionId: string
   turnRange: [number, number]
   summary: string
+  tags: string[]
   score: number
-  scoreSource?: ScoreSource
-  tags?: string[]
-  createdAt?: string
+  scoreSource: ScoreSource
+  createdAt: string
+  
+  // Tiered memory extensions (Phase A)
+  domain?: MemoryDomain
+  epistemic_state?: EpistemicState
+  encoding_level?: EncodingLevel
 }

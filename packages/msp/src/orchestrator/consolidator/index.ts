@@ -16,7 +16,10 @@ import {
 } from './config.js'
 import type {
   ConsolidateOptions,
+  EncodingLevel,
+  EpistemicState,
   Episode,
+  MemoryDomain,
   ScoreSource,
   Turn,
 } from './types.js'
@@ -198,6 +201,9 @@ interface EpisodeFields {
   score: number
   scoreSource: ScoreSource
   createdAt: string
+  domain?: MemoryDomain
+  epistemicState?: EpistemicState
+  encodingLevel?: EncodingLevel
 }
 
 function makeEpisode(f: EpisodeFields): Episode {
@@ -209,5 +215,8 @@ function makeEpisode(f: EpisodeFields): Episode {
     score: f.score,
     scoreSource: f.scoreSource,
     createdAt: f.createdAt,
+    domain: f.domain ?? 'meta',
+    epistemic_state: f.epistemicState ?? 'hypothesis',
+    encoding_level: f.encodingLevel ?? 'L2',
   }
 }
