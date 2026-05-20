@@ -1,6 +1,60 @@
 import { writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
-import type { NarrativeUnit } from './types.js'
+import type { NarrativeUnit, IdentityBelief } from './types.js'
+
+/**
+ * Pillar 4: RELATION (Identity Variant)
+ * Generates the GKS atom for a distilled Identity belief.
+ */
+export async function writeBeliefAtom(
+  root: string,
+  belief: IdentityBelief
+): Promise<string> {
+  const content = `---
+id: ${belief.id}
+phase: 1
+type: belief
+status: stable
+vault_id: default
+tier: process
+source_type: learned
+epistemic_state: ${belief.epistemic_state}
+confidence: ${belief.confidence}
+title: BELIEF — ${belief.id}
+tags: [msp, memory, identity, belief, distillation]
+aliases: [Identity Memory, BELIEF]
+cluster: memory
+role: Distilled long-term belief
+crosslinks:
+  references:
+${belief.source_narratives.map(id => `    - ${id}`).join('\n')}
+created_at: ${new Date().toISOString()}
+---
+
+# BELIEF — ${belief.id}
+
+## Belief
+
+${belief.statement}
+
+## Evidence
+
+- Supported by ${belief.source_narratives.length} narratives.
+- First observed at: ${belief.first_observed_at}
+- Times confirmed: ${belief.times_confirmed}
+- Times contested: ${belief.times_contested}
+
+## Source
+
+- Distilled from hierarchical 8-8-8 memory synthesis.
+`
+
+  const filePath = join(root, 'gks', 'identity', `${belief.id}.md`)
+  // Note: Directory is guaranteed to exist by initMemoryStore.
+  await writeFile(filePath, content, 'utf8')
+  
+  return filePath
+}
 
 /**
  * Pillar 4: RELATION
@@ -10,8 +64,6 @@ export async function writeNarrativeAtom(
   root: string,
   narrative: NarrativeUnit
 ): Promise<string> {
-  const timestamp = new Date().toISOString()
-  
   const content = `---
 id: ${narrative.id}
 phase: 1

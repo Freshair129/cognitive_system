@@ -8,6 +8,7 @@ export interface DistillOptions {
   namespace: string
   root?: string
   dryRun?: boolean
+  force?: boolean
   llm?: SlmClient
   maxLlmCalls?: number
   llmTimeoutMs?: number

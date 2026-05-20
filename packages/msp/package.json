@@ -22,7 +22,8 @@
     "msp-atrophy": "./dist/validator/atrophy-cli.js",
     "msp-adr": "./dist/generator/adr-cli.js",
     "msp-recall-bench": "./dist/orchestrator/retrieval/bench-cli.js",
-    "msp-judge": "./dist/validator/judge-cli.js"
+    "msp-judge": "./dist/validator/judge-cli.js",
+    "msp-mll": "./dist/orchestrator/mll/cli.js"
   },
   "scripts": {
     "dev": "concurrently \"npm run build:watch\" \"npm run test:watch\"",

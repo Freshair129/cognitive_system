@@ -1,23 +1,19 @@
 import { resolve } from 'node:path'
-import { readFile, writeFile } from 'node:fs/promises'
 
-import type { Episode } from '../consolidator/types.js'
-import type { DistillOptions, DistillResult, NarrativeUnit } from './types.js'
+import type { DistillOptions, DistillResult, IdentityBelief, NarrativeUnit } from './types.js'
 import { cleanEpisodes } from './pillar-clean.js'
-import { synthesizeNarrative } from './pillar-summary.js'
-import { writeNarrativeAtom } from './pillar-relation.js'
+import { synthesizeNarrative, synthesizeIdentity } from './pillar-summary.js'
+import { writeNarrativeAtom, writeBeliefAtom } from './pillar-relation.js'
 import { readMemoryCounters, updateMemoryCounters } from '../../memory/counters.js'
 import { initMemoryStore } from '../../memory/init.js'
+import { loadUndistilledEpisodes, loadUndistilledNarratives } from './loader.js'
 
 /**
- * Main orchestrator for memory distillation.
+ * Main orchestrator for memory distillation (Phase B & C).
  * 
- * Workflow:
- * 1. Initialize store and read counters.
- * 2. Check trigger: sessions since last narrative >= 8.
- * 3. Load unconsolidated episodes.
- * 4. Run 4-pillars pipeline.
- * 5. Update counters and persist narrative.
+ * Implements the 8-8-8 protocol:
+ * - 8 Sessions -> 1 Narrative (Tier 2)
+ * - 8 Narratives -> 1 Identity Belief (Tier 3)
  */
 export async function distill(opts: DistillOptions): Promise<DistillResult> {
   const root = opts.root ?? process.cwd()
@@ -33,60 +29,80 @@ export async function distill(opts: DistillOptions): Promise<DistillResult> {
     await initMemoryStore(root, namespace)
     const counters = await readMemoryCounters(root, namespace)
 
-    // Trigger check (M11 default: 8)
-    if (counters.session_seq < 8 && !opts.dryRun) {
-      return result // Not enough sessions for narrative synthesis
+    // --- Phase B: Session -> Narrative ---
+    const sessionThreshold = 8
+    if (counters.session_seq >= sessionThreshold || opts.force) {
+      const rawEpisodes = await loadUndistilledEpisodes({ root, namespace, limit: 50 })
+      if (rawEpisodes.length > 0) {
+        const cleaned = cleanEpisodes(rawEpisodes)
+        result.episodesProcessed = cleaned.length
+
+        if (cleaned.length > 0 && opts.llm) {
+          console.log(`[distill] Tier 2: synthesizing narrative from ${cleaned.length} episodes...`)
+          const summary = await synthesizeNarrative(cleaned, opts.llm, opts.llmTimeoutMs)
+
+          const narrativeId = `NARRATIVE--${Date.now()}` 
+          const narrative: NarrativeUnit = {
+            id: narrativeId,
+            namespace,
+            created_at: new Date().toISOString(),
+            domain: 'meta',
+            epistemic_state: 'confirmed',
+            confidence: 0.8,
+            encoding_level: 'L2',
+            source_episodes: cleaned.map(ep => ({
+              id: 'EPISODE--MOCK',
+              session_id: ep.sessionId,
+              encoding_level: ep.encoding_level || 'L2'
+            })),
+            content: summary
+          }
+
+          if (!opts.dryRun) {
+            await writeNarrativeAtom(root, narrative)
+            await updateMemoryCounters(root, namespace, 'core')
+            result.narrativesCreated = 1
+          }
+        }
+      }
     }
 
-    // TODO: Load episodes from episodic_memory.json that haven't been distilled.
-    // For now, we mock the episode retrieval logic.
-    const mockEpisodes: Episode[] = [] 
+    // --- Phase C: Narrative -> Identity ---
+    // Re-read counters after Phase B update
+    const updatedCounters = await readMemoryCounters(root, namespace)
+    const coreThreshold = 8
+    if (updatedCounters.core_seq >= coreThreshold || opts.force) {
+      const narratives = await loadUndistilledNarratives({ root, namespace, limit: 50 })
+      
+      if (narratives.length > 0 && opts.llm) {
+        console.log(`[distill] Tier 3: synthesizing identity from ${narratives.length} narratives...`)
+        const identityResult = await synthesizeIdentity(narratives, opts.llm, opts.llmTimeoutMs)
 
-    if (mockEpisodes.length === 0) {
-      return result
+        if (!opts.dryRun) {
+          for (const b of identityResult.beliefs) {
+            const beliefId = `BELIEF--${Math.random().toString(36).substring(2, 9).toUpperCase()}`
+            const belief: IdentityBelief = {
+              id: beliefId,
+              statement: b.belief,
+              confidence: b.confidence,
+              epistemic_state: 'confirmed',
+              source_narratives: b.evidence_cite,
+              first_observed_at: new Date().toISOString(),
+              times_confirmed: 1,
+              times_contested: 0
+            }
+            await writeBeliefAtom(root, belief)
+            result.beliefsRevised++
+          }
+          await updateMemoryCounters(root, namespace, 'sphere')
+        }
+      }
     }
-
-    // Pillar 1: CLEAN
-    const cleaned = cleanEpisodes(mockEpisodes)
-    result.episodesProcessed = cleaned.length
-
-    if (cleaned.length === 0) return result
-
-    // Pillar 2: SUMMARY
-    if (!opts.llm) {
-      throw new Error('LLM client required for narrative synthesis')
-    }
-    const summary = await synthesizeNarrative(cleaned, opts.llm, opts.llmTimeoutMs)
-
-    // Construct Narrative Unit
-    const narrativeId = `NARRATIVE--${Date.now()}` // TODO: Use ULID
-    const narrative: NarrativeUnit = {
-      id: narrativeId,
-      namespace,
-      created_at: new Date().toISOString(),
-      domain: 'meta',
-      epistemic_state: 'confirmed',
-      confidence: 0.8,
-      encoding_level: 'L2',
-      source_episodes: cleaned.map(ep => ({
-        id: 'EPISODE--MOCK', // TODO: Real ID
-        session_id: ep.sessionId,
-        encoding_level: ep.encoding_level || 'L2'
-      })),
-      content: summary
-    }
-
-    // Pillar 4: RELATION (Persistence)
-    if (!opts.dryRun) {
-      await writeNarrativeAtom(root, narrative)
-      await updateMemoryCounters(root, namespace, 'core')
-      result.narrativesCreated = 1
-    }
-
-    console.log(`[distill] successfully created narrative ${narrativeId}`)
 
   } catch (err) {
-    result.errors.push((err as Error).message)
+    const msg = (err as Error).message
+    console.error(`[distill] error: ${msg}`)
+    result.errors.push(msg)
   }
 
   return result
