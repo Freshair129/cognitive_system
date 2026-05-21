@@ -23,16 +23,16 @@ Daily aggregate of dispatcher cost telemetry. See `SPEC--USAGE-ATOM` for the con
 <!-- USAGE-SUMMARY-START -->
 ```json
 {
-  "total_cost_usd": 0.001164825,
-  "call_count": 5,
+  "total_cost_usd": 0.00168795,
+  "call_count": 8,
   "by_tier": {
     "T1": {
       "count": 0,
       "cost_usd": 0
     },
     "T2": {
-      "count": 5,
-      "cost_usd": 0.001164825
+      "count": 8,
+      "cost_usd": 0.00168795
     },
     "T3": {
       "count": 0,
@@ -40,7 +40,7 @@ Daily aggregate of dispatcher cost telemetry. See `SPEC--USAGE-ATOM` for the con
     }
   },
   "top_episodes": [],
-  "updated_at": "2026-05-21T20:09:05.998Z"
+  "updated_at": "2026-05-21T20:20:06.669Z"
 }
 ```
 <!-- USAGE-SUMMARY-END -->
