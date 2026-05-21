@@ -2,7 +2,7 @@
 id: BLUEPRINT--NOTION-IMPORT-TOOLING
 phase: 3
 type: blueprint
-status: proposed
+status: draft
 vault_id: default
 tier: process
 source_type: axiomatic
@@ -15,6 +15,10 @@ crosslinks:
   references:
     - FEAT--NOTION-IMPORT-TOOLING
     - CONCEPT--MSP-ROADMAP
+linked_symbols:
+  - file: packages/msp/src/migration/notion/cli.ts
+  - file: packages/msp/src/migration/notion/client.ts
+  - file: packages/msp/src/migration/notion/mapper.ts
 created_at: 2026-05-21T23:15:00+07:00
 ---
 

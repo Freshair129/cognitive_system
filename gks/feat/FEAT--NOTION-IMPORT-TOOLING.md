@@ -2,7 +2,7 @@
 id: FEAT--NOTION-IMPORT-TOOLING
 phase: 2
 type: feat
-status: proposed
+status: draft
 vault_id: default
 tier: process
 source_type: axiomatic
