@@ -1,6 +1,30 @@
 # FRAMEWORK_MASTER_SPEC.md
 
 > **Universal Multi-Agent Framework Boilerplate**
+
+## Tri‑Brain Architecture Overview
+
+The system is organized around a **Tri‑Brain** model that mirrors the functional organization of the human brain:
+
+| Module | Abbreviation | Core Role | Primary Responsibilities |
+|--------|--------------|-----------|--------------------------|
+| **Cortex** | **T3 (Architect)** | Global analysis, planning, and design of high‑level strategies. | • Context synthesis<br>• Task decomposition<br>• Knowledge‑base querying |
+| **Limbic** | **T2 (Implementer)** | Intent handling, resonance with user context, and coordination of sub‑tasks. | • Context retrieval (GKS)<br>• State management<br>• Emotional/priority weighting |
+| **Motor** | **T1 (Executor)** | Micro‑task execution, tool orchestration, and low‑level actuation. | • Running commands<br>• File I/O<br>• Real‑time feedback |
+
+The **workflow** proceeds as:
+
+```mermaid
+flowchart LR
+    A[Boss Input] --> B[Limbic (T2) – Intent & Context]
+    B --> C[Context Retrieval (GKS)]
+    C --> D[Cortex (T3) – Analysis & Planning]
+    D --> E[Motor (T1) – Execution & Tool Calls]
+    E --> F[Result Delivery]
+```
+
+*The diagram above is rendered using Mermaid and is compatible with the repository’s Markdown preview tooling.*
+
 > สถาปัตยกรรมตั้งต้น (Meta-Architecture) สำหรับโปรเจกต์ที่ขับเคลื่อนด้วย Multi-Agent + Doc-Before-Code
 > สกัดจาก GKS — ลบ business logic ออกทั้งหมด คงไว้เฉพาะ "กฎของระบบ" ที่ใช้ซ้ำได้กับทุกโปรเจกต์
 >
@@ -77,22 +101,25 @@
 
 ## 1. วิสัยทัศน์ (Vision)
 
-สถาปัตยกรรมนี้มองการพัฒนาโปรเจกต์ใดก็ตามว่าเป็น **"สายพานการผลิตข้อมูล" (Information Assembly Line)** ที่แปลง:
+สถาปัตยกรรมนี้มองการพัฒนาโปรเจกต์ว่าเป็น **"สายพานการผลิตข้อมูล" (Information Assembly Line)** ที่จำลองโครงสร้างการประมวลผลของ **"สมอง 3 ส่วน" (Tri-Brain Architecture)** แบ่งเป็น 3 ระยะหลัก (Phases) เพื่อประสิทธิภาพสูงสุดในบริบทของภาษาไทย (**Thai LLM Native**):
 
+1.  **Phase 1: Perception (Limbic Brain - T2):** 
+    - **⚡ Engram Check (O(1) Reflex):** ตรวจสอบฐานข้อมูลความจำระยะสั้นทันทีเพื่อการตอบสนองที่รวดเร็ว
+    - **Cognitive Gateway:** ใช้ `typhoon-s-thaillm-8b-instruct` เพื่อจำแนก **Intent** และอารมณ์ (Confidence < 70% จะส่งต่อไปยัง Cortex อัตโนมัติ)
+    - **Output:** ส่งต่อข้อมูลในฐานะ "Intuitive Gut Feeling" ให้กับสมองส่วนถัดไป
+2.  **Phase 2: Analysis & Planning (Cortex Brain - T3):**
+    - ทำหน้าที่วิเคราะห์แผนงานเป็นขั้นตอน (`Plan`) และตรวจสอบกฎ `EVA.md`
+    - ใช้โมเดลระดับสูง (Gemini Pro / Claude) เพื่อสร้าง `StepTrace` และตัดสินใจเลือกใช้เครื่องมือ
+3.  **Phase 3: Execution & Coding (Motor Brain - T1):**
+    - **Tools Engine:** ใช้ `gemma4` (local) เพื่อเรียกใช้ Bash, FS และ Knowledge Tools
+    - **Coding Engine:** ใช้ `qwen 2.5 coder` (local) เพื่อเขียนโค้ดจริงจาก Blueprint ที่แตกเป็น Micro-tasks แล้ว
+
+**กระบวนการประมวลผล (Operational Flow):**
 ```text
-Human Concept  →  Atomic Knowledge  →  Technical Blueprint  →  Code
- (คลุมเครือ)      (โครงสร้างชัด)       (แห้ง/ไร้น้ำ)         (รันได้)
+User Input → Engram Check → Limbic (Perception) → GKS Retrieval → Cortex (Analysis) → Motor (Execution)
 ```
 
-เพื่อให้ AI แต่ละระดับทำงานในจุดที่ตัวเองเก่งที่สุด:
-
-- **Large LLM (Claude Opus 4.7 / Gemini 2.5 Pro / GPT-5)** ออกแบบสถาปัตยกรรม / ตัดสินใจ / review architecture
-- **Medium LLM (Claude Sonnet 4.6 / Haiku 4.5 / Gemini Flash)** แปลงเอกสาร / composer / validator / generic tasks
-- **Small Local SLM (Qwen 7–14B / Llama 3.x 7–13B / Phi-3)** เขียนโค้ดระดับ micro-task ที่ scope แคบและ deterministic
-
-ผลลัพธ์: **ประหยัด token, ลด hallucination, ทำงานแบบ parallel ได้**
-
-**หลักการแกนกลาง:** *Context Isolation → High Precision + Low Cost*
+**หลักการแกนกลาง:** *Thai-Language Precision + Context Isolation → High Precision + Low Cost*
 
 ---
 
@@ -116,6 +143,10 @@ Human Concept  →  Atomic Knowledge  →  Technical Blueprint  →  Code
 | **K-Impact Index** | ระบบจัดลำดับความสำคัญเชิงวิศวกรรม (0.0-1.0) อิงตาม Depth, Strictness, Stability | `gks_recall` / `gks_query` ranking |
 | **Genesis Block Bridge**| ตัวเชื่อมต่อระหว่างความรู้และการรันคำสั่ง (`msp-genesis-exec`) | `GenesisBlockBridge` (TS/Rust) |
 | **Axiomatic Guard** | ระบบป้องกันระดับ Native ไม่อนุญาตให้โหนดระดับล่างขัดแย้งกับกฎเหล็ก (Tier 0) | Rust-native Interceptor |
+| **Thai LLM Native** | การใช้โมเดลภาษาไทยที่สกัดเจตนาและอารมณ์ได้อย่างแม่นยำ | `typhoon-s-thaillm-8b-instruct` |
+| **Tri-Brain Runtime** | ระบบการประมวลผลที่แบ่งแยก Limbic, Cortex และ Motor ออกจากกัน | EVA Runtime |
+| **Engram Check** | ระบบตรวจสอบ O(1) Reflex เพื่อการตอบสนองที่รวดเร็วแบบสัญชาตญาณ | Reflex Candidate |
+| **Cognitive Gateway** | จุดคัดกรองเจตนาแรกสุดด้วย SLM ภาษาไทยประสิทธิภาพสูง | Typhoon Gateway |
 
 ---
 
@@ -285,9 +316,10 @@ packages/msp/src/
 
 **Scaling Tier (เลือกตามขนาดของงาน):**
 
-- **L1 (Trivial):** งานเล็กน้อย/จุกจิก (Quick Task เท่านั้น)
-- **L2 (Standard):** ฟีเจอร์ใหม่/โมดูลทั่วไป (ต้องมี contract: API / FEAT / BLUEPRINT)
-- **L3 (Critical):** ระบบหลัก/สถาปัตยกรรมซับซ้อน (ต้องมีเอกสารครบ FRAME + ADR + CONCEPT)
+- **L0 (Conversation):** **Small Talk [Limbic Only]** — สำหรับการถามตอบทั่วไป (Fact/Small talk) ไม่มีการวิเคราะห์ซับซ้อน
+- **L1 (Trivial):** **Quick Loop [Limbic → Motor]** — สำหรับงานเล็กน้อย/ถามตอบ (T2 → T1) กรองเจตนาแล้วรันเครื่องมือทันที
+- **L2 (Standard):** **Planned Loop [Limbic → Cortex → Motor]** — สำหรับฟีเจอร์ใหม่/โมดูลทั่วไป (T2 → T3 → T1) ต้องมี contract: API / FEAT / BLUEPRINT
+- **L3 (Critical):** **Full Chain [Limbic → T3 → T2 → T1]** — สำหรับระบบหลัก/สถาปัตยกรรมซับซ้อน (T2 → Cortex → Implementer → Motor) ต้องมีเอกสารครบ FRAMEWORK + ADR + CONCEPT + BLUEPRINT
 
 ### 4.2 โครงโฟลเดอร์มาตรฐาน (Canonical Layout)
 
