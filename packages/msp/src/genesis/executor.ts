@@ -3,7 +3,8 @@ import type { DispatchTask, Tier } from '../agents/types.js'
 import { findActiveMaster } from '../master/registry.js'
 
 import { composePrompt } from './composer.js'
-import { loadManifest, loadMembers } from './loader.js'
+import { loadManifest } from './loader.js'
+import { GenesisBlockBridge } from './bridge.js'
 import {
   DIMENSIONS,
   type ExecuteOptions,
@@ -24,29 +25,10 @@ function totalMembers(members: LoadedMembers): number {
  *
  * Orchestrates:
  *   1. loadManifest()      — parse the GENESIS--<blockId> frontmatter
- *   2. loadMembers()       — resolve every member atom and read its body
- *   3. findActiveMaster()  — check the Promoted-Block Registry; if the
- *                            block has graduated to Master tier, flip the
- *                            default-tier baseline up to T2 and surface
- *                            `from_master: true` in the result
+ *   2. GenesisBlockBridge  — resolve members via graph (Seeds + High-Impact Neighbors)
+ *   3. findActiveMaster()  — check the Promoted-Block Registry
  *   4. composePrompt()     — concatenate bodies by dimension + append userPrompt
  *   5. dispatch()          — send the composed prompt through the tier router
- *
- * `dispatch()` is called with `type: 'codegen'`, `severity: 'regular'`.
- * The `codegen` type biases routing toward T2 (per
- * `BLUEPRINT--AGENT-DISPATCHER`), which is the right default for the
- * structured-composite workload a Genesis Block represents.
- *
- * Tier resolution precedence:
- *   - `opts.tier` (explicit caller override) → forwarded as `budget_hint`.
- *   - Otherwise, if a registry hit exists → `'T2'` as the explicit floor.
- *   - Otherwise → no `budget_hint`, dispatcher routes automatically.
- *
- * Per `CONCEPT--PROMOTED-BLOCK-REGISTRY`, Master-tier blocks are presumed
- * important enough to warrant T2 minimum (the safe always-allowed cloud
- * tier per `BLUEPRINT--AGENT-DISPATCHER`). Callers can still force T3 by
- * passing `tier: 'T3'`; the cost-policy still applies — asking for T3 on a
- * regular-severity task will throw, NOT silently downgrade.
  */
 export async function executeBlock(
   blockId: string,
@@ -55,7 +37,10 @@ export async function executeBlock(
   const startedAt = Date.now()
 
   const manifest = await loadManifest(blockId, opts.root)
-  const members = await loadMembers(manifest, opts.root)
+  
+  // Phase 4.4: Use Bridge for impact-aware resolution
+  const bridge = new GenesisBlockBridge(opts.root)
+  const members = await bridge.resolveMembers(blockId)
 
   // Phase F1: surface registry membership to the runtime.
   const masterEntry = await findActiveMaster(opts.root, manifest.id)

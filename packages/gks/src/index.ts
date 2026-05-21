@@ -1,6 +1,7 @@
 export {
   BgeReranker,
   createEmbedder,
+  createGenesisGraphBackend,
   createReranker,
   MemoryStore,
   recall,
