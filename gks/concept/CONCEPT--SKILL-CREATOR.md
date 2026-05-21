@@ -13,7 +13,10 @@ tags:
   - skill
   - learning
   - evolution
-crosslinks: {"references":["docs/gks/SPEC--MLL.md","CONCEPT--ATOM-CONTRADICTION-DETECTION"]}
+crosslinks:
+  references:
+    - SPEC--META-LEARNING-LOOP
+    - CONCEPT--ATOM-CONTRADICTION-DETECTION
 created_at: 2026-05-18T11:15:00+07:00
 cluster: implementation_flow
 role: "Strategic intent / PRD"
@@ -36,5 +39,5 @@ The system identifies recurring successful workflows and automatically proposes 
 3. **Continuous Refinement:** Skills are not static; they are updated or superseded as new, more efficient patterns emerge.
 
 ## Connections
-- `[[docs/gks/SPEC--MLL.md]]` — the technical specification for the Meta-Learning Loop.
+- `[[SPEC--META-LEARNING-LOOP]]` — the technical specification for the Meta-Learning Loop.
 - `[[CONCEPT--SKILL-CANDIDATE]]` — the schema for the resulting atoms.

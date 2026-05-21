@@ -1,60 +1,82 @@
 #!/usr/bin/env node
 import { parseArgs } from 'node:util'
 import { resolve } from 'node:path'
-import { distillSkillFromEpisodes } from './skill-creator.js'
+import { runMll } from './orchestrator.js'
 
-const HELP = `msp-mll — Meta-Learning Loop CLI
+const HELP = `msp-mll — Meta Learning Loop (MLL) CLI
 
 Usage:
-  msp-mll distill [options]
+  msp-mll run --session-id <id> [--namespace <ns>] [--root <path>] [--force]
+  msp-mll --help
 
-Options:
-  --root <dir>       Project root (default: .)
-  --limit <n>        Max number of episodes to analyze (default: 5)
-  --ns <name>        Namespace/Tenant ID (default: default)
-  --help             Show this message
+Flags:
+  --session-id <id>   Session ID to analyze (required)
+  --namespace <ns>    Project namespace (default: evaAI)
+  --root <path>       Workspace root (default: cwd)
+  --force             Trigger distillation regardless of complexity
+  --help              This message
+
+Examples:
+  msp-mll run --session-id sess-123 --force
 `
 
 async function main(): Promise<number> {
-  const { values, positionals } = parseArgs({
-    options: {
-      root: { type: 'string' },
-      limit: { type: 'string' },
-      ns: { type: 'string' },
-      help: { type: 'boolean' },
-    },
-    allowPositionals: true,
-  })
+  let parsed
+  try {
+    parsed = parseArgs({
+      args: process.argv.slice(2),
+      options: {
+        'session-id': { type: 'string' },
+        namespace: { type: 'string', default: 'evaAI' },
+        root: { type: 'string' },
+        force: { type: 'boolean' },
+        help: { type: 'boolean', short: 'h' },
+      },
+      allowPositionals: true,
+    })
+  } catch (err) {
+    process.stderr.write(`error: ${(err as Error).message}\n${HELP}`)
+    return 2
+  }
+  const { values, positionals } = parsed
 
-  if (values.help || positionals.length === 0 || positionals[0] !== 'distill') {
+  if (values.help || (positionals[0] !== 'run' && !values['session-id'])) {
     process.stdout.write(HELP)
     return 0
   }
 
-  const root = values.root || process.cwd()
-  const limit = values.limit ? parseInt(values.limit, 10) : 5
-  const namespace = values.ns || 'default'
+  const root = resolve(values.root ?? process.cwd())
+  const sessionId = values['session-id']!
+  const namespace = values.namespace!
 
   try {
-    process.stdout.write(`[mll] Distilling skills from recent episodes (limit: ${limit})...\n`)
-    
-    const results = await distillSkillFromEpisodes({ root, limit, namespace })
+    const result = await runMll({
+      root,
+      sessionId,
+      namespace,
+      force: values.force
+    })
 
-    if (results.length === 0) {
-      process.stdout.write(`✓ No new skills identified.\n`)
-    } else {
-      process.stdout.write(`✓ Distillation complete. Created ${results.length} skill candidates:\n`)
-      for (const r of results) {
-        process.stdout.write(`  - ${r.skill_id} (from ${r.source_episodes.length} episodes)\n`)
-      }
-      process.stdout.write(`\nCheck .brain/msp/projects/${namespace}/candidates/ for details.\n`)
+    if (result.errors.length > 0) {
+      process.stderr.write(`✗ MLL failed with ${result.errors.length} errors:\n`)
+      for (const e of result.errors) process.stderr.write(`  - ${e}\n`)
+      return 1
     }
 
-    return 0
+    process.stdout.write(`✅ MLL run complete.\n`)
+    process.stdout.write(`Suggested Skills: ${result.skillsSuggested.join(', ') || 'None'}\n`)
+
   } catch (err) {
-    process.stderr.write(`✗ error: ${(err as Error).message}\n`)
+    process.stderr.write(`✗ unexpected error: ${(err as Error).message}\n`)
     return 1
   }
+
+  return 0
 }
 
-main().then((code) => process.exit(code))
+main()
+  .then((code) => process.exit(code))
+  .catch((err) => {
+    process.stderr.write(`✗ fatal error: ${(err as Error).message}\n`)
+    process.exit(2)
+  })

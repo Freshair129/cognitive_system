@@ -10,17 +10,20 @@ export interface DistillationResult {
   source_episodes: string[]
 }
 
+export interface SkillCreatorOpts {
+  root: string
+  limit?: number
+  namespace?: string
+  stabilityScore?: number
+}
+
 /**
  * Skill Creator Engine — automated distillation of reusable patterns.
  *
  * Implements Step 2 of the Meta-Learning Loop (Phase 1).
  * Uses Genesis Graph for data discovery and T3 for distillation.
  */
-export async function distillSkillFromEpisodes(opts: {
-  root: string,
-  limit?: number,
-  namespace?: string
-}): Promise<DistillationResult[]> {
+export async function distillSkillFromEpisodes(opts: SkillCreatorOpts): Promise<DistillationResult[]> {
   const root = resolve(opts.root)
   const limit = opts.limit ?? 5
   const ns = opts.namespace ?? 'default'
@@ -31,7 +34,8 @@ export async function distillSkillFromEpisodes(opts: {
   await backend.load()
 
   // Simplified query for MVP: find all atoms with type 'episode'
-  const allNodes = await backend.neighbors('N-ROOT', { depth: 2 }) // Mocking root discovery
+  // In future, filter for successful ones.
+  const allNodes = await backend.neighbors('N-ROOT', { depth: 2 }) 
   const episodeNodes = allNodes.filter(n => n.node.labels.includes('episode')).slice(0, limit)
 
   if (episodeNodes.length === 0) {
@@ -73,7 +77,7 @@ type: skill
 tier: genesis
 mll_metadata:
   source_episodes: ${JSON.stringify(episodeNodes.map(n => n.node.id))}
-  definition_stability: 0.9
+  definition_stability: ${opts.stabilityScore !== undefined ? opts.stabilityScore.toFixed(2) : '0.50'}
   suggested_by: "MLL-Skill-Creator"
   timestamp: "${new Date().toISOString()}"
 ---

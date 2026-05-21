@@ -22,7 +22,6 @@
     "msp-atrophy": "./dist/validator/atrophy-cli.js",
     "msp-adr": "./dist/generator/adr-cli.js",
     "msp-recall-bench": "./dist/orchestrator/retrieval/bench-cli.js",
-    "msp-judge": "./dist/validator/judge-cli.js",
     "msp-mll": "./dist/orchestrator/mll/cli.js"
   },
   "scripts": {
@@ -37,6 +36,7 @@
     "msp:atrophy": "tsx src/validator/atrophy-cli.ts",
     "msp:adr": "tsx src/generator/adr-cli.ts",
     "msp:recall:bench": "tsx src/orchestrator/retrieval/bench-cli.ts",
+    "msp:mll": "tsx src/orchestrator/mll/cli.ts",
     "msp:backlinks": "tsx src/memory/backlinks/cli.ts",
     "msp:check-links": "gks validate --links --root=../..",
     "msp:dispatch": "tsx src/agents/cli.ts",

@@ -7,87 +7,18 @@ tier: process
 source_type: axiomatic
 vault_id: default
 title: Dynamic Compound ID Suffix with Phase-Layer K Numbering
-aliases: &a1
-  - ADR
+aliases: [ADR, implementation_flow, Architecture decision record]
 cluster: implementation_flow
 role: Architecture decision record
-tags: &a2
-  - msp
-crosslinks: &a3
+tags: [msp, architecture, schema, id]
+crosslinks:
   references:
     - CONCEPT--CONFIG-AS-SSOT
+linked_symbols:
+  - file: packages/gks/src/memory/atomic-id.ts
+  - file: packages/msp/src/validator/utils/registry.ts
+  - file: scripts/msp/msp-atom.ts
 created_at: 2026-05-17T09:50:53.301+07:00
-attributes:
-  id: ADR--DYNAMIC-COMPOUND-ID-K-SUFFIX
-  phase: 2
-  type: adr
-  status: draft
-  tier: process
-  source_type: axiomatic
-  vault_id: default
-  title: Dynamic Compound ID Suffix with Phase-Layer K Numbering
-  aliases: *a1
-  cluster: implementation_flow
-  role: Architecture decision record
-  tags: *a2
-  crosslinks: *a3
-  created_at: 2026-05-17T09:50:53.301+07:00
-  attributes:
-    id: ADR-376--DYNAMIC-COMPOUND-ID-K-SUFFIX--K3
-    knowledgeId: DYNAMIC-COMPOUND-ID-K-SUFFIX
-    phase: 2
-    type: adr
-    status: draft
-    tier: process
-    source_type: axiomatic
-    vault_id: default
-    title: Dynamic Compound ID Suffix with Phase-Layer K Numbering
-    aliases: *a1
-    cluster: implementation_flow
-    role: Architecture decision record
-    tags: *a2
-    crosslinks: *a3
-    created_at: 2026-05-17T09:50:53.301+07:00
-    attributes:
-      id: ADR-376--DYNAMIC-COMPOUND-ID-K-SUFFIX--K3
-      knowledgeId: DYNAMIC-COMPOUND-ID-K-SUFFIX
-      phase: 2
-      type: adr
-      status: draft
-      tier: process
-      source_type: axiomatic
-      vault_id: default
-      title: Dynamic Compound ID Suffix with Phase-Layer K Numbering
-      aliases: *a1
-      cluster: implementation_flow
-      role: Architecture decision record
-      tags: *a2
-      crosslinks: *a3
-      created_at: 2026-05-17T09:50:53.301+07:00
-      domain: adr
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: adr
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
-  domain: adr
-  language: markdown
-  is_test: false
-  is_entrypoint: false
-  has_secret: true
-  secret_type: high_entropy_string
-  leak_risk: high
-  encryption_level: none
 ---
 
 # ADR — Dynamic Compound ID Suffix with Phase-Layer K Numbering
@@ -136,5 +67,5 @@ The GKS scaffolder is updated to treat this format as the universal fallback sta
 
 ## Source
 
-*   [atom_registry.yaml](file:///c:/Users/freshair/cognitive_system/atom_registry.yaml)
-*   [msp-atom.ts](file:///c:/Users/freshair/cognitive_system/scripts/msp/msp-atom.ts)
+*   `atom_registry.yaml`
+*   `scripts/msp/msp-atom.ts`
