@@ -2,6 +2,7 @@ import {
   DEFAULT_RRF_K,
   DEFAULT_TOP_K,
   DEFAULT_WEIGHTS,
+  type MemoryTier,
   type RetrievalHit,
   type SourceName,
   type SourceResult,
@@ -13,6 +14,7 @@ import {
 interface AtomScore {
   atomId: string
   score: number
+  memoryTier?: MemoryTier
   contributions: Array<{ source: SourceName; rank: number }>
   /** First non-empty snippet seen (deterministic by source iteration order). */
   snippet?: string
@@ -63,6 +65,9 @@ export function rrfFuse(perSource: SourceResult[], opts: RrfFuseOptions = {}): R
         existing.score += contribution
         existing.contributions.push({ source: sourceName, rank })
         existing.perSourceRanks[sourceName] = rank
+        if (!existing.memoryTier && hit.memoryTier) {
+          existing.memoryTier = hit.memoryTier
+        }
         if (!existing.snippet && hit.snippet) {
           existing.snippet = hit.snippet
         }
@@ -73,6 +78,7 @@ export function rrfFuse(perSource: SourceResult[], opts: RrfFuseOptions = {}): R
         const entry: AtomScore = {
           atomId: hit.atomId,
           score: contribution,
+          memoryTier: hit.memoryTier,
           contributions: [{ source: sourceName, rank }],
           snippet: hit.snippet,
           primarySource: sourceName,
@@ -106,6 +112,7 @@ export function rrfFuse(perSource: SourceResult[], opts: RrfFuseOptions = {}): R
   return sliced.map((entry, i) => ({
     atomId: entry.atomId,
     source: entry.primarySource,
+    memoryTier: entry.memoryTier,
     score: entry.score,
     rank: i + 1,
     snippet: entry.snippet,

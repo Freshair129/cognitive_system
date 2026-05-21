@@ -9,6 +9,8 @@ import * as brainResolve from './tools/brain-resolve.js'
 import * as candidate from './tools/candidate.js'
 import * as compressTool from './tools/compress.js'
 import * as dispatchTool from './tools/dispatch.js'
+import * as distillTool from './tools/distill.js'
+import * as identityBeliefsTool from './tools/identity-beliefs.js'
 import * as episodeAppend from './tools/episode-append.js'
 import * as identityGet from './tools/identity-get.js'
 import * as identitySet from './tools/identity-set.js'
@@ -39,6 +41,8 @@ const TOOLS = [
   validateTool,
   brainResolve,
   dispatchTool,
+  distillTool,
+  identityBeliefsTool,
   candidate,
   runTask,
   sessionAppend,

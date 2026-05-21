@@ -5,7 +5,10 @@ import type { RequestContext, Subject } from '../../policy/types.js'
  * Logical retrieval source name. Each source produces ranked hits which
  * RRF fuses into a single result list.
  */
-export type SourceName = 'gks-vector' | 'obsidian-text' | 'grep' | 'episodic' | 'backlinks' | 'graph'
+export type SourceName = 'gks-vector' | 'obsidian-text' | 'grep' | 'episodic' | 'backlinks' | 'graph' | 'narrative' | 'identity'
+
+/** §1 — Memory Tier hierarchy. */
+export type MemoryTier = 'trace' | 'episode' | 'narrative' | 'identity' | 'atom'
 
 /**
  * Minimal embedder shape accepted by the vector source. Compatible with the
@@ -42,6 +45,7 @@ export interface SourceHit {
   rank: number
   snippet?: string
   source: SourceName
+  memoryTier?: MemoryTier
   /** §4 — Domain-specific attributes for policy checks (UCF). */
   attributes?: Record<string, any>
 }
@@ -67,6 +71,7 @@ export interface SourceResult {
 export interface RetrievalHit {
   atomId: string
   source: SourceName
+  memoryTier?: MemoryTier
   score: number
   rank: number
   snippet?: string
@@ -96,6 +101,8 @@ export interface RetrievalTimings {
   episodic?: number
   backlinks?: number
   graph?: number
+  narrative?: number
+  identity?: number
   fusion: number
   rerank?: number
 }
@@ -175,7 +182,9 @@ export const DEFAULT_WEIGHTS: Record<SourceName, number> = {
   grep: 0.6,
   episodic: 1.2,
   backlinks: 0.5,
-  graph: 1.5, // High priority for structural connections
+  graph: 1.5,
+  narrative: 1.4,
+  identity: 1.8,
 }
 
 /**
@@ -188,6 +197,8 @@ export const DEFAULT_PER_SOURCE_TIMEOUTS: Record<SourceName, number> = {
   episodic: 100,
   backlinks: 100,
   graph: 300,
+  narrative: 200,
+  identity: 200,
 }
 
 export const DEFAULT_TOTAL_TIMEOUT_MS = 1500
