@@ -34,6 +34,7 @@ export interface GraphNode {
   id: string
   labels: string[]
   props: Record<string, unknown>
+  impact?: number
 }
 
 export interface GraphEdge {
@@ -47,6 +48,7 @@ export interface GraphEdge {
   valid_to: string | null
   recorded_at: string
   superseded_by?: string
+  impact?: number
 }
 
 export interface AddNodeArgs {

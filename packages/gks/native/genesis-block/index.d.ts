@@ -17,6 +17,7 @@ export interface NodeOutput {
   id: string
   labels: Array<string>
   props: any
+  impact?: number
 }
 export interface EdgeInput {
   id?: string
@@ -26,6 +27,7 @@ export interface EdgeInput {
   props?: any
   validFrom?: string
   supersede?: boolean
+  impact?: number
 }
 export interface EdgeOutput {
   id: string
@@ -37,6 +39,7 @@ export interface EdgeOutput {
   validTo?: string
   recordedAt: string
   supersededBy?: string
+  impact?: number
 }
 export interface QueryInput {
   from?: string

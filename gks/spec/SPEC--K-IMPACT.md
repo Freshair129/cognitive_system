@@ -1,62 +1,60 @@
-# SPEC--K-IMPACT
+# SPEC--K-IMPACT (Engineering Version)
 
 - **ID:** SPEC--K-IMPACT
 - **Phase:** 2 (Spec)
-- **Status:** draft
+- **Status:** stable
 - **Author:** Rwang (T2 Agent)
 - **Date:** 2026-05-21
-- **Ref:** [[CONCEPT--GENESIS-GRAPH-BACKEND]], [[MASTER--ATOM-CONTRADICTION-POLICY]]
+- **Ref:** [[CONCEPT--GENESIS-GRAPH-BACKEND]], [[FRAMEWORK--KNOWLEDGE-3-TIER]]
 
 ## 1. Objective
-The **K-Impact Index** is a cognitive weighting system for the Genesis Block native engine. It transforms a flat knowledge graph into a prioritized "Cognitive Map" by assigning a scalar impact score (0.0 to 1.0) to every Node and Edge.
+The **K-Impact Index** in this system is a purely engineering-centric metric designed for a **Code Agent** environment. It eliminates dependencies on physiological cores (`ri`, `rim`) and instead measures the architectural weight, logical authority, and stability of knowledge within the GKS graph.
 
-Its primary role is to serve as a **Ranked Secondary Index** to:
-1. **Prune Noise:** Filter out low-impact data during deep graph traversals.
-2. **Prioritize Recall:** Complement vector search (`pgvector`) by boosting high-impact relevant nodes.
-3. **Enforce Integrity:** Penalize data that contradicts Master Blocks (Axiomatic Alignment).
+## 2. Core Dimensions (Digital Physiology)
 
-## 2. Core Dimensions
-K-Impact is calculated using three primary dimensions, porting concepts from the legacy EVA 6.0 `k_impact_engine`.
+### 2.1 Dependency Depth (DD)
+Measures the structural importance of a node based on how much the system relies on it.
+- **Calculation:** Derived from the recursive count of incoming `references`, `implements`, and `depends_on` edges.
+- **Scale:** 0.0 (Leaf node/Utility) to 1.0 (Core Framework/Base Library).
 
-### 2.1 Structural Impact (SI)
-Measures the "Connectivity Density" of a node.
-- **Formula:** `SI = log(1 + in_degree + out_degree) / log(1 + max_possible_density)`
-- **Logic:** Nodes that are highly referenced or reference many others (e.g., central Concepts or Features) naturally carry more weight.
+### 2.2 Axiomatic Strictness (AS)
+Measures the logical authority of the knowledge based on its Tier in the architecture.
+- **Mapping:**
+    - `Tier 0 (MASTER-- / FRAME--)`: 1.0 (Sacred/Immutable)
+    - `Tier 1 (CONCEPT-- / SPEC--)`: 0.8 (Stable Logic)
+    - `Tier 2 (FEAT-- / ADR--)`: 0.6 (Intent/Implementation)
+    - `Tier 3 (LOG-- / EPISODE--)`: 0.3 (Transient Data)
+- **Scale:** Fixed scalar based on atom prefix.
 
-### 2.2 Axiomatic Alignment (AA)
-Measures compliance with the system's "Ground Truth" (Master Blocks).
-- **Formula:** `AA = 1.0` if no contradictions; `AA = -1.0` (Force Purge) if it violates a `MASTER--` rule.
-- **Logic:** Even a highly connected node becomes "Impact 0" if it is proven wrong by an Axiom.
-
-### 2.3 Temporal Recency (TR)
-Measures the freshness of the knowledge.
-- **Formula:** `TR = exp(-lambda * (current_time - valid_from))`
-- **Logic:** Newer facts have higher immediate impact; older facts "decay" unless reinforced by new edges (Resonance).
+### 2.3 Stability Confidence (SC)
+Measures the reliability of the information based on its lifecycle status.
+- **Mapping:**
+    - `status: stable`: 1.0
+    - `status: active`: 0.8
+    - `status: draft`: 0.4
+    - `status: deprecated`: 0.1
+- **Scale:** Fixed scalar based on `status:` frontmatter.
 
 ## 3. The K-Impact Formula (Rust Engine)
-The final index for a node `n` at time `t`:
 
-`K_Impact(n, t) = clamp((SI * w1 + TR * w2) * AA, 0.0, 1.0)`
+The final K-Impact score for any knowledge node `n` is calculated as a weighted average:
 
-- **w1 (Structure Weight):** 0.6 (Prioritizes fundamental concepts)
-- **w2 (Time Weight):** 0.4 (Prioritizes recent events)
+`K_Impact(n) = (DD * 0.5) + (AS * 0.3) + (SC * 0.2)`
 
-## 4. Operational Integration
-- **Index Storage:** K-Impact scores are cached in the native `Storage` struct and persisted in the JSONL log as metadata.
-- **Query Time:** `MATCH (a)-[r*1..5]->(b)` will use K-Impact to explore high-score paths first and stop if a path's cumulative impact falls below a `min_impact` threshold.
-- **API Extension:**
-  ```typescript
-  // Find top 10 most impactful nodes for a concept
-  query({ rel: 'references', minImpact: 0.7, limit: 10 })
-  ```
+### 3.1 Edge Impact
+Edges inherit a portion of the impact from the nodes they connect, modulated by the relationship type.
+- `supersedes` edges carry high impact (logical shift).
+- `mentions` edges carry low impact (informational).
 
-## 5. Non-Redundancy Guarantee
-| Dimension | pgvector | K-Impact |
-|---|---|---|
-| **Input** | String/Embedding | Graph Topology + Time + Axioms |
-| **Search** | "Find what is similar" | "Find what is important/true" |
-| **State** | Static (per document) | Dynamic (changes as the graph grows) |
+## 4. Implementation Strategy (P4.3)
+1. **Metadata Ingestion:** Update the Rust `Storage` to parse `tier` and `status` from atom frontmatter during sync.
+2. **Topology Analysis:** Implement a background routine in Rust to calculate recursive `DD` scores (Directed Acyclic Graph traversal).
+3. **Index Persistence:** Store the calculated `K_Impact` in the JSONL log as a new event type `Event::ImpactUpdate`.
+4. **Traversal Weighting:** Update `neighbors` and `cypher` engines to sort results by `K_Impact` by default.
+
+## 5. Usage Example
+A `MASTER--` atom with many `references` will have a `K_Impact` near **1.0**, ensuring it always appears at the top of query results and guides the agent's decision-making above all other data.
 
 ---
 
-**Please review and approve this specification. I will proceed to implement the logic in the Rust engine and update the TS adapter once approved.**
+**Please review and approve this Engineering Version of the K-Impact spec. I will proceed with the Rust implementation once approved.**

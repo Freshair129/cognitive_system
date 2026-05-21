@@ -131,6 +131,7 @@ interface NodeOutputLike {
   id: string
   labels: string[]
   props: unknown
+  impact?: number
 }
 
 interface EdgeOutputLike {
@@ -143,6 +144,7 @@ interface EdgeOutputLike {
   validTo?: string | null
   recordedAt: string
   supersededBy?: string | null
+  impact?: number
 }
 
 interface NeighborOutputLike {
@@ -165,6 +167,7 @@ interface EdgeInputLike {
   props?: unknown
   validFrom?: string
   supersede?: boolean
+  impact?: number
 }
 
 interface QueryInputLike {
@@ -287,6 +290,7 @@ function toGraphNode(no: NodeOutputLike): GraphNode {
     id: no.id,
     labels: no.labels,
     props: (no.props ?? {}) as Record<string, unknown>,
+    impact: no.impact,
   }
 }
 
@@ -300,6 +304,7 @@ function toGraphEdge(eo: EdgeOutputLike): GraphEdge {
     valid_from: eo.validFrom,
     valid_to: eo.validTo ?? null,
     recorded_at: eo.recordedAt,
+    impact: eo.impact,
   }
   if (eo.supersededBy != null) edge.superseded_by = eo.supersededBy
   return edge

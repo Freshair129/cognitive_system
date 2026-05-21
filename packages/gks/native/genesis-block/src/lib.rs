@@ -47,6 +47,7 @@ pub struct NodeOutput {
     pub id: String,
     pub labels: Vec<String>,
     pub props: serde_json::Value,
+    pub impact: Option<f64>,
 }
 
 #[napi(object)]
@@ -58,6 +59,7 @@ pub struct EdgeInput {
     pub props: Option<serde_json::Value>,
     pub valid_from: Option<String>,
     pub supersede: Option<bool>,
+    pub impact: Option<f64>,
 }
 
 #[napi(object)]
@@ -72,6 +74,7 @@ pub struct EdgeOutput {
     pub valid_to: Option<String>,
     pub recorded_at: String,
     pub superseded_by: Option<String>,
+    pub impact: Option<f64>,
 }
 
 #[napi(object)]
@@ -172,6 +175,7 @@ impl Storage {
                     }
                 }
             }
+            storage.refresh_impacts();
         }
 
         Ok(storage)
@@ -237,6 +241,48 @@ impl Storage {
         self.in_idx.entry(to.to_string()).or_default().insert(id.to_string());
     }
 
+    fn calculate_as(&self, id: &str) -> f64 {
+        if id.starts_with("MASTER--") || id.starts_with("FRAME--") { 1.0 }
+        else if id.starts_with("CONCEPT--") || id.starts_with("SPEC--") { 0.8 }
+        else if id.starts_with("FEAT--") || id.starts_with("ADR--") || id.starts_with("BLUEPRINT--") { 0.6 }
+        else { 0.3 }
+    }
+
+    fn calculate_sc(&self, node: &NodeOutput) -> f64 {
+        let status = node.props.get("status").and_then(|v| v.as_str()).unwrap_or("active");
+        match status {
+            "stable" => 1.0,
+            "active" => 0.8,
+            "draft" => 0.4,
+            "deprecated" => 0.1,
+            _ => 0.6,
+        }
+    }
+
+    fn calculate_dd(&self, id: &str) -> f64 {
+        // Simple incoming reference count for now (M1)
+        // Future: Recursive DAG walk
+        let incoming = self.in_idx.get(id).map_or(0, |set| set.len());
+        (incoming as f64 / 10.0).min(1.0) // Normalize: 10+ references = 1.0 impact
+    }
+
+    fn compute_impact(&self, node: &NodeOutput) -> f64 {
+        let dd = self.calculate_dd(&node.id);
+        let as_score = self.calculate_as(&node.id);
+        let sc = self.calculate_sc(node);
+        (dd * 0.5) + (as_score * 0.3) + (sc * 0.2)
+    }
+
+    fn refresh_impacts(&mut self) {
+        let ids: Vec<String> = self.nodes.keys().cloned().collect();
+        for id in ids {
+            let impact = self.compute_impact(self.nodes.get(&id).unwrap());
+            if let Some(node) = self.nodes.get_mut(&id) {
+                node.impact = Some(impact);
+            }
+        }
+    }
+
     fn persist(&self, event: &Event) -> Result<()> {
         self.ensure_writable()?;
         let mut file = FileOpenOptions::new()
@@ -257,28 +303,38 @@ impl Storage {
             format!("N-{}", &hash[..16])
         });
 
-        if let Some(existing) = self.nodes.get_mut(&id) {
-            let mut labels = existing.labels.clone();
+        let mut existing_node = self.nodes.get(&id).cloned();
+        if let Some(ref mut n) = existing_node {
+            let mut labels = n.labels.clone();
             for l in args.labels {
                 if !labels.contains(&l) { labels.push(l); }
             }
-            let mut props = existing.props.as_object().cloned().unwrap_or_default();
+            let mut props = n.props.as_object().cloned().unwrap_or_default();
             if let Some(new_props) = args.props.and_then(|p| p.as_object().cloned()) {
                 for (k, v) in new_props { props.insert(k, v); }
             }
-            existing.labels = labels;
-            existing.props = Value::Object(props);
-            let n = existing.clone();
-            self.persist(&Event::Node(n.clone()))?;
-            return Ok(n);
+            n.labels = labels;
+            n.props = Value::Object(props);
+            
+            let impact = self.compute_impact(n);
+            n.impact = Some(impact);
+            
+            let n_cloned = n.clone();
+            self.nodes.insert(id.clone(), n_cloned.clone());
+            self.persist(&Event::Node(n_cloned.clone()))?;
+            return Ok(n_cloned);
         }
 
-        let node = NodeOutput {
-            id,
+        let mut node = NodeOutput {
+            id: id.clone(),
             labels: args.labels,
             props: args.props.unwrap_or(Value::Object(Default::default())),
+            impact: None,
         };
-        self.nodes.insert(node.id.clone(), node.clone());
+        let impact = self.compute_impact(&node);
+        node.impact = Some(impact);
+        
+        self.nodes.insert(id, node.clone());
         self.persist(&Event::Node(node.clone()))?;
         Ok(node)
     }
@@ -299,6 +355,7 @@ impl Storage {
             props: args.props.unwrap_or(Value::Object(Default::default())),
             valid_from: args.valid_from.unwrap_or_else(|| now.clone()),
             valid_to: None, recorded_at: now, superseded_by: None,
+            impact: args.impact,
         };
 
         if args.supersede.unwrap_or(false) {
@@ -326,7 +383,18 @@ impl Storage {
         }
 
         self.index_edge_internal(&edge.id, &edge.from, &edge.to);
+        
+        let target_id = edge.to.clone();
         self.edges.insert(edge.id.clone(), edge.clone());
+        
+        if let Some(target_node) = self.nodes.get(&target_id).cloned() {
+            let mut updated_node = target_node;
+            let new_impact = self.compute_impact(&updated_node);
+            updated_node.impact = Some(new_impact);
+            self.nodes.insert(target_id, updated_node.clone());
+            self.persist(&Event::Node(updated_node)).ok();
+        }
+
         self.persist(&Event::Edge(edge.clone()))?;
         Ok(edge)
     }
@@ -457,7 +525,15 @@ impl GenesisDatabase {
                     args.include_invalid.unwrap_or(false) || e.valid_to.is_none()
                 };
                 if is_valid { results.push(e.clone()); }
-                if let Some(limit) = args.limit { if results.len() >= limit as usize { break; } }
+            }
+            
+            // Sort by impact score descending
+            results.sort_by(|a, b| b.impact.unwrap_or(0.0).partial_cmp(&a.impact.unwrap_or(0.0)).unwrap());
+            
+            if let Some(limit) = args.limit {
+                if results.len() > limit as usize {
+                    results.truncate(limit as usize);
+                }
             }
             Ok(results)
         }).await.map_err(|e| Error::from_reason(format!("join: {e}")))?
@@ -476,7 +552,6 @@ impl GenesisDatabase {
         if !storage.nodes.contains_key(&seed) { return Ok(Vec::new()); }
         let depth = args.depth.unwrap_or(1);
         let direction = args.direction.as_deref().unwrap_or("out");
-        let limit = args.limit.unwrap_or(u32::MAX);
         
         let mut target_rels = HashSet::new();
         if let Some(r) = args.rel { target_rels.insert(r); }
@@ -492,21 +567,36 @@ impl GenesisDatabase {
             let mut edge_ids = HashSet::new();
             if direction == "out" || direction == "both" { if let Some(eids) = storage.out_idx.get(&curr_id) { edge_ids.extend(eids.clone()); } }
             if direction == "in" || direction == "both" { if let Some(eids) = storage.in_idx.get(&curr_id) { edge_ids.extend(eids.clone()); } }
-            for eid in edge_ids {
-                if let Some(edge) = storage.edges.get(&eid) {
-                    if !target_rels.is_empty() && !target_rels.contains(&edge.rel) { continue; }
-                    if !args.include_invalid.unwrap_or(false) && edge.valid_to.is_some() { continue; }
-                    let next_id = if edge.from == curr_id { edge.to.clone() } else { edge.from.clone() };
-                    if visited.contains(&next_id) { continue; }
-                    visited.insert(next_id.clone());
-                    if let Some(node) = storage.nodes.get(&next_id) {
-                        let mut new_path = path.clone();
-                        new_path.push(edge.clone());
-                        results.push(NeighborOutput { node: node.clone(), path: new_path.clone(), depth: curr_depth + 1 });
-                        if results.len() >= limit as usize { return Ok(results); }
-                        queue.push_back((next_id, new_path, curr_depth + 1));
-                    }
+            
+            let mut edges_to_visit: Vec<EdgeOutput> = edge_ids.iter()
+                .filter_map(|eid| storage.edges.get(eid))
+                .cloned()
+                .collect();
+            
+            // Sort edges by impact during expansion
+            edges_to_visit.sort_by(|a, b| b.impact.unwrap_or(0.0).partial_cmp(&a.impact.unwrap_or(0.0)).unwrap());
+
+            for edge in edges_to_visit {
+                if !target_rels.is_empty() && !target_rels.contains(&edge.rel) { continue; }
+                if !args.include_invalid.unwrap_or(false) && edge.valid_to.is_some() { continue; }
+                let next_id = if edge.from == curr_id { edge.to.clone() } else { edge.from.clone() };
+                if visited.contains(&next_id) { continue; }
+                visited.insert(next_id.clone());
+                if let Some(node) = storage.nodes.get(&next_id) {
+                    let mut new_path = path.clone();
+                    new_path.push(edge.clone());
+                    results.push(NeighborOutput { node: node.clone(), path: new_path.clone(), depth: curr_depth + 1 });
+                    queue.push_back((next_id, new_path, curr_depth + 1));
                 }
+            }
+        }
+        
+        // Final result sorting by node impact
+        results.sort_by(|a, b| b.node.impact.unwrap_or(0.0).partial_cmp(&a.node.impact.unwrap_or(0.0)).unwrap());
+        
+        if let Some(limit) = args.limit {
+            if results.len() > limit as usize {
+                results.truncate(limit as usize);
             }
         }
         Ok(results)
