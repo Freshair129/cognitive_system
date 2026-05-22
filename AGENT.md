@@ -186,6 +186,10 @@ No code is written without a preceding spec. Phase order:
 
 Before implementing: confirm `FEAT--` is `status: stable/active` and a `BLUEPRINT--` exists.
 
+### Schema and Atom Integrity Rules
+
+- **Check Schema First**: When writing or editing any atom, or when modifying schema definitions, you **MUST** always refer to the canonical [atom_schema.yaml](file:///c:/Users/freshair/cognitive_system/atom_schema.yaml) at the root. Do not modify schemas or write atoms without aligning with this schema file, as it maintains the source of truth for all validators, configurations, and agent guidance files.
+
 ---
 
 ## 7. Atom Taxonomy (v2.3)

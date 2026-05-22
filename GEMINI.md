@@ -185,6 +185,10 @@ Every implementation follows this phase order. Gemini typically operates at P1â€
 - [ ] `BLUEPRINT--` exists with `status: stable/active`
 - [ ] All referenced `ADR--` are `status: stable/active`
 
+**Atom and Schema Integrity:**
+
+- Always consult [atom_schema.yaml](file:///c:/Users/freshair/cognitive_system/atom_schema.yaml) at the root when writing/editing any atom or modifying schemas. Ensure that any schema changes are updated in the YAML file so that they correctly propagate to validators, config, and agent guidance files.
+
 ---
 
 ## 6. Packages Overview (for context-loading)

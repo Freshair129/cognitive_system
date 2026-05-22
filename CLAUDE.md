@@ -120,6 +120,7 @@ Every milestone follows this phase order:
 
 ## Atom Integrity
 
+- **Check Schema First**: When editing/creating atoms or modifying schema definitions, always consult [atom_schema.yaml](file:///c:/Users/freshair/cognitive_system/atom_schema.yaml) at the root first. Ensure changes are aligned with this file so that configurations, validators, and agent instructions (`CLAUDE.md`, `GEMINI.md`) stay synchronized.
 - Atoms must validate (`npm run msp:validate`) before commit.
 - Crosslinks must resolve (`npm run msp:check-links`).
 - Context tracing is mandatory: read related atoms before coding.
