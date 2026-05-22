@@ -4,7 +4,7 @@ phase: 2
 type: algo
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: Identity Resolution Algorithm — Global vs Project Layering
 tags: &a1

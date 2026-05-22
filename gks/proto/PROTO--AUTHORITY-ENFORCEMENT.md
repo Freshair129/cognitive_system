@@ -2,7 +2,7 @@
 id: PROTO--AUTHORITY-ENFORCEMENT
 phase: 2
 type: proto
-status: draft
+status: stable
 severity: error
 vault_id: default
 tier: safety
@@ -35,7 +35,7 @@ attributes:
   id: PROTO--AUTHORITY-ENFORCEMENT
   phase: 2
   type: proto
-  status: draft
+  status: stable
   severity: error
   vault_id: default
   tier: safety
@@ -52,7 +52,7 @@ attributes:
     id: PROTO--AUTHORITY-ENFORCEMENT
     phase: 2
     type: proto
-    status: draft
+    status: stable
     severity: error
     vault_id: default
     tier: safety
@@ -69,7 +69,7 @@ attributes:
       id: PROTO--AUTHORITY-ENFORCEMENT
       phase: 2
       type: proto
-      status: draft
+      status: stable
       severity: error
       vault_id: default
       tier: safety

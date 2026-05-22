@@ -2,9 +2,9 @@
 id: CONCEPT--MSP-BRIDGE-PLUGIN
 phase: 1
 type: concept
-status: draft
+status: stable
 vault_id: default
-tier: process
+tier: genesis
 source_type: axiomatic
 title: CONCEPT — MSP Bridge Plugin — stable API and pgvector adapter for Obsidian
 tags: [msp, obsidian, plugin, pgvector, m10a]

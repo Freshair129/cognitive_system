@@ -2,7 +2,7 @@
 id: AUDIT--PHASE-E4-MASTER-PROMOTION
 phase: 6
 type: audit
-status: draft
+status: stable
 tier: process
 source_type: axiomatic
 vault_id: default
@@ -42,7 +42,7 @@ attributes:
   id: AUDIT--PHASE-E4-MASTER-PROMOTION
   phase: 6
   type: audit
-  status: draft
+  status: stable
   tier: process
   source_type: axiomatic
   vault_id: default
@@ -59,7 +59,7 @@ attributes:
     id: AUDIT--PHASE-E4-MASTER-PROMOTION
     phase: 6
     type: audit
-    status: draft
+    status: stable
     tier: process
     source_type: axiomatic
     vault_id: default
@@ -76,7 +76,7 @@ attributes:
       id: AUDIT--PHASE-E4-MASTER-PROMOTION
       phase: 6
       type: audit
-      status: draft
+      status: stable
       tier: process
       source_type: axiomatic
       vault_id: default

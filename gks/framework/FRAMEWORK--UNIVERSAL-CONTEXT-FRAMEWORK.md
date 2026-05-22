@@ -2,8 +2,8 @@
 id: FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK
 phase: 0
 type: framework
-status: draft
-tier: process
+status: stable
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Universal context framework — identity-aware, policy-controlled,
@@ -35,8 +35,8 @@ attributes:
   id: FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK
   phase: 0
   type: framework
-  status: draft
-  tier: process
+  status: stable
+  tier: genesis
   source_type: axiomatic
   vault_id: default
   title: Universal context framework — identity-aware, policy-controlled,
@@ -51,8 +51,8 @@ attributes:
     id: FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK
     phase: 0
     type: framework
-    status: draft
-    tier: process
+    status: stable
+    tier: genesis
     source_type: axiomatic
     vault_id: default
     title: Universal context framework — identity-aware, policy-controlled,
@@ -67,8 +67,8 @@ attributes:
       id: FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK
       phase: 0
       type: framework
-      status: draft
-      tier: process
+      status: stable
+      tier: genesis
       source_type: axiomatic
       vault_id: default
       title: Universal context framework — identity-aware, policy-controlled,

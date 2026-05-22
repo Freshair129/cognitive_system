@@ -14,6 +14,7 @@ tags: &a1
   - tagging
   - attributes
 crosslinks: &a2
+  belongs_to: MOD--DEVELOPER
   implements:
     - CONCEPT--ATTRIBUTE-BAG-MODEL
   references:
@@ -70,22 +71,22 @@ attributes:
       role: Feature spec
       aliases: *a3
       attributes:
-        domain: feat
-      domain: feat
+        domain: tooling
+      domain: tooling
       language: markdown
       is_test: false
       is_entrypoint: false
       has_secret: false
       leak_risk: low
       encryption_level: none
-    domain: feat
+    domain: tooling
     language: markdown
     is_test: false
     is_entrypoint: false
     has_secret: false
     leak_risk: low
     encryption_level: none
-  domain: feat
+  domain: tooling
   language: markdown
   is_test: false
   is_entrypoint: false
@@ -125,7 +126,7 @@ interface Classifier {
 
 ## Built-in Classifiers
 
-- **PathClassifier:** Tags `domain` based on directory structure (e.g. `gks/adr/` -> `domain: adr`).
+- **PathClassifier:** Tags `domain` based on directory structure (e.g. `gks/adr/` -> `domain: tooling`).
 - **ContentClassifier:** Regex-based tagging for sensitive patterns (SSN, Email, Keys).
 - **FrontmatterClassifier:** Passthrough for explicit `attributes:` in markdown.
 

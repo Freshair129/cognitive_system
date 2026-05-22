@@ -2,7 +2,7 @@
 id: BLUEPRINT--PHASE-5-STEP-UP-AUTH
 phase: 3
 type: blueprint
-status: draft
+status: stable
 tier: process
 source_type: axiomatic
 vault_id: default
@@ -39,7 +39,7 @@ attributes:
   id: BLUEPRINT--PHASE-5-STEP-UP-AUTH
   phase: 3
   type: blueprint
-  status: draft
+  status: stable
   tier: process
   source_type: axiomatic
   vault_id: default
@@ -57,7 +57,7 @@ attributes:
     id: BLUEPRINT--PHASE-5-STEP-UP-AUTH
     phase: 3
     type: blueprint
-    status: draft
+    status: stable
     tier: process
     source_type: axiomatic
     vault_id: default
@@ -75,7 +75,7 @@ attributes:
       id: BLUEPRINT--PHASE-5-STEP-UP-AUTH
       phase: 3
       type: blueprint
-      status: draft
+      status: stable
       tier: process
       source_type: axiomatic
       vault_id: default

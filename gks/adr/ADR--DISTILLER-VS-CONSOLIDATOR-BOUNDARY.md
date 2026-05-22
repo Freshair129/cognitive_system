@@ -4,7 +4,7 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
-tier: process
+tier: genesis
 source_type: axiomatic
 title: ADR — Boundary between the 8-8-8 Distiller and the M7b Consolidator
 tags: [msp, memory, architecture, consolidator, distiller]

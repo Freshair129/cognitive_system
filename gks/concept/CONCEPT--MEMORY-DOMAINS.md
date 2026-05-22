@@ -3,7 +3,7 @@ id: CONCEPT--MEMORY-DOMAINS
 phase: 1
 type: concept
 status: stable
-tier: process
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Memory Domains — semantic categorization for decay and promotion

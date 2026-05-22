@@ -2,7 +2,7 @@
 id: ADR--AGENT-TIER-COST-POLICY
 phase: 2
 type: adr
-status: draft
+status: stable
 tier: genesis
 source_type: axiomatic
 vault_id: default
@@ -26,7 +26,7 @@ attributes:
   id: ADR--AGENT-TIER-COST-POLICY
   phase: 2
   type: adr
-  status: draft
+  status: stable
   tier: genesis
   source_type: axiomatic
   vault_id: default
@@ -41,7 +41,7 @@ attributes:
     id: ADR--AGENT-TIER-COST-POLICY
     phase: 2
     type: adr
-    status: draft
+    status: stable
     tier: genesis
     source_type: axiomatic
     vault_id: default
@@ -56,7 +56,7 @@ attributes:
       id: ADR--AGENT-TIER-COST-POLICY
       phase: 2
       type: adr
-      status: draft
+      status: stable
       tier: genesis
       source_type: axiomatic
       vault_id: default

@@ -8,7 +8,7 @@ title: Implementation plan for nomic-embed-text-v1.5 embedder
 created_at: 2026-04-29T12:00:00+07:00
 linked_symbols: &a1
   - file: packages/gks/src/memory/vector/embedder-nomic.ts
-tier: genesis
+tier: process
 links: &a2
   - CONCEPT--EMBEDDING-STRATEGY
   - ADR--NOMIC-EMBEDDER

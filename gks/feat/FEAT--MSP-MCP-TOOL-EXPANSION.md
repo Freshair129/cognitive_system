@@ -14,6 +14,7 @@ tags: &a1
   - m7f
   - user-facing
 crosslinks: &a2
+  belongs_to: MOD--MCP
   references:
     - CONCEPT--MSP-MCP-TOOL-EXPANSION
     - FEAT--MSP-MCP-SERVER
@@ -85,22 +86,22 @@ attributes:
       cluster: implementation_flow
       role: Feature spec
       attributes:
-        domain: feat
-      domain: feat
+        domain: integration
+      domain: integration
       language: markdown
       is_test: false
       is_entrypoint: false
       has_secret: false
       leak_risk: low
       encryption_level: none
-    domain: feat
+    domain: integration
     language: markdown
     is_test: false
     is_entrypoint: false
     has_secret: false
     leak_risk: low
     encryption_level: none
-  domain: feat
+  domain: integration
   language: markdown
   is_test: false
   is_entrypoint: false

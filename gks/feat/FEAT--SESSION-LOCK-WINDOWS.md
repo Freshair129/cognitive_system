@@ -2,9 +2,10 @@
 id: FEAT--SESSION-LOCK-WINDOWS
 phase: 2
 type: feat
-status: draft
+domain: identity
+status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: FEAT — Windows Session Locking — cross-platform session write integrity
 tags: [msp, sessions, locking, windows, parity, m9f]
@@ -12,6 +13,7 @@ aliases: [FEAT, implementation_flow, Feature specification]
 cluster: implementation_flow
 role: Feature specification
 crosslinks:
+  belongs_to: MOD--IDENTITY
   references:
     - CONCEPT--MEMORY-SESSIONS
     - CONCEPT--MSP-ROADMAP

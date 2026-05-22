@@ -13,6 +13,7 @@ tags: &a1
   - coding
   - classifier
 crosslinks: &a2
+  belongs_to: MOD--DEVELOPER
   implements:
     - CONCEPT--CODING-DOMAIN-PACK
   references:
@@ -68,21 +69,21 @@ attributes:
       cluster: implementation_flow
       role: Feature spec
       aliases: *a3
-      domain: feat
+      domain: tooling
       language: markdown
       is_test: false
       is_entrypoint: false
       has_secret: false
       leak_risk: low
       encryption_level: none
-    domain: feat
+    domain: tooling
     language: markdown
     is_test: false
     is_entrypoint: false
     has_secret: false
     leak_risk: low
     encryption_level: none
-  domain: feat
+  domain: tooling
   language: markdown
   is_test: false
   is_entrypoint: false

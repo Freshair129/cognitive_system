@@ -14,6 +14,7 @@ tags: &a1
   - vitest
   - user-facing
 crosslinks: &a2
+  belongs_to: MOD--GOVERNANCE
   implements:
     - ADR--ACCEPTANCE-VITEST-RUNNER
   references:
@@ -79,22 +80,22 @@ attributes:
       cluster: implementation_flow
       role: Feature spec
       attributes:
-        domain: feat
-      domain: feat
+        domain: governance
+      domain: governance
       language: markdown
       is_test: false
       is_entrypoint: false
       has_secret: false
       leak_risk: low
       encryption_level: none
-    domain: feat
+    domain: governance
     language: markdown
     is_test: false
     is_entrypoint: false
     has_secret: false
     leak_risk: low
     encryption_level: none
-  domain: feat
+  domain: governance
   language: markdown
   is_test: false
   is_entrypoint: false

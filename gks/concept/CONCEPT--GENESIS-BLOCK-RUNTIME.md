@@ -2,9 +2,9 @@
 id: CONCEPT--GENESIS-BLOCK-RUNTIME
 phase: 1
 type: concept
-status: draft
+status: stable
 vault_id: default
-tier: process
+tier: genesis
 source_type: axiomatic
 title: Genesis Block Runtime — composite execution layer for GENESIS-- manifests
 tags: &a1
@@ -30,7 +30,7 @@ attributes:
   id: CONCEPT--GENESIS-BLOCK-RUNTIME
   phase: 1
   type: concept
-  status: draft
+  status: stable
   vault_id: default
   tier: process
   source_type: axiomatic
@@ -45,7 +45,7 @@ attributes:
     id: CONCEPT--GENESIS-BLOCK-RUNTIME
     phase: 1
     type: concept
-    status: draft
+    status: stable
     vault_id: default
     tier: process
     source_type: axiomatic
@@ -60,7 +60,7 @@ attributes:
       id: CONCEPT--GENESIS-BLOCK-RUNTIME
       phase: 1
       type: concept
-      status: draft
+      status: stable
       vault_id: default
       tier: process
       source_type: axiomatic

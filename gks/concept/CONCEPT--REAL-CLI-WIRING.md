@@ -4,7 +4,7 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
-tier: process
+tier: genesis
 source_type: axiomatic
 title: Real CLI wiring for T1/T2/T3 tier adapters — invocation patterns + opt-in
   integration tests

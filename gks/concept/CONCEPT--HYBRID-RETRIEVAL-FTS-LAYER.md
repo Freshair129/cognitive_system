@@ -4,7 +4,7 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
-tier: process
+tier: genesis
 source_type: axiomatic
 title: Hybrid Retrieval — adding FTS as layer 2 (FRAMEWORK_MASTER_SPEC §13)
 tags: &a1

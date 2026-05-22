@@ -2,7 +2,7 @@
 id: ADR--BRAIN-PATH-RESOLUTION
 phase: 2
 type: adr
-status: draft
+status: stable
 vault_id: default
 tier: genesis
 source_type: axiomatic
@@ -31,7 +31,7 @@ attributes:
   id: ADR--BRAIN-PATH-RESOLUTION
   phase: 2
   type: adr
-  status: draft
+  status: stable
   vault_id: default
   tier: genesis
   source_type: axiomatic
@@ -47,7 +47,7 @@ attributes:
     id: ADR--BRAIN-PATH-RESOLUTION
     phase: 2
     type: adr
-    status: draft
+    status: stable
     vault_id: default
     tier: genesis
     source_type: axiomatic
@@ -63,7 +63,7 @@ attributes:
       id: ADR--BRAIN-PATH-RESOLUTION
       phase: 2
       type: adr
-      status: draft
+      status: stable
       vault_id: default
       tier: genesis
       source_type: axiomatic

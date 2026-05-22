@@ -3,7 +3,7 @@ id: CONCEPT--TASK-MANAGEMENT-PACK
 phase: 1
 type: concept
 status: stable
-tier: process
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Task & Management Domain Pack — operational workflow enforcement

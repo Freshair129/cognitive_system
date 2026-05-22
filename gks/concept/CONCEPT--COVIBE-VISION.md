@@ -2,9 +2,9 @@
 id: CONCEPT--COVIBE-VISION
 phase: 1
 type: concept
-status: draft
+status: stable
 vault_id: default
-tier: process
+tier: genesis
 source_type: axiomatic
 title: CONCEPT — CoVibe — autonomous music synchronization for riders
 tags: [covibe, vision, music, sync, riders]

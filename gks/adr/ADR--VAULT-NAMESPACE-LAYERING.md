@@ -3,7 +3,7 @@ id: ADR--VAULT-NAMESPACE-LAYERING
 phase: 2
 type: adr
 status: stable
-tier: process
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Vault / Namespace / Brain layering — Vault is a view, not a stored partition

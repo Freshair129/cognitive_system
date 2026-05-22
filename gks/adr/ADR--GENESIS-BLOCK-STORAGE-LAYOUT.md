@@ -4,7 +4,7 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
-tier: process
+tier: genesis
 source_type: axiomatic
 title: ADR — Genesis Block on-disk storage layout for P3.2 MVP
 tags: &a1

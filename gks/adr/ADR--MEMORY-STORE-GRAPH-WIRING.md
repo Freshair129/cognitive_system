@@ -4,7 +4,7 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
-tier: process
+tier: genesis
 source_type: axiomatic
 title: GraphBackend joins MemoryStoreOptions — MemoryStore exposes store.graph
   after init()

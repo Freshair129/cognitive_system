@@ -3,7 +3,7 @@ id: ADR--RESOLUTION-TIER-COUNT
 phase: 2
 type: adr
 status: stable
-tier: process
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Resolution tier count — 2-tier MVP (FULL + MENTION), 4-tier data model

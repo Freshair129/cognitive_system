@@ -2,7 +2,7 @@
 id: BLUEPRINT--PHASE-6-CLASSIFIERS
 phase: 3
 type: blueprint
-status: draft
+status: stable
 tier: process
 source_type: axiomatic
 vault_id: default
@@ -33,7 +33,7 @@ attributes:
   id: BLUEPRINT--PHASE-6-CLASSIFIERS
   phase: 3
   type: blueprint
-  status: draft
+  status: stable
   tier: process
   source_type: axiomatic
   vault_id: default
@@ -49,7 +49,7 @@ attributes:
     id: BLUEPRINT--PHASE-6-CLASSIFIERS
     phase: 3
     type: blueprint
-    status: draft
+    status: stable
     tier: process
     source_type: axiomatic
     vault_id: default
@@ -65,7 +65,7 @@ attributes:
       id: BLUEPRINT--PHASE-6-CLASSIFIERS
       phase: 3
       type: blueprint
-      status: draft
+      status: stable
       tier: process
       source_type: axiomatic
       vault_id: default

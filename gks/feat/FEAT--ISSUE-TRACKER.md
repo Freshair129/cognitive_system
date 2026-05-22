@@ -5,13 +5,14 @@ type: feat
 status: stable
 created_at: 2026-05-13T12:00:00+07:00
 vault_id: GKS-CORE
-tier: genesis
+tier: process
 title: Self-hosted issue tracker (light-tier)
 tags: &a1
   - user-facing
   - ops
   - issue-tracking
 crosslinks: &a2
+  belongs_to: MOD--DEVELOPER
   implements:
     - ADR--EXTENDED-TAXONOMY
   references:
@@ -34,7 +35,7 @@ attributes:
   status: stable
   created_at: 2026-05-13T12:00:00+07:00
   vault_id: GKS-CORE
-  tier: genesis
+  tier: process
   title: Self-hosted issue tracker (light-tier)
   tags: *a1
   crosslinks: *a2
@@ -49,7 +50,7 @@ attributes:
     status: stable
     created_at: 2026-05-13T12:00:00+07:00
     vault_id: GKS-CORE
-    tier: genesis
+    tier: process
     title: Self-hosted issue tracker (light-tier)
     tags: *a1
     crosslinks: *a2
@@ -64,7 +65,7 @@ attributes:
       status: stable
       created_at: 2026-05-13T12:00:00+07:00
       vault_id: GKS-CORE
-      tier: genesis
+      tier: process
       title: Self-hosted issue tracker (light-tier)
       tags: *a1
       crosslinks: *a2
@@ -73,22 +74,22 @@ attributes:
       cluster: implementation_flow
       role: Feature spec
       attributes:
-        domain: feat
-      domain: feat
+        domain: tooling
+      domain: tooling
       language: markdown
       is_test: false
       is_entrypoint: false
       has_secret: false
       leak_risk: low
       encryption_level: none
-    domain: feat
+    domain: tooling
     language: markdown
     is_test: false
     is_entrypoint: false
     has_secret: false
     leak_risk: low
     encryption_level: none
-  domain: feat
+  domain: tooling
   language: markdown
   is_test: false
   is_entrypoint: false

@@ -4,7 +4,7 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
-tier: process
+tier: genesis
 source_type: axiomatic
 title: ADR — Default affect policy for memory distillation
 tags: [msp, memory, affect, 888, policy]

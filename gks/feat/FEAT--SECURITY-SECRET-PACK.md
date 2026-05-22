@@ -13,6 +13,7 @@ tags: &a1
   - security
   - secrets
 crosslinks: &a2
+  belongs_to: MOD--IDENTITY
   implements:
     - CONCEPT--SECURITY-SECRET-PACK
   references:
@@ -69,21 +70,21 @@ attributes:
       cluster: implementation_flow
       role: Feature spec
       aliases: *a3
-      domain: feat
+      domain: identity
       language: markdown
       is_test: false
       is_entrypoint: false
       has_secret: false
       leak_risk: low
       encryption_level: none
-    domain: feat
+    domain: identity
     language: markdown
     is_test: false
     is_entrypoint: false
     has_secret: false
     leak_risk: low
     encryption_level: none
-  domain: feat
+  domain: identity
   language: markdown
   is_test: false
   is_entrypoint: false

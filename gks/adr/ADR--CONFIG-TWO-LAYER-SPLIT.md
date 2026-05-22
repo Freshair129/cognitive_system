@@ -2,8 +2,8 @@
 id: ADR--CONFIG-TWO-LAYER-SPLIT
 phase: 2
 type: adr
-status: draft
-tier: process
+status: stable
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Config 2-Layer Split — operator-facing root + package-internal manifests
@@ -27,7 +27,7 @@ attributes:
   id: ADR--CONFIG-TWO-LAYER-SPLIT
   phase: 2
   type: adr
-  status: draft
+  status: stable
   tier: process
   source_type: axiomatic
   vault_id: default
@@ -42,7 +42,7 @@ attributes:
     id: ADR--CONFIG-TWO-LAYER-SPLIT
     phase: 2
     type: adr
-    status: draft
+    status: stable
     tier: process
     source_type: axiomatic
     vault_id: default

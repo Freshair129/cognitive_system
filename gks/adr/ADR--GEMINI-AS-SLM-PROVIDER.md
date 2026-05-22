@@ -4,7 +4,7 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
-tier: process
+tier: genesis
 source_type: axiomatic
 title: Gemini CLI is a first-class SLM provider, not only an escalator
 tags: &a1

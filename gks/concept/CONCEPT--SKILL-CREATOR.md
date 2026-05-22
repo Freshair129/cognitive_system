@@ -3,7 +3,7 @@ id: CONCEPT--SKILL-CREATOR
 phase: 1
 type: concept
 status: stable
-tier: process
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: "Skill Creator — automated distillation of execution history into reusable skills"

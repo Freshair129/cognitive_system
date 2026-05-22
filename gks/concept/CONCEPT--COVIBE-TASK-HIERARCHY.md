@@ -2,9 +2,9 @@
 id: CONCEPT--COVIBE-TASK-HIERARCHY
 phase: 1
 type: concept
-status: draft
+status: stable
 vault_id: default
-tier: process
+tier: genesis
 source_type: axiomatic
 title: CONCEPT — CoVibe Task Hierarchy — Tree decomposition for 8K context
 tags: [covibe, architecture, tasks, context, scaling]

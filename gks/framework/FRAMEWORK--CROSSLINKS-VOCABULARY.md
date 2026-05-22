@@ -109,6 +109,7 @@ Atoms relate through a small fixed vocabulary of predicates under `crosslinks.*`
 | `superseded_by` | this → successor | derived; set on the *old* atom when `supersedes` is set on the new |
 | `partially_superseded_by` | this → successor | derived; same |
 | `resolves` | this → debt | "this atom closes the open debt X" (typically `HOTFIX--`) |
+| `belongs_to` | this → parent | "this atom is grouped under or belongs to container X" (e.g. FEAT → MOD) |
 
 ## Usage rules
 

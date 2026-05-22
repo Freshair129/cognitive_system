@@ -14,6 +14,7 @@ tags: &a1
   - auth
   - step-up
 crosslinks: &a2
+  belongs_to: MOD--IDENTITY
   references:
     - CONCEPT--STEP-UP-AUTH
     - CONCEPT--ABAC-POLICY-ENGINE
@@ -71,8 +72,8 @@ attributes:
       cluster: implementation_flow
       role: Feature spec
       attributes:
-        domain: feat
-      domain: feat
+        domain: identity
+      domain: identity
       language: markdown
       is_test: false
       is_entrypoint: false
@@ -80,7 +81,7 @@ attributes:
       secret_type: high_entropy_string
       leak_risk: high
       encryption_level: none
-    domain: feat
+    domain: identity
     language: markdown
     is_test: false
     is_entrypoint: false
@@ -88,7 +89,7 @@ attributes:
     secret_type: high_entropy_string
     leak_risk: high
     encryption_level: none
-  domain: feat
+  domain: identity
   language: markdown
   is_test: false
   is_entrypoint: false

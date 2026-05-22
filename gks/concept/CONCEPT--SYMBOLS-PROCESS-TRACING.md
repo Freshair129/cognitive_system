@@ -3,7 +3,7 @@ id: CONCEPT--SYMBOLS-PROCESS-TRACING
 phase: 1
 type: concept
 status: active
-tier: process
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: End-to-end process tracing — following execution flows

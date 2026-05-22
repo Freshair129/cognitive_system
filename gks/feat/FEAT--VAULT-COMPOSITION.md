@@ -14,6 +14,7 @@ tags: &a1
   - vault
   - namespace
 crosslinks: &a2
+  belongs_to: MOD--DEVELOPER
   references:
     - CONCEPT--NAMESPACE-VAULT-BRAIN
     - ADR--VAULT-NAMESPACE-LAYERING
@@ -71,8 +72,8 @@ attributes:
       cluster: implementation_flow
       role: Feature spec
       attributes:
-        domain: feat
-      domain: feat
+        domain: tooling
+      domain: tooling
       language: markdown
       is_test: false
       is_entrypoint: false
@@ -80,7 +81,7 @@ attributes:
       secret_type: high_entropy_string
       leak_risk: high
       encryption_level: none
-    domain: feat
+    domain: tooling
     language: markdown
     is_test: false
     is_entrypoint: false
@@ -88,7 +89,7 @@ attributes:
     secret_type: high_entropy_string
     leak_risk: high
     encryption_level: none
-  domain: feat
+  domain: tooling
   language: markdown
   is_test: false
   is_entrypoint: false

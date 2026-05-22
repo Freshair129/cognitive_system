@@ -3,7 +3,7 @@ id: CONCEPT--EPISTEMIC-STATES
 phase: 1
 type: concept
 status: stable
-tier: process
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Epistemic States — tracking confidence as first-class data

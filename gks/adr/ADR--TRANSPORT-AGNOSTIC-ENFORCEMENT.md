@@ -3,7 +3,7 @@ id: ADR--TRANSPORT-AGNOSTIC-ENFORCEMENT
 phase: 2
 type: adr
 status: stable
-tier: process
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Transport-agnostic enforcement — one PEP per entry surface, one shared PDP

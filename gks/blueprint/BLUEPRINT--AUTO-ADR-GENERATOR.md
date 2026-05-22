@@ -2,9 +2,9 @@
 id: BLUEPRINT--AUTO-ADR-GENERATOR
 phase: 3
 type: blueprint
-status: draft
+status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: BLUEPRINT — Auto-ADR Generator Implementation Plan
 tags: [msp, governance, automation, adr, plan, m9e]

@@ -3,7 +3,7 @@ id: ADR--SYMBOLS-PROCESS-TRACING
 phase: 2
 type: adr
 status: active
-tier: process
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Execution flow traversal strategy and constraints

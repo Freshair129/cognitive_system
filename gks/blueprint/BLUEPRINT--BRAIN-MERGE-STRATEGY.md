@@ -2,9 +2,9 @@
 id: BLUEPRINT--BRAIN-MERGE-STRATEGY
 phase: 3
 type: blueprint
-status: draft
+status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: BLUEPRINT — Brain Merge Strategy — implementation plan for two-brain resolver
 scale_level: feature
@@ -30,7 +30,7 @@ attributes:
   id: BLUEPRINT--BRAIN-MERGE-STRATEGY
   phase: 3
   type: blueprint
-  status: draft
+  status: stable
   vault_id: default
   tier: genesis
   source_type: axiomatic
@@ -47,7 +47,7 @@ attributes:
     id: BLUEPRINT--BRAIN-MERGE-STRATEGY
     phase: 3
     type: blueprint
-    status: draft
+    status: stable
     vault_id: default
     tier: genesis
     source_type: axiomatic
@@ -65,7 +65,7 @@ attributes:
       id: BLUEPRINT--BRAIN-MERGE-STRATEGY
       phase: 3
       type: blueprint
-      status: draft
+      status: stable
       vault_id: default
       tier: genesis
       source_type: axiomatic

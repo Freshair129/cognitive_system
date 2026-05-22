@@ -3,7 +3,7 @@ id: ADR--DEFAULT-POLICY-POSTURE
 phase: 2
 type: adr
 status: stable
-tier: process
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Default policy posture — default-permit + shadow log, tighten per-endpoint

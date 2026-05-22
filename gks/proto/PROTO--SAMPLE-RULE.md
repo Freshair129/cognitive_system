@@ -2,7 +2,7 @@
 id: PROTO--SAMPLE-RULE
 phase: 2
 type: proto
-status: draft
+status: stable
 severity: warning
 vault_id: default
 tier: safety
@@ -33,7 +33,7 @@ attributes:
   id: PROTO--SAMPLE-RULE
   phase: 2
   type: proto
-  status: draft
+  status: stable
   severity: warning
   vault_id: default
   tier: safety
@@ -50,7 +50,7 @@ attributes:
     id: PROTO--SAMPLE-RULE
     phase: 2
     type: proto
-    status: draft
+    status: stable
     severity: warning
     vault_id: default
     tier: safety
@@ -67,7 +67,7 @@ attributes:
       id: PROTO--SAMPLE-RULE
       phase: 2
       type: proto
-      status: draft
+      status: stable
       severity: warning
       vault_id: default
       tier: safety

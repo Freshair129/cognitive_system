@@ -4,7 +4,7 @@ phase: 6
 type: audit
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: AUDIT — Phase F (refinements) — implementation complete
 tags: &a1

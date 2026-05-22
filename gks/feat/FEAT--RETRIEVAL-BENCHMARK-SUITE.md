@@ -2,7 +2,8 @@
 id: FEAT--RETRIEVAL-BENCHMARK-SUITE
 phase: 2
 type: feat
-status: draft
+domain: knowledge-engine
+status: stable
 vault_id: default
 tier: process
 source_type: axiomatic
@@ -12,6 +13,7 @@ aliases: [FEAT, implementation_flow, Feature specification]
 cluster: implementation_flow
 role: Feature specification
 crosslinks:
+  belongs_to: MOD--RETRIEVAL
   references:
     - CONCEPT--MSP-ROADMAP
     - ADR--RETRIEVAL-RRF-FUSION

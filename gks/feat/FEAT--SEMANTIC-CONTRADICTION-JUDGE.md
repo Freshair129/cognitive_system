@@ -2,6 +2,7 @@
 id: FEAT--SEMANTIC-CONTRADICTION-JUDGE
 phase: 2
 type: feat
+domain: governance
 status: active
 tier: process
 source_type: axiomatic

@@ -16,6 +16,7 @@ tags: &a1
   - retrieval
   - mcp
 crosslinks: &a2
+  belongs_to: MOD--RETRIEVAL
   references:
     - CONCEPT--RESOLUTION-GRADIENT
     - ADR--RESOLUTION-TIER-COUNT
@@ -76,8 +77,8 @@ attributes:
       cluster: implementation_flow
       role: Feature spec
       attributes:
-        domain: feat
-      domain: feat
+        domain: knowledge-engine
+      domain: knowledge-engine
       language: markdown
       is_test: false
       is_entrypoint: false
@@ -85,7 +86,7 @@ attributes:
       secret_type: high_entropy_string
       leak_risk: high
       encryption_level: none
-    domain: feat
+    domain: knowledge-engine
     language: markdown
     is_test: false
     is_entrypoint: false
@@ -93,7 +94,7 @@ attributes:
     secret_type: high_entropy_string
     leak_risk: high
     encryption_level: none
-  domain: feat
+  domain: knowledge-engine
   language: markdown
   is_test: false
   is_entrypoint: false

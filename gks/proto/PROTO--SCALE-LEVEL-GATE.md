@@ -2,7 +2,7 @@
 id: PROTO--SCALE-LEVEL-GATE
 phase: 2
 type: proto
-status: draft
+status: stable
 severity: warning
 vault_id: default
 tier: safety
@@ -28,13 +28,14 @@ aliases: &a4
   - PROTO
   - implementation_flow
   - Machine-enforced invariant
+  - Build gate
 cluster: implementation_flow
 role: Machine-enforced invariant
 attributes:
   id: PROTO--SCALE-LEVEL-GATE
   phase: 2
   type: proto
-  status: draft
+  status: stable
   severity: warning
   vault_id: default
   tier: safety
@@ -52,7 +53,7 @@ attributes:
     id: PROTO--SCALE-LEVEL-GATE
     phase: 2
     type: proto
-    status: draft
+    status: stable
     severity: warning
     vault_id: default
     tier: safety
@@ -70,7 +71,7 @@ attributes:
       id: PROTO--SCALE-LEVEL-GATE
       phase: 2
       type: proto
-      status: draft
+      status: stable
       severity: warning
       vault_id: default
       tier: safety

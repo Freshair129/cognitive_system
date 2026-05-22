@@ -4,7 +4,7 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
-tier: process
+tier: genesis
 source_type: axiomatic
 title: ADR — MSP Distiller as the exclusive write authority for memory artifacts
 tags: [msp, memory, authority, distillation, governance]

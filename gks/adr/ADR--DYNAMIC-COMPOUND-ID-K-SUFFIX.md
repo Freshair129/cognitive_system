@@ -2,8 +2,8 @@
 id: ADR--DYNAMIC-COMPOUND-ID-K-SUFFIX
 phase: 2
 type: adr
-status: draft
-tier: process
+status: stable
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Dynamic Compound ID Suffix with Phase-Layer K Numbering

@@ -2,7 +2,7 @@
 id: ADR--MONOREPO-STRUCTURE
 phase: 2
 type: adr
-status: draft
+status: stable
 vault_id: default
 tier: genesis
 source_type: axiomatic
@@ -32,7 +32,7 @@ attributes:
   id: ADR--MONOREPO-STRUCTURE
   phase: 2
   type: adr
-  status: draft
+  status: stable
   vault_id: default
   tier: genesis
   source_type: axiomatic
@@ -48,7 +48,7 @@ attributes:
     id: ADR--MONOREPO-STRUCTURE
     phase: 2
     type: adr
-    status: draft
+    status: stable
     vault_id: default
     tier: genesis
     source_type: axiomatic
@@ -64,7 +64,7 @@ attributes:
       id: ADR--MONOREPO-STRUCTURE
       phase: 2
       type: adr
-      status: draft
+      status: stable
       vault_id: default
       tier: genesis
       source_type: axiomatic

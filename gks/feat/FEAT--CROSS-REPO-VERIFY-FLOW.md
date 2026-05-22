@@ -2,7 +2,8 @@
 id: FEAT--CROSS-REPO-VERIFY-FLOW
 phase: 2
 type: feat
-status: draft
+domain: governance
+status: stable
 vault_id: default
 tier: process
 source_type: axiomatic
@@ -12,6 +13,7 @@ aliases: [FEAT, implementation_flow, Feature specification]
 cluster: implementation_flow
 role: Feature specification
 crosslinks:
+  belongs_to: MOD--GOVERNANCE
   references:
     - CONCEPT--MSP-ROADMAP
     - FRAMEWORK--PHASE-GOVERNANCE

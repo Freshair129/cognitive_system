@@ -4,7 +4,7 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
-tier: process
+tier: genesis
 source_type: axiomatic
 title: Episode retention — bounded growth of <root>/gks/episode/ via age-based
   GC with error preservation

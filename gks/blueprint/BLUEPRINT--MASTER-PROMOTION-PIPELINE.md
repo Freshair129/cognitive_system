@@ -2,7 +2,7 @@
 id: BLUEPRINT--MASTER-PROMOTION-PIPELINE
 phase: 3
 type: blueprint
-status: draft
+status: stable
 tier: process
 source_type: axiomatic
 vault_id: default
@@ -43,7 +43,7 @@ attributes:
   id: BLUEPRINT--MASTER-PROMOTION-PIPELINE
   phase: 3
   type: blueprint
-  status: draft
+  status: stable
   tier: process
   source_type: axiomatic
   vault_id: default
@@ -60,7 +60,7 @@ attributes:
     id: BLUEPRINT--MASTER-PROMOTION-PIPELINE
     phase: 3
     type: blueprint
-    status: draft
+    status: stable
     tier: process
     source_type: axiomatic
     vault_id: default
@@ -77,7 +77,7 @@ attributes:
       id: BLUEPRINT--MASTER-PROMOTION-PIPELINE
       phase: 3
       type: blueprint
-      status: draft
+      status: stable
       tier: process
       source_type: axiomatic
       vault_id: default

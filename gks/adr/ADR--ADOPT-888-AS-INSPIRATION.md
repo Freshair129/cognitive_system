@@ -4,7 +4,7 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
-tier: process
+tier: genesis
 source_type: axiomatic
 title: ADR — Adopt 8-8-8 architecture with cognitive_system-native naming
 tags: [msp, memory, architecture, 888, naming]

@@ -2,9 +2,10 @@
 id: FEAT--AUTO-ADR-GENERATOR
 phase: 2
 type: feat
-status: draft
+domain: governance
+status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: FEAT — Auto-ADR Generator — reducing doc-first friction via automation
 tags: [msp, governance, automation, adr, m9e]
@@ -12,6 +13,7 @@ aliases: [FEAT, implementation_flow, Feature specification]
 cluster: implementation_flow
 role: Feature specification
 crosslinks:
+  belongs_to: MOD--GOVERNANCE
   references:
     - CONCEPT--MSP-ROADMAP
     - ADR--DOC-TO-CODE-ENFORCEMENT

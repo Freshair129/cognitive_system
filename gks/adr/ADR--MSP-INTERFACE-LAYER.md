@@ -2,7 +2,7 @@
 id: ADR--MSP-INTERFACE-LAYER
 phase: 2
 type: adr
-status: draft
+status: stable
 vault_id: default
 tier: genesis
 source_type: documented_source
@@ -33,7 +33,7 @@ attributes:
   id: ADR--MSP-INTERFACE-LAYER
   phase: 2
   type: adr
-  status: draft
+  status: stable
   vault_id: default
   tier: genesis
   source_type: documented_source
@@ -49,7 +49,7 @@ attributes:
     id: ADR--MSP-INTERFACE-LAYER
     phase: 2
     type: adr
-    status: draft
+    status: stable
     vault_id: default
     tier: genesis
     source_type: documented_source
@@ -65,7 +65,7 @@ attributes:
       id: ADR--MSP-INTERFACE-LAYER
       phase: 2
       type: adr
-      status: draft
+      status: stable
       vault_id: default
       tier: genesis
       source_type: documented_source
