@@ -1,5 +1,6 @@
 ---
 id: FRAMEWORK--MSP-ARCHITECTURE
+version: 1.0.0
 phase: 0
 type: framework
 status: superseded
@@ -7,18 +8,18 @@ vault_id: default
 tier: genesis
 source_type: axiomatic
 title: MSP architecture — gatekeeper layers + write flow
-tags: &a1
+tags:
   - msp
   - architecture
   - gatekeeper
   - foundation
   - superseded
-crosslinks: &a2
+crosslinks:
   references: []
   superseded_by:
     - FRAMEWORK--MSP-ARCHITECTURE-V2
 created_at: 2026-05-03T14:01:47.791+07:00
-aliases: &a3
+aliases:
   - FRAMEWORK
   - implementation_flow
   - Governance / architectural framework
@@ -33,10 +34,21 @@ attributes:
   tier: genesis
   source_type: axiomatic
   title: MSP architecture — gatekeeper layers + write flow
-  tags: *a1
-  crosslinks: *a2
+  tags:
+    - msp
+    - architecture
+    - gatekeeper
+    - foundation
+    - superseded
+  crosslinks:
+    references: []
+    superseded_by:
+      - FRAMEWORK--MSP-ARCHITECTURE-V2
   created_at: 2026-05-03T14:01:47.791+07:00
-  aliases: *a3
+  aliases:
+    - FRAMEWORK
+    - implementation_flow
+    - Governance / architectural framework
   cluster: implementation_flow
   role: Governance / architectural framework
   attributes:
@@ -48,10 +60,21 @@ attributes:
     tier: genesis
     source_type: axiomatic
     title: MSP architecture — gatekeeper layers + write flow
-    tags: *a1
-    crosslinks: *a2
+    tags:
+      - msp
+      - architecture
+      - gatekeeper
+      - foundation
+      - superseded
+    crosslinks:
+      references: []
+      superseded_by:
+        - FRAMEWORK--MSP-ARCHITECTURE-V2
     created_at: 2026-05-03T14:01:47.791+07:00
-    aliases: *a3
+    aliases:
+      - FRAMEWORK
+      - implementation_flow
+      - Governance / architectural framework
     cluster: implementation_flow
     role: Governance / architectural framework
     attributes:
@@ -63,10 +86,21 @@ attributes:
       tier: genesis
       source_type: axiomatic
       title: MSP architecture — gatekeeper layers + write flow
-      tags: *a1
-      crosslinks: *a2
+      tags:
+        - msp
+        - architecture
+        - gatekeeper
+        - foundation
+        - superseded
+      crosslinks:
+        references: []
+        superseded_by:
+          - FRAMEWORK--MSP-ARCHITECTURE-V2
       created_at: 2026-05-03T14:01:47.791+07:00
-      aliases: *a3
+      aliases:
+        - FRAMEWORK
+        - implementation_flow
+        - Governance / architectural framework
       cluster: implementation_flow
       role: Governance / architectural framework
       attributes:

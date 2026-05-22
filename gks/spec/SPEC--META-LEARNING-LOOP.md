@@ -3,7 +3,7 @@ id: SPEC--META-LEARNING-LOOP
 title: Meta Learning Loop (MLL) Technical Specification
 type: spec
 phase: 2
-status: draft
+status: stable
 tier: process
 created_at: 2026-05-13T23:44:00.000+07:00
 framework: FRAMEWORK--MSP-ARCHITECTURE-V2
@@ -18,7 +18,7 @@ attributes:
   title: Meta Learning Loop (MLL) Technical Specification
   type: spec
   phase: 2
-  status: draft
+  status: stable
   tier: process
   created_at: 2026-05-13T23:44:00.000+07:00
   framework: FRAMEWORK--MSP-ARCHITECTURE-V2
@@ -30,7 +30,7 @@ attributes:
     title: Meta Learning Loop (MLL) Technical Specification
     type: spec
     phase: 2
-    status: draft
+    status: stable
     tier: process
     created_at: 2026-05-13T23:44:00.000+07:00
     framework: FRAMEWORK--MSP-ARCHITECTURE-V2
@@ -42,7 +42,7 @@ attributes:
       title: Meta Learning Loop (MLL) Technical Specification
       type: spec
       phase: 2
-      status: draft
+      status: stable
       tier: process
       created_at: 2026-05-13T23:44:00.000+07:00
       framework: FRAMEWORK--MSP-ARCHITECTURE-V2
@@ -79,7 +79,10 @@ attributes:
 
 ## 1. Technical Architecture
 
-**MLL (Meta Learning Loop)** คือระบบบริหารจัดการความรู้ที่ดำเนินการโดย **MSP (Orchestrator)** เพื่อรักษาและพัฒนาความสมบูรณ์ของ **GKS (Vault)** โดยทำหน้าที่เป็นสะพานเชื่อมระหว่างการทำงานจริง (Execution) และฐานความรู้ถาวร (Durable Knowledge)
+**MLL (Meta Learning Loop)** คือระบบบริหารจัดการความรู้ที่ดำเนินการโดย **MSP (Or
+  chestrator)** เพื่อรักษาและพัฒนาความสมบูรณ์ของ **GKS (Vault)** โดยทำหน้าที่เป็
+นส  ะพานเชื่อมระหว่างการทำงานจริง (Execution) และฐานความรู้ถาวร (Durable Knowled
+ge)
 
 ### 1.1 The Synergy Cycle
 
@@ -114,7 +117,7 @@ Used to track drift between documentation and code.
 ### 3.2 4D Completeness Matrix
 
 - **Required Atoms:** `ALGO--`, `CONCEPT--`, `FRAMEWORK--`, `PROTOCOL--`.
-- **Validation Rule:** A `GENESIS--` Block Manifest cannot be promoted to `status: stable` unless all 4D members are present and have `stability_score > 0.85`.
+- **Validation Rule:** A `GENESIS--` Block Manifest cannot be promoted to `statu  s: stable` unless all 4D members are present and have `stability_score > 0.85`.
 
 ## 4. Multi-Model Stability Check (Algorithm)
 
@@ -135,7 +138,7 @@ C:\Users\freshair\cognitive_system\
 │   └── SPEC--META-LEARNING-LOOP.md    (Technical Spec)
 └── .brain\msp\projects\<ns>\candidates\
     └── (MLL-generated Skill/Tool candidates)
-```
+```bash
 
 ## Connections
 

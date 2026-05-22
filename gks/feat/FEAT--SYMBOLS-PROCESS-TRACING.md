@@ -16,6 +16,7 @@ tags: &a1
   - impact-analysis
   - feat
 crosslinks: &a2
+  belongs_to: MOD--SYMBOLS
   implements:
     - ADR--SYMBOL-GRAPH-PERSISTENCE
   references:
@@ -89,8 +90,8 @@ attributes:
       cluster: implementation_flow
       role: Feature spec
       attributes:
-        domain: feat
-      domain: feat
+        domain: symbols
+      domain: symbols
       language: markdown
       is_test: false
       is_entrypoint: false
@@ -98,7 +99,7 @@ attributes:
       secret_type: high_entropy_string
       leak_risk: high
       encryption_level: none
-    domain: feat
+    domain: symbols
     language: markdown
     is_test: false
     is_entrypoint: false
@@ -106,7 +107,7 @@ attributes:
     secret_type: high_entropy_string
     leak_risk: high
     encryption_level: none
-  domain: feat
+  domain: symbols
   language: markdown
   is_test: false
   is_entrypoint: false

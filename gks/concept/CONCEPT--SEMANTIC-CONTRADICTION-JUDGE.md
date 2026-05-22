@@ -3,7 +3,7 @@ id: CONCEPT--SEMANTIC-CONTRADICTION-JUDGE
 phase: 1
 type: concept
 status: stable
-tier: process
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: "Semantic Contradiction Judge — leveraging T3 reasoning to catch logic drift"

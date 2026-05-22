@@ -2,9 +2,9 @@
 id: CONCEPT--COVIBE-ROADMAP
 phase: 1
 type: concept
-status: draft
+status: stable
 vault_id: default
-tier: process
+tier: genesis
 source_type: axiomatic
 title: CONCEPT — CoVibe Roadmap — 4-Phase execution plan
 tags: [covibe, roadmap, execution, mvp]

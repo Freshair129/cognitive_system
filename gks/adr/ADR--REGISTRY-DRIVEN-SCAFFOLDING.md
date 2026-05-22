@@ -3,7 +3,7 @@ id: ADR--REGISTRY-DRIVEN-SCAFFOLDING
 phase: 2
 type: adr
 status: stable
-tier: process
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Registry-Driven Scaffolding
@@ -38,7 +38,7 @@ attributes:
     id: ADR--REGISTRY-DRIVEN-SCAFFOLDING
     phase: 2
     type: adr
-    status: draft
+    status: stable
     tier: process
     source_type: axiomatic
     vault_id: default
@@ -53,7 +53,7 @@ attributes:
       id: ADR--REGISTRY-DRIVEN-SCAFFOLDING
       phase: 2
       type: adr
-      status: draft
+      status: stable
       tier: process
       source_type: axiomatic
       vault_id: default

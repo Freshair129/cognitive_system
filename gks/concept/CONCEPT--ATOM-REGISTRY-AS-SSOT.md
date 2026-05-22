@@ -3,7 +3,7 @@ id: CONCEPT--ATOM-REGISTRY-AS-SSOT
 phase: 1
 type: concept
 status: stable
-tier: process
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Atom Registry as Single Source of Truth
@@ -36,7 +36,7 @@ attributes:
     id: CONCEPT--ATOM-REGISTRY-AS-SSOT
     phase: 1
     type: concept
-    status: draft
+    status: stable
     tier: process
     source_type: axiomatic
     vault_id: default
@@ -51,7 +51,7 @@ attributes:
       id: CONCEPT--ATOM-REGISTRY-AS-SSOT
       phase: 1
       type: concept
-      status: draft
+      status: stable
       tier: process
       source_type: axiomatic
       vault_id: default

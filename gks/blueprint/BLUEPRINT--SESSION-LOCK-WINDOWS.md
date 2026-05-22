@@ -2,9 +2,9 @@
 id: BLUEPRINT--SESSION-LOCK-WINDOWS
 phase: 3
 type: blueprint
-status: draft
+status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: BLUEPRINT — Windows Session Locking Implementation Plan
 tags: [msp, sessions, locking, windows, plan, m9f]

@@ -2,9 +2,9 @@
 id: BLUEPRINT--COST-TRACKING
 phase: 3
 type: blueprint
-status: draft
+status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: BLUEPRINT — Cost Tracking — pricing math + USAGE-atom recorder + dispatch
   wiring
@@ -37,7 +37,7 @@ attributes:
   id: BLUEPRINT--COST-TRACKING
   phase: 3
   type: blueprint
-  status: draft
+  status: stable
   vault_id: default
   tier: genesis
   source_type: axiomatic
@@ -55,7 +55,7 @@ attributes:
     id: BLUEPRINT--COST-TRACKING
     phase: 3
     type: blueprint
-    status: draft
+    status: stable
     vault_id: default
     tier: genesis
     source_type: axiomatic
@@ -73,7 +73,7 @@ attributes:
       id: BLUEPRINT--COST-TRACKING
       phase: 3
       type: blueprint
-      status: draft
+      status: stable
       vault_id: default
       tier: genesis
       source_type: axiomatic

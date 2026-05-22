@@ -2,6 +2,7 @@
 id: FEAT--SKILL-CREATOR
 phase: 2
 type: feat
+domain: agent
 status: active
 tier: process
 source_type: axiomatic

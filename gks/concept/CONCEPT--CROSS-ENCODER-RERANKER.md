@@ -2,9 +2,9 @@
 id: CONCEPT--CROSS-ENCODER-RERANKER
 phase: 1
 type: concept
-status: draft
+status: stable
 vault_id: default
-tier: process
+tier: genesis
 source_type: axiomatic
 title: CONCEPT — Cross-Encoder Re-ranker — second-stage high-precision retrieval
 tags: [msp, retrieval, rerank, cross-encoder, precision, m10c]

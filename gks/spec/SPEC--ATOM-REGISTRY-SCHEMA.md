@@ -36,7 +36,7 @@ attributes:
     id: SPEC--ATOM-REGISTRY-SCHEMA
     phase: 2
     type: spec
-    status: draft
+    status: stable
     tier: process
     source_type: axiomatic
     vault_id: default
@@ -51,7 +51,7 @@ attributes:
       id: SPEC--ATOM-REGISTRY-SCHEMA
       phase: 2
       type: spec
-      status: draft
+      status: stable
       tier: process
       source_type: axiomatic
       vault_id: default
@@ -96,20 +96,23 @@ The YAML structure contract for the registry is defined as follows:
 - **Version**: A string representing the taxonomy version (e.g., "2.4").
 - **Last Updated**: ISO-8601 timestamp with offset.
 - **Taxonomy**:
-  - **Clusters**: Broad groupings (e.g., `implementation_flow`, `agent_governance`).
+  - **Clusters**: Broad groupings (e.g., `implementation_flow`, `agent_governanc  e`).
     - **Types**: Key-value pairs where the key is the UPPERCASE atom prefix.
       - `phase`: The numeric phase (0-6).
       - `role`: Short descriptive role.
       - `tier`: Governance tier (`process`, `master`, `safety`).
       - `folder`: The lowercase folder name under `gks/`.
       - `sections`: An array of section headers required for this atom type.
-      - `db_id` (optional): The database identifier field name used for Supabase integration (e.g. `atomId`, `reqId`).
+      - `db_id` (optional): The database identifier field name used for Supabase   integration (e.g. `atomId`, `reqId`).
       - `description` (optional): Extended semantics.
       - `lifecycle` (optional): Intended longevity.
 
 ## Wire Format
 
-The registry acts as a JSON Schema provider for downstream tools. The fields listed in the registry for each type define the `required` elements of the markdown body and the `frontmatter` requirements (when compiled by the schema codegen script).
+The registry acts as a JSON Schema provider for downstream tools. The fields lis
+  ted in the registry for each type define the `required` elements of the markdo
+wn   body and the `frontmatter` requirements (when compiled by the schema codege
+n sc  ript).
 
 ## Source
 

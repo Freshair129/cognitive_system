@@ -3,7 +3,7 @@ id: CONCEPT--RESOLUTION-GRADIENT
 phase: 1
 type: concept
 status: stable
-tier: process
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Resolution gradient — graded retrieval with FULL / MENTION + expand-on-demand

@@ -2,7 +2,8 @@
 id: FEAT--COVIBE-SYNC-PROTOTYPE
 phase: 2
 type: feat
-status: proposed
+domain: integration
+status: stable
 vault_id: default
 tier: process
 source_type: axiomatic
@@ -12,6 +13,7 @@ aliases: [FEAT, implementation_flow, Feature specification]
 cluster: implementation_flow
 role: Feature specification
 crosslinks:
+  belongs_to: MOD--MCP
   references:
     - CONCEPT--COVIBE-VISION
     - CONCEPT--COVIBE-ROADMAP

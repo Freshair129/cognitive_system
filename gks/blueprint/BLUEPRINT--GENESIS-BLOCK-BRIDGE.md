@@ -1,11 +1,28 @@
+---
+id: BLUEPRINT--GENESIS-BLOCK-BRIDGE
+phase: 3
+type: blueprint
+status: stable
+vault_id: default
+tier: process
+source_type: axiomatic
+title: "BLUEPRINT — Genesis Block Bridge — Impact-aware execution integration"
+tags: [gks, blueprint, bridge, execution]
+aliases: [bridge-blueprint]
+linked_symbols:
+  - file: packages/msp/src/genesis/bridge.ts
+created_at: 2026-05-21T00:00:00+07:00
+---
+
 # BLUEPRINT--GENESIS-BLOCK-BRIDGE
+
 
 - **ID:** BLUEPRINT--GENESIS-BLOCK-BRIDGE
 - **Status:** draft
 - **Author:** Rwang (T2 Agent)
 - **Stakeholders:** Claude (T3), Boss
 - **Date:** 2026-05-21
-- **Ref:** [[CONCEPT--GENESIS-BLOCK-RUNTIME]], [[SPEC--K-IMPACT]], [[FEAT--GENESIS-BLOCK-NATIVE]]
+- **Ref:** [[CONCEPT--GENESIS-BLOCK-RUNTIME]], [[SPEC--K-IMPACT]], [[BLUEPRINT--GENESIS-BLOCK-RUNTIME]]
 
 ## 1. Objective
 Transform `msp-genesis-exec` from a static file loader into an impact-aware execution engine. This bridge enables the runtime to leverage the high-performance Rust graph engine and K-Impact scores to dynamically assemble the most relevant cognitive context for the agent.

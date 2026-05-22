@@ -3,7 +3,7 @@ id: ADR--POLICY-AS-DATA-NOT-CODE
 phase: 2
 type: adr
 status: stable
-tier: process
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Policy as data, not code — YAML + minimal operators for v1

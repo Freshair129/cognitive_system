@@ -3,7 +3,7 @@ id: AUDIT--IDENTITY-ENGINE-ATOMS
 phase: 6
 type: audit
 status: stable
-tier: genesis
+tier: process
 source_type: axiomatic
 vault_id: default
 title: AUDIT — Identity Engine member atoms & GENESIS manifest

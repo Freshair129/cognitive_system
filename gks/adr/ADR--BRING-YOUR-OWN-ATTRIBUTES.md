@@ -3,7 +3,7 @@ id: ADR--BRING-YOUR-OWN-ATTRIBUTES
 phase: 2
 type: adr
 status: stable
-tier: process
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Bring-your-own attributes — open bag in atom metadata, GKS Namespace untouched

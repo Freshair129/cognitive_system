@@ -2,7 +2,7 @@
 id: PROTO--AUTO-GENERATED-MARKER
 phase: 2
 type: proto
-status: draft
+status: stable
 severity: warning
 vault_id: default
 tier: safety
@@ -35,7 +35,7 @@ attributes:
   id: PROTO--AUTO-GENERATED-MARKER
   phase: 2
   type: proto
-  status: draft
+  status: stable
   severity: warning
   vault_id: default
   tier: safety
@@ -52,7 +52,7 @@ attributes:
     id: PROTO--AUTO-GENERATED-MARKER
     phase: 2
     type: proto
-    status: draft
+    status: stable
     severity: warning
     vault_id: default
     tier: safety
@@ -69,7 +69,7 @@ attributes:
       id: PROTO--AUTO-GENERATED-MARKER
       phase: 2
       type: proto
-      status: draft
+      status: stable
       severity: warning
       vault_id: default
       tier: safety

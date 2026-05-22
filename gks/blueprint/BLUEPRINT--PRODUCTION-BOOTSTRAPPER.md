@@ -2,7 +2,7 @@
 id: BLUEPRINT--PRODUCTION-BOOTSTRAPPER
 phase: 3
 type: blueprint
-status: draft
+status: stable
 vault_id: default
 tier: process
 source_type: axiomatic
@@ -11,6 +11,8 @@ tags: [msp, infra, bootstrap, plan]
 aliases: [installer-plan]
 cluster: implementation_flow
 role: Implementation plan
+linked_symbols:
+  - file: packages/msp/src/usage/cli/bootstrap.ts
 crosslinks:
   references:
     - CONCEPT--PRODUCTION-BOOTSTRAPPER

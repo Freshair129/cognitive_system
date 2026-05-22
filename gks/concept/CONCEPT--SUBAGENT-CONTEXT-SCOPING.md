@@ -3,7 +3,7 @@ id: CONCEPT--SUBAGENT-CONTEXT-SCOPING
 phase: 1
 type: concept
 status: stable
-tier: process
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Subagent context scoping — POLA for agents via task scope + escalation

@@ -2,9 +2,9 @@
 id: BLUEPRINT--AGENT-DISPATCHER
 phase: 3
 type: blueprint
-status: draft
+status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: BLUEPRINT — Agent Dispatcher — implementation plan for T1/T2/T3 routing
 scale_level: feature
@@ -31,7 +31,7 @@ attributes:
   id: BLUEPRINT--AGENT-DISPATCHER
   phase: 3
   type: blueprint
-  status: draft
+  status: stable
   vault_id: default
   tier: genesis
   source_type: axiomatic
@@ -48,7 +48,7 @@ attributes:
     id: BLUEPRINT--AGENT-DISPATCHER
     phase: 3
     type: blueprint
-    status: draft
+    status: stable
     vault_id: default
     tier: genesis
     source_type: axiomatic
@@ -65,7 +65,7 @@ attributes:
       id: BLUEPRINT--AGENT-DISPATCHER
       phase: 3
       type: blueprint
-      status: draft
+      status: stable
       vault_id: default
       tier: genesis
       source_type: axiomatic

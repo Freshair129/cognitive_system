@@ -3,7 +3,7 @@ id: CONCEPT--ATTRIBUTE-BAG-MODEL
 phase: 1
 type: concept
 status: stable
-tier: process
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Attribute bag — bring-your-own open-schema metadata

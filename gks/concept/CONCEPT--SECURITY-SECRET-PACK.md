@@ -3,7 +3,7 @@ id: CONCEPT--SECURITY-SECRET-PACK
 phase: 1
 type: concept
 status: stable
-tier: process
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Security & Secret Domain Pack — deep content inspection for leak prevention

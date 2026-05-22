@@ -23,5 +23,8 @@
     "msp:vault": "npm run msp:vault --workspace=packages/msp --",
     "msp:genesis": "npm run msp:genesis --workspace=packages/msp --",
     "msp:check-links": "gks validate --links --root=."
+  },
+  "dependencies": {
+    "glob": "^13.0.6"
   }
 }

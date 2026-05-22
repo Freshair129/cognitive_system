@@ -2,7 +2,7 @@
 id: PROTO--MASTER-PRIORITY-AUTHORITY
 phase: 2
 type: proto
-status: draft
+status: stable
 severity: error
 tier: safety
 source_type: axiomatic
@@ -32,7 +32,7 @@ attributes:
   id: PROTO--MASTER-PRIORITY-AUTHORITY
   phase: 2
   type: proto
-  status: draft
+  status: stable
   severity: error
   tier: safety
   source_type: axiomatic
@@ -48,7 +48,7 @@ attributes:
     id: PROTO--MASTER-PRIORITY-AUTHORITY
     phase: 2
     type: proto
-    status: draft
+    status: stable
     severity: error
     tier: safety
     source_type: axiomatic
@@ -64,7 +64,7 @@ attributes:
       id: PROTO--MASTER-PRIORITY-AUTHORITY
       phase: 2
       type: proto
-      status: draft
+      status: stable
       severity: error
       tier: safety
       source_type: axiomatic

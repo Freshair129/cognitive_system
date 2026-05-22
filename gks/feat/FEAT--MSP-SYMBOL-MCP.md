@@ -15,6 +15,7 @@ tags: &a1
   - feat
   - tool
 crosslinks: &a2
+  belongs_to: MOD--MCP
   implements:
     - ADR--SYMBOL-GRAPH-PERSISTENCE
   references:
@@ -87,22 +88,22 @@ attributes:
       cluster: implementation_flow
       role: Feature spec
       attributes:
-        domain: feat
-      domain: feat
+        domain: integration
+      domain: integration
       language: markdown
       is_test: false
       is_entrypoint: false
       has_secret: false
       leak_risk: low
       encryption_level: none
-    domain: feat
+    domain: integration
     language: markdown
     is_test: false
     is_entrypoint: false
     has_secret: false
     leak_risk: low
     encryption_level: none
-  domain: feat
+  domain: integration
   language: markdown
   is_test: false
   is_entrypoint: false

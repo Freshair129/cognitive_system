@@ -2,7 +2,7 @@
 id: BLUEPRINT--TRACE-INVARIANTS-PREDICATE-CONTEXT
 phase: 3
 type: blueprint
-status: draft
+status: stable
 tier: process
 title: BLUEPRINT — Extend PredicateContext with Symbol Graph Reader
 crosslinks: &a1
@@ -25,7 +25,7 @@ attributes:
   id: BLUEPRINT--TRACE-INVARIANTS-PREDICATE-CONTEXT
   phase: 3
   type: blueprint
-  status: draft
+  status: stable
   tier: process
   title: BLUEPRINT — Extend PredicateContext with Symbol Graph Reader
   crosslinks: *a1
@@ -38,7 +38,7 @@ attributes:
     id: BLUEPRINT--TRACE-INVARIANTS-PREDICATE-CONTEXT
     phase: 3
     type: blueprint
-    status: draft
+    status: stable
     tier: process
     title: BLUEPRINT — Extend PredicateContext with Symbol Graph Reader
     crosslinks: *a1
@@ -51,7 +51,7 @@ attributes:
       id: BLUEPRINT--TRACE-INVARIANTS-PREDICATE-CONTEXT
       phase: 3
       type: blueprint
-      status: draft
+      status: stable
       tier: process
       title: BLUEPRINT — Extend PredicateContext with Symbol Graph Reader
       crosslinks: *a1

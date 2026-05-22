@@ -4,7 +4,7 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
-tier: process
+tier: genesis
 source_type: axiomatic
 title: Default codegen SLM is Ollama + qwen2.5-coder (drop the qwen-CLI fallback
   in runner)

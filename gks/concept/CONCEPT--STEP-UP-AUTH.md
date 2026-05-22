@@ -3,7 +3,7 @@ id: CONCEPT--STEP-UP-AUTH
 phase: 1
 type: concept
 status: stable
-tier: process
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Step-up authentication — defense-in-depth for sensitive actions

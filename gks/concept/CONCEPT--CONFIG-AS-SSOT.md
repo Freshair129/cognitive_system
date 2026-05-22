@@ -2,8 +2,8 @@
 id: CONCEPT--CONFIG-AS-SSOT
 phase: 1
 type: concept
-status: draft
-tier: process
+status: stable
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Config as Single Source of Truth (extend atom-registry pattern to all
@@ -28,7 +28,7 @@ attributes:
   id: CONCEPT--CONFIG-AS-SSOT
   phase: 1
   type: concept
-  status: draft
+  status: stable
   tier: process
   source_type: axiomatic
   vault_id: default
@@ -44,7 +44,7 @@ attributes:
     id: CONCEPT--CONFIG-AS-SSOT
     phase: 1
     type: concept
-    status: draft
+    status: stable
     tier: process
     source_type: axiomatic
     vault_id: default

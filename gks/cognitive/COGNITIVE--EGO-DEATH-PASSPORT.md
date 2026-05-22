@@ -3,7 +3,7 @@ id: COGNITIVE--EGO-DEATH-PASSPORT
 phase: 1
 type: cognitive
 status: stable
-tier: genesis
+tier: process
 source_type: axiomatic
 vault_id: default
 title: Ego Death Passport — mental framework for externalised identity

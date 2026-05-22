@@ -4,7 +4,7 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
-tier: process
+tier: genesis
 source_type: axiomatic
 title: ADR — File-based state handoff for multi-stage micro-tasks
 tags: [covibe, architecture, state, memory, context]

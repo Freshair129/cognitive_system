@@ -169,15 +169,15 @@ YAML was considered but rejected: identity isn't manually-edited often (compared
 Agent boot
   │
   ▼
+┌───────────────────────────────┐
+│  src/identity/getIdentity(ns) │  ← M7e (this work)
+│ load .brain/.../identity.json │
+│ default-construct if missing  │
+└─────────────┬─────────────────┘
+              │ Identity object
+              ▼
 ┌─────────────────────────────┐
-│ src/identity/getIdentity(ns)│  ← M7e (this work)
-│ load .brain/.../identity.json│
-│ default-construct if missing │
-└────────────┬────────────────┘
-             │ Identity object
-             ▼
-┌─────────────────────────────┐
-│ Agent receives + reads     │
+│  Agent receives + reads     │
 │  - profile.name → self-ref  │
 │  - voice → prompt building  │
 │  - preferences → tool args  │

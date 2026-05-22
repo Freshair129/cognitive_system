@@ -2,7 +2,7 @@
 id: CONCEPT--COST-TRACKING
 phase: 1
 type: concept
-status: draft
+status: stable
 vault_id: default
 tier: genesis
 source_type: axiomatic
@@ -30,7 +30,7 @@ attributes:
   id: CONCEPT--COST-TRACKING
   phase: 1
   type: concept
-  status: draft
+  status: stable
   vault_id: default
   tier: genesis
   source_type: axiomatic
@@ -45,7 +45,7 @@ attributes:
     id: CONCEPT--COST-TRACKING
     phase: 1
     type: concept
-    status: draft
+    status: stable
     vault_id: default
     tier: genesis
     source_type: axiomatic
@@ -60,7 +60,7 @@ attributes:
       id: CONCEPT--COST-TRACKING
       phase: 1
       type: concept
-      status: draft
+      status: stable
       vault_id: default
       tier: genesis
       source_type: axiomatic

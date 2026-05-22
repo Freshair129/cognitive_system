@@ -14,6 +14,7 @@ tags: &a1
   - indexer
   - user-facing
 crosslinks: &a2
+  belongs_to: MOD--MEMORY
   implements:
     - ADR--MEMORY-BACKLINKS-INDEXER
   references:
@@ -78,8 +79,8 @@ attributes:
       cluster: implementation_flow
       role: Feature spec
       attributes:
-        domain: feat
-      domain: feat
+        domain: knowledge-engine
+      domain: knowledge-engine
       language: markdown
       is_test: false
       is_entrypoint: false
@@ -87,7 +88,7 @@ attributes:
       secret_type: high_entropy_string
       leak_risk: high
       encryption_level: none
-    domain: feat
+    domain: knowledge-engine
     language: markdown
     is_test: false
     is_entrypoint: false
@@ -95,7 +96,7 @@ attributes:
     secret_type: high_entropy_string
     leak_risk: high
     encryption_level: none
-  domain: feat
+  domain: knowledge-engine
   language: markdown
   is_test: false
   is_entrypoint: false

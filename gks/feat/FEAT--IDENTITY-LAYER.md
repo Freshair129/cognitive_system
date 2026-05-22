@@ -17,6 +17,7 @@ tags: &a1
   - m7e
   - user-facing
 crosslinks: &a2
+  belongs_to: MOD--IDENTITY
   implements:
     - ADR--IDENTITY-STORAGE-SHAPE
   references:
@@ -84,22 +85,22 @@ attributes:
       cluster: implementation_flow
       role: Feature spec
       attributes:
-        domain: feat
-      domain: feat
+        domain: identity
+      domain: identity
       language: markdown
       is_test: false
       is_entrypoint: false
       has_secret: false
       leak_risk: low
       encryption_level: none
-    domain: feat
+    domain: identity
     language: markdown
     is_test: false
     is_entrypoint: false
     has_secret: false
     leak_risk: low
     encryption_level: none
-  domain: feat
+  domain: identity
   language: markdown
   is_test: false
   is_entrypoint: false

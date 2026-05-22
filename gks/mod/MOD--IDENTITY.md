@@ -20,6 +20,9 @@ crosslinks: &a2
     - ALGO--IDENTITY-RESOLUTION
   implements:
     - FEAT--IDENTITY-LAYER
+    - FEAT--SECURITY-SECRET-PACK
+    - FEAT--SESSION-LOCK-WINDOWS
+    - FEAT--STEP-UP-AUTH-PIN
 created_at: 2026-05-11T10:28:00.000Z
 aliases: &a3
   - MOD
@@ -73,22 +76,22 @@ attributes:
       cluster: implementation_flow
       role: Module manifest
       attributes:
-        domain: mod
-      domain: mod
+        domain: identity
+      domain: identity
       language: markdown
       is_test: false
       is_entrypoint: false
       has_secret: false
       leak_risk: low
       encryption_level: none
-    domain: mod
+    domain: identity
     language: markdown
     is_test: false
     is_entrypoint: false
     has_secret: false
     leak_risk: low
     encryption_level: none
-  domain: mod
+  domain: identity
   language: markdown
   is_test: false
   is_entrypoint: false
@@ -111,7 +114,7 @@ This module is a functional knowledge unit composed of:
 
 ## 2. Integration
 
-- **Implements**: `[[FEAT--IDENTITY-LAYER]]`.
+- **Implements**: `[[FEAT--IDENTITY-LAYER]]`, `[[FEAT--SECURITY-SECRET-PACK]]`, `[[FEAT--SESSION-LOCK-WINDOWS]]`, `[[FEAT--STEP-UP-AUTH-PIN]]`.
 - **Governed by**: `[[ADR--IDENTITY-STORAGE-SHAPE]]` (durable JSON storage).
 - **Observable via**: `[[AUDIT--IDENTITY-LAYER]]`.
 

@@ -4,7 +4,7 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
-tier: process
+tier: genesis
 source_type: axiomatic
 title: ADR — Separate epistemic_state from document status
 tags: [msp, memory, epistemology, lifecycle, governance]

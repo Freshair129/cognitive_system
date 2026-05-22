@@ -2,9 +2,9 @@
 id: FEAT--DECISION-ATROPHY-GUARDS
 phase: 2
 type: feat
-status: draft
+status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: FEAT — Decision Atrophy Guards — automatic detection of expired atoms
 tags: &a1
@@ -20,6 +20,7 @@ aliases: &a2
 cluster: implementation_flow
 role: Feature specification
 crosslinks: &a3
+  belongs_to: MOD--GOVERNANCE
   references:
     - PROTO--VALID-UNTIL
     - FRAMEWORK--PHASE-GOVERNANCE
@@ -29,9 +30,9 @@ attributes:
   id: FEAT--DECISION-ATROPHY-GUARDS
   phase: 2
   type: feat
-  status: draft
+  status: stable
   vault_id: default
-  tier: genesis
+  tier: process
   source_type: axiomatic
   title: FEAT — Decision Atrophy Guards — automatic detection of expired atoms
   tags: *a1
@@ -40,7 +41,7 @@ attributes:
   role: Feature specification
   crosslinks: *a3
   created_at: 2026-05-18T11:15:00+07:00
-  domain: feat
+  domain: governance
   language: markdown
   is_test: false
   is_entrypoint: false

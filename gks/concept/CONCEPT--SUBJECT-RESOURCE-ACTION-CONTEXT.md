@@ -2,8 +2,8 @@
 id: CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT
 phase: 1
 type: concept
-status: draft
-tier: process
+status: stable
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Subject / Resource / Action / Context — the universal request 4-tuple
@@ -11,7 +11,7 @@ attributes:
   id: CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT
   phase: 1
   type: concept
-  status: draft
+  status: stable
   tier: process
   source_type: axiomatic
   vault_id: default
@@ -20,7 +20,7 @@ attributes:
     id: CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT
     phase: 1
     type: concept
-    status: draft
+    status: stable
     tier: process
     source_type: axiomatic
     vault_id: default
@@ -29,7 +29,7 @@ attributes:
       id: CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT
       phase: 1
       type: concept
-      status: draft
+      status: stable
       tier: process
       source_type: axiomatic
       vault_id: default

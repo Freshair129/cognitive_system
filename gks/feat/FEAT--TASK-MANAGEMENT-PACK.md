@@ -13,6 +13,7 @@ tags: &a1
   - ops
   - task
 crosslinks: &a2
+  belongs_to: MOD--DEVELOPER
   implements:
     - CONCEPT--TASK-MANAGEMENT-PACK
   references:
@@ -69,21 +70,21 @@ attributes:
       cluster: implementation_flow
       role: Feature spec
       aliases: *a3
-      domain: feat
+      domain: tooling
       language: markdown
       is_test: false
       is_entrypoint: false
       has_secret: false
       leak_risk: low
       encryption_level: none
-    domain: feat
+    domain: tooling
     language: markdown
     is_test: false
     is_entrypoint: false
     has_secret: false
     leak_risk: low
     encryption_level: none
-  domain: feat
+  domain: tooling
   language: markdown
   is_test: false
   is_entrypoint: false
@@ -101,7 +102,7 @@ This feature implements the operational management extension for UCF. It provide
 ## Requirements
 
 1. **Task Classifier:**
-   - Detect `domain: ops` for ISSUE, RUNBOOK, and INCIDENT atoms.
+   - Detect `domain: tooling` for ISSUE, RUNBOOK, and INCIDENT atoms.
    - Extract `priority` (low, medium, high, urgent) from frontmatter.
    - Extract `status` (open, in_progress, closed, blocked) from frontmatter.
    - Extract `assignee` from frontmatter.

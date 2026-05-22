@@ -4,7 +4,7 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
-tier: process
+tier: genesis
 source_type: axiomatic
 title: Cognitive Layer facade — one-line memoryOS entry for any agent
 tags: &a1

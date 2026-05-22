@@ -37,7 +37,7 @@ attributes:
   id: BLUEPRINT--GENESIS-BLOCK-RUNTIME
   phase: 3
   type: blueprint
-  status: draft
+  status: stable
   vault_id: default
   tier: process
   source_type: axiomatic
@@ -55,7 +55,7 @@ attributes:
     id: BLUEPRINT--GENESIS-BLOCK-RUNTIME
     phase: 3
     type: blueprint
-    status: draft
+    status: stable
     vault_id: default
     tier: process
     source_type: axiomatic
@@ -73,7 +73,7 @@ attributes:
       id: BLUEPRINT--GENESIS-BLOCK-RUNTIME
       phase: 3
       type: blueprint
-      status: draft
+      status: stable
       vault_id: default
       tier: process
       source_type: axiomatic

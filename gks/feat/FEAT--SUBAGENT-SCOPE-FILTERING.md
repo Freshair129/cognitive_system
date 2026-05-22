@@ -15,6 +15,7 @@ tags: &a1
   - scope
   - codegen
 crosslinks: &a2
+  belongs_to: MOD--COGNITIVE
   references:
     - CONCEPT--SUBAGENT-CONTEXT-SCOPING
     - CONCEPT--ABAC-POLICY-ENGINE
@@ -73,8 +74,8 @@ attributes:
       cluster: implementation_flow
       role: Feature spec
       attributes:
-        domain: feat
-      domain: feat
+        domain: agent
+      domain: agent
       language: markdown
       is_test: false
       is_entrypoint: false
@@ -82,7 +83,7 @@ attributes:
       secret_type: high_entropy_string
       leak_risk: high
       encryption_level: none
-    domain: feat
+    domain: agent
     language: markdown
     is_test: false
     is_entrypoint: false
@@ -90,7 +91,7 @@ attributes:
     secret_type: high_entropy_string
     leak_risk: high
     encryption_level: none
-  domain: feat
+  domain: agent
   language: markdown
   is_test: false
   is_entrypoint: false
@@ -150,7 +151,7 @@ Behaviour contract:
 
 ## Verification
 
-- A task with `excludes: [patient-records]` produces a subagent context with zero atoms tagged `domain: patient-records`, **even when** the parent user's ABAC would permit them (the defense-in-depth property).
+- A task with `excludes: [patient-records]` produces a subagent context with zero atoms tagged `domain: agent-records`, **even when** the parent user's ABAC would permit them (the defense-in-depth property).
 - The subagent has no API to mutate its own `scope` — attempting to returns a type error / runtime rejection.
 - `escalate()` round-trips: subagent → parent decision → (on approve) widened scope → subagent retry succeeds.
 - Composer audit log lists both included and filter-dropped Resources per task.

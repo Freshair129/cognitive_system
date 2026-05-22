@@ -2,7 +2,7 @@
 id: PROTO--REGISTRY-DRIFT-CHECK
 phase: 2
 type: proto
-status: draft
+status: stable
 tier: safety
 source_type: axiomatic
 vault_id: default
@@ -21,7 +21,7 @@ attributes:
   id: PROTO--REGISTRY-DRIFT-CHECK
   phase: 2
   type: proto
-  status: draft
+  status: stable
   tier: safety
   source_type: axiomatic
   vault_id: default
@@ -36,7 +36,7 @@ attributes:
     id: PROTO--REGISTRY-DRIFT-CHECK
     phase: 2
     type: proto
-    status: draft
+    status: stable
     tier: safety
     source_type: axiomatic
     vault_id: default
@@ -51,7 +51,7 @@ attributes:
       id: PROTO--REGISTRY-DRIFT-CHECK
       phase: 2
       type: proto
-      status: draft
+      status: stable
       tier: safety
       source_type: axiomatic
       vault_id: default

@@ -2,7 +2,7 @@
 id: CONCEPT--MSP-OBSERVE-HOT-PATH
 phase: 1
 type: concept
-status: draft
+status: stable
 vault_id: default
 tier: genesis
 source_type: learned
@@ -29,7 +29,7 @@ attributes:
   id: CONCEPT--MSP-OBSERVE-HOT-PATH
   phase: 1
   type: concept
-  status: draft
+  status: stable
   vault_id: default
   tier: genesis
   source_type: learned
@@ -44,7 +44,7 @@ attributes:
     id: CONCEPT--MSP-OBSERVE-HOT-PATH
     phase: 1
     type: concept
-    status: draft
+    status: stable
     vault_id: default
     tier: genesis
     source_type: learned
@@ -59,7 +59,7 @@ attributes:
       id: CONCEPT--MSP-OBSERVE-HOT-PATH
       phase: 1
       type: concept
-      status: draft
+      status: stable
       vault_id: default
       tier: genesis
       source_type: learned

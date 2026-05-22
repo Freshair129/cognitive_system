@@ -2,7 +2,7 @@
 id: CONCEPT--PROMOTED-BLOCK-REGISTRY
 phase: 1
 type: concept
-status: draft
+status: stable
 tier: genesis
 source_type: axiomatic
 vault_id: default
@@ -35,7 +35,7 @@ attributes:
   id: CONCEPT--PROMOTED-BLOCK-REGISTRY
   phase: 1
   type: concept
-  status: draft
+  status: stable
   tier: genesis
   source_type: axiomatic
   vault_id: default
@@ -51,7 +51,7 @@ attributes:
     id: CONCEPT--PROMOTED-BLOCK-REGISTRY
     phase: 1
     type: concept
-    status: draft
+    status: stable
     tier: genesis
     source_type: axiomatic
     vault_id: default
@@ -67,7 +67,7 @@ attributes:
       id: CONCEPT--PROMOTED-BLOCK-REGISTRY
       phase: 1
       type: concept
-      status: draft
+      status: stable
       tier: genesis
       source_type: axiomatic
       vault_id: default

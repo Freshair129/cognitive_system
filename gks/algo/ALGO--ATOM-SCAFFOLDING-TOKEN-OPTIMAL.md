@@ -2,7 +2,7 @@
 id: ALGO--ATOM-SCAFFOLDING-TOKEN-OPTIMAL
 phase: 2
 type: algo
-status: draft
+status: stable
 tier: process
 source_type: axiomatic
 vault_id: default
@@ -21,7 +21,7 @@ attributes:
   id: ALGO--ATOM-SCAFFOLDING-TOKEN-OPTIMAL
   phase: 2
   type: algo
-  status: draft
+  status: stable
   tier: process
   source_type: axiomatic
   vault_id: default
@@ -36,7 +36,7 @@ attributes:
     id: ALGO--ATOM-SCAFFOLDING-TOKEN-OPTIMAL
     phase: 2
     type: algo
-    status: draft
+    status: stable
     tier: process
     source_type: axiomatic
     vault_id: default
@@ -51,7 +51,7 @@ attributes:
       id: ALGO--ATOM-SCAFFOLDING-TOKEN-OPTIMAL
       phase: 2
       type: algo
-      status: draft
+      status: stable
       tier: process
       source_type: axiomatic
       vault_id: default

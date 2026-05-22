@@ -3,7 +3,7 @@ id: CONCEPT--TIERED-MEMORY-DISTILLATION
 phase: 1
 type: concept
 status: stable
-tier: process
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Tiered Memory Distillation — the 8-8-8 cross-session synthesis pipeline

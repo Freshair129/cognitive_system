@@ -3,7 +3,7 @@ id: CONCEPT--ABAC-POLICY-ENGINE
 phase: 1
 type: concept
 status: stable
-tier: process
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: ABAC policy engine — PDP / PEP separation, policy as data

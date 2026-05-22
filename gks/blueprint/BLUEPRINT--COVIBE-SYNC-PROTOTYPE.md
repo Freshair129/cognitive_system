@@ -2,7 +2,7 @@
 id: BLUEPRINT--COVIBE-SYNC-PROTOTYPE
 phase: 3
 type: blueprint
-status: proposed
+status: stable
 vault_id: default
 tier: process
 source_type: axiomatic
@@ -11,6 +11,8 @@ tags: [covibe, technical-spike, youtube, websocket, plan, m13]
 aliases: [BLUEPRINT, implementation_flow, Implementation plan]
 cluster: implementation_flow
 role: Implementation plan
+linked_symbols:
+  - file: apps/web/server/sync-server.ts
 crosslinks:
   references:
     - FEAT--COVIBE-SYNC-PROTOTYPE

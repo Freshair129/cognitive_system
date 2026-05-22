@@ -2,9 +2,9 @@
 id: BLUEPRINT--DECISION-ATROPHY-GUARDS
 phase: 3
 type: blueprint
-status: draft
+status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: BLUEPRINT — Decision Atrophy Guards Implementation Plan
 tags: [msp, lifecycle, atrophy, plan, m9a]

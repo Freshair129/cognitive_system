@@ -2,8 +2,8 @@
 id: BLUEPRINT--MSP-MASTER-COMPOSE-LOADER
 phase: 3
 type: blueprint
-status: draft
-tier: genesis
+status: stable
+tier: process
 source_type: axiomatic
 vault_id: default
 title: msp master compose CLI — sector-aware Master loader with multi-tiered triggers
@@ -37,7 +37,7 @@ attributes:
   id: BLUEPRINT--MSP-MASTER-COMPOSE-LOADER
   phase: 3
   type: blueprint
-  status: draft
+  status: stable
   tier: genesis
   source_type: axiomatic
   vault_id: default
@@ -54,7 +54,7 @@ attributes:
     id: BLUEPRINT--MSP-MASTER-COMPOSE-LOADER
     phase: 3
     type: blueprint
-    status: draft
+    status: stable
     tier: genesis
     source_type: axiomatic
     vault_id: default
@@ -71,7 +71,7 @@ attributes:
       id: BLUEPRINT--MSP-MASTER-COMPOSE-LOADER
       phase: 3
       type: blueprint
-      status: draft
+      status: stable
       tier: genesis
       source_type: axiomatic
       vault_id: default

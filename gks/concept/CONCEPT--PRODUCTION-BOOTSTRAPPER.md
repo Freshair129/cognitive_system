@@ -2,9 +2,9 @@
 id: CONCEPT--PRODUCTION-BOOTSTRAPPER
 phase: 1
 type: concept
-status: draft
+status: stable
 vault_id: default
-tier: process
+tier: genesis
 source_type: axiomatic
 title: CONCEPT — Production Bootstrapper — instantiating clean GKS/MSP projects
 tags: [msp, infra, bootstrap, production, installer]

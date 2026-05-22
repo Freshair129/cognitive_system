@@ -4,7 +4,7 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
-tier: process
+tier: genesis
 source_type: axiomatic
 title: ADR — Distillation ratios are configurable defaults
 tags: [msp, memory, config, 888, distillation]

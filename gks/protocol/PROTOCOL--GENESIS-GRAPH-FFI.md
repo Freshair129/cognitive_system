@@ -2,7 +2,7 @@
 id: PROTOCOL--GENESIS-GRAPH-FFI
 phase: 2
 type: protocol
-status: draft
+status: stable
 vault_id: default
 tier: process
 source_type: axiomatic
@@ -32,7 +32,7 @@ attributes:
   id: PROTOCOL--GENESIS-GRAPH-FFI
   phase: 2
   type: protocol
-  status: draft
+  status: stable
   vault_id: default
   tier: process
   source_type: axiomatic
@@ -47,7 +47,7 @@ attributes:
     id: PROTOCOL--GENESIS-GRAPH-FFI
     phase: 2
     type: protocol
-    status: draft
+    status: stable
     vault_id: default
     tier: process
     source_type: axiomatic
@@ -62,7 +62,7 @@ attributes:
       id: PROTOCOL--GENESIS-GRAPH-FFI
       phase: 2
       type: protocol
-      status: draft
+      status: stable
       vault_id: default
       tier: process
       source_type: axiomatic

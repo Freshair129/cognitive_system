@@ -3,7 +3,7 @@ id: CONCEPT--BELIEF-REVISION
 phase: 1
 type: concept
 status: stable
-tier: process
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Belief Revision — protocol for handling contradictions and state regressions

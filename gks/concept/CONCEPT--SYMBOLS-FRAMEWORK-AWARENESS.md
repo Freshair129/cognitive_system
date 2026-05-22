@@ -3,7 +3,7 @@ id: CONCEPT--SYMBOLS-FRAMEWORK-AWARENESS
 phase: 1
 type: concept
 status: active
-tier: process
+tier: genesis
 source_type: axiomatic
 vault_id: default
 title: Symbol graph must understand framework semantics, not just syntactic structure

@@ -14,6 +14,7 @@ tags: &a1
   - m7a
   - user-facing
 crosslinks: &a2
+  belongs_to: MOD--MCP
   implements:
     - ADR--MSP-OBSIDIAN-INTEGRATION
   references:
@@ -79,8 +80,8 @@ attributes:
       cluster: implementation_flow
       role: Feature spec
       attributes:
-        domain: feat
-      domain: feat
+        domain: integration
+      domain: integration
       language: markdown
       is_test: false
       is_entrypoint: false
@@ -88,7 +89,7 @@ attributes:
       secret_type: high_entropy_string
       leak_risk: high
       encryption_level: none
-    domain: feat
+    domain: integration
     language: markdown
     is_test: false
     is_entrypoint: false
@@ -96,7 +97,7 @@ attributes:
     secret_type: high_entropy_string
     leak_risk: high
     encryption_level: none
-  domain: feat
+  domain: integration
   language: markdown
   is_test: false
   is_entrypoint: false
