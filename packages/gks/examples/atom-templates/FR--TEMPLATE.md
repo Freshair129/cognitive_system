@@ -1,41 +1,38 @@
 ---
 id: FR--TEMPLATE
-tier: genesis
-created_at: 2026-05-13T12:00:00.000+07:00
 phase: 1
 type: fr
 status: draft
-vault_id: <YOUR-PROJECT>
+vault_id: default
+tier: process
+source_type: axiomatic
 title: <One-line functional requirement>
+created_at: 2026-05-13T12:00:00.000+07:00
 tags: [functional]
-domain: <domain-name>
-priority: medium                # low | medium | high | must
+aliases:
+  - FR
+  - requirements
+  - Functional requirement
+cluster: requirements
+role: Functional requirement
 crosslinks:
-  parent: REQ--<umbrella>       # if part of a larger requirement (Hierarchical Link)
-  satisfied_by: []              # FEAT-- / BLUEPRINT-- that implement this (Inverse Link)
-  verified_by: []               # AUDIT-- proving this requirement met (Resolution Link)
-  governed_by: []               # ADR-- that dictates constraints for this FR (Governance Link)
-  references: []                # Contextual background / external docs (Context Link)
+  references: []
+linked_symbols: []
+attributes:
+  priority: medium
+  domain: requirements
 ---
 
 # FR — <Title>
 
-## Statement
+## Requirement
 
-The system **shall** <observable behaviour>. State exactly once,
-testable.
+State the functional requirement. The system **shall** <observable behaviour>. It must be specific and testable.
 
-## Acceptance criteria
+## Verification
 
-- [ ] <verifiable criterion 1>
-- [ ] <verifiable criterion 2>
-- [ ] <error case>
-
-## Verification approach
-
-- unit / E2E test referenced in implementing BLUEPRINT
-- AUDIT-- expected at sign-off
+Describe the verification approach (e.g. unit test, E2E test, or manual validation).
 
 ## Source
 
-- <CONCEPT--PRD section / customer interview / ticket>
+- <Link to the REQ-- or CONCEPT-- that originating this requirement>
