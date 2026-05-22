@@ -3,11 +3,11 @@ id: FRAMEWORK--SYMBOL-GRAPH
 phase: 0
 type: framework
 status: stable
-tier: genesis
-source_type: axiomatic
 vault_id: default
+tier: master
+source_type: axiomatic
 title: Symbol Graph — structural code knowledge axis (orthogonal to 3-tier atom model)
-tags: &a1
+tags:
   - msp
   - symbol-graph
   - architecture
@@ -15,7 +15,7 @@ tags: &a1
   - tree-sitter
   - leiden
   - upstream-gks
-crosslinks: &a2
+crosslinks:
   references:
     - FRAMEWORK--MSP-ARCHITECTURE-V2
     - FRAMEWORK--KNOWLEDGE-3-TIER
@@ -24,78 +24,13 @@ crosslinks: &a2
     - ADR--SYMBOL-GRAPH-PROCESSING-STAGES
     - PROTO--TRACE-INVARIANTS
 created_at: 2026-05-09T16:30:00.000+07:00
-aliases: &a3
+aliases:
   - FRAMEWORK
   - implementation_flow
   - Governance / architectural framework
 cluster: implementation_flow
 role: Governance / architectural framework
 attributes:
-  id: FRAMEWORK--SYMBOL-GRAPH
-  phase: 0
-  type: framework
-  status: stable
-  tier: genesis
-  source_type: axiomatic
-  vault_id: default
-  title: Symbol Graph — structural code knowledge axis (orthogonal to 3-tier atom
-    model)
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-09T16:30:00.000+07:00
-  aliases: *a3
-  cluster: implementation_flow
-  role: Governance / architectural framework
-  attributes:
-    id: FRAMEWORK--SYMBOL-GRAPH
-    phase: 0
-    type: framework
-    status: stable
-    tier: genesis
-    source_type: axiomatic
-    vault_id: default
-    title: Symbol Graph — structural code knowledge axis (orthogonal to 3-tier atom
-      model)
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-09T16:30:00.000+07:00
-    aliases: *a3
-    cluster: implementation_flow
-    role: Governance / architectural framework
-    attributes:
-      id: FRAMEWORK--SYMBOL-GRAPH
-      phase: 0
-      type: framework
-      status: stable
-      tier: genesis
-      source_type: axiomatic
-      vault_id: default
-      title: Symbol Graph — structural code knowledge axis (orthogonal to 3-tier atom
-        model)
-      tags: *a1
-      crosslinks: *a2
-      created_at: 2026-05-09T16:30:00.000+07:00
-      aliases: *a3
-      cluster: implementation_flow
-      role: Governance / architectural framework
-      attributes:
-        domain: framework
-      domain: framework
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: framework
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
   domain: framework
   language: markdown
   is_test: false
@@ -104,6 +39,9 @@ attributes:
   secret_type: high_entropy_string
   leak_risk: high
   encryption_level: none
+promoted_from: CONCEPT--KNOWLEDGE-LAYERS-V2
+promoted_at: 2026-05-13T12:21:49+07:00
+promotion_adr: ADR--TAXONOMY-V2-3-MIGRATION
 ---
 
 # FRAME — Symbol Graph

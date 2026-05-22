@@ -7,14 +7,14 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: M7-prep follow-up — GKS audit alignment + 4 upstream proposals
-tags: &a1
+tags:
   - msp
   - m7
   - m7-prep
   - audit
   - followup
   - gks-audit
-crosslinks: &a2
+crosslinks:
   references:
     - ADR--GRAPH-IS-GKS-DOMAIN
     - ADR--EMBEDDING-MODEL-PARITY
@@ -26,80 +26,15 @@ crosslinks: &a2
     - ADR--SEMANTIC-SEARCH-VIA-SMART-CONNECTIONS
     - ADR--ANTI-HALLUCINATION-RULES
     - CONCEPT--MEMORY-VECTOR-BACKLINKS
-linked_symbols: &a3 []
 created_at: 2026-05-04T09:18:00.000+07:00
-aliases: &a4
+aliases:
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
-  id: AUDIT--M7-PREP-FOLLOWUP
-  phase: 6
-  type: audit
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: M7-prep follow-up — GKS audit alignment + 4 upstream proposals
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-04T09:18:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Test results / quality report
-  attributes:
-    id: AUDIT--M7-PREP-FOLLOWUP
-    phase: 6
-    type: audit
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: M7-prep follow-up — GKS audit alignment + 4 upstream proposals
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-04T09:18:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Test results / quality report
-    attributes:
-      id: AUDIT--M7-PREP-FOLLOWUP
-      phase: 6
-      type: audit
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: M7-prep follow-up — GKS audit alignment + 4 upstream proposals
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-04T09:18:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Test results / quality report
-      attributes:
-        domain: audit
-      domain: audit
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: audit
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols: []
   domain: audit
   language: markdown
   is_test: false

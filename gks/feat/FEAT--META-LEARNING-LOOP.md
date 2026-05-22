@@ -1,70 +1,21 @@
 ---
 id: FEAT--META-LEARNING-LOOP
-title: Meta Learning Loop (MLL)
-type: feat
 phase: 2
+type: feat
 status: stable
 tier: process
+title: Meta Learning Loop (MLL)
+crosslinks:
+  belongs_to: MOD--COGNITIVE
 created_at: 2026-05-13T23:43:00.000+07:00
-owner: Genesis Architect (Antigravity)
-aliases: &a1
+aliases:
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
-  id: FEAT--META-LEARNING-LOOP
-  title: Meta Learning Loop (MLL)
-  type: feat
-  phase: 2
-  status: stable
-  tier: process
-  created_at: 2026-05-13T23:43:00.000+07:00
   owner: Genesis Architect (Antigravity)
-  aliases: *a1
-  cluster: implementation_flow
-  role: Feature spec
-  attributes:
-    id: FEAT--META-LEARNING-LOOP
-    title: Meta Learning Loop (MLL)
-    type: feat
-    phase: 2
-    status: stable
-    tier: process
-    created_at: 2026-05-13T23:43:00.000+07:00
-    owner: Genesis Architect (Antigravity)
-    aliases: *a1
-    cluster: implementation_flow
-    role: Feature spec
-    attributes:
-      id: FEAT--META-LEARNING-LOOP
-      title: Meta Learning Loop (MLL)
-      type: feat
-      phase: 2
-      status: stable
-      tier: process
-      created_at: 2026-05-13T23:43:00.000+07:00
-      owner: Genesis Architect (Antigravity)
-      aliases: *a1
-      cluster: implementation_flow
-      role: Feature spec
-      attributes:
-        domain: agent
-      domain: agent
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: agent
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
   domain: agent
   language: markdown
   is_test: false
@@ -72,8 +23,6 @@ attributes:
   has_secret: false
   leak_risk: low
   encryption_level: none
-crosslinks:
-  belongs_to: MOD--COGNITIVE
 ---
 # FEAT — Meta Learning Loop (MLL)
 

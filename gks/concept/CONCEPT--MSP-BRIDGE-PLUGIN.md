@@ -4,11 +4,19 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: CONCEPT — MSP Bridge Plugin — stable API and pgvector adapter for Obsidian
-tags: [msp, obsidian, plugin, pgvector, m10a]
-aliases: [CONCEPT, implementation_flow, Strategic intent / PRD]
+tags:
+  - msp
+  - obsidian
+  - plugin
+  - pgvector
+  - m10a
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 cluster: implementation_flow
 role: Strategic intent / PRD
 crosslinks:

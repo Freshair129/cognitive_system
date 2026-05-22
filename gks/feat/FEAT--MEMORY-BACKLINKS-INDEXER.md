@@ -7,95 +7,30 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: msp:backlinks — full-rebuild backlinks.jsonl from atom crosslinks
-tags: &a1
+tags:
   - msp
   - memory
   - backlinks
   - indexer
   - user-facing
-crosslinks: &a2
+crosslinks:
   belongs_to: MOD--MEMORY
   implements:
     - ADR--MEMORY-BACKLINKS-INDEXER
   references:
     - CONCEPT--MEMORY-BACKLINKS-INDEXER
     - CONCEPT--MEMORY-VECTOR-BACKLINKS
-linked_symbols: &a3
-  - file: packages/msp/src/memory/backlinks/indexer.ts
-  - file: packages/msp/src/memory/backlinks/cli.ts
 created_at: 2026-05-03T14:16:42.851+07:00
-aliases: &a4
+aliases:
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
-  id: FEAT--MEMORY-BACKLINKS-INDEXER
-  phase: 2
-  type: feat
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: msp:backlinks — full-rebuild backlinks.jsonl from atom crosslinks
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-03T14:16:42.851+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Feature spec
-  attributes:
-    id: FEAT--MEMORY-BACKLINKS-INDEXER
-    phase: 2
-    type: feat
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: msp:backlinks — full-rebuild backlinks.jsonl from atom crosslinks
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-03T14:16:42.851+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Feature spec
-    attributes:
-      id: FEAT--MEMORY-BACKLINKS-INDEXER
-      phase: 2
-      type: feat
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: msp:backlinks — full-rebuild backlinks.jsonl from atom crosslinks
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-03T14:16:42.851+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Feature spec
-      attributes:
-        domain: knowledge-engine
-      domain: knowledge-engine
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: knowledge-engine
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/memory/backlinks/indexer.ts
+    - file: packages/msp/src/memory/backlinks/cli.ts
   domain: knowledge-engine
   language: markdown
   is_test: false

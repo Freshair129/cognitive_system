@@ -2,14 +2,13 @@
 id: BLUEPRINT--GLOBAL-VS-WORKSPACE-MIGRATION
 phase: 3
 type: blueprint
-scale_level: L2
 status: stable
 vault_id: default
 tier: process
 source_type: axiomatic
 title: BLUEPRINT — implement global vs workspace storage split (~/.msp/ +
   .brain/msp/projects/<ns>/)
-tags: &a1
+tags:
   - msp
   - storage
   - global
@@ -17,106 +16,36 @@ tags: &a1
   - migration
   - blueprint
   - implementation
-crosslinks: &a2
+crosslinks:
   references:
     - ADR--GLOBAL-VS-WORKSPACE
     - CONCEPT--AGENT-AGNOSTIC
     - CONCEPT--NAMED-PROJECT-REGISTRY
     - ADR--PATH-ENCODING
-linked_symbols: &a3
-  - file: packages/msp/src/identity/store.ts
-  - file: packages/msp/src/identity/types.ts
-  - file: packages/msp/src/identity/migrate.ts
-  - file: packages/msp/src/identity/index.ts
-  - file: packages/msp/src/projects/registry.ts
-  - file: packages/msp/src/projects/resolve.ts
-  - file: packages/msp/src/projects/types.ts
-  - file: packages/msp/src/lib/msp-home.ts
-  - file: packages/msp/src/mcp/tools/identity-get.ts
-  - file: packages/msp/src/mcp/tools/identity-set.ts
-  - file: packages/msp/test/identity/store.test.ts
-  - file: packages/msp/test/identity/migrate.test.ts
-  - file: packages/msp/test/projects/registry.test.ts
-  - file: packages/msp/test/projects/resolve.test.ts
 created_at: 2026-05-09T07:00:00.000+07:00
-aliases: &a4
+aliases:
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  id: BLUEPRINT--GLOBAL-VS-WORKSPACE-MIGRATION
-  phase: 3
-  type: blueprint
   scale_level: L2
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: BLUEPRINT — implement global vs workspace storage split (~/.msp/ +
-    .brain/msp/projects/<ns>/)
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-09T07:00:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Implementation plan
-  attributes:
-    id: BLUEPRINT--GLOBAL-VS-WORKSPACE-MIGRATION
-    phase: 3
-    type: blueprint
-    scale_level: L2
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: BLUEPRINT — implement global vs workspace storage split (~/.msp/ +
-      .brain/msp/projects/<ns>/)
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-09T07:00:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Implementation plan
-    attributes:
-      id: BLUEPRINT--GLOBAL-VS-WORKSPACE-MIGRATION
-      phase: 3
-      type: blueprint
-      scale_level: L2
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: BLUEPRINT — implement global vs workspace storage split (~/.msp/ +
-        .brain/msp/projects/<ns>/)
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-09T07:00:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Implementation plan
-      attributes:
-        domain: blueprint
-      domain: blueprint
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: blueprint
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/identity/store.ts
+    - file: packages/msp/src/identity/types.ts
+    - file: packages/msp/src/identity/migrate.ts
+    - file: packages/msp/src/identity/index.ts
+    - file: packages/msp/src/projects/registry.ts
+    - file: packages/msp/src/projects/resolve.ts
+    - file: packages/msp/src/projects/types.ts
+    - file: packages/msp/src/lib/msp-home.ts
+    - file: packages/msp/src/mcp/tools/identity-get.ts
+    - file: packages/msp/src/mcp/tools/identity-set.ts
+    - file: packages/msp/test/identity/store.test.ts
+    - file: packages/msp/test/identity/migrate.test.ts
+    - file: packages/msp/test/projects/registry.test.ts
+    - file: packages/msp/test/projects/resolve.test.ts
   domain: blueprint
   language: markdown
   is_test: false

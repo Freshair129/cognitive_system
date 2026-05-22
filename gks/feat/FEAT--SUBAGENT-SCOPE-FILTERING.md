@@ -3,18 +3,18 @@ id: FEAT--SUBAGENT-SCOPE-FILTERING
 phase: 2
 type: feat
 status: active
+vault_id: default
 tier: process
 source_type: axiomatic
-vault_id: default
 title: Subagent scope filtering — task-scoped context with escalation
-tags: &a1
+tags:
   - msp
   - ucf
   - feat
   - subagent
   - scope
   - codegen
-crosslinks: &a2
+crosslinks:
   belongs_to: MOD--COGNITIVE
   references:
     - CONCEPT--SUBAGENT-CONTEXT-SCOPING
@@ -22,75 +22,13 @@ crosslinks: &a2
     - ADR--TRANSPORT-AGNOSTIC-ENFORCEMENT
     - CONCEPT--RESOLUTION-GRADIENT
 created_at: 2026-05-14T19:42:03.565+07:00
-aliases: &a3
+aliases:
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
-  id: FEAT--SUBAGENT-SCOPE-FILTERING
-  phase: 2
-  type: feat
-  status: active
-  tier: process
-  source_type: axiomatic
-  vault_id: default
-  title: Subagent scope filtering — task-scoped context with escalation
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-14T19:42:03.565+07:00
-  aliases: *a3
-  cluster: implementation_flow
-  role: Feature spec
-  attributes:
-    id: FEAT--SUBAGENT-SCOPE-FILTERING
-    phase: 2
-    type: feat
-    status: active
-    tier: process
-    source_type: axiomatic
-    vault_id: default
-    title: Subagent scope filtering — task-scoped context with escalation
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-14T19:42:03.565+07:00
-    aliases: *a3
-    cluster: implementation_flow
-    role: Feature spec
-    attributes:
-      id: FEAT--SUBAGENT-SCOPE-FILTERING
-      phase: 2
-      type: feat
-      status: active
-      tier: process
-      source_type: axiomatic
-      vault_id: default
-      title: Subagent scope filtering — task-scoped context with escalation
-      tags: *a1
-      crosslinks: *a2
-      created_at: 2026-05-14T19:42:03.565+07:00
-      aliases: *a3
-      cluster: implementation_flow
-      role: Feature spec
-      attributes:
-        domain: agent
-      domain: agent
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: agent
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
   domain: agent
   language: markdown
   is_test: false

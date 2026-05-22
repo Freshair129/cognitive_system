@@ -2,107 +2,39 @@
 id: BLUEPRINT--MSP-OBSIDIAN-CLIENT
 phase: 3
 type: blueprint
-scale_level: L2
 status: stable
 vault_id: default
 tier: process
 source_type: axiomatic
 title: BLUEPRINT — MSP Obsidian client implementation plan
-tags: &a1
+tags:
   - msp
   - obsidian
   - client
   - blueprint
   - implementation
-crosslinks: &a2
+crosslinks:
   implements:
     - FEAT--MSP-OBSIDIAN-CLIENT
   references:
     - ADR--MSP-OBSIDIAN-INTEGRATION
     - CONCEPT--OBSIDIAN-AS-RUNTIME
-linked_symbols: &a3
-  - file: packages/msp/src/obsidian/client.ts
-  - file: packages/msp/src/obsidian/types.ts
-  - file: packages/msp/src/obsidian/rest.ts
-  - file: packages/msp/src/obsidian/filesystem.ts
-  - file: packages/msp/src/obsidian/env.ts
-  - file: packages/msp/test/obsidian/client.test.ts
 created_at: 2026-05-04T12:25:22.543+07:00
-aliases: &a4
+aliases:
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  id: BLUEPRINT--MSP-OBSIDIAN-CLIENT
-  phase: 3
-  type: blueprint
   scale_level: L2
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: BLUEPRINT — MSP Obsidian client implementation plan
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-04T12:25:22.543+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Implementation plan
-  attributes:
-    id: BLUEPRINT--MSP-OBSIDIAN-CLIENT
-    phase: 3
-    type: blueprint
-    scale_level: L2
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: BLUEPRINT — MSP Obsidian client implementation plan
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-04T12:25:22.543+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Implementation plan
-    attributes:
-      id: BLUEPRINT--MSP-OBSIDIAN-CLIENT
-      phase: 3
-      type: blueprint
-      scale_level: L2
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: BLUEPRINT — MSP Obsidian client implementation plan
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-04T12:25:22.543+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Implementation plan
-      attributes:
-        domain: blueprint
-      domain: blueprint
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: blueprint
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/obsidian/client.ts
+    - file: packages/msp/src/obsidian/types.ts
+    - file: packages/msp/src/obsidian/rest.ts
+    - file: packages/msp/src/obsidian/filesystem.ts
+    - file: packages/msp/src/obsidian/env.ts
+    - file: packages/msp/test/obsidian/client.test.ts
   domain: blueprint
   language: markdown
   is_test: false

@@ -1,5 +1,7 @@
 ---
 id: FEAT--ACCEPTANCE-VITEST-RUNNER
+cssclasses:
+  - decorated-spec
 version: 0.0.1
 phase: 2
 type: feat
@@ -28,11 +30,11 @@ aliases:
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
+linked_symbols:
+  - file: packages/msp/src/codegen/acceptance/vitest.ts
+  - file: packages/msp/src/codegen/acceptance/sandbox.ts
+  - file: packages/msp/src/codegen/acceptance/types.ts
 attributes:
-  linked_symbols:
-    - file: packages/msp/src/codegen/acceptance/vitest.ts
-    - file: packages/msp/src/codegen/acceptance/sandbox.ts
-    - file: packages/msp/src/codegen/acceptance/types.ts
   domain: governance
   language: markdown
   is_test: false

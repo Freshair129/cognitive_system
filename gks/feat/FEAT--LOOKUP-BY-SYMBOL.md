@@ -3,95 +3,35 @@ id: FEAT--LOOKUP-BY-SYMBOL
 phase: 2
 type: feat
 status: stable
-created_at: 2026-05-13T12:00:00+07:00
 vault_id: GKS-CORE
 tier: process
 title: Reverse citation lookup — atoms-by-code-path
-tags: &a1
+tags:
   - user-facing
   - traceability
   - drift-detection
-crosslinks: &a2
+crosslinks:
   belongs_to: MOD--RETRIEVAL
   implements:
     - ADR--REVERSE-CITATION-LOOKUP
   references:
     - CONCEPT--MEMORY-STORE
-linked_symbols: &a3
-  - file: packages/gks/src/memory/index.ts
-    fn: lookupBySymbol
-  - file: packages/gks/src/memory/gks.ts
-    fn: searchBySymbol
-  - file: packages/gks/bin/gks.ts
-    fn: cmdLookupBySymbol
-  - file: packages/gks/src/mcp-server/index.ts
-aliases: &a4
+created_at: 2026-05-13T12:00:00+07:00
+aliases:
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
-  id: FEAT--LOOKUP-BY-SYMBOL
-  phase: 2
-  type: feat
-  status: stable
-  created_at: 2026-05-13T12:00:00+07:00
-  vault_id: GKS-CORE
-  tier: process
-  title: Reverse citation lookup — atoms-by-code-path
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  aliases: *a4
-  cluster: implementation_flow
-  role: Feature spec
-  attributes:
-    id: FEAT--LOOKUP-BY-SYMBOL
-    phase: 2
-    type: feat
-    status: stable
-    created_at: 2026-05-13T12:00:00+07:00
-    vault_id: GKS-CORE
-    tier: process
-    title: Reverse citation lookup — atoms-by-code-path
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    aliases: *a4
-    cluster: implementation_flow
-    role: Feature spec
-    attributes:
-      id: FEAT--LOOKUP-BY-SYMBOL
-      phase: 2
-      type: feat
-      status: stable
-      created_at: 2026-05-13T12:00:00+07:00
-      vault_id: GKS-CORE
-      tier: process
-      title: Reverse citation lookup — atoms-by-code-path
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      aliases: *a4
-      cluster: implementation_flow
-      role: Feature spec
-      attributes:
-        domain: knowledge-engine
-      domain: knowledge-engine
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: knowledge-engine
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
+  linked_symbols:
+    - file: packages/gks/src/memory/index.ts
+      fn: lookupBySymbol
+    - file: packages/gks/src/memory/gks.ts
+      fn: searchBySymbol
+    - file: packages/gks/bin/gks.ts
+      fn: cmdLookupBySymbol
+    - file: packages/gks/src/mcp-server/index.ts
   domain: knowledge-engine
   language: markdown
   is_test: false

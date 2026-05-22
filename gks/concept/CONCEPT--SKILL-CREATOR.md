@@ -3,10 +3,11 @@ id: CONCEPT--SKILL-CREATOR
 phase: 1
 type: concept
 status: stable
-tier: genesis
+tier: process
 source_type: axiomatic
 vault_id: default
-title: "Skill Creator — automated distillation of execution history into reusable skills"
+title: Skill Creator — automated distillation of execution history into reusable
+  skills
 tags:
   - msp
   - mll
@@ -19,7 +20,7 @@ crosslinks:
     - CONCEPT--ATOM-CONTRADICTION-DETECTION
 created_at: 2026-05-18T11:15:00+07:00
 cluster: implementation_flow
-role: "Strategic intent / PRD"
+role: Strategic intent / PRD
 ---
 
 # CONCEPT — Skill Creator

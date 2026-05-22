@@ -7,97 +7,32 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: GKS 3.6.0 published to npm — closes upstream proposal
-tags: &a1
+tags:
   - msp
   - gks
   - audit
   - upstream
   - npm
   - migration
-crosslinks: &a2
+crosslinks:
   references:
     - AUDIT--GKS-UPSTREAM-PROPOSALS-FILED
     - AUDIT--TWO-REPO-VALIDATION
     - ADR--EMBEDDING-MODEL-PARITY
-linked_symbols: &a3
-  - package.json
-  - tsconfig.json
-  - tsconfig.build.json
-  - packages/msp/src/index.ts
-  - packages/msp/src/memory.ts
 created_at: 2026-05-07T03:55:00.000+07:00
-aliases: &a4
+aliases:
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
-  id: AUDIT--GKS-3-6-0-PUBLISHED
-  phase: 6
-  type: audit
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: GKS 3.6.0 published to npm — closes upstream proposal
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-07T03:55:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Test results / quality report
-  attributes:
-    id: AUDIT--GKS-3-6-0-PUBLISHED
-    phase: 6
-    type: audit
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: GKS 3.6.0 published to npm — closes upstream proposal
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-07T03:55:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Test results / quality report
-    attributes:
-      id: AUDIT--GKS-3-6-0-PUBLISHED
-      phase: 6
-      type: audit
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: GKS 3.6.0 published to npm — closes upstream proposal
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-07T03:55:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Test results / quality report
-      attributes:
-        domain: audit
-      domain: audit
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: aws_secret
-      leak_risk: high
-      encryption_level: none
-    domain: audit
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: aws_secret
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - package.json
+    - tsconfig.json
+    - tsconfig.build.json
+    - packages/msp/src/index.ts
+    - packages/msp/src/memory.ts
   domain: audit
   language: markdown
   is_test: false

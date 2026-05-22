@@ -7,7 +7,7 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: Genesis Graph Phase 0 (TS-first backend) — coverage polish acceptance audit
-tags: &a1
+tags:
   - msp
   - gks
   - graph
@@ -15,95 +15,29 @@ tags: &a1
   - genesis-graph
   - audit
   - cypher-v0
-crosslinks: &a2
+crosslinks:
   references:
     - BLUEPRINT--GENESIS-GRAPH-TS-FIRST
     - ADR--GENESIS-GRAPH-AS-GKS-BACKEND
     - SPEC--GENESIS-GRAPH-BACKEND
     - CONCEPT--GENESIS-GRAPH-BACKEND
-linked_symbols: &a3
-  - file: packages/gks/src/memory/graph/genesis-graph.ts
-  - file: packages/gks/src/memory/graph/cypher-v0.ts
-  - file: packages/gks/src/memory/graph/genesis-graph-errors.ts
-  - file: packages/gks/src/memory/index.ts
-  - file: packages/gks/test/memory/genesis-graph-cypher.test.ts
-  - file: packages/gks/test/memory/memory-store-genesis-graph.test.ts
-  - file: apps/qwen/strip_fence.py
-  - file: apps/qwen/run_microtask.sh
 created_at: 2026-05-16T14:30:00.000+07:00
-aliases: &a4
+aliases:
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
-  id: AUDIT--GENESIS-GRAPH-PHASE0-POLISH
-  phase: 6
-  type: audit
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: Genesis Graph Phase 0 (TS-first backend) — coverage polish acceptance audit
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-16T14:30:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Test results / quality report
-  attributes:
-    id: AUDIT--GENESIS-GRAPH-PHASE0-POLISH
-    phase: 6
-    type: audit
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: Genesis Graph Phase 0 (TS-first backend) — coverage polish acceptance audit
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-16T14:30:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Test results / quality report
-    attributes:
-      id: AUDIT--GENESIS-GRAPH-PHASE0-POLISH
-      phase: 6
-      type: audit
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: Genesis Graph Phase 0 (TS-first backend) — coverage polish acceptance
-        audit
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-16T14:30:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Test results / quality report
-      attributes:
-        domain: audit
-      domain: audit
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: audit
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/gks/src/memory/graph/genesis-graph.ts
+    - file: packages/gks/src/memory/graph/cypher-v0.ts
+    - file: packages/gks/src/memory/graph/genesis-graph-errors.ts
+    - file: packages/gks/src/memory/index.ts
+    - file: packages/gks/test/memory/genesis-graph-cypher.test.ts
+    - file: packages/gks/test/memory/memory-store-genesis-graph.test.ts
+    - file: apps/qwen/strip_fence.py
+    - file: apps/qwen/run_microtask.sh
   domain: audit
   language: markdown
   is_test: false

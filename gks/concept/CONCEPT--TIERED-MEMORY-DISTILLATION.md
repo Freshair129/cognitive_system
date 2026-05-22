@@ -3,14 +3,21 @@ id: CONCEPT--TIERED-MEMORY-DISTILLATION
 phase: 1
 type: concept
 status: stable
-tier: genesis
+tier: process
 source_type: axiomatic
 vault_id: default
 title: Tiered Memory Distillation — the 8-8-8 cross-session synthesis pipeline
-aliases: [8-8-8 protocol, consciousness-session-core-sphere]
+aliases:
+  - 8-8-8 protocol
+  - consciousness-session-core-sphere
 cluster: memory
 role: Strategic intent / PRD
-tags: [msp, memory, distillation, 888, architecture]
+tags:
+  - msp
+  - memory
+  - distillation
+  - 888
+  - architecture
 crosslinks:
   references:
     - CONCEPT--MEMORY-SUBSYSTEM

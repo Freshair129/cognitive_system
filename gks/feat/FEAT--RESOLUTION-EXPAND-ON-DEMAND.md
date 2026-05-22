@@ -3,97 +3,32 @@ id: FEAT--RESOLUTION-EXPAND-ON-DEMAND
 phase: 2
 type: feat
 status: active
+vault_id: default
 tier: process
 source_type: axiomatic
-vault_id: default
 title: Resolution expand-on-demand — 2-tier recall + expand() to promote MENTION
   to FULL
-tags: &a1
+tags:
   - msp
   - ucf
   - feat
   - resolution
   - retrieval
   - mcp
-crosslinks: &a2
+crosslinks:
   belongs_to: MOD--RETRIEVAL
   references:
     - CONCEPT--RESOLUTION-GRADIENT
     - ADR--RESOLUTION-TIER-COUNT
     - FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK
 created_at: 2026-05-14T19:42:02.796+07:00
-aliases: &a3
+aliases:
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
-  id: FEAT--RESOLUTION-EXPAND-ON-DEMAND
-  phase: 2
-  type: feat
-  status: active
-  tier: process
-  source_type: axiomatic
-  vault_id: default
-  title: Resolution expand-on-demand — 2-tier recall + expand() to promote MENTION
-    to FULL
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-14T19:42:02.796+07:00
-  aliases: *a3
-  cluster: implementation_flow
-  role: Feature spec
-  attributes:
-    id: FEAT--RESOLUTION-EXPAND-ON-DEMAND
-    phase: 2
-    type: feat
-    status: active
-    tier: process
-    source_type: axiomatic
-    vault_id: default
-    title: Resolution expand-on-demand — 2-tier recall + expand() to promote MENTION
-      to FULL
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-14T19:42:02.796+07:00
-    aliases: *a3
-    cluster: implementation_flow
-    role: Feature spec
-    attributes:
-      id: FEAT--RESOLUTION-EXPAND-ON-DEMAND
-      phase: 2
-      type: feat
-      status: active
-      tier: process
-      source_type: axiomatic
-      vault_id: default
-      title: Resolution expand-on-demand — 2-tier recall + expand() to promote MENTION
-        to FULL
-      tags: *a1
-      crosslinks: *a2
-      created_at: 2026-05-14T19:42:02.796+07:00
-      aliases: *a3
-      cluster: implementation_flow
-      role: Feature spec
-      attributes:
-        domain: knowledge-engine
-      domain: knowledge-engine
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: knowledge-engine
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
   domain: knowledge-engine
   language: markdown
   is_test: false

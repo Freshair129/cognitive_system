@@ -3,81 +3,21 @@ id: PROTO--REGISTRY-DRIFT-CHECK
 phase: 2
 type: proto
 status: stable
+vault_id: default
 tier: safety
 source_type: axiomatic
-vault_id: default
 title: Registry Drift Check
-tags: &a1
+tags:
   - msp
-crosslinks: &a2 {}
+crosslinks: {}
 created_at: 2026-05-17T04:07:44.976+07:00
-aliases: &a3
+aliases:
   - PROTO
   - implementation_flow
   - Machine-enforced invariant
 cluster: implementation_flow
 role: Machine-enforced invariant
 attributes:
-  id: PROTO--REGISTRY-DRIFT-CHECK
-  phase: 2
-  type: proto
-  status: stable
-  tier: safety
-  source_type: axiomatic
-  vault_id: default
-  title: Registry Drift Check
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-17T04:07:44.976+07:00
-  aliases: *a3
-  cluster: implementation_flow
-  role: Machine-enforced invariant
-  attributes:
-    id: PROTO--REGISTRY-DRIFT-CHECK
-    phase: 2
-    type: proto
-    status: stable
-    tier: safety
-    source_type: axiomatic
-    vault_id: default
-    title: Registry Drift Check
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-17T04:07:44.976+07:00
-    aliases: *a3
-    cluster: implementation_flow
-    role: Machine-enforced invariant
-    attributes:
-      id: PROTO--REGISTRY-DRIFT-CHECK
-      phase: 2
-      type: proto
-      status: stable
-      tier: safety
-      source_type: axiomatic
-      vault_id: default
-      title: Registry Drift Check
-      tags: *a1
-      crosslinks: *a2
-      created_at: 2026-05-17T04:07:44.976+07:00
-      aliases: *a3
-      cluster: implementation_flow
-      role: Machine-enforced invariant
-      attributes:
-        domain: proto
-      domain: proto
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: proto
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
   domain: proto
   language: markdown
   is_test: false

@@ -3,12 +3,12 @@ id: ALGO--SYMBOLS-FRAMEWORK-RECOGNITION
 phase: 2
 type: algo
 status: active
+vault_id: default
 tier: process
 source_type: axiomatic
-vault_id: default
 title: Framework recognition algorithms — Next.js routing, runtime tags, data
   fetching, ORM, MCP tools
-tags: &a1
+tags:
   - msp
   - symbol-graph
   - algorithm
@@ -16,95 +16,27 @@ tags: &a1
   - prisma
   - mcp
   - recognition
-crosslinks: &a2
+crosslinks:
   implements:
     - ADR--SYMBOLS-FRAMEWORK-AWARENESS
   references:
     - CONCEPT--SYMBOLS-FRAMEWORK-AWARENESS
     - FRAMEWORK--SYMBOL-GRAPH
-linked_symbols: &a3
-  - file: packages/msp/src/symbols/framework/routes.ts
-  - file: packages/msp/src/symbols/framework/nextjs.ts
-  - file: packages/msp/src/symbols/framework/runtime-tag.ts
-  - file: packages/msp/src/symbols/framework/data-fetching.ts
-  - file: packages/msp/src/symbols/framework/orm.ts
-  - file: packages/msp/src/symbols/framework/mcp-tools.ts
 created_at: 2026-05-12T05:37:00.000+07:00
-aliases: &a4
+aliases:
   - ALGO
   - implementation_flow
   - Algorithm definition
 cluster: implementation_flow
 role: Algorithm definition
 attributes:
-  id: ALGO--SYMBOLS-FRAMEWORK-RECOGNITION
-  phase: 2
-  type: algo
-  status: active
-  tier: process
-  source_type: axiomatic
-  vault_id: default
-  title: Framework recognition algorithms — Next.js routing, runtime tags, data
-    fetching, ORM, MCP tools
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-12T05:37:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Algorithm definition
-  attributes:
-    id: ALGO--SYMBOLS-FRAMEWORK-RECOGNITION
-    phase: 2
-    type: algo
-    status: active
-    tier: process
-    source_type: axiomatic
-    vault_id: default
-    title: Framework recognition algorithms — Next.js routing, runtime tags, data
-      fetching, ORM, MCP tools
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-12T05:37:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Algorithm definition
-    attributes:
-      id: ALGO--SYMBOLS-FRAMEWORK-RECOGNITION
-      phase: 2
-      type: algo
-      status: active
-      tier: process
-      source_type: axiomatic
-      vault_id: default
-      title: Framework recognition algorithms — Next.js routing, runtime tags, data
-        fetching, ORM, MCP tools
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-12T05:37:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Algorithm definition
-      attributes:
-        domain: algo
-      domain: algo
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: algo
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/symbols/framework/routes.ts
+    - file: packages/msp/src/symbols/framework/nextjs.ts
+    - file: packages/msp/src/symbols/framework/runtime-tag.ts
+    - file: packages/msp/src/symbols/framework/data-fetching.ts
+    - file: packages/msp/src/symbols/framework/orm.ts
+    - file: packages/msp/src/symbols/framework/mcp-tools.ts
   domain: algo
   language: markdown
   is_test: false

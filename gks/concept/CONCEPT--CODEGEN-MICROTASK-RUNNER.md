@@ -4,87 +4,26 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: Codegen microtask runner — execute T*.task.yaml under the codegen contract
-tags: &a1
+tags:
   - msp
   - codegen
   - runner
   - microtask
-crosslinks: &a2
+crosslinks:
   references:
     - CONCEPT--CODEGEN-MICROTASK-CONTRACT
     - ADR--CODEGEN-RETRY-POLICY
 created_at: 2026-05-03T14:16:36.203+07:00
-aliases: &a3
+aliases:
   - CONCEPT
   - implementation_flow
   - Strategic intent / PRD
 cluster: implementation_flow
 role: Strategic intent / PRD
 attributes:
-  id: CONCEPT--CODEGEN-MICROTASK-RUNNER
-  phase: 1
-  type: concept
-  status: stable
-  vault_id: default
-  tier: genesis
-  source_type: axiomatic
-  title: Codegen microtask runner — execute T*.task.yaml under the codegen contract
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-03T14:16:36.203+07:00
-  aliases: *a3
-  cluster: implementation_flow
-  role: Strategic intent / PRD
-  attributes:
-    id: CONCEPT--CODEGEN-MICROTASK-RUNNER
-    phase: 1
-    type: concept
-    status: stable
-    vault_id: default
-    tier: genesis
-    source_type: axiomatic
-    title: Codegen microtask runner — execute T*.task.yaml under the codegen contract
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-03T14:16:36.203+07:00
-    aliases: *a3
-    cluster: implementation_flow
-    role: Strategic intent / PRD
-    attributes:
-      id: CONCEPT--CODEGEN-MICROTASK-RUNNER
-      phase: 1
-      type: concept
-      status: stable
-      vault_id: default
-      tier: genesis
-      source_type: axiomatic
-      title: Codegen microtask runner — execute T*.task.yaml under the codegen
-        contract
-      tags: *a1
-      crosslinks: *a2
-      created_at: 2026-05-03T14:16:36.203+07:00
-      aliases: *a3
-      cluster: implementation_flow
-      role: Strategic intent / PRD
-      attributes:
-        domain: concept
-      domain: concept
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: concept
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
   domain: concept
   language: markdown
   is_test: false

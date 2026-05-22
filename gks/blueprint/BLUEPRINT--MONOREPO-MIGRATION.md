@@ -7,7 +7,7 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: BLUEPRINT — monorepo migration phased implementation plan
-tags: &a1
+tags:
   - monorepo
   - workspace
   - migration
@@ -15,94 +15,29 @@ tags: &a1
   - implementation
   - msp
   - gks
-crosslinks: &a2
+crosslinks:
   references:
     - CONCEPT--MONOREPO-MIGRATION
     - ADR--MONOREPO-STRUCTURE
     - FRAMEWORK--MSP-ARCHITECTURE-V2
-linked_symbols: &a3
-  - file: package.json
-  - file: packages/gks/package.json
-  - file: packages/msp/package.json
-  - file: .github/workflows/ci.yml
-  - file: .github/workflows/publish-gks.yml
-  - file: eslint.config.js
-  - file: upstream/gks-proposals/
-  - file: scripts/msp/propose.mjs
-  - file: packages/msp/src/memory/backlinks/
 created_at: 2026-05-08T13:22:00.000+07:00
-aliases: &a4
+aliases:
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  id: BLUEPRINT--MONOREPO-MIGRATION
-  phase: 3
-  type: blueprint
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: BLUEPRINT — monorepo migration phased implementation plan
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-08T13:22:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Implementation plan
-  attributes:
-    id: BLUEPRINT--MONOREPO-MIGRATION
-    phase: 3
-    type: blueprint
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: BLUEPRINT — monorepo migration phased implementation plan
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-08T13:22:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Implementation plan
-    attributes:
-      id: BLUEPRINT--MONOREPO-MIGRATION
-      phase: 3
-      type: blueprint
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: BLUEPRINT — monorepo migration phased implementation plan
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-08T13:22:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Implementation plan
-      attributes:
-        domain: blueprint
-      domain: blueprint
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: blueprint
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: package.json
+    - file: packages/gks/package.json
+    - file: packages/msp/package.json
+    - file: .github/workflows/ci.yml
+    - file: .github/workflows/publish-gks.yml
+    - file: eslint.config.js
+    - file: upstream/gks-proposals/
+    - file: scripts/msp/propose.mjs
+    - file: packages/msp/src/memory/backlinks/
   domain: blueprint
   language: markdown
   is_test: false

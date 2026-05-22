@@ -7,14 +7,14 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: Consolidator — session → episode hybrid-scored gate
-tags: &a1
+tags:
   - msp
   - consolidator
   - importance
   - summarisation
   - m7b
   - user-facing
-crosslinks: &a2
+crosslinks:
   belongs_to: MOD--MEMORY
   implements:
     - ADR--CONSOLIDATOR-HYBRID-SCORING
@@ -22,83 +22,20 @@ crosslinks: &a2
     - CONCEPT--CONSOLIDATOR
     - FEAT--MEMORY-EPISODIC-WRITER
     - FEAT--MEMORY-SESSIONS-WRITER
-linked_symbols: &a3
-  - file: packages/msp/src/orchestrator/consolidator/index.ts
-  - file: packages/msp/src/orchestrator/consolidator/types.ts
-  - file: packages/msp/src/orchestrator/consolidator/score.ts
-  - file: packages/msp/src/orchestrator/consolidator/boundary.ts
-  - file: packages/msp/src/orchestrator/consolidator/summarise.ts
 created_at: 2026-05-04T17:06:00.000+07:00
-aliases: &a4
+aliases:
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
-  id: FEAT--CONSOLIDATOR
-  phase: 2
-  type: feat
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: Consolidator — session → episode hybrid-scored gate
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-04T17:06:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Feature spec
-  attributes:
-    id: FEAT--CONSOLIDATOR
-    phase: 2
-    type: feat
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: Consolidator — session → episode hybrid-scored gate
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-04T17:06:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Feature spec
-    attributes:
-      id: FEAT--CONSOLIDATOR
-      phase: 2
-      type: feat
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: Consolidator — session → episode hybrid-scored gate
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-04T17:06:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Feature spec
-      attributes:
-        domain: knowledge-engine
-      domain: knowledge-engine
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: knowledge-engine
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/orchestrator/consolidator/index.ts
+    - file: packages/msp/src/orchestrator/consolidator/types.ts
+    - file: packages/msp/src/orchestrator/consolidator/score.ts
+    - file: packages/msp/src/orchestrator/consolidator/boundary.ts
+    - file: packages/msp/src/orchestrator/consolidator/summarise.ts
   domain: knowledge-engine
   language: markdown
   is_test: false

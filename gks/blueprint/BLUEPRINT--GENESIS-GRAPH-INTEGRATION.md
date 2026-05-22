@@ -7,7 +7,7 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: BLUEPRINT — Genesis Block backend integration plan
-tags: &a1
+tags:
   - msp
   - gks
   - graph
@@ -18,90 +18,25 @@ tags: &a1
   - cypher
   - blueprint
   - implementation
-crosslinks: &a2
+crosslinks:
   references:
     - ADR--GENESIS-GRAPH-AS-GKS-BACKEND
     - CONCEPT--GENESIS-GRAPH-BACKEND
     - FRAMEWORK--MSP-ARCHITECTURE-V2
     - PROTOCOL--GENESIS-GRAPH-FFI
-linked_symbols: &a3
-  - file: packages/gks/src/memory/index.ts
-  - file: packages/gks/src/memory/graph/genesis-graph.ts
-  - file: packages/gks/src/memory/graph/cypher-v0.ts
-  - file: packages/gks/src/memory/graph/genesis-graph-errors.ts
 created_at: 2026-05-12T11:59:00.000+07:00
-aliases: &a4
+aliases:
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  id: BLUEPRINT--GENESIS-GRAPH-INTEGRATION
-  phase: 3
-  type: blueprint
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: BLUEPRINT — Genesis Block backend integration plan
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-12T11:59:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Implementation plan
-  attributes:
-    id: BLUEPRINT--GENESIS-GRAPH-INTEGRATION
-    phase: 3
-    type: blueprint
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: BLUEPRINT — Genesis Block backend integration plan
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-12T11:59:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Implementation plan
-    attributes:
-      id: BLUEPRINT--GENESIS-GRAPH-INTEGRATION
-      phase: 3
-      type: blueprint
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: BLUEPRINT — Genesis Block backend integration plan
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-12T11:59:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Implementation plan
-      attributes:
-        domain: blueprint
-      domain: blueprint
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: blueprint
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/gks/src/memory/index.ts
+    - file: packages/gks/src/memory/graph/genesis-graph.ts
+    - file: packages/gks/src/memory/graph/cypher-v0.ts
+    - file: packages/gks/src/memory/graph/genesis-graph-errors.ts
   domain: blueprint
   language: markdown
   is_test: false

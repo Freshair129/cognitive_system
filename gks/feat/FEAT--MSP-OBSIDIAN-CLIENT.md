@@ -7,96 +7,31 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: MSP Obsidian client wrapper — REST primary, filesystem fallback
-tags: &a1
+tags:
   - msp
   - obsidian
   - client
   - m7a
   - user-facing
-crosslinks: &a2
+crosslinks:
   belongs_to: MOD--MCP
   implements:
     - ADR--MSP-OBSIDIAN-INTEGRATION
   references:
     - CONCEPT--OBSIDIAN-AS-RUNTIME
     - FRAMEWORK--MSP-ARCHITECTURE-V2
-linked_symbols: &a3
-  - file: packages/msp/src/obsidian/client.ts
-  - file: packages/msp/src/obsidian/types.ts
-  - file: packages/msp/src/obsidian/filesystem.ts
 created_at: 2026-05-04T12:24:39.673+07:00
-aliases: &a4
+aliases:
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
-  id: FEAT--MSP-OBSIDIAN-CLIENT
-  phase: 2
-  type: feat
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: MSP Obsidian client wrapper — REST primary, filesystem fallback
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-04T12:24:39.673+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Feature spec
-  attributes:
-    id: FEAT--MSP-OBSIDIAN-CLIENT
-    phase: 2
-    type: feat
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: MSP Obsidian client wrapper — REST primary, filesystem fallback
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-04T12:24:39.673+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Feature spec
-    attributes:
-      id: FEAT--MSP-OBSIDIAN-CLIENT
-      phase: 2
-      type: feat
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: MSP Obsidian client wrapper — REST primary, filesystem fallback
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-04T12:24:39.673+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Feature spec
-      attributes:
-        domain: integration
-      domain: integration
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: integration
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/obsidian/client.ts
+    - file: packages/msp/src/obsidian/types.ts
+    - file: packages/msp/src/obsidian/filesystem.ts
   domain: integration
   language: markdown
   is_test: false

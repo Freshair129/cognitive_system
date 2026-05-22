@@ -4,87 +4,27 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: Ollama SLM client — real codegen via Ollama HTTP API
-tags: &a1
+tags:
   - msp
   - codegen
   - slm
   - ollama
   - runtime
-crosslinks: &a2
+crosslinks:
   references:
     - FEAT--CODEGEN-MICROTASK-RUNNER
     - ADR--CODEGEN-RETRY-POLICY
 created_at: 2026-05-03T16:22:30.407+07:00
-aliases: &a3
+aliases:
   - CONCEPT
   - implementation_flow
   - Strategic intent / PRD
 cluster: implementation_flow
 role: Strategic intent / PRD
 attributes:
-  id: CONCEPT--SLM-OLLAMA-CLIENT
-  phase: 1
-  type: concept
-  status: stable
-  vault_id: default
-  tier: genesis
-  source_type: axiomatic
-  title: Ollama SLM client — real codegen via Ollama HTTP API
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-03T16:22:30.407+07:00
-  aliases: *a3
-  cluster: implementation_flow
-  role: Strategic intent / PRD
-  attributes:
-    id: CONCEPT--SLM-OLLAMA-CLIENT
-    phase: 1
-    type: concept
-    status: stable
-    vault_id: default
-    tier: genesis
-    source_type: axiomatic
-    title: Ollama SLM client — real codegen via Ollama HTTP API
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-03T16:22:30.407+07:00
-    aliases: *a3
-    cluster: implementation_flow
-    role: Strategic intent / PRD
-    attributes:
-      id: CONCEPT--SLM-OLLAMA-CLIENT
-      phase: 1
-      type: concept
-      status: stable
-      vault_id: default
-      tier: genesis
-      source_type: axiomatic
-      title: Ollama SLM client — real codegen via Ollama HTTP API
-      tags: *a1
-      crosslinks: *a2
-      created_at: 2026-05-03T16:22:30.407+07:00
-      aliases: *a3
-      cluster: implementation_flow
-      role: Strategic intent / PRD
-      attributes:
-        domain: concept
-      domain: concept
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: concept
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
   domain: concept
   language: markdown
   is_test: false

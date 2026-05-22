@@ -3,34 +3,21 @@ id: USAGE--DAILY-2026-05-17
 phase: 6
 type: usage
 status: stable
+vault_id: default
 tier: process
 source_type: learned
-vault_id: default
 title: USAGE — Daily cost bucket 2026-05-17
-aliases: &a1
-  - USAGE
-cluster: memory
-role: Usage metrics rollup
-tags: &a2
+tags:
   - agents
   - usage
   - cost
   - daily
 created_at: 2026-05-17T02:10:17.957Z
+aliases:
+  - USAGE
+cluster: memory
+role: Usage metrics rollup
 attributes:
-  id: USAGE--DAILY-2026-05-17
-  phase: 6
-  type: usage
-  status: stable
-  tier: process
-  source_type: learned
-  vault_id: default
-  title: USAGE — Daily cost bucket 2026-05-17
-  aliases: *a1
-  cluster: memory
-  role: Usage metrics rollup
-  tags: *a2
-  created_at: 2026-05-17T02:10:17.957Z
   domain: usage
   language: markdown
   is_test: false

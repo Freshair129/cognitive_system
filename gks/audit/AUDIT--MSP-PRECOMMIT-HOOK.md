@@ -7,95 +7,32 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: MSP pre-commit hook M3a acceptance audit
-tags: &a1
+tags:
   - msp
   - precommit
   - hook
   - audit
   - m3a
   - dogfood
-crosslinks: &a2
+crosslinks:
   references:
     - FEAT--MSP-PRECOMMIT-HOOK
     - BLUEPRINT--MSP-PRECOMMIT-HOOK
     - ADR--MSP-PRECOMMIT-HOOK
     - FEAT--MSP-VALIDATOR
-linked_symbols: &a3
-  - file: packages/msp/examples/hooks/pre-commit-validator.sh
-  - file: packages/msp/examples/hooks/install.sh
-  - file: packages/msp/examples/hooks/README.md
-  - file: packages/msp/test/hooks/pre-commit.test.ts
 created_at: 2026-05-03T14:42:57.238+07:00
-aliases: &a4
+aliases:
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
-  id: AUDIT--MSP-PRECOMMIT-HOOK
-  phase: 6
-  type: audit
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: MSP pre-commit hook M3a acceptance audit
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-03T14:42:57.238+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Test results / quality report
-  attributes:
-    id: AUDIT--MSP-PRECOMMIT-HOOK
-    phase: 6
-    type: audit
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: MSP pre-commit hook M3a acceptance audit
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-03T14:42:57.238+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Test results / quality report
-    attributes:
-      id: AUDIT--MSP-PRECOMMIT-HOOK
-      phase: 6
-      type: audit
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: MSP pre-commit hook M3a acceptance audit
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-03T14:42:57.238+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Test results / quality report
-      attributes:
-        domain: audit
-      domain: audit
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: audit
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/examples/hooks/pre-commit-validator.sh
+    - file: packages/msp/examples/hooks/install.sh
+    - file: packages/msp/examples/hooks/README.md
+    - file: packages/msp/test/hooks/pre-commit.test.ts
   domain: audit
   language: markdown
   is_test: false

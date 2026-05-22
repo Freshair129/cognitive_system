@@ -4,11 +4,19 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: ADR — File-based state handoff for multi-stage micro-tasks
-tags: [covibe, architecture, state, memory, context]
-aliases: [ADR, implementation_flow, Architecture decision record]
+tags:
+  - covibe
+  - architecture
+  - state
+  - memory
+  - context
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 crosslinks:

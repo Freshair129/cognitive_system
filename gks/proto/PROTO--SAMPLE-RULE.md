@@ -3,99 +3,33 @@ id: PROTO--SAMPLE-RULE
 phase: 2
 type: proto
 status: stable
-severity: warning
 vault_id: default
 tier: safety
 source_type: axiomatic
 title: PROTO--SAMPLE-RULE — trivial demo predicate (M8a)
-tags: &a1
+tags:
   - msp
   - proto
   - sample
   - demo
   - m8a
-crosslinks: &a2
+crosslinks:
   enforces:
     - FRAMEWORK--MSP-ARCHITECTURE-V2
   references:
     - CONCEPT--PROTO-PATTERN
     - FEAT--PROTO-LOADER
-linked_symbols: &a3
-  - file: packages/msp/src/validator/proto/sample.ts
 created_at: 2026-05-05T18:00:00.000+07:00
-aliases: &a4
+aliases:
   - PROTO
   - implementation_flow
   - Machine-enforced invariant
 cluster: implementation_flow
 role: Machine-enforced invariant
 attributes:
-  id: PROTO--SAMPLE-RULE
-  phase: 2
-  type: proto
-  status: stable
   severity: warning
-  vault_id: default
-  tier: safety
-  source_type: axiomatic
-  title: PROTO--SAMPLE-RULE — trivial demo predicate (M8a)
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-05T18:00:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Machine-enforced invariant
-  attributes:
-    id: PROTO--SAMPLE-RULE
-    phase: 2
-    type: proto
-    status: stable
-    severity: warning
-    vault_id: default
-    tier: safety
-    source_type: axiomatic
-    title: PROTO--SAMPLE-RULE — trivial demo predicate (M8a)
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-05T18:00:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Machine-enforced invariant
-    attributes:
-      id: PROTO--SAMPLE-RULE
-      phase: 2
-      type: proto
-      status: stable
-      severity: warning
-      vault_id: default
-      tier: safety
-      source_type: axiomatic
-      title: PROTO--SAMPLE-RULE — trivial demo predicate (M8a)
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-05T18:00:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Machine-enforced invariant
-      attributes:
-        domain: proto
-      domain: proto
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: proto
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/validator/proto/sample.ts
   domain: proto
   language: markdown
   is_test: false

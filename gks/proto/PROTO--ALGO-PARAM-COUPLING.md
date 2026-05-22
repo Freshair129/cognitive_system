@@ -3,13 +3,12 @@ id: PROTO--ALGO-PARAM-COUPLING
 phase: 2
 type: proto
 status: stable
-severity: error
 vault_id: default
 tier: safety
 source_type: axiomatic
 title: PROTO--ALGO-PARAM-COUPLING — bi-directional tunes ↔ tunable_by reciprocal
   validator
-tags: &a1
+tags:
   - msp
   - proto
   - algo
@@ -17,94 +16,24 @@ tags: &a1
   - coupling
   - governance
   - m8d
-crosslinks: &a2
+crosslinks:
   enforces:
     - FRAMEWORK--CROSSLINKS-VOCABULARY
   references:
     - CONCEPT--PROTO-ALGO-PARAM-COUPLING
     - CONCEPT--PROTO-PATTERN
     - ADR--GRAPH-IS-GKS-DOMAIN
-linked_symbols: &a3
-  - file: packages/msp/src/validator/proto/algo-param-coupling.ts
 created_at: 2026-05-05T18:11:00.000+07:00
-aliases: &a4
+aliases:
   - PROTO
   - implementation_flow
   - Machine-enforced invariant
 cluster: implementation_flow
 role: Machine-enforced invariant
 attributes:
-  id: PROTO--ALGO-PARAM-COUPLING
-  phase: 2
-  type: proto
-  status: stable
   severity: error
-  vault_id: default
-  tier: safety
-  source_type: axiomatic
-  title: PROTO--ALGO-PARAM-COUPLING — bi-directional tunes ↔ tunable_by reciprocal
-    validator
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-05T18:11:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Machine-enforced invariant
-  attributes:
-    id: PROTO--ALGO-PARAM-COUPLING
-    phase: 2
-    type: proto
-    status: stable
-    severity: error
-    vault_id: default
-    tier: safety
-    source_type: axiomatic
-    title: PROTO--ALGO-PARAM-COUPLING — bi-directional tunes ↔ tunable_by reciprocal
-      validator
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-05T18:11:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Machine-enforced invariant
-    attributes:
-      id: PROTO--ALGO-PARAM-COUPLING
-      phase: 2
-      type: proto
-      status: stable
-      severity: error
-      vault_id: default
-      tier: safety
-      source_type: axiomatic
-      title: PROTO--ALGO-PARAM-COUPLING — bi-directional tunes ↔ tunable_by reciprocal
-        validator
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-05T18:11:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Machine-enforced invariant
-      attributes:
-        domain: proto
-      domain: proto
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: proto
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/validator/proto/algo-param-coupling.ts
   domain: proto
   language: markdown
   is_test: false

@@ -4,11 +4,11 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: Contradiction detection stack — 5 layers (human rule + reciprocal
   supersession + domain uniqueness + embedding hint + LLM judge)
-tags: &a1
+tags:
   - msp
   - validator
   - contradiction
@@ -16,83 +16,20 @@ tags: &a1
   - decision
   - ci
   - governance
-crosslinks: &a2
+crosslinks:
   references:
     - CONCEPT--ATOM-CONTRADICTION-DETECTION
     - ADR--ANTI-HALLUCINATION-RULES
     - ADR--HUMAN-REVIEW-GATES
     - FRAMEWORK--MSP-ARCHITECTURE-V2
 created_at: 2026-05-08T17:32:00.000+07:00
-aliases: &a3
+aliases:
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
-  id: ADR--CONTRADICTION-DETECTION-STACK
-  phase: 2
-  type: adr
-  status: stable
-  vault_id: default
-  tier: genesis
-  source_type: axiomatic
-  title: Contradiction detection stack — 5 layers (human rule + reciprocal
-    supersession + domain uniqueness + embedding hint + LLM judge)
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-08T17:32:00.000+07:00
-  aliases: *a3
-  cluster: implementation_flow
-  role: Architecture decision record
-  attributes:
-    id: ADR--CONTRADICTION-DETECTION-STACK
-    phase: 2
-    type: adr
-    status: stable
-    vault_id: default
-    tier: genesis
-    source_type: axiomatic
-    title: Contradiction detection stack — 5 layers (human rule + reciprocal
-      supersession + domain uniqueness + embedding hint + LLM judge)
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-08T17:32:00.000+07:00
-    aliases: *a3
-    cluster: implementation_flow
-    role: Architecture decision record
-    attributes:
-      id: ADR--CONTRADICTION-DETECTION-STACK
-      phase: 2
-      type: adr
-      status: stable
-      vault_id: default
-      tier: genesis
-      source_type: axiomatic
-      title: Contradiction detection stack — 5 layers (human rule + reciprocal
-        supersession + domain uniqueness + embedding hint + LLM judge)
-      tags: *a1
-      crosslinks: *a2
-      created_at: 2026-05-08T17:32:00.000+07:00
-      aliases: *a3
-      cluster: implementation_flow
-      role: Architecture decision record
-      attributes:
-        domain: adr
-      domain: adr
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: adr
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
   domain: adr
   language: markdown
   is_test: false

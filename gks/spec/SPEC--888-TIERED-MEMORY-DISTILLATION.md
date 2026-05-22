@@ -3,16 +3,12 @@ id: SPEC--888-TIERED-MEMORY-DISTILLATION
 phase: 2
 type: spec
 status: stable
+vault_id: default
 tier: process
 source_type: axiomatic
-vault_id: default
 title: 888 Tiered Memory Distillation — cross-session synthesis protocol for
   cognitive_system
-aliases: &a1
-  - SPEC
-cluster: implementation_flow
-role: Technical specification
-tags: &a2
+tags:
   - msp
   - memory
   - distillation
@@ -21,7 +17,7 @@ tags: &a2
   - narrative
   - identity
   - epistemic
-crosslinks: &a3
+crosslinks:
   references:
     - CONCEPT--MEMORY-SUBSYSTEM
     - CONCEPT--MEMORY-EPISODIC
@@ -29,22 +25,11 @@ crosslinks: &a3
     - FRAMEWORK--MSP-ARCHITECTURE-V2
     - SPEC--EPISODE-ATOM
 created_at: 2026-05-17T18:00:00.000+07:00
+aliases:
+  - SPEC
+cluster: implementation_flow
+role: Technical specification
 attributes:
-  id: SPEC--888-TIERED-MEMORY-DISTILLATION
-  phase: 2
-  type: spec
-  status: stable
-  tier: process
-  source_type: axiomatic
-  vault_id: default
-  title: 888 Tiered Memory Distillation — cross-session synthesis protocol for
-    cognitive_system
-  aliases: *a1
-  cluster: implementation_flow
-  role: Technical specification
-  tags: *a2
-  crosslinks: *a3
-  created_at: 2026-05-17T18:00:00.000+07:00
   domain: spec
   language: markdown
   is_test: false

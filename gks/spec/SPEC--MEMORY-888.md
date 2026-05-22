@@ -8,7 +8,7 @@ tier: process
 source_type: axiomatic
 title: SPEC — 8-8-8 Memory Synthesis Protocol — runtime memory layers + atom
   production contract
-tags: &a1
+tags:
   - msp
   - memory
   - distillation
@@ -18,7 +18,7 @@ tags: &a1
   - ucf
   - mll
   - spec
-crosslinks: &a2
+crosslinks:
   references:
     - SPEC--EPISODE-ATOM
     - CONCEPT--CONTEXT-COMPRESSION
@@ -29,28 +29,13 @@ crosslinks: &a2
     - FRAMEWORK--MSP-ARCHITECTURE-V2
     - ADR--AGENTIC-MONOREPO-PIVOT
 created_at: 2026-05-17T18:00:00.000+07:00
-aliases: &a3
+aliases:
   - SPEC
   - implementation_flow
   - Technical specification
 cluster: implementation_flow
 role: Technical specification
 attributes:
-  id: SPEC--MEMORY-888
-  phase: 2
-  type: spec
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: SPEC — 8-8-8 Memory Synthesis Protocol — runtime memory layers + atom
-    production contract
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-17T18:00:00.000+07:00
-  aliases: *a3
-  cluster: implementation_flow
-  role: Technical specification
   domain: spec
   language: markdown
   is_test: false

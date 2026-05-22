@@ -1,13 +1,12 @@
 ---
 id: FRAMEWORK--MSP-ARCHITECTURE-V2
-version: 2.0.0
 phase: 0
 type: framework
 status:
   - stable
   - active
 vault_id: default
-tier: genesis
+tier: master
 source_type: axiomatic
 title: MSP architecture v2 — passport-orchestrator over Obsidian-backed GKS
 tags:
@@ -35,120 +34,6 @@ aliases:
 cluster: implementation_flow
 role: Governance / architectural framework
 attributes:
-  id: FRAMEWORK--MSP-ARCHITECTURE-V2
-  phase: 0
-  type: framework
-  status: stable
-  vault_id: default
-  tier: genesis
-  source_type: axiomatic
-  title: MSP architecture v2 — passport-orchestrator over Obsidian-backed GKS
-  tags:
-    - msp
-    - architecture
-    - foundation
-    - v2
-    - supersede
-  crosslinks:
-    references:
-      - CONCEPT--OBSIDIAN-AS-RUNTIME
-      - CONCEPT--EMBEDDING-STRATEGY
-      - CONCEPT--AGENT-AGNOSTIC
-      - CONCEPT--AGENT-INTEGRATION-PATTERNS
-      - ADR--MSP-OBSIDIAN-INTEGRATION
-      - ADR--SEMANTIC-SEARCH-VIA-SMART-CONNECTIONS
-      - ADR--GLOBAL-VS-WORKSPACE
-    supersedes:
-      - FRAMEWORK--MSP-ARCHITECTURE
-  created_at: 2026-05-03T23:55:07.217+07:00
-  aliases:
-    - FRAMEWORK
-    - implementation_flow
-    - Governance / architectural framework
-  cluster: implementation_flow
-  role: Governance / architectural framework
-  attributes:
-    id: FRAMEWORK--MSP-ARCHITECTURE-V2
-    phase: 0
-    type: framework
-    status: stable
-    vault_id: default
-    tier: genesis
-    source_type: axiomatic
-    title: MSP architecture v2 — passport-orchestrator over Obsidian-backed GKS
-    tags:
-      - msp
-      - architecture
-      - foundation
-      - v2
-      - supersede
-    crosslinks:
-      references:
-        - CONCEPT--OBSIDIAN-AS-RUNTIME
-        - CONCEPT--EMBEDDING-STRATEGY
-        - CONCEPT--AGENT-AGNOSTIC
-        - CONCEPT--AGENT-INTEGRATION-PATTERNS
-        - ADR--MSP-OBSIDIAN-INTEGRATION
-        - ADR--SEMANTIC-SEARCH-VIA-SMART-CONNECTIONS
-        - ADR--GLOBAL-VS-WORKSPACE
-      supersedes:
-        - FRAMEWORK--MSP-ARCHITECTURE
-    created_at: 2026-05-03T23:55:07.217+07:00
-    aliases:
-      - FRAMEWORK
-      - implementation_flow
-      - Governance / architectural framework
-    cluster: implementation_flow
-    role: Governance / architectural framework
-    attributes:
-      id: FRAMEWORK--MSP-ARCHITECTURE-V2
-      phase: 0
-      type: framework
-      status: stable
-      vault_id: default
-      tier: genesis
-      source_type: axiomatic
-      title: MSP architecture v2 — passport-orchestrator over Obsidian-backed GKS
-      tags:
-        - msp
-        - architecture
-        - foundation
-        - v2
-        - supersede
-      crosslinks:
-        references:
-          - CONCEPT--OBSIDIAN-AS-RUNTIME
-          - CONCEPT--EMBEDDING-STRATEGY
-          - CONCEPT--AGENT-AGNOSTIC
-          - CONCEPT--AGENT-INTEGRATION-PATTERNS
-          - ADR--MSP-OBSIDIAN-INTEGRATION
-          - ADR--SEMANTIC-SEARCH-VIA-SMART-CONNECTIONS
-          - ADR--GLOBAL-VS-WORKSPACE
-        supersedes:
-          - FRAMEWORK--MSP-ARCHITECTURE
-      created_at: 2026-05-03T23:55:07.217+07:00
-      aliases:
-        - FRAMEWORK
-        - implementation_flow
-        - Governance / architectural framework
-      cluster: implementation_flow
-      role: Governance / architectural framework
-      attributes:
-        domain: framework
-      domain: framework
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: framework
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
   domain: framework
   language: markdown
   is_test: false
@@ -156,7 +41,9 @@ attributes:
   has_secret: false
   leak_risk: low
   encryption_level: none
-links:
+promoted_from: CONCEPT--KNOWLEDGE-LAYERS-V2
+promoted_at: 2026-05-13T12:21:49+07:00
+promotion_adr: ADR--TAXONOMY-V2-3-MIGRATION
 ---
 
 # FRAMEWORK — MSP architecture v2

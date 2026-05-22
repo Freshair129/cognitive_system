@@ -3,17 +3,17 @@ id: FEAT--POLICY-DECISION-POINT
 phase: 2
 type: feat
 status: active
+vault_id: default
 tier: process
 source_type: axiomatic
-vault_id: default
 title: Policy Decision Point — the pure-function PDP and its API
-tags: &a1
+tags:
   - msp
   - ucf
   - feat
   - abac
   - pdp
-crosslinks: &a2
+crosslinks:
   belongs_to: MOD--GOVERNANCE
   references:
     - CONCEPT--ABAC-POLICY-ENGINE
@@ -22,75 +22,13 @@ crosslinks: &a2
     - ADR--TRANSPORT-AGNOSTIC-ENFORCEMENT
     - CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT
 created_at: 2026-05-14T19:42:01.331+07:00
-aliases: &a3
+aliases:
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
-  id: FEAT--POLICY-DECISION-POINT
-  phase: 2
-  type: feat
-  status: active
-  tier: process
-  source_type: axiomatic
-  vault_id: default
-  title: Policy Decision Point — the pure-function PDP and its API
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-14T19:42:01.331+07:00
-  aliases: *a3
-  cluster: implementation_flow
-  role: Feature spec
-  attributes:
-    id: FEAT--POLICY-DECISION-POINT
-    phase: 2
-    type: feat
-    status: active
-    tier: process
-    source_type: axiomatic
-    vault_id: default
-    title: Policy Decision Point — the pure-function PDP and its API
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-14T19:42:01.331+07:00
-    aliases: *a3
-    cluster: implementation_flow
-    role: Feature spec
-    attributes:
-      id: FEAT--POLICY-DECISION-POINT
-      phase: 2
-      type: feat
-      status: active
-      tier: process
-      source_type: axiomatic
-      vault_id: default
-      title: Policy Decision Point — the pure-function PDP and its API
-      tags: *a1
-      crosslinks: *a2
-      created_at: 2026-05-14T19:42:01.331+07:00
-      aliases: *a3
-      cluster: implementation_flow
-      role: Feature spec
-      attributes:
-        domain: governance
-      domain: governance
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: governance
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
   domain: governance
   language: markdown
   is_test: false

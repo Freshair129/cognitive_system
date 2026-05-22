@@ -3,102 +3,34 @@ id: PROTO--VALID-UNTIL
 phase: 2
 type: proto
 status: stable
-severity: warning
 vault_id: default
 tier: safety
 source_type: axiomatic
 title: PROTO--VALID-UNTIL — decision atrophy guard (scan valid_until fields)
-tags: &a1
+tags:
   - msp
   - proto
   - lifecycle
   - valid-until
   - atrophy
   - m9a
-crosslinks: &a2
+crosslinks:
   enforces:
     - FRAMEWORK--MSP-ARCHITECTURE-V2
   references:
     - CONCEPT--DECISION-ATROPHY-GUARDS
     - FEAT--PROTO-LOADER
-linked_symbols: &a3
-  - file: packages/msp/src/validator/proto/valid-until.ts
 created_at: 2026-05-05T18:10:00.000+07:00
-aliases: &a4
+aliases:
   - PROTO
   - implementation_flow
   - Machine-enforced invariant
 cluster: implementation_flow
 role: Machine-enforced invariant
+linked_symbols:
+  - file: packages/msp/src/validator/proto/valid-until.ts
 attributes:
-  id: PROTO--VALID-UNTIL
-  phase: 2
-  type: proto
-  status: stable
   severity: warning
-  vault_id: default
-  tier: safety
-  source_type: axiomatic
-  title: PROTO--VALID-UNTIL — decision atrophy guard (scan valid_until fields)
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-05T18:10:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Machine-enforced invariant
-  attributes:
-    id: PROTO--VALID-UNTIL
-    phase: 2
-    type: proto
-    status: stable
-    severity: warning
-    vault_id: default
-    tier: safety
-    source_type: axiomatic
-    title: PROTO--VALID-UNTIL — decision atrophy guard (scan valid_until fields)
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-05T18:10:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Machine-enforced invariant
-    attributes:
-      id: PROTO--VALID-UNTIL
-      phase: 2
-      type: proto
-      status: stable
-      severity: warning
-      vault_id: default
-      tier: safety
-      source_type: axiomatic
-      title: PROTO--VALID-UNTIL — decision atrophy guard (scan valid_until fields)
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-05T18:10:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Machine-enforced invariant
-      attributes:
-        domain: proto
-      domain: proto
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: proto
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
   domain: proto
   language: markdown
   is_test: false

@@ -3,90 +3,34 @@ id: CONCEPT--ABAC-POLICY-ENGINE
 phase: 1
 type: concept
 status: stable
-tier: genesis
-source_type: axiomatic
 vault_id: default
+tier: process
+source_type: axiomatic
 title: ABAC policy engine — PDP / PEP separation, policy as data
+tags:
+  - msp
+  - ucf
+  - concept
+  - abac
+  - pdp
+  - pep
+  - policy
+crosslinks:
+  references:
+    - FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK
+    - CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT
+    - CONCEPT--ATTRIBUTE-BAG-MODEL
+created_at: 2026-05-13T17:22:01.640+07:00
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
+cluster: implementation_flow
+role: Strategic intent / PRD
 attributes:
-  id: CONCEPT--ABAC-POLICY-ENGINE
-  phase: 1
-  type: concept
-  status: stable
-  tier: process
-  source_type: axiomatic
-  vault_id: default
-  title: ABAC policy engine — PDP / PEP separation, policy as data
-  attributes:
-    id: CONCEPT--ABAC-POLICY-ENGINE
-    phase: 1
-    type: concept
-    status: stable
-    tier: process
-    source_type: axiomatic
-    vault_id: default
-    title: ABAC policy engine — PDP / PEP separation, policy as data
-    attributes:
-      id: CONCEPT--ABAC-POLICY-ENGINE
-      phase: 1
-      type: concept
-      status: stable
-      tier: process
-      source_type: axiomatic
-      vault_id: default
-      title: ABAC policy engine — PDP / PEP separation, policy as data
-      attributes:
-        domain:
-          - ucf
-          - msp
-      tags: &a1
-        - msp
-        - ucf
-        - concept
-        - abac
-        - pdp
-        - pep
-        - policy
-      crosslinks: &a2
-        references:
-          - FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK
-          - CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT
-          - CONCEPT--ATTRIBUTE-BAG-MODEL
-      created_at: 2026-05-13T17:22:01.640+07:00
-      aliases: &a3
-        - CONCEPT
-        - implementation_flow
-        - Strategic intent / PRD
-      cluster: implementation_flow
-      role: Strategic intent / PRD
-      domain: concept
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-13T17:22:01.640+07:00
-    aliases: *a3
-    cluster: implementation_flow
-    role: Strategic intent / PRD
-    domain: concept
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-13T17:22:01.640+07:00
-  aliases: *a3
-  cluster: implementation_flow
-  role: Strategic intent / PRD
-  domain: concept
+  domain:
+    - ucf
+    - msp
   language: markdown
   is_test: false
   is_entrypoint: false
@@ -94,12 +38,6 @@ attributes:
   secret_type: high_entropy_string
   leak_risk: high
   encryption_level: none
-tags: *a1
-crosslinks: *a2
-created_at: 2026-05-13T17:22:01.640+07:00
-aliases: *a3
-cluster: implementation_flow
-role: Strategic intent / PRD
 ---
 
 # CONCEPT — ABAC policy engine

@@ -7,7 +7,7 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: M4c — Vitest acceptance runner acceptance audit
-tags: &a1
+tags:
   - msp
   - m4
   - m4c
@@ -15,88 +15,25 @@ tags: &a1
   - codegen
   - acceptance
   - vitest
-crosslinks: &a2
+crosslinks:
   references:
     - FEAT--ACCEPTANCE-VITEST-RUNNER
     - BLUEPRINT--ACCEPTANCE-VITEST-RUNNER
     - ADR--ACCEPTANCE-VITEST-RUNNER
     - FEAT--CODEGEN-MICROTASK-RUNNER
-linked_symbols: &a3
-  - file: packages/msp/src/codegen/acceptance/vitest.ts
-  - file: packages/msp/src/codegen/acceptance/sandbox.ts
-  - file: packages/msp/src/codegen/acceptance/parse-results.ts
-  - file: packages/msp/src/codegen/acceptance/types.ts
 created_at: 2026-05-03T16:30:27.474+07:00
-aliases: &a4
+aliases:
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
-  id: AUDIT--ACCEPTANCE-VITEST-RUNNER
-  phase: 6
-  type: audit
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: M4c — Vitest acceptance runner acceptance audit
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-03T16:30:27.474+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Test results / quality report
-  attributes:
-    id: AUDIT--ACCEPTANCE-VITEST-RUNNER
-    phase: 6
-    type: audit
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: M4c — Vitest acceptance runner acceptance audit
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-03T16:30:27.474+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Test results / quality report
-    attributes:
-      id: AUDIT--ACCEPTANCE-VITEST-RUNNER
-      phase: 6
-      type: audit
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: M4c — Vitest acceptance runner acceptance audit
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-03T16:30:27.474+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Test results / quality report
-      attributes:
-        domain: audit
-      domain: audit
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: audit
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/codegen/acceptance/vitest.ts
+    - file: packages/msp/src/codegen/acceptance/sandbox.ts
+    - file: packages/msp/src/codegen/acceptance/parse-results.ts
+    - file: packages/msp/src/codegen/acceptance/types.ts
   domain: audit
   language: markdown
   is_test: false

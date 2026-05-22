@@ -7,12 +7,12 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: msp:hotfix:* scripts + pre-commit gate via gks hotfix check
-tags: &a1
+tags:
   - msp
   - hotfix
   - user-facing
   - hook
-crosslinks: &a2
+crosslinks:
   belongs_to: MOD--DEVELOPER
   implements:
     - ADR--MSP-HOTFIX-WRAPPER
@@ -20,83 +20,18 @@ crosslinks: &a2
     - CONCEPT--MSP-HOTFIX-WRAPPER
     - FEAT--MSP-PRECOMMIT-HOOK
     - ADR--HOTFIX-ESCAPE-HATCH
-linked_symbols: &a3
-  - file: examples/hooks/pre-commit-validator.sh
-  - file: package.json
-  - file: packages/msp/test/hooks/pre-commit.test.ts
 created_at: 2026-05-03T17:45:50.058+07:00
-aliases: &a4
+aliases:
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
-  id: FEAT--MSP-HOTFIX-WRAPPER
-  phase: 2
-  type: feat
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: msp:hotfix:* scripts + pre-commit gate via gks hotfix check
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-03T17:45:50.058+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Feature spec
-  attributes:
-    id: FEAT--MSP-HOTFIX-WRAPPER
-    phase: 2
-    type: feat
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: msp:hotfix:* scripts + pre-commit gate via gks hotfix check
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-03T17:45:50.058+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Feature spec
-    attributes:
-      id: FEAT--MSP-HOTFIX-WRAPPER
-      phase: 2
-      type: feat
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: msp:hotfix:* scripts + pre-commit gate via gks hotfix check
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-03T17:45:50.058+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Feature spec
-      attributes:
-        domain: tooling
-      domain: tooling
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: tooling
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: examples/hooks/pre-commit-validator.sh
+    - file: package.json
+    - file: packages/msp/test/hooks/pre-commit.test.ts
   domain: tooling
   language: markdown
   is_test: false

@@ -4,11 +4,18 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: CONCEPT — Production Bootstrapper — instantiating clean GKS/MSP projects
-tags: [msp, infra, bootstrap, production, installer]
-aliases: [installer, project-generator]
+tags:
+  - msp
+  - infra
+  - bootstrap
+  - production
+  - installer
+aliases:
+  - installer
+  - project-generator
 cluster: implementation_flow
 role: Strategic intent / PRD
 crosslinks:

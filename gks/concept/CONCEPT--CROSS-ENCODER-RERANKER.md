@@ -4,11 +4,20 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: CONCEPT — Cross-Encoder Re-ranker — second-stage high-precision retrieval
-tags: [msp, retrieval, rerank, cross-encoder, precision, m10c]
-aliases: [CONCEPT, implementation_flow, Strategic intent / PRD]
+tags:
+  - msp
+  - retrieval
+  - rerank
+  - cross-encoder
+  - precision
+  - m10c
+aliases:
+  - CONCEPT
+  - implementation_flow
+  - Strategic intent / PRD
 cluster: implementation_flow
 role: Strategic intent / PRD
 crosslinks:

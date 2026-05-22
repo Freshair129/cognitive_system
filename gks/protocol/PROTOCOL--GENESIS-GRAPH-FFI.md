@@ -7,7 +7,7 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: PROTOCOL — Genesis Block FFI contract (Node ↔ Rust)
-tags: &a1
+tags:
   - msp
   - gks
   - genesis-block
@@ -16,81 +16,19 @@ tags: &a1
   - rust
   - protocol
   - contract
-crosslinks: &a2
+crosslinks:
   references:
     - ADR--GENESIS-GRAPH-AS-GKS-BACKEND
     - CONCEPT--GENESIS-GRAPH-BACKEND
     - BLUEPRINT--GENESIS-GRAPH-INTEGRATION
 created_at: 2026-05-12T12:30:00.000+07:00
-aliases: &a3
+aliases:
   - PROTOCOL
   - agent_governance
   - Interaction contract
 cluster: agent_governance
 role: Interaction contract
 attributes:
-  id: PROTOCOL--GENESIS-GRAPH-FFI
-  phase: 2
-  type: protocol
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: PROTOCOL — Genesis Block FFI contract (Node ↔ Rust)
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-12T12:30:00.000+07:00
-  aliases: *a3
-  cluster: agent_governance
-  role: Interaction contract
-  attributes:
-    id: PROTOCOL--GENESIS-GRAPH-FFI
-    phase: 2
-    type: protocol
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: PROTOCOL — Genesis Block FFI contract (Node ↔ Rust)
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-12T12:30:00.000+07:00
-    aliases: *a3
-    cluster: agent_governance
-    role: Interaction contract
-    attributes:
-      id: PROTOCOL--GENESIS-GRAPH-FFI
-      phase: 2
-      type: protocol
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: PROTOCOL — Genesis Block FFI contract (Node ↔ Rust)
-      tags: *a1
-      crosslinks: *a2
-      created_at: 2026-05-12T12:30:00.000+07:00
-      aliases: *a3
-      cluster: agent_governance
-      role: Interaction contract
-      attributes:
-        domain: protocol
-      domain: protocol
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: protocol
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
   domain: protocol
   language: markdown
   is_test: false

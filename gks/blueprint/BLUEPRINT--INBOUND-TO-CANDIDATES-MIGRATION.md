@@ -2,119 +2,48 @@
 id: BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION
 phase: 3
 type: blueprint
-scale_level: L2
 status: stable
+vault_id: default
 tier: process
 source_type: axiomatic
-vault_id: default
 title: BLUEPRINT — replace inbound queue with candidates layer (phased removal
   of msp_propose + propose.mjs + inbound infra)
-tags: &a1
+tags:
   - msp
   - inbound
   - candidates
   - migration
   - blueprint
   - implementation
-crosslinks: &a2
+crosslinks:
   references:
     - CONCEPT--KNOWLEDGE-LAYERS-V2
     - ADR--AGENT-WRITE-BOUNDARIES
     - FRAMEWORK--MSP-ARCHITECTURE-V2
-linked_symbols: &a3
-  - file: src/mcp/tools/propose.ts
-  - file: packages/msp/src/mcp/tools/candidate.ts
-  - file: packages/msp/src/memory/candidates/writer.ts
-  - file: scripts/msp/propose.mjs
-  - file: test/scripts/propose.test.ts
-  - file: test/mcp/tools/propose.test.ts
-  - file: packages/msp/test/mcp/tools/candidate.test.ts
-  - file: packages/msp/test/memory/candidates/writer.test.ts
-  - file: web/src/components/CandidatesList.tsx
-  - file: web/src/api.ts
-  - file: packages/msp/src/mcp/server.ts
-  - file: package.json
-  - file: msp_spec.md
-  - file: CLAUDE.md
 created_at: 2026-05-08T17:02:00.000+07:00
-aliases: &a4
+aliases:
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  id: BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION
-  phase: 3
-  type: blueprint
   scale_level: L2
-  status: stable
-  tier: process
-  source_type: axiomatic
-  vault_id: default
-  title: BLUEPRINT — replace inbound queue with candidates layer (phased removal
-    of msp_propose + propose.mjs + inbound infra)
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-08T17:02:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Implementation plan
-  attributes:
-    id: BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION
-    phase: 3
-    type: blueprint
-    scale_level: L2
-    status: stable
-    tier: process
-    source_type: axiomatic
-    vault_id: default
-    title: BLUEPRINT — replace inbound queue with candidates layer (phased removal
-      of msp_propose + propose.mjs + inbound infra)
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-08T17:02:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Implementation plan
-    attributes:
-      id: BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION
-      phase: 3
-      type: blueprint
-      scale_level: L2
-      status: stable
-      tier: process
-      source_type: axiomatic
-      vault_id: default
-      title: BLUEPRINT — replace inbound queue with candidates layer (phased removal
-        of msp_propose + propose.mjs + inbound infra)
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-08T17:02:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Implementation plan
-      attributes:
-        domain: blueprint
-      domain: blueprint
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: blueprint
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: src/mcp/tools/propose.ts
+    - file: packages/msp/src/mcp/tools/candidate.ts
+    - file: packages/msp/src/memory/candidates/writer.ts
+    - file: scripts/msp/propose.mjs
+    - file: test/scripts/propose.test.ts
+    - file: test/mcp/tools/propose.test.ts
+    - file: packages/msp/test/mcp/tools/candidate.test.ts
+    - file: packages/msp/test/memory/candidates/writer.test.ts
+    - file: web/src/components/CandidatesList.tsx
+    - file: web/src/api.ts
+    - file: packages/msp/src/mcp/server.ts
+    - file: package.json
+    - file: msp_spec.md
+    - file: CLAUDE.md
   domain: blueprint
   language: markdown
   is_test: false

@@ -4,87 +4,27 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: Hybrid Retrieval — adding FTS as layer 2 (FRAMEWORK_MASTER_SPEC §13)
-tags: &a1
+tags:
   - msp
   - retrieval
   - fts
   - hybrid-retrieval
   - framework-spec-13
-crosslinks: &a2
+crosslinks:
   references:
     - CONCEPT--COGNITIVE-LAYER-FACADE
     - CONCEPT--MEMORY-SUBSYSTEM
 created_at: 2026-05-12T22:53:00.000+07:00
-aliases: &a3
+aliases:
   - CONCEPT
   - implementation_flow
   - Strategic intent / PRD
 cluster: implementation_flow
 role: Strategic intent / PRD
 attributes:
-  id: CONCEPT--HYBRID-RETRIEVAL-FTS-LAYER
-  phase: 1
-  type: concept
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: Hybrid Retrieval — adding FTS as layer 2 (FRAMEWORK_MASTER_SPEC §13)
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-12T22:53:00.000+07:00
-  aliases: *a3
-  cluster: implementation_flow
-  role: Strategic intent / PRD
-  attributes:
-    id: CONCEPT--HYBRID-RETRIEVAL-FTS-LAYER
-    phase: 1
-    type: concept
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: Hybrid Retrieval — adding FTS as layer 2 (FRAMEWORK_MASTER_SPEC §13)
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-12T22:53:00.000+07:00
-    aliases: *a3
-    cluster: implementation_flow
-    role: Strategic intent / PRD
-    attributes:
-      id: CONCEPT--HYBRID-RETRIEVAL-FTS-LAYER
-      phase: 1
-      type: concept
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: Hybrid Retrieval — adding FTS as layer 2 (FRAMEWORK_MASTER_SPEC §13)
-      tags: *a1
-      crosslinks: *a2
-      created_at: 2026-05-12T22:53:00.000+07:00
-      aliases: *a3
-      cluster: implementation_flow
-      role: Strategic intent / PRD
-      attributes:
-        domain: concept
-      domain: concept
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: concept
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
   domain: concept
   language: markdown
   is_test: false

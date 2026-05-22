@@ -4,7 +4,7 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: ADR — Genesis Block Cypher v0 surface freeze (HALT GATE 2)
 tags:

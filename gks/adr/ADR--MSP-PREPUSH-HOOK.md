@@ -4,89 +4,27 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: Pre-push hook walks touched FEAT files only (no reverse traversal)
-tags: &a1
+tags:
   - msp
   - prepush
   - hook
   - decision
-crosslinks: &a2
+crosslinks:
   references:
     - CONCEPT--MSP-PREPUSH-HOOK
     - FEAT--MSP-VALIDATOR
     - ADR--MSP-PRECOMMIT-HOOK
 created_at: 2026-05-03T17:39:27.995+07:00
-aliases: &a3
+aliases:
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
-  id: ADR--MSP-PREPUSH-HOOK
-  phase: 2
-  type: adr
-  status: stable
-  vault_id: default
-  tier: genesis
-  source_type: axiomatic
-  title: Pre-push hook walks touched FEAT files only (no reverse traversal)
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-03T17:39:27.995+07:00
-  aliases: *a3
-  cluster: implementation_flow
-  role: Architecture decision record
-  attributes:
-    id: ADR--MSP-PREPUSH-HOOK
-    phase: 2
-    type: adr
-    status: stable
-    vault_id: default
-    tier: genesis
-    source_type: axiomatic
-    title: Pre-push hook walks touched FEAT files only (no reverse traversal)
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-03T17:39:27.995+07:00
-    aliases: *a3
-    cluster: implementation_flow
-    role: Architecture decision record
-    attributes:
-      id: ADR--MSP-PREPUSH-HOOK
-      phase: 2
-      type: adr
-      status: stable
-      vault_id: default
-      tier: genesis
-      source_type: axiomatic
-      title: Pre-push hook walks touched FEAT files only (no reverse traversal)
-      tags: *a1
-      crosslinks: *a2
-      created_at: 2026-05-03T17:39:27.995+07:00
-      aliases: *a3
-      cluster: implementation_flow
-      role: Architecture decision record
-      attributes:
-        domain: adr
-      domain: adr
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: aws_secret
-      leak_risk: high
-      encryption_level: none
-    domain: adr
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: aws_secret
-    leak_risk: high
-    encryption_level: none
   domain: adr
   language: markdown
   is_test: false

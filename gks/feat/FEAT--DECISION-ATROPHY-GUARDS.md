@@ -7,40 +7,26 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: FEAT — Decision Atrophy Guards — automatic detection of expired atoms
-tags: &a1
+tags:
   - msp
   - lifecycle
   - atrophy
   - validator
   - m9a
-aliases: &a2
-  - FEAT
-  - implementation_flow
-  - Feature specification
-cluster: implementation_flow
-role: Feature specification
-crosslinks: &a3
+crosslinks:
   belongs_to: MOD--GOVERNANCE
   references:
     - PROTO--VALID-UNTIL
     - FRAMEWORK--PHASE-GOVERNANCE
     - CONCEPT--MSP-ROADMAP
 created_at: 2026-05-18T11:15:00+07:00
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature specification
+cluster: implementation_flow
+role: Feature specification
 attributes:
-  id: FEAT--DECISION-ATROPHY-GUARDS
-  phase: 2
-  type: feat
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: FEAT — Decision Atrophy Guards — automatic detection of expired atoms
-  tags: *a1
-  aliases: *a2
-  cluster: implementation_flow
-  role: Feature specification
-  crosslinks: *a3
-  created_at: 2026-05-18T11:15:00+07:00
   domain: governance
   language: markdown
   is_test: false

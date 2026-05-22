@@ -7,89 +7,26 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: M5e human-review-gates ADR + spec §12 alignment audit
-tags: &a1
+tags:
   - msp
   - m5
   - m5e
   - audit
-crosslinks: &a2
+crosslinks:
   references:
     - ADR--HUMAN-REVIEW-GATES
     - ADR--PATH-ENCODING
     - ADR--AGENT-WRITE-BOUNDARIES
-linked_symbols: &a3
-  - file: msp_spec.md
 created_at: 2026-05-03T18:01:43.397+07:00
-aliases: &a4
+aliases:
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
-  id: AUDIT--HUMAN-REVIEW-GATES
-  phase: 6
-  type: audit
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: M5e human-review-gates ADR + spec §12 alignment audit
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-03T18:01:43.397+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Test results / quality report
-  attributes:
-    id: AUDIT--HUMAN-REVIEW-GATES
-    phase: 6
-    type: audit
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: M5e human-review-gates ADR + spec §12 alignment audit
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-03T18:01:43.397+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Test results / quality report
-    attributes:
-      id: AUDIT--HUMAN-REVIEW-GATES
-      phase: 6
-      type: audit
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: M5e human-review-gates ADR + spec §12 alignment audit
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-03T18:01:43.397+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Test results / quality report
-      attributes:
-        domain: audit
-      domain: audit
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: audit
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
+  linked_symbols:
+    - file: msp_spec.md
   domain: audit
   language: markdown
   is_test: false

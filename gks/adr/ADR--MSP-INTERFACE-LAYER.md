@@ -4,10 +4,10 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: documented_source
 title: MSP Interface Layer — Hexagonal seam for inbound adapters (Smart Proxy Pattern)
-tags: &a1
+tags:
   - msp
   - architecture
   - hexagonal
@@ -15,7 +15,7 @@ tags: &a1
   - interface
   - adapter
   - decision
-crosslinks: &a2
+crosslinks:
   implements:
     - FRAMEWORK--MSP-ARCHITECTURE-V2
   references:
@@ -23,76 +23,13 @@ crosslinks: &a2
     - ADR--MSP-MCP-SERVER
     - CONCEPT--AGENT-AGNOSTIC
 created_at: 2026-05-12T03:30:00.000+07:00
-aliases: &a3
+aliases:
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
-  id: ADR--MSP-INTERFACE-LAYER
-  phase: 2
-  type: adr
-  status: stable
-  vault_id: default
-  tier: genesis
-  source_type: documented_source
-  title: MSP Interface Layer — Hexagonal seam for inbound adapters (Smart Proxy
-    Pattern)
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-12T03:30:00.000+07:00
-  aliases: *a3
-  cluster: implementation_flow
-  role: Architecture decision record
-  attributes:
-    id: ADR--MSP-INTERFACE-LAYER
-    phase: 2
-    type: adr
-    status: stable
-    vault_id: default
-    tier: genesis
-    source_type: documented_source
-    title: MSP Interface Layer — Hexagonal seam for inbound adapters (Smart Proxy
-      Pattern)
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-12T03:30:00.000+07:00
-    aliases: *a3
-    cluster: implementation_flow
-    role: Architecture decision record
-    attributes:
-      id: ADR--MSP-INTERFACE-LAYER
-      phase: 2
-      type: adr
-      status: stable
-      vault_id: default
-      tier: genesis
-      source_type: documented_source
-      title: MSP Interface Layer — Hexagonal seam for inbound adapters (Smart Proxy
-        Pattern)
-      tags: *a1
-      crosslinks: *a2
-      created_at: 2026-05-12T03:30:00.000+07:00
-      aliases: *a3
-      cluster: implementation_flow
-      role: Architecture decision record
-      attributes:
-        domain: adr
-      domain: adr
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: adr
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
   domain: adr
   language: markdown
   is_test: false

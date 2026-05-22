@@ -3,107 +3,36 @@ id: PROTO--GENESIS-BLOCK-MEMBERSHIP
 phase: 2
 type: proto
 status: stable
-severity: error
 vault_id: default
 tier: safety
 source_type: axiomatic
 title: PROTO--GENESIS-BLOCK-MEMBERSHIP — machine-enforces the GENESIS-- Block
   Manifest membership + status-cascade contract
-tags: &a1
+tags:
   - msp
   - proto
   - genesis
   - knowledge-block
   - manifest
   - taxonomy
-crosslinks: &a2
+crosslinks:
   enforces:
     - SPEC--GENESIS-BLOCK-MANIFEST
   references:
     - SPEC--GENESIS-BLOCK-MANIFEST
     - CONCEPT--TAXONOMY-V2-3
     - CONCEPT--PROTO-PATTERN
-linked_symbols: &a3
-  - file: packages/msp/src/validator/proto/genesis-block-membership.ts
 created_at: 2026-05-14T18:30:00.000+07:00
-aliases: &a4
+aliases:
   - PROTO
   - implementation_flow
   - Machine-enforced invariant
 cluster: implementation_flow
 role: Machine-enforced invariant
 attributes:
-  id: PROTO--GENESIS-BLOCK-MEMBERSHIP
-  phase: 2
-  type: proto
-  status: stable
   severity: error
-  vault_id: default
-  tier: safety
-  source_type: axiomatic
-  title: PROTO--GENESIS-BLOCK-MEMBERSHIP — machine-enforces the GENESIS-- Block
-    Manifest membership + status-cascade contract
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-14T18:30:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Machine-enforced invariant
-  attributes:
-    id: PROTO--GENESIS-BLOCK-MEMBERSHIP
-    phase: 2
-    type: proto
-    status: stable
-    severity: error
-    vault_id: default
-    tier: safety
-    source_type: axiomatic
-    title: PROTO--GENESIS-BLOCK-MEMBERSHIP — machine-enforces the GENESIS-- Block
-      Manifest membership + status-cascade contract
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-14T18:30:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Machine-enforced invariant
-    attributes:
-      id: PROTO--GENESIS-BLOCK-MEMBERSHIP
-      phase: 2
-      type: proto
-      status: stable
-      severity: error
-      vault_id: default
-      tier: safety
-      source_type: axiomatic
-      title: PROTO--GENESIS-BLOCK-MEMBERSHIP — machine-enforces the GENESIS-- Block
-        Manifest membership + status-cascade contract
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-14T18:30:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Machine-enforced invariant
-      attributes:
-        domain: proto
-      domain: proto
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: aws_secret
-      leak_risk: high
-      encryption_level: none
-    domain: proto
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: aws_secret
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/validator/proto/genesis-block-membership.ts
   domain: proto
   language: markdown
   is_test: false

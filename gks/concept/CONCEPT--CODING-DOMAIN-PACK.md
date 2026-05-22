@@ -3,83 +3,25 @@ id: CONCEPT--CODING-DOMAIN-PACK
 phase: 1
 type: concept
 status: stable
-tier: genesis
-source_type: axiomatic
 vault_id: default
+tier: process
+source_type: axiomatic
 title: Coding Domain Pack — strategic ABAC for software engineering
-aliases: &a1
-  - CONCEPT
-tags: &a2
+tags:
   - msp
   - ucf
   - coding
   - security
-crosslinks: &a3
+crosslinks:
   references:
     - FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK
     - CONCEPT--ATTRIBUTE-BAG-MODEL
 created_at: 2026-05-17T09:10:00+07:00
+aliases:
+  - CONCEPT
 cluster: implementation_flow
 role: Strategic intent / PRD
 attributes:
-  id: CONCEPT--CODING-DOMAIN-PACK
-  phase: 1
-  type: concept
-  status: stable
-  tier: process
-  source_type: axiomatic
-  vault_id: default
-  title: Coding Domain Pack — strategic ABAC for software engineering
-  aliases: *a1
-  tags: *a2
-  crosslinks: *a3
-  created_at: 2026-05-17T09:10:00+07:00
-  cluster: implementation_flow
-  role: Strategic intent / PRD
-  attributes:
-    id: CONCEPT--CODING-DOMAIN-PACK
-    phase: 1
-    type: concept
-    status: stable
-    tier: process
-    source_type: axiomatic
-    vault_id: default
-    title: Coding Domain Pack — strategic ABAC for software engineering
-    tags: *a2
-    crosslinks: *a3
-    created_at: 2026-05-17T09:10:00+07:00
-    cluster: implementation_flow
-    role: Strategic intent / PRD
-    attributes:
-      id: CONCEPT--CODING-DOMAIN-PACK
-      phase: 1
-      type: concept
-      status: stable
-      tier: process
-      source_type: axiomatic
-      vault_id: default
-      title: Coding Domain Pack — strategic ABAC for software engineering
-      tags: *a2
-      crosslinks: *a3
-      created_at: 2026-05-17T09:10:00+07:00
-      cluster: implementation_flow
-      role: Strategic intent / PRD
-      domain: concept
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: concept
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
   domain: concept
   language: markdown
   is_test: false

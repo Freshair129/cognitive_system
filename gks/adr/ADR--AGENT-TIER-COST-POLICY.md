@@ -3,86 +3,26 @@ id: ADR--AGENT-TIER-COST-POLICY
 phase: 2
 type: adr
 status: stable
-tier: genesis
-source_type: axiomatic
 vault_id: default
+tier: process
+source_type: axiomatic
 title: ADR — Agent Tier Cost Policy — escalation and budget rules
-tags: &a1
+tags:
   - msp
   - agents
   - cost
   - governance
-crosslinks: &a2
+crosslinks:
   references:
     - CONCEPT--AGENT-TIER-ROUTING
 created_at: 2026-05-13T22:52:00+07:00
-aliases: &a3
+aliases:
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
-  id: ADR--AGENT-TIER-COST-POLICY
-  phase: 2
-  type: adr
-  status: stable
-  tier: genesis
-  source_type: axiomatic
-  vault_id: default
-  title: ADR — Agent Tier Cost Policy — escalation and budget rules
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-13T22:52:00+07:00
-  aliases: *a3
-  cluster: implementation_flow
-  role: Architecture decision record
-  attributes:
-    id: ADR--AGENT-TIER-COST-POLICY
-    phase: 2
-    type: adr
-    status: stable
-    tier: genesis
-    source_type: axiomatic
-    vault_id: default
-    title: ADR — Agent Tier Cost Policy — escalation and budget rules
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-13T22:52:00+07:00
-    aliases: *a3
-    cluster: implementation_flow
-    role: Architecture decision record
-    attributes:
-      id: ADR--AGENT-TIER-COST-POLICY
-      phase: 2
-      type: adr
-      status: stable
-      tier: genesis
-      source_type: axiomatic
-      vault_id: default
-      title: ADR — Agent Tier Cost Policy — escalation and budget rules
-      tags: *a1
-      crosslinks: *a2
-      created_at: 2026-05-13T22:52:00+07:00
-      aliases: *a3
-      cluster: implementation_flow
-      role: Architecture decision record
-      attributes:
-        domain: adr
-      domain: adr
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: adr
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
   domain: adr
   language: markdown
   is_test: false

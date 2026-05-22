@@ -7,13 +7,13 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: Identity Module — Genesis Block for the "Soul" Passport
-tags: &a1
+tags:
   - msp
   - identity
   - genesis
   - module
   - composition
-crosslinks: &a2
+crosslinks:
   composes:
     - CONCEPT--IDENTITY-LAYER
     - PROTOCOL--IDENTITY-API
@@ -24,73 +24,13 @@ crosslinks: &a2
     - FEAT--SESSION-LOCK-WINDOWS
     - FEAT--STEP-UP-AUTH-PIN
 created_at: 2026-05-11T10:28:00.000Z
-aliases: &a3
+aliases:
   - MOD
   - implementation_flow
   - Module manifest
 cluster: implementation_flow
 role: Module manifest
 attributes:
-  id: MOD--IDENTITY
-  phase: 2
-  type: mod
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: Identity Module — Genesis Block for the "Soul" Passport
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-11T10:28:00.000Z
-  aliases: *a3
-  cluster: implementation_flow
-  role: Module manifest
-  attributes:
-    id: MOD--IDENTITY
-    phase: 2
-    type: mod
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: Identity Module — Genesis Block for the "Soul" Passport
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-11T10:28:00.000Z
-    aliases: *a3
-    cluster: implementation_flow
-    role: Module manifest
-    attributes:
-      id: MOD--IDENTITY
-      phase: 2
-      type: mod
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: Identity Module — Genesis Block for the "Soul" Passport
-      tags: *a1
-      crosslinks: *a2
-      created_at: 2026-05-11T10:28:00.000Z
-      aliases: *a3
-      cluster: implementation_flow
-      role: Module manifest
-      attributes:
-        domain: identity
-      domain: identity
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: identity
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
   domain: identity
   language: markdown
   is_test: false

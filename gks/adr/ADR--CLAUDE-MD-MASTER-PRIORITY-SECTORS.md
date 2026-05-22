@@ -3,12 +3,12 @@ id: ADR--CLAUDE-MD-MASTER-PRIORITY-SECTORS
 phase: 2
 type: adr
 status: stable
-tier: genesis
-source_type: axiomatic
 vault_id: default
+tier: process
+source_type: axiomatic
 title: CLAUDE.md MASTER BLOCKS sector — P0–P4 priority bands, user-only P0/P1,
   multi-tiered triggers, constituent index
-tags: &a1
+tags:
   - msp
   - master
   - claude-md
@@ -17,7 +17,7 @@ tags: &a1
   - trigger
   - constituents
   - decision
-crosslinks: &a2
+crosslinks:
   references:
     - FRAMEWORK--KNOWLEDGE-3-TIER
     - CONCEPT--MASTER-PRIORITY-SECTORS
@@ -27,78 +27,13 @@ crosslinks: &a2
     - MASTER--ROOT-CAUSE-ANALYSIS
     - ADR--AGENT-WRITE-BOUNDARIES
 created_at: 2026-05-17T02:35:00.000+07:00
-aliases: &a3
+aliases:
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
-  id: ADR--CLAUDE-MD-MASTER-PRIORITY-SECTORS
-  phase: 2
-  type: adr
-  status: stable
-  tier: genesis
-  source_type: axiomatic
-  vault_id: default
-  title: CLAUDE.md MASTER BLOCKS sector — P0–P4 priority bands, user-only P0/P1,
-    multi-tiered triggers, constituent index
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-17T02:35:00.000+07:00
-  aliases: *a3
-  cluster: implementation_flow
-  role: Architecture decision record
-  attributes:
-    id: ADR--CLAUDE-MD-MASTER-PRIORITY-SECTORS
-    phase: 2
-    type: adr
-    status: stable
-    tier: genesis
-    source_type: axiomatic
-    vault_id: default
-    title: CLAUDE.md MASTER BLOCKS sector — P0–P4 priority bands, user-only P0/P1,
-      multi-tiered triggers, constituent index
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-17T02:35:00.000+07:00
-    aliases: *a3
-    cluster: implementation_flow
-    role: Architecture decision record
-    attributes:
-      id: ADR--CLAUDE-MD-MASTER-PRIORITY-SECTORS
-      phase: 2
-      type: adr
-      status: stable
-      tier: genesis
-      source_type: axiomatic
-      vault_id: default
-      title: CLAUDE.md MASTER BLOCKS sector — P0–P4 priority bands, user-only P0/P1,
-        multi-tiered triggers, constituent index
-      tags: *a1
-      crosslinks: *a2
-      created_at: 2026-05-17T02:35:00.000+07:00
-      aliases: *a3
-      cluster: implementation_flow
-      role: Architecture decision record
-      attributes:
-        domain: adr
-      domain: adr
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: adr
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
   domain: adr
   language: markdown
   is_test: false

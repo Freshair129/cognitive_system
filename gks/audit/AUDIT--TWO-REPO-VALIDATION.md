@@ -7,94 +7,29 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: Two-repo validation — MSP atomic claims vs published @freshair129/gks
-tags: &a1
+tags:
   - msp
   - gks
   - audit
   - validation
   - version-control
   - upstream
-crosslinks: &a2
+crosslinks:
   references:
     - ADR--EMBEDDING-MODEL-PARITY
     - ADR--MSP-OBSIDIAN-INTEGRATION
     - ADR--GRAPH-IS-GKS-DOMAIN
     - CONCEPT--EMBEDDING-STRATEGY
     - AUDIT--M7-PREP-FOLLOWUP
-linked_symbols: &a3 []
 created_at: 2026-05-04T12:55:00.000+07:00
-aliases: &a4
+aliases:
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
-  id: AUDIT--TWO-REPO-VALIDATION
-  phase: 6
-  type: audit
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: Two-repo validation — MSP atomic claims vs published @freshair129/gks
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-04T12:55:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Test results / quality report
-  attributes:
-    id: AUDIT--TWO-REPO-VALIDATION
-    phase: 6
-    type: audit
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: Two-repo validation — MSP atomic claims vs published @freshair129/gks
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-04T12:55:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Test results / quality report
-    attributes:
-      id: AUDIT--TWO-REPO-VALIDATION
-      phase: 6
-      type: audit
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: Two-repo validation — MSP atomic claims vs published @freshair129/gks
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-04T12:55:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Test results / quality report
-      attributes:
-        domain: audit
-      domain: audit
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: audit
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols: []
   domain: audit
   language: markdown
   is_test: false

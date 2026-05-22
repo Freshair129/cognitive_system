@@ -7,108 +7,42 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: M7c — retrieval orchestration implementation (RRF fusion across 4 sources)
-tags: &a1
+tags:
   - msp
   - retrieval
   - rrf
   - msp-recall
   - m7c
   - audit
-crosslinks: &a2
+crosslinks:
   references:
     - FEAT--RETRIEVAL-ORCHESTRATION
     - BLUEPRINT--RETRIEVAL-ORCHESTRATION
     - ADR--RETRIEVAL-RRF-FUSION
     - CONCEPT--RETRIEVAL-ORCHESTRATION
     - FRAMEWORK--MSP-ARCHITECTURE-V2
-linked_symbols: &a3
-  - file: packages/msp/src/orchestrator/retrieval/index.ts
-  - file: packages/msp/src/orchestrator/retrieval/types.ts
-  - file: packages/msp/src/orchestrator/retrieval/fusion.ts
-  - file: packages/msp/src/orchestrator/retrieval/sources/vector.ts
-  - file: packages/msp/src/orchestrator/retrieval/sources/obsidian.ts
-  - file: packages/msp/src/orchestrator/retrieval/sources/episodic.ts
-  - file: packages/msp/src/orchestrator/retrieval/sources/backlinks.ts
-  - file: packages/msp/test/orchestrator/retrieval/fusion.test.ts
-  - file: packages/msp/test/orchestrator/retrieval/sources/vector.test.ts
-  - file: packages/msp/test/orchestrator/retrieval/sources/obsidian.test.ts
-  - file: packages/msp/test/orchestrator/retrieval/sources/episodic.test.ts
-  - file: packages/msp/test/orchestrator/retrieval/sources/backlinks.test.ts
-  - file: packages/msp/test/orchestrator/retrieval/index.test.ts
 created_at: 2026-05-05T16:18:00.000+07:00
-aliases: &a4
+aliases:
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
-  id: AUDIT--RETRIEVAL-ORCHESTRATION
-  phase: 6
-  type: audit
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: M7c — retrieval orchestration implementation (RRF fusion across 4 sources)
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-05T16:18:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Test results / quality report
-  attributes:
-    id: AUDIT--RETRIEVAL-ORCHESTRATION
-    phase: 6
-    type: audit
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: M7c — retrieval orchestration implementation (RRF fusion across 4 sources)
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-05T16:18:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Test results / quality report
-    attributes:
-      id: AUDIT--RETRIEVAL-ORCHESTRATION
-      phase: 6
-      type: audit
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: M7c — retrieval orchestration implementation (RRF fusion across 4
-        sources)
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-05T16:18:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Test results / quality report
-      attributes:
-        domain: audit
-      domain: audit
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: aws_secret
-      leak_risk: high
-      encryption_level: none
-    domain: audit
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: aws_secret
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/orchestrator/retrieval/index.ts
+    - file: packages/msp/src/orchestrator/retrieval/types.ts
+    - file: packages/msp/src/orchestrator/retrieval/fusion.ts
+    - file: packages/msp/src/orchestrator/retrieval/sources/vector.ts
+    - file: packages/msp/src/orchestrator/retrieval/sources/obsidian.ts
+    - file: packages/msp/src/orchestrator/retrieval/sources/episodic.ts
+    - file: packages/msp/src/orchestrator/retrieval/sources/backlinks.ts
+    - file: packages/msp/test/orchestrator/retrieval/fusion.test.ts
+    - file: packages/msp/test/orchestrator/retrieval/sources/vector.test.ts
+    - file: packages/msp/test/orchestrator/retrieval/sources/obsidian.test.ts
+    - file: packages/msp/test/orchestrator/retrieval/sources/episodic.test.ts
+    - file: packages/msp/test/orchestrator/retrieval/sources/backlinks.test.ts
+    - file: packages/msp/test/orchestrator/retrieval/index.test.ts
   domain: audit
   language: markdown
   is_test: false

@@ -3,83 +3,23 @@ id: ADR--REGISTRY-DRIVEN-SCAFFOLDING
 phase: 2
 type: adr
 status: stable
-tier: genesis
-source_type: axiomatic
 vault_id: default
+tier: process
+source_type: axiomatic
 title: Registry-Driven Scaffolding
-tags: &a1
+tags:
   - msp
-crosslinks: &a2
+crosslinks:
   references:
     - CONCEPT--ATOM-REGISTRY-AS-SSOT
 created_at: 2026-05-17T04:07:40.095+07:00
-aliases: &a3
+aliases:
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
-  id: ADR--REGISTRY-DRIVEN-SCAFFOLDING
-  phase: 2
-  type: adr
-  status: stable
-  tier: process
-  source_type: axiomatic
-  vault_id: default
-  title: Registry-Driven Scaffolding
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-17T04:07:40.095+07:00
-  aliases: *a3
-  cluster: implementation_flow
-  role: Architecture decision record
-  attributes:
-    id: ADR--REGISTRY-DRIVEN-SCAFFOLDING
-    phase: 2
-    type: adr
-    status: stable
-    tier: process
-    source_type: axiomatic
-    vault_id: default
-    title: Registry-Driven Scaffolding
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-17T04:07:40.095+07:00
-    aliases: *a3
-    cluster: implementation_flow
-    role: Architecture decision record
-    attributes:
-      id: ADR--REGISTRY-DRIVEN-SCAFFOLDING
-      phase: 2
-      type: adr
-      status: stable
-      tier: process
-      source_type: axiomatic
-      vault_id: default
-      title: Registry-Driven Scaffolding
-      tags: *a1
-      crosslinks: *a2
-      created_at: 2026-05-17T04:07:40.095+07:00
-      aliases: *a3
-      cluster: implementation_flow
-      role: Architecture decision record
-      attributes:
-        domain: adr
-      domain: adr
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: adr
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
   domain: adr
   language: markdown
   is_test: false

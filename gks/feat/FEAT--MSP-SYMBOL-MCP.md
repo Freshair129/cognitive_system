@@ -3,18 +3,18 @@ id: FEAT--MSP-SYMBOL-MCP
 phase: 2
 type: feat
 status: stable
+vault_id: default
 tier: process
 source_type: axiomatic
-vault_id: default
 title: msp_symbol_* MCP tool surface — 5 read-only tools for in-session
   symbol-graph queries
-tags: &a1
+tags:
   - msp
   - symbol-graph
   - mcp
   - feat
   - tool
-crosslinks: &a2
+crosslinks:
   belongs_to: MOD--MCP
   implements:
     - ADR--SYMBOL-GRAPH-PERSISTENCE
@@ -22,87 +22,21 @@ crosslinks: &a2
     - FRAMEWORK--SYMBOL-GRAPH
     - CONCEPT--SYMBOL-GRAPH
     - FEAT--MSP-MCP-SERVER
-linked_symbols: &a3
-  - file: packages/msp/src/mcp/tools/symbol-lookup.ts
-  - file: packages/msp/src/mcp/tools/symbol-neighbors.ts
-  - file: packages/msp/src/mcp/tools/symbol-impact.ts
-  - file: packages/msp/src/mcp/tools/symbol-community.ts
-  - file: packages/msp/src/mcp/tools/symbol-search.ts
-  - file: packages/msp/src/mcp/server.ts
 created_at: 2026-05-09T16:52:00.000+07:00
-aliases: &a4
+aliases:
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
-  id: FEAT--MSP-SYMBOL-MCP
-  phase: 2
-  type: feat
-  status: stable
-  tier: process
-  source_type: axiomatic
-  vault_id: default
-  title: msp_symbol_* MCP tool surface — 5 read-only tools for in-session
-    symbol-graph queries
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-09T16:52:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Feature spec
-  attributes:
-    id: FEAT--MSP-SYMBOL-MCP
-    phase: 2
-    type: feat
-    status: stable
-    tier: process
-    source_type: axiomatic
-    vault_id: default
-    title: msp_symbol_* MCP tool surface — 5 read-only tools for in-session
-      symbol-graph queries
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-09T16:52:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Feature spec
-    attributes:
-      id: FEAT--MSP-SYMBOL-MCP
-      phase: 2
-      type: feat
-      status: stable
-      tier: process
-      source_type: axiomatic
-      vault_id: default
-      title: msp_symbol_* MCP tool surface — 5 read-only tools for in-session
-        symbol-graph queries
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-09T16:52:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Feature spec
-      attributes:
-        domain: integration
-      domain: integration
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: integration
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/mcp/tools/symbol-lookup.ts
+    - file: packages/msp/src/mcp/tools/symbol-neighbors.ts
+    - file: packages/msp/src/mcp/tools/symbol-impact.ts
+    - file: packages/msp/src/mcp/tools/symbol-community.ts
+    - file: packages/msp/src/mcp/tools/symbol-search.ts
+    - file: packages/msp/src/mcp/server.ts
   domain: integration
   language: markdown
   is_test: false

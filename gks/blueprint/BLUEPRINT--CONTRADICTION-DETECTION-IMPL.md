@@ -7,107 +7,39 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: BLUEPRINT — contradiction detection implementation (5 phases, one PR per layer)
-tags: &a1
+tags:
   - msp
   - validator
   - contradiction
   - blueprint
   - implementation
   - ci
-crosslinks: &a2
+crosslinks:
   references:
     - CONCEPT--ATOM-CONTRADICTION-DETECTION
     - ADR--CONTRADICTION-DETECTION-STACK
     - PROTO--ALGO-PARAM-COUPLING
-linked_symbols: &a3
-  - file: CLAUDE.md
-  - file: .github/pull_request_template.md
-  - file: src/validator/proto/reciprocal-supersession.ts
-  - file: gks/proto/PROTO--RECIPROCAL-SUPERSESSION.md
-  - file: src/validator/proto/domain-uniqueness.ts
-  - file: gks/proto/PROTO--DOMAIN-UNIQUENESS.md
-  - file: .brain/msp/LLM_Contract/atomic_contract.yaml
-  - file: .github/workflows/contradiction-similarity.yml
-  - file: scripts/msp/contradiction-similarity.mjs
-  - file: .github/workflows/contradiction-judge.yml
-  - file: scripts/msp/contradiction-judge.mjs
-  - file: .github/contradiction-detection.yml
 created_at: 2026-05-08T17:34:00.000+07:00
-aliases: &a4
+aliases:
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  id: BLUEPRINT--CONTRADICTION-DETECTION-IMPL
-  phase: 3
-  type: blueprint
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: BLUEPRINT — contradiction detection implementation (5 phases, one PR per
-    layer)
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-08T17:34:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Implementation plan
-  attributes:
-    id: BLUEPRINT--CONTRADICTION-DETECTION-IMPL
-    phase: 3
-    type: blueprint
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: BLUEPRINT — contradiction detection implementation (5 phases, one PR per
-      layer)
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-08T17:34:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Implementation plan
-    attributes:
-      id: BLUEPRINT--CONTRADICTION-DETECTION-IMPL
-      phase: 3
-      type: blueprint
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: BLUEPRINT — contradiction detection implementation (5 phases, one PR per
-        layer)
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-08T17:34:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Implementation plan
-      attributes:
-        domain: blueprint
-      domain: blueprint
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: blueprint
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: CLAUDE.md
+    - file: .github/pull_request_template.md
+    - file: src/validator/proto/reciprocal-supersession.ts
+    - file: gks/proto/PROTO--RECIPROCAL-SUPERSESSION.md
+    - file: src/validator/proto/domain-uniqueness.ts
+    - file: gks/proto/PROTO--DOMAIN-UNIQUENESS.md
+    - file: .brain/msp/LLM_Contract/atomic_contract.yaml
+    - file: .github/workflows/contradiction-similarity.yml
+    - file: scripts/msp/contradiction-similarity.mjs
+    - file: .github/workflows/contradiction-judge.yml
+    - file: scripts/msp/contradiction-judge.mjs
+    - file: .github/contradiction-detection.yml
   domain: blueprint
   language: markdown
   is_test: false

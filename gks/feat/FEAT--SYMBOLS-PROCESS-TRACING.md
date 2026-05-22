@@ -3,19 +3,19 @@ id: FEAT--SYMBOLS-PROCESS-TRACING
 phase: 2
 type: feat
 status: superseded
+vault_id: default
 tier: process
 source_type: axiomatic
-vault_id: default
 title: End-to-end process tracing — following execution flows from entry points
   to leaf functions
-tags: &a1
+tags:
   - msp
   - symbol-graph
   - data-flow
   - trace
   - impact-analysis
   - feat
-crosslinks: &a2
+crosslinks:
   belongs_to: MOD--SYMBOLS
   implements:
     - ADR--SYMBOL-GRAPH-PERSISTENCE
@@ -28,85 +28,17 @@ crosslinks: &a2
     - ADR--SYMBOLS-PROCESS-TRACING
     - ALGO--SYMBOLS-CALL-GRAPH-TRAVERSAL
     - PROTO--SYMBOLS-TRACE-INVARIANTS
-linked_symbols: &a3
-  - file: packages/msp/src/symbols/tracer.ts
-  - file: packages/msp/src/mcp/tools/symbol-trace.ts
 created_at: 2026-05-12T04:48:00.000+07:00
-aliases: &a4
+aliases:
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
-  id: FEAT--SYMBOLS-PROCESS-TRACING
-  phase: 2
-  type: feat
-  status: superseded
-  tier: process
-  source_type: axiomatic
-  vault_id: default
-  title: End-to-end process tracing — following execution flows from entry points
-    to leaf functions
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-12T04:48:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Feature spec
-  attributes:
-    id: FEAT--SYMBOLS-PROCESS-TRACING
-    phase: 2
-    type: feat
-    status: superseded
-    tier: process
-    source_type: axiomatic
-    vault_id: default
-    title: End-to-end process tracing — following execution flows from entry points
-      to leaf functions
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-12T04:48:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Feature spec
-    attributes:
-      id: FEAT--SYMBOLS-PROCESS-TRACING
-      phase: 2
-      type: feat
-      status: superseded
-      tier: process
-      source_type: axiomatic
-      vault_id: default
-      title: End-to-end process tracing — following execution flows from entry points
-        to leaf functions
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-12T04:48:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Feature spec
-      attributes:
-        domain: symbols
-      domain: symbols
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: symbols
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/symbols/tracer.ts
+    - file: packages/msp/src/mcp/tools/symbol-trace.ts
   domain: symbols
   language: markdown
   is_test: false

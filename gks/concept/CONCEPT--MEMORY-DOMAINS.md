@@ -3,14 +3,20 @@ id: CONCEPT--MEMORY-DOMAINS
 phase: 1
 type: concept
 status: stable
-tier: genesis
+tier: process
 source_type: axiomatic
 vault_id: default
 title: Memory Domains — semantic categorization for decay and promotion
-aliases: [knowledge categories, memory classification]
+aliases:
+  - knowledge categories
+  - memory classification
 cluster: memory
 role: Strategic intent / PRD
-tags: [msp, memory, taxonomy, lifecycle]
+tags:
+  - msp
+  - memory
+  - taxonomy
+  - lifecycle
 crosslinks:
   references:
     - CONCEPT--TIERED-MEMORY-DISTILLATION

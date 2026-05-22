@@ -3,100 +3,34 @@ id: PROTO--PHASE-GATES
 phase: 2
 type: proto
 status: stable
-severity: error
 vault_id: default
 tier: safety
 source_type: axiomatic
 title: PROTO--PHASE-GATES — enforce P0..P6 phase ordering at PR-time (M8b)
-tags: &a1
+tags:
   - msp
   - proto
   - phase-gates
   - governance
   - m8b
-crosslinks: &a2
+crosslinks:
   enforces:
     - FRAMEWORK--PHASE-GOVERNANCE
   references:
     - CONCEPT--PROTO-PHASE-GATES
     - CONCEPT--PROTO-PATTERN
     - FEAT--PROTO-LOADER
-linked_symbols: &a3
-  - file: packages/msp/src/validator/proto/phase-gates.ts
 created_at: 2026-05-05T18:00:00.000+07:00
-aliases: &a4
+aliases:
   - PROTO
   - implementation_flow
   - Machine-enforced invariant
 cluster: implementation_flow
 role: Machine-enforced invariant
 attributes:
-  id: PROTO--PHASE-GATES
-  phase: 2
-  type: proto
-  status: stable
   severity: error
-  vault_id: default
-  tier: safety
-  source_type: axiomatic
-  title: PROTO--PHASE-GATES — enforce P0..P6 phase ordering at PR-time (M8b)
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-05T18:00:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Machine-enforced invariant
-  attributes:
-    id: PROTO--PHASE-GATES
-    phase: 2
-    type: proto
-    status: stable
-    severity: error
-    vault_id: default
-    tier: safety
-    source_type: axiomatic
-    title: PROTO--PHASE-GATES — enforce P0..P6 phase ordering at PR-time (M8b)
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-05T18:00:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Machine-enforced invariant
-    attributes:
-      id: PROTO--PHASE-GATES
-      phase: 2
-      type: proto
-      status: stable
-      severity: error
-      vault_id: default
-      tier: safety
-      source_type: axiomatic
-      title: PROTO--PHASE-GATES — enforce P0..P6 phase ordering at PR-time (M8b)
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-05T18:00:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Machine-enforced invariant
-      attributes:
-        domain: proto
-      domain: proto
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: proto
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/validator/proto/phase-gates.ts
   domain: proto
   language: markdown
   is_test: false

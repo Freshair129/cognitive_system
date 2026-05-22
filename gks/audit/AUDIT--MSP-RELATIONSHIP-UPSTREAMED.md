@@ -7,88 +7,26 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: MSP relationship docs upstreamed — closes proposal
-tags: &a1
+tags:
   - msp
   - gks
   - audit
   - upstream
   - documentation
-crosslinks: &a2
+crosslinks:
   references:
     - AUDIT--ARCH-DOC-CLEANUP
     - CONCEPT--AGENT-AGNOSTIC
     - BLUEPRINT--INBOUND-TO-CANDIDATES-MIGRATION
     - ADR--AGENT-WRITE-BOUNDARIES
 created_at: 2026-05-11T17:25:00.000+07:00
-aliases: &a3
+aliases:
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
-  id: AUDIT--MSP-RELATIONSHIP-UPSTREAMED
-  phase: 6
-  type: audit
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: MSP relationship docs upstreamed — closes proposal
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-11T17:25:00.000+07:00
-  aliases: *a3
-  cluster: implementation_flow
-  role: Test results / quality report
-  attributes:
-    id: AUDIT--MSP-RELATIONSHIP-UPSTREAMED
-    phase: 6
-    type: audit
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: MSP relationship docs upstreamed — closes proposal
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-11T17:25:00.000+07:00
-    aliases: *a3
-    cluster: implementation_flow
-    role: Test results / quality report
-    attributes:
-      id: AUDIT--MSP-RELATIONSHIP-UPSTREAMED
-      phase: 6
-      type: audit
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: MSP relationship docs upstreamed — closes proposal
-      tags: *a1
-      crosslinks: *a2
-      created_at: 2026-05-11T17:25:00.000+07:00
-      aliases: *a3
-      cluster: implementation_flow
-      role: Test results / quality report
-      attributes:
-        domain: audit
-      domain: audit
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: audit
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
   domain: audit
   language: markdown
   is_test: false

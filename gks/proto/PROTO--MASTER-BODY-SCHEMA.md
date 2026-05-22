@@ -3,106 +3,35 @@ id: PROTO--MASTER-BODY-SCHEMA
 phase: 2
 type: proto
 status: stable
-severity: error
 vault_id: default
 tier: safety
 source_type: axiomatic
 title: PROTO--MASTER-BODY-SCHEMA — five required H2 sections in every Master
   atom body (PR-5)
-tags: &a1
+tags:
   - msp
   - proto
   - master
   - schema
   - 3-tier
-crosslinks: &a2
+crosslinks:
   enforces:
     - FRAMEWORK--KNOWLEDGE-3-TIER
   references:
     - FRAMEWORK--KNOWLEDGE-3-TIER
     - ADR--MASTER-PROMOTION-DOC-TO-CODE
     - ADR--MASTER-PROMOTION-CONTRADICTION-POLICY
-linked_symbols: &a3
-  - file: packages/msp/src/validator/proto/master-body-schema.ts
 created_at: 2026-05-09T15:05:00.000+07:00
-aliases: &a4
+aliases:
   - PROTO
   - implementation_flow
   - Machine-enforced invariant
 cluster: implementation_flow
 role: Machine-enforced invariant
 attributes:
-  id: PROTO--MASTER-BODY-SCHEMA
-  phase: 2
-  type: proto
-  status: stable
   severity: error
-  vault_id: default
-  tier: safety
-  source_type: axiomatic
-  title: PROTO--MASTER-BODY-SCHEMA — five required H2 sections in every Master
-    atom body (PR-5)
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-09T15:05:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Machine-enforced invariant
-  attributes:
-    id: PROTO--MASTER-BODY-SCHEMA
-    phase: 2
-    type: proto
-    status: stable
-    severity: error
-    vault_id: default
-    tier: safety
-    source_type: axiomatic
-    title: PROTO--MASTER-BODY-SCHEMA — five required H2 sections in every Master
-      atom body (PR-5)
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-09T15:05:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Machine-enforced invariant
-    attributes:
-      id: PROTO--MASTER-BODY-SCHEMA
-      phase: 2
-      type: proto
-      status: stable
-      severity: error
-      vault_id: default
-      tier: safety
-      source_type: axiomatic
-      title: PROTO--MASTER-BODY-SCHEMA — five required H2 sections in every Master
-        atom body (PR-5)
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-09T15:05:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Machine-enforced invariant
-      attributes:
-        domain: proto
-      domain: proto
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: proto
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/validator/proto/master-body-schema.ts
   domain: proto
   language: markdown
   is_test: false

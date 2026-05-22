@@ -3,19 +3,19 @@ id: CONCEPT--MASTER-PROMOTION
 phase: 1
 type: concept
 status: stable
-tier: genesis
-source_type: axiomatic
 vault_id: default
+tier: process
+source_type: axiomatic
 title: Master Block promotion — 4-of-5 dimension rule + human-in-the-loop
   proposal flow
-tags: &a1
+tags:
   - msp
   - master
   - promotion
   - genesis-block
   - dimensions
   - phase-e4
-crosslinks: &a2
+crosslinks:
   references:
     - SPEC--GENESIS-BLOCK-MANIFEST
     - CONCEPT--TAXONOMY-V2-3
@@ -23,76 +23,13 @@ crosslinks: &a2
     - ADR--MASTER-PROMOTION-CONTRADICTION-POLICY
     - FRAMEWORK--KNOWLEDGE-3-TIER
 created_at: 2026-05-13T10:00:00.000+07:00
-aliases: &a3
+aliases:
   - CONCEPT
   - implementation_flow
   - Strategic intent / PRD
 cluster: implementation_flow
 role: Strategic intent / PRD
 attributes:
-  id: CONCEPT--MASTER-PROMOTION
-  phase: 1
-  type: concept
-  status: stable
-  tier: genesis
-  source_type: axiomatic
-  vault_id: default
-  title: Master Block promotion — 4-of-5 dimension rule + human-in-the-loop
-    proposal flow
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-13T10:00:00.000+07:00
-  aliases: *a3
-  cluster: implementation_flow
-  role: Strategic intent / PRD
-  attributes:
-    id: CONCEPT--MASTER-PROMOTION
-    phase: 1
-    type: concept
-    status: stable
-    tier: genesis
-    source_type: axiomatic
-    vault_id: default
-    title: Master Block promotion — 4-of-5 dimension rule + human-in-the-loop
-      proposal flow
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-13T10:00:00.000+07:00
-    aliases: *a3
-    cluster: implementation_flow
-    role: Strategic intent / PRD
-    attributes:
-      id: CONCEPT--MASTER-PROMOTION
-      phase: 1
-      type: concept
-      status: stable
-      tier: genesis
-      source_type: axiomatic
-      vault_id: default
-      title: Master Block promotion — 4-of-5 dimension rule + human-in-the-loop
-        proposal flow
-      tags: *a1
-      crosslinks: *a2
-      created_at: 2026-05-13T10:00:00.000+07:00
-      aliases: *a3
-      cluster: implementation_flow
-      role: Strategic intent / PRD
-      attributes:
-        domain: concept
-      domain: concept
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: concept
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
   domain: concept
   language: markdown
   is_test: false

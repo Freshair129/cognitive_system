@@ -3,103 +3,35 @@ id: PROTO--AUTO-GENERATED-MARKER
 phase: 2
 type: proto
 status: stable
-severity: warning
 vault_id: default
 tier: safety
 source_type: axiomatic
 title: PROTO--AUTO-GENERATED-MARKER — codegen outputs must declare themselves
-tags: &a1
+tags:
   - msp
   - proto
   - codegen
   - marker
   - framework-spec-9.6
-crosslinks: &a2
+crosslinks:
   enforces:
     - FRAMEWORK--MSP-ARCHITECTURE-V2
   references:
     - CONCEPT--COGNITIVE-LAYER-FACADE
     - CONCEPT--CODEGEN-MICROTASK-RUNNER
-linked_symbols: &a3
-  - file: packages/msp/src/cognitive/compose.ts
-  - file: packages/msp/src/cognitive/marker-constants.ts
-    symbol: PROTO_AUTO_GENERATED_MARKER
 created_at: 2026-05-12T22:51:00.000+07:00
-aliases: &a4
+aliases:
   - PROTO
   - implementation_flow
   - Machine-enforced invariant
 cluster: implementation_flow
 role: Machine-enforced invariant
 attributes:
-  id: PROTO--AUTO-GENERATED-MARKER
-  phase: 2
-  type: proto
-  status: stable
   severity: warning
-  vault_id: default
-  tier: safety
-  source_type: axiomatic
-  title: PROTO--AUTO-GENERATED-MARKER — codegen outputs must declare themselves
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-12T22:51:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Machine-enforced invariant
-  attributes:
-    id: PROTO--AUTO-GENERATED-MARKER
-    phase: 2
-    type: proto
-    status: stable
-    severity: warning
-    vault_id: default
-    tier: safety
-    source_type: axiomatic
-    title: PROTO--AUTO-GENERATED-MARKER — codegen outputs must declare themselves
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-12T22:51:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Machine-enforced invariant
-    attributes:
-      id: PROTO--AUTO-GENERATED-MARKER
-      phase: 2
-      type: proto
-      status: stable
-      severity: warning
-      vault_id: default
-      tier: safety
-      source_type: axiomatic
-      title: PROTO--AUTO-GENERATED-MARKER — codegen outputs must declare themselves
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-12T22:51:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Machine-enforced invariant
-      attributes:
-        domain: proto
-      domain: proto
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: proto
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/cognitive/compose.ts
+    - file: packages/msp/src/cognitive/marker-constants.ts
+      symbol: PROTO_AUTO_GENERATED_MARKER
   domain: proto
   language: markdown
   is_test: false

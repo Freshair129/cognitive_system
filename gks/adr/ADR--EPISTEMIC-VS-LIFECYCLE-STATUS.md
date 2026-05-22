@@ -4,11 +4,19 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: ADR — Separate epistemic_state from document status
-tags: [msp, memory, epistemology, lifecycle, governance]
-aliases: [ADR, implementation_flow, Architecture decision record]
+tags:
+  - msp
+  - memory
+  - epistemology
+  - lifecycle
+  - governance
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 crosslinks:

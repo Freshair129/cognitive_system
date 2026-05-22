@@ -4,11 +4,19 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: ADR — Default affect policy for memory distillation
-tags: [msp, memory, affect, 888, policy]
-aliases: [ADR, implementation_flow, Architecture decision record]
+tags:
+  - msp
+  - memory
+  - affect
+  - 888
+  - policy
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 crosslinks:

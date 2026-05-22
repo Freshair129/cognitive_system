@@ -4,11 +4,17 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: CONCEPT — CoVibe Roadmap — 4-Phase execution plan
-tags: [covibe, roadmap, execution, mvp]
-aliases: [sprint-plan, milestones]
+tags:
+  - covibe
+  - roadmap
+  - execution
+  - mvp
+aliases:
+  - sprint-plan
+  - milestones
 cluster: implementation_flow
 role: Strategic intent / PRD
 crosslinks:

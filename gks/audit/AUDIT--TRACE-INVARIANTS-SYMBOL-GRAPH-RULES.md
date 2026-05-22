@@ -3,101 +3,36 @@ id: AUDIT--TRACE-INVARIANTS-SYMBOL-GRAPH-RULES
 phase: 6
 type: audit
 status: stable
+vault_id: default
 tier: process
 source_type: axiomatic
-vault_id: default
 title: AUDIT — Symbol-graph trace invariants + PROTO promotion to stable
-tags: &a1
+tags:
   - validator
   - proto
   - trace-invariants
   - symbol-graph
   - audit
-crosslinks: &a2
+crosslinks:
   references:
     - PROTO--SYMBOLS-TRACE-INVARIANTS
     - BLUEPRINT--PROTO-LOADER
     - BLUEPRINT--TRACE-INVARIANTS-PREDICATE-CONTEXT
     - AUDIT--TRACE-INVARIANTS-ATOM-GRAPH-RULES
     - AUDIT--WIRE-TRACE-INVARIANTS-PROTO
-phase_override: &a3
-  skip_blueprint: true
-  reason: Implementation surface is already covered by
-    BLUEPRINT--TRACE-INVARIANTS-PREDICATE-CONTEXT (reader injection) +
-    BLUEPRINT--PROTO-LOADER (predicate scaffold). Audit closes them out.
 created_at: 2026-05-16T01:00:00.000+07:00
-aliases: &a4
+aliases:
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
-  id: AUDIT--TRACE-INVARIANTS-SYMBOL-GRAPH-RULES
-  phase: 6
-  type: audit
-  status: stable
-  tier: process
-  source_type: axiomatic
-  vault_id: default
-  title: AUDIT — Symbol-graph trace invariants + PROTO promotion to stable
-  tags: *a1
-  crosslinks: *a2
-  phase_override: *a3
-  created_at: 2026-05-16T01:00:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Test results / quality report
-  attributes:
-    id: AUDIT--TRACE-INVARIANTS-SYMBOL-GRAPH-RULES
-    phase: 6
-    type: audit
-    status: stable
-    tier: process
-    source_type: axiomatic
-    vault_id: default
-    title: AUDIT — Symbol-graph trace invariants + PROTO promotion to stable
-    tags: *a1
-    crosslinks: *a2
-    phase_override: *a3
-    created_at: 2026-05-16T01:00:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Test results / quality report
-    attributes:
-      id: AUDIT--TRACE-INVARIANTS-SYMBOL-GRAPH-RULES
-      phase: 6
-      type: audit
-      status: stable
-      tier: process
-      source_type: axiomatic
-      vault_id: default
-      title: AUDIT — Symbol-graph trace invariants + PROTO promotion to stable
-      tags: *a1
-      crosslinks: *a2
-      phase_override: *a3
-      created_at: 2026-05-16T01:00:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Test results / quality report
-      attributes:
-        domain: audit
-      domain: audit
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: audit
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  phase_override:
+    skip_blueprint: true
+    reason: Implementation surface is already covered by
+      BLUEPRINT--TRACE-INVARIANTS-PREDICATE-CONTEXT (reader injection) +
+      BLUEPRINT--PROTO-LOADER (predicate scaffold). Audit closes them out.
   domain: audit
   language: markdown
   is_test: false

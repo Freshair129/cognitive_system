@@ -3,117 +3,42 @@ id: MASTER--MSP-DOC-TO-CODE
 phase: 0
 type: master
 status: stable
+vault_id: default
 tier: master
 source_type: axiomatic
-promoted_from: CONCEPT--CODEGEN-MICROTASK-CONTRACT
-promoted_at: 2026-05-09T08:00:00.000Z
-promotion_adr: ADR--MASTER-PROMOTION-DOC-TO-CODE
-vault_id: default
-priority: P0
-constituents: &a1
-  required:
-    framework:
-      - FRAMEWORK--KNOWLEDGE-3-TIER
-    concept:
-      - CONCEPT--CODEGEN-MICROTASK-CONTRACT
-    adr:
-      - ADR--MASTER-PROMOTION-DOC-TO-CODE
-  optional: {}
 title: Doc-to-code — atoms before code, every milestone, no exceptions
-tags: &a2
+tags:
   - msp
   - master
   - doc-to-code
   - governance
   - instinct
-crosslinks: &a3
+crosslinks:
   references:
     - FRAMEWORK--KNOWLEDGE-3-TIER
     - ADR--MASTER-PROMOTION-DOC-TO-CODE
     - CONCEPT--CODEGEN-MICROTASK-CONTRACT
 created_at: 2026-05-09T15:00:30.000+07:00
-aliases: &a4
+aliases:
   - MASTER
   - implementation_flow
   - Root-level policy / genesis rule
 cluster: implementation_flow
 role: Root-level policy / genesis rule
 attributes:
-  id: MASTER--MSP-DOC-TO-CODE
-  phase: 0
-  type: master
-  status: stable
-  tier: master
-  source_type: axiomatic
   promoted_from: CONCEPT--CODEGEN-MICROTASK-CONTRACT
   promoted_at: 2026-05-09T08:00:00.000Z
   promotion_adr: ADR--MASTER-PROMOTION-DOC-TO-CODE
-  vault_id: default
   priority: P0
-  constituents: *a1
-  title: Doc-to-code — atoms before code, every milestone, no exceptions
-  tags: *a2
-  crosslinks: *a3
-  created_at: 2026-05-09T15:00:30.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Root-level policy / genesis rule
-  attributes:
-    id: MASTER--MSP-DOC-TO-CODE
-    phase: 0
-    type: master
-    status: stable
-    tier: master
-    source_type: axiomatic
-    promoted_from: CONCEPT--CODEGEN-MICROTASK-CONTRACT
-    promoted_at: 2026-05-09T08:00:00.000Z
-    promotion_adr: ADR--MASTER-PROMOTION-DOC-TO-CODE
-    vault_id: default
-    priority: P0
-    constituents: *a1
-    title: Doc-to-code — atoms before code, every milestone, no exceptions
-    tags: *a2
-    crosslinks: *a3
-    created_at: 2026-05-09T15:00:30.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Root-level policy / genesis rule
-    attributes:
-      id: MASTER--MSP-DOC-TO-CODE
-      phase: 0
-      type: master
-      status: stable
-      tier: master
-      source_type: axiomatic
-      promoted_from: CONCEPT--CODEGEN-MICROTASK-CONTRACT
-      promoted_at: 2026-05-09T08:00:00.000Z
-      promotion_adr: ADR--MASTER-PROMOTION-DOC-TO-CODE
-      vault_id: default
-      priority: P0
-      constituents: *a1
-      title: Doc-to-code — atoms before code, every milestone, no exceptions
-      tags: *a2
-      crosslinks: *a3
-      created_at: 2026-05-09T15:00:30.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Root-level policy / genesis rule
-      attributes:
-        domain: master
-      domain: master
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: master
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
+  constituents:
+    required:
+      framework:
+        - FRAMEWORK--KNOWLEDGE-3-TIER
+      concept:
+        - CONCEPT--CODEGEN-MICROTASK-CONTRACT
+      adr:
+        - ADR--MASTER-PROMOTION-DOC-TO-CODE
+    optional: {}
   domain: master
   language: markdown
   is_test: false
@@ -121,6 +46,9 @@ attributes:
   has_secret: false
   leak_risk: low
   encryption_level: none
+promoted_from: CONCEPT--CODEGEN-MICROTASK-CONTRACT
+promoted_at: 2026-05-17T02:10:00.000+07:00
+promotion_adr: ADR--MASTER-PROMOTION-DOC-TO-CODE
 ---
 
 # MASTER — Doc-to-code (atoms before code, every milestone)

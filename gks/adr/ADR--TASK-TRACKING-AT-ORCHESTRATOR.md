@@ -3,98 +3,36 @@ id: ADR--TASK-TRACKING-AT-ORCHESTRATOR
 phase: 2
 type: adr
 status: stable
-created_at: 2026-05-13T12:00:00+07:00
 vault_id: GKS-CORE
-tier: genesis
+tier: process
 title: Task tracking belongs to the orchestrator, not GKS
-tags: &a1
+tags:
   - scope
   - taxonomy
   - lifecycle
   - msp
   - supersedes
-crosslinks: &a2
+crosslinks:
   references:
     - ADR--EXTENDED-TAXONOMY
     - CONCEPT--MSP-ROADMAP
   partially_supersedes:
     - ADR--DOC-TO-CODE-ENFORCEMENT
-linked_symbols: &a3
-  - file: packages/gks/src/memory/types.ts
-    fn: AtomicType
-  - file: packages/gks/src/scaffold/new-feature.ts
-    fn: scaffoldNewFeature
-  - file: packages/gks/bin/gks.ts
-    fn: cmdNewFeature
-aliases: &a4
+created_at: 2026-05-13T12:00:00+07:00
+aliases:
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
-  id: ADR--TASK-TRACKING-AT-ORCHESTRATOR
-  phase: 2
-  type: adr
-  status: stable
-  created_at: 2026-05-13T12:00:00+07:00
-  vault_id: GKS-CORE
-  tier: genesis
-  title: Task tracking belongs to the orchestrator, not GKS
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  aliases: *a4
-  cluster: implementation_flow
-  role: Architecture decision record
-  attributes:
-    id: ADR--TASK-TRACKING-AT-ORCHESTRATOR
-    phase: 2
-    type: adr
-    status: stable
-    created_at: 2026-05-13T12:00:00+07:00
-    vault_id: GKS-CORE
-    tier: genesis
-    title: Task tracking belongs to the orchestrator, not GKS
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    aliases: *a4
-    cluster: implementation_flow
-    role: Architecture decision record
-    attributes:
-      id: ADR--TASK-TRACKING-AT-ORCHESTRATOR
-      phase: 2
-      type: adr
-      status: stable
-      created_at: 2026-05-13T12:00:00+07:00
-      vault_id: GKS-CORE
-      tier: genesis
-      title: Task tracking belongs to the orchestrator, not GKS
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      aliases: *a4
-      cluster: implementation_flow
-      role: Architecture decision record
-      attributes:
-        domain: adr
-      domain: adr
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: adr
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/gks/src/memory/types.ts
+      fn: AtomicType
+    - file: packages/gks/src/scaffold/new-feature.ts
+      fn: scaffoldNewFeature
+    - file: packages/gks/bin/gks.ts
+      fn: cmdNewFeature
   domain: adr
   language: markdown
   is_test: false

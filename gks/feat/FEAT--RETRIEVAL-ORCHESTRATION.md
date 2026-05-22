@@ -8,14 +8,14 @@ tier: process
 source_type: axiomatic
 title: Retrieval orchestration — recall(query) fans out across 4 sources, fuses
   via RRF
-tags: &a1
+tags:
   - msp
   - retrieval
   - rrf
   - msp-recall
   - m7c
   - user-facing
-crosslinks: &a2
+crosslinks:
   belongs_to: MOD--RETRIEVAL
   implements:
     - ADR--RETRIEVAL-RRF-FUSION
@@ -23,88 +23,22 @@ crosslinks: &a2
     - CONCEPT--RETRIEVAL-ORCHESTRATION
     - FEAT--MSP-OBSIDIAN-CLIENT
     - FEAT--CONSOLIDATOR
-linked_symbols: &a3
-  - file: packages/msp/src/orchestrator/retrieval/index.ts
-  - file: packages/msp/src/orchestrator/retrieval/types.ts
-  - file: packages/msp/src/orchestrator/retrieval/fusion.ts
-  - file: packages/msp/src/orchestrator/retrieval/sources/vector.ts
-  - file: packages/msp/src/orchestrator/retrieval/sources/obsidian.ts
-  - file: packages/msp/src/orchestrator/retrieval/sources/episodic.ts
-  - file: packages/msp/src/orchestrator/retrieval/sources/backlinks.ts
 created_at: 2026-05-05T15:56:00.000+07:00
-aliases: &a4
+aliases:
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
-  id: FEAT--RETRIEVAL-ORCHESTRATION
-  phase: 2
-  type: feat
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: Retrieval orchestration — recall(query) fans out across 4 sources, fuses
-    via RRF
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-05T15:56:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Feature spec
-  attributes:
-    id: FEAT--RETRIEVAL-ORCHESTRATION
-    phase: 2
-    type: feat
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: Retrieval orchestration — recall(query) fans out across 4 sources, fuses
-      via RRF
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-05T15:56:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Feature spec
-    attributes:
-      id: FEAT--RETRIEVAL-ORCHESTRATION
-      phase: 2
-      type: feat
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: Retrieval orchestration — recall(query) fans out across 4 sources, fuses
-        via RRF
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-05T15:56:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Feature spec
-      attributes:
-        domain: knowledge-engine
-      domain: knowledge-engine
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: knowledge-engine
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/orchestrator/retrieval/index.ts
+    - file: packages/msp/src/orchestrator/retrieval/types.ts
+    - file: packages/msp/src/orchestrator/retrieval/fusion.ts
+    - file: packages/msp/src/orchestrator/retrieval/sources/vector.ts
+    - file: packages/msp/src/orchestrator/retrieval/sources/obsidian.ts
+    - file: packages/msp/src/orchestrator/retrieval/sources/episodic.ts
+    - file: packages/msp/src/orchestrator/retrieval/sources/backlinks.ts
   domain: knowledge-engine
   language: markdown
   is_test: false

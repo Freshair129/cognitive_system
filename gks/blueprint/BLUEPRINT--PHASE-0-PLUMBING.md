@@ -3,104 +3,33 @@ id: BLUEPRINT--PHASE-0-PLUMBING
 phase: 3
 type: blueprint
 status: active
+vault_id: default
 tier: process
 source_type: axiomatic
-vault_id: default
-scale_level: L2
 title: "BLUEPRINT — Phase 0 plumbing: thread the 4-tuple and attribute bag, no
   enforcement"
-tags: &a1
+tags:
   - msp
   - ucf
   - blueprint
   - phase-0
-crosslinks: &a2
+crosslinks:
   references:
     - CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT
     - CONCEPT--ATTRIBUTE-BAG-MODEL
     - ADR--BRING-YOUR-OWN-ATTRIBUTES
     - FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK
-linked_symbols: &a3
-  - file: packages/msp/src/policy/types.ts
 created_at: 2026-05-14T22:21:52.048+07:00
-aliases: &a4
+aliases:
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  id: BLUEPRINT--PHASE-0-PLUMBING
-  phase: 3
-  type: blueprint
-  status: active
-  tier: process
-  source_type: axiomatic
-  vault_id: default
   scale_level: L2
-  title: "BLUEPRINT — Phase 0 plumbing: thread the 4-tuple and attribute bag, no
-    enforcement"
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-14T22:21:52.048+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Implementation plan
-  attributes:
-    id: BLUEPRINT--PHASE-0-PLUMBING
-    phase: 3
-    type: blueprint
-    status: active
-    tier: process
-    source_type: axiomatic
-    vault_id: default
-    scale_level: L2
-    title: "BLUEPRINT — Phase 0 plumbing: thread the 4-tuple and attribute bag, no
-      enforcement"
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-14T22:21:52.048+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Implementation plan
-    attributes:
-      id: BLUEPRINT--PHASE-0-PLUMBING
-      phase: 3
-      type: blueprint
-      status: active
-      tier: process
-      source_type: axiomatic
-      vault_id: default
-      scale_level: L2
-      title: "BLUEPRINT — Phase 0 plumbing: thread the 4-tuple and attribute bag, no
-        enforcement"
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-14T22:21:52.048+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Implementation plan
-      attributes:
-        domain: blueprint
-      domain: blueprint
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: blueprint
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/policy/types.ts
   domain: blueprint
   language: markdown
   is_test: false

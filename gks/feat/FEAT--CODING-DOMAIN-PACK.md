@@ -3,86 +3,28 @@ id: FEAT--CODING-DOMAIN-PACK
 phase: 2
 type: feat
 status: active
+vault_id: default
 tier: process
 source_type: axiomatic
-vault_id: default
 title: FEAT — Coding Domain Pack — classifier and policy set
-tags: &a1
+tags:
   - msp
   - ucf
   - coding
   - classifier
-crosslinks: &a2
+crosslinks:
   belongs_to: MOD--DEVELOPER
   implements:
     - CONCEPT--CODING-DOMAIN-PACK
   references:
     - FEAT--CLASSIFIER-PLUGINS
 created_at: 2026-05-17T09:15:00+07:00
-cluster: implementation_flow
-role: Feature spec
-aliases: &a3
+aliases:
   - FEAT
   - implementation_flow
+cluster: implementation_flow
+role: Feature spec
 attributes:
-  id: FEAT--CODING-DOMAIN-PACK
-  phase: 2
-  type: feat
-  status: active
-  tier: process
-  source_type: axiomatic
-  vault_id: default
-  title: FEAT — Coding Domain Pack — classifier and policy set
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-17T09:15:00+07:00
-  cluster: implementation_flow
-  role: Feature spec
-  aliases: *a3
-  attributes:
-    id: FEAT--CODING-DOMAIN-PACK
-    phase: 2
-    type: feat
-    status: active
-    tier: process
-    source_type: axiomatic
-    vault_id: default
-    title: FEAT — Coding Domain Pack — classifier and policy set
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-17T09:15:00+07:00
-    cluster: implementation_flow
-    role: Feature spec
-    aliases: *a3
-    attributes:
-      id: FEAT--CODING-DOMAIN-PACK
-      phase: 2
-      type: feat
-      status: active
-      tier: process
-      source_type: axiomatic
-      vault_id: default
-      title: FEAT — Coding Domain Pack — classifier and policy set
-      tags: *a1
-      crosslinks: *a2
-      created_at: 2026-05-17T09:15:00+07:00
-      cluster: implementation_flow
-      role: Feature spec
-      aliases: *a3
-      domain: tooling
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: tooling
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
   domain: tooling
   language: markdown
   is_test: false

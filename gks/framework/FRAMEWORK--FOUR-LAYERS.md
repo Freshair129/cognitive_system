@@ -3,89 +3,29 @@ id: FRAMEWORK--FOUR-LAYERS
 phase: 0
 type: framework
 status: stable
-created_at: 2026-05-13T12:00:00+07:00
 vault_id: GKS-CORE
-tier: genesis
+tier: master
 title: Four-layer storage model
-tags: &a1
+tags:
   - architecture
   - framework
   - core
-crosslinks: &a2
+crosslinks:
   references:
     - CONCEPT--MEMORY-STORE
-linked_symbols: &a3
-  - file: packages/gks/src/memory/gks.ts
-  - file: packages/gks/src/memory/vector/index.ts
-  - file: packages/gks/src/memory/episodic.ts
-  - file: packages/gks/src/memory/obsidian-mcp.ts
-aliases: &a4
+created_at: 2026-05-13T12:00:00+07:00
+aliases:
   - FRAMEWORK
   - implementation_flow
   - Governance / architectural framework
 cluster: implementation_flow
 role: Governance / architectural framework
 attributes:
-  id: FRAMEWORK--FOUR-LAYERS
-  phase: 0
-  type: framework
-  status: stable
-  created_at: 2026-05-13T12:00:00+07:00
-  vault_id: GKS-CORE
-  tier: genesis
-  title: Four-layer storage model
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  aliases: *a4
-  cluster: implementation_flow
-  role: Governance / architectural framework
-  attributes:
-    id: FRAMEWORK--FOUR-LAYERS
-    phase: 0
-    type: framework
-    status: stable
-    created_at: 2026-05-13T12:00:00+07:00
-    vault_id: GKS-CORE
-    tier: genesis
-    title: Four-layer storage model
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    aliases: *a4
-    cluster: implementation_flow
-    role: Governance / architectural framework
-    attributes:
-      id: FRAMEWORK--FOUR-LAYERS
-      phase: 0
-      type: framework
-      status: stable
-      created_at: 2026-05-13T12:00:00+07:00
-      vault_id: GKS-CORE
-      tier: genesis
-      title: Four-layer storage model
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      aliases: *a4
-      cluster: implementation_flow
-      role: Governance / architectural framework
-      attributes:
-        domain: framework
-      domain: framework
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: framework
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
+  linked_symbols:
+    - file: packages/gks/src/memory/gks.ts
+    - file: packages/gks/src/memory/vector/index.ts
+    - file: packages/gks/src/memory/episodic.ts
+    - file: packages/gks/src/memory/obsidian-mcp.ts
   domain: framework
   language: markdown
   is_test: false
@@ -93,6 +33,9 @@ attributes:
   has_secret: false
   leak_risk: low
   encryption_level: none
+promoted_from: CONCEPT--KNOWLEDGE-LAYERS-V2
+promoted_at: 2026-05-13T12:21:49+07:00
+promotion_adr: ADR--TAXONOMY-V2-3-MIGRATION
 ---
 
 # FRAME — Four-layer storage model

@@ -2,110 +2,42 @@
 id: BLUEPRINT--COMPRESSOR
 phase: 3
 type: blueprint
-scale_level: L2
 status: stable
 vault_id: default
 tier: process
 source_type: axiomatic
 title: BLUEPRINT — context compressor implementation plan
-tags: &a1
+tags:
   - msp
   - compressor
   - blueprint
   - implementation
   - m7d
-crosslinks: &a2
+crosslinks:
   implements:
     - FEAT--COMPRESSOR
   references:
     - ADR--COMPRESSOR-THREE-TIER
     - CONCEPT--CONTEXT-COMPRESSION
-linked_symbols: &a3
-  - file: packages/msp/src/orchestrator/compressor/index.ts
-  - file: packages/msp/src/orchestrator/compressor/types.ts
-  - file: packages/msp/src/orchestrator/compressor/tokens.ts
-  - file: packages/msp/src/orchestrator/compressor/trim.ts
-  - file: packages/msp/src/orchestrator/compressor/resummarise.ts
-  - file: packages/msp/test/orchestrator/compressor/tokens.test.ts
-  - file: packages/msp/test/orchestrator/compressor/trim.test.ts
-  - file: packages/msp/test/orchestrator/compressor/resummarise.test.ts
-  - file: packages/msp/test/orchestrator/compressor/index.test.ts
 created_at: 2026-05-05T16:11:00.000+07:00
-aliases: &a4
+aliases:
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  id: BLUEPRINT--COMPRESSOR
-  phase: 3
-  type: blueprint
   scale_level: L2
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: BLUEPRINT — context compressor implementation plan
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-05T16:11:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Implementation plan
-  attributes:
-    id: BLUEPRINT--COMPRESSOR
-    phase: 3
-    type: blueprint
-    scale_level: L2
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: BLUEPRINT — context compressor implementation plan
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-05T16:11:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Implementation plan
-    attributes:
-      id: BLUEPRINT--COMPRESSOR
-      phase: 3
-      type: blueprint
-      scale_level: L2
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: BLUEPRINT — context compressor implementation plan
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-05T16:11:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Implementation plan
-      attributes:
-        domain: blueprint
-      domain: blueprint
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: aws_secret
-      leak_risk: high
-      encryption_level: none
-    domain: blueprint
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: aws_secret
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/orchestrator/compressor/index.ts
+    - file: packages/msp/src/orchestrator/compressor/types.ts
+    - file: packages/msp/src/orchestrator/compressor/tokens.ts
+    - file: packages/msp/src/orchestrator/compressor/trim.ts
+    - file: packages/msp/src/orchestrator/compressor/resummarise.ts
+    - file: packages/msp/test/orchestrator/compressor/tokens.test.ts
+    - file: packages/msp/test/orchestrator/compressor/trim.test.ts
+    - file: packages/msp/test/orchestrator/compressor/resummarise.test.ts
+    - file: packages/msp/test/orchestrator/compressor/index.test.ts
   domain: blueprint
   language: markdown
   is_test: false

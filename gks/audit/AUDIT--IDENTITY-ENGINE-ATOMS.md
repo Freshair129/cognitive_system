@@ -3,91 +3,29 @@ id: AUDIT--IDENTITY-ENGINE-ATOMS
 phase: 6
 type: audit
 status: stable
+vault_id: default
 tier: process
 source_type: axiomatic
-vault_id: default
 title: AUDIT — Identity Engine member atoms & GENESIS manifest
-tags: &a1
+tags:
   - msp
   - identity
   - genesis
   - knowledge-block
   - audit
-crosslinks: &a2
+crosslinks:
   references:
     - GENESIS--IDENTITY-ENGINE
     - SPEC--GENESIS-BLOCK-MANIFEST
     - PROTO--GENESIS-BLOCK-MEMBERSHIP
 created_at: 2026-05-14T21:30:00+07:00
-aliases: &a3
+aliases:
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
-  id: AUDIT--IDENTITY-ENGINE-ATOMS
-  phase: 6
-  type: audit
-  status: stable
-  tier: genesis
-  source_type: axiomatic
-  vault_id: default
-  title: AUDIT — Identity Engine member atoms & GENESIS manifest
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-14T21:30:00+07:00
-  aliases: *a3
-  cluster: implementation_flow
-  role: Test results / quality report
-  attributes:
-    id: AUDIT--IDENTITY-ENGINE-ATOMS
-    phase: 6
-    type: audit
-    status: stable
-    tier: genesis
-    source_type: axiomatic
-    vault_id: default
-    title: AUDIT — Identity Engine member atoms & GENESIS manifest
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-14T21:30:00+07:00
-    aliases: *a3
-    cluster: implementation_flow
-    role: Test results / quality report
-    attributes:
-      id: AUDIT--IDENTITY-ENGINE-ATOMS
-      phase: 6
-      type: audit
-      status: stable
-      tier: genesis
-      source_type: axiomatic
-      vault_id: default
-      title: AUDIT — Identity Engine member atoms & GENESIS manifest
-      tags: *a1
-      crosslinks: *a2
-      created_at: 2026-05-14T21:30:00+07:00
-      aliases: *a3
-      cluster: implementation_flow
-      role: Test results / quality report
-      attributes:
-        domain: audit
-      domain: audit
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: audit
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
   domain: audit
   language: markdown
   is_test: false

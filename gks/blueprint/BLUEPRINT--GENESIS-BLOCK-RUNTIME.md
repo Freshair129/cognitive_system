@@ -7,102 +7,33 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: BLUEPRINT — Genesis Block Runtime — implementation plan for composite execution
-scale_level: feature
-tags: &a1
+tags:
   - msp
   - genesis-block
   - runtime
   - blueprint
   - phase-e5
-crosslinks: &a2
+crosslinks:
   references:
     - CONCEPT--GENESIS-BLOCK-RUNTIME
     - SPEC--GENESIS-BLOCK-MANIFEST
     - BLUEPRINT--AGENT-DISPATCHER
     - CONCEPT--AGENT-AGNOSTIC
-linked_symbols: &a3
-  - file: packages/msp/src/genesis/types.ts
-  - file: packages/msp/src/genesis/loader.ts
-  - file: packages/msp/src/genesis/composer.ts
-  - file: packages/msp/src/genesis/executor.ts
-  - file: packages/msp/src/genesis/cli.ts
 created_at: 2026-05-14T03:35:00.000+07:00
-aliases: &a4
+aliases:
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  id: BLUEPRINT--GENESIS-BLOCK-RUNTIME
-  phase: 3
-  type: blueprint
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: BLUEPRINT — Genesis Block Runtime — implementation plan for composite
-    execution
   scale_level: feature
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-14T03:35:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Implementation plan
-  attributes:
-    id: BLUEPRINT--GENESIS-BLOCK-RUNTIME
-    phase: 3
-    type: blueprint
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: BLUEPRINT — Genesis Block Runtime — implementation plan for composite
-      execution
-    scale_level: feature
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-14T03:35:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Implementation plan
-    attributes:
-      id: BLUEPRINT--GENESIS-BLOCK-RUNTIME
-      phase: 3
-      type: blueprint
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: BLUEPRINT — Genesis Block Runtime — implementation plan for composite
-        execution
-      scale_level: feature
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-14T03:35:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Implementation plan
-      attributes:
-        domain: blueprint
-      domain: blueprint
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: blueprint
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/genesis/types.ts
+    - file: packages/msp/src/genesis/loader.ts
+    - file: packages/msp/src/genesis/composer.ts
+    - file: packages/msp/src/genesis/executor.ts
+    - file: packages/msp/src/genesis/cli.ts
   domain: blueprint
   language: markdown
   is_test: false

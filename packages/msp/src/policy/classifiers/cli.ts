@@ -63,19 +63,21 @@ async function main(): Promise<number> {
       const body = raw.slice(fmMatch[0].length)
       const fm = parseYaml(fmText)
       
+      // ISOLATION FIX: Separate top-level frontmatter from the attributes bag.
+      // We pass only the existing attributes to the engine to prevent recursion.
+      const existingAttributes = fm.attributes || {}
+      
       const resource: ClassifiableResource = {
         id: fm.id,
         path: relPath,
         body,
-        // Pass the FULL frontmatter as attributes to classifiers.
-        // The engine and classifiers can then pick what they need.
-        attributes: { ...fm }
+        attributes: { ...existingAttributes }
       }
 
       const result = await runClassifiers(resource, classifiers)
       
       // Check if anything changed
-      const oldAttrText = JSON.stringify(fm.attributes || {})
+      const oldAttrText = JSON.stringify(existingAttributes)
       const newAttrText = JSON.stringify(result.attributes)
 
       if (oldAttrText !== newAttrText) {
@@ -92,6 +94,7 @@ async function main(): Promise<number> {
         }
 
         if (!values['dry-run']) {
+          // Update only the attributes field, keeping top-level fields intact.
           fm.attributes = result.attributes
           const newFmText = stringifyYaml(fm).trim()
           await writeFile(absPath, `---\n${newFmText}\n---\n${body}`, 'utf8')

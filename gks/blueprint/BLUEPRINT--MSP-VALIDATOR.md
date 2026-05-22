@@ -2,111 +2,43 @@
 id: BLUEPRINT--MSP-VALIDATOR
 phase: 3
 type: blueprint
-scale_level: L2
 status: stable
 vault_id: default
 tier: process
 source_type: axiomatic
 title: BLUEPRINT — MSP validator implementation plan
-tags: &a1
+tags:
   - msp
   - validator
   - blueprint
   - implementation
-crosslinks: &a2
+crosslinks:
   implements:
     - FEAT--MSP-VALIDATOR
   references:
     - ADR--MSP-VALIDATOR
     - CONCEPT--MSP-VALIDATOR
-linked_symbols: &a3
-  - file: packages/msp/src/validator/index.ts
-  - file: packages/msp/src/validator/types.ts
-  - file: packages/msp/src/validator/parse.ts
-  - file: packages/msp/src/validator/rules/forbidden-fields.ts
-  - file: packages/msp/src/validator/rules/dangling-wikilinks.ts
-  - file: src/validator/rules/id-uniqueness.ts
-  - file: packages/msp/src/validator/rules/id-format.ts
-  - file: packages/msp/src/validator/rules/future-date.ts
-  - file: packages/msp/src/validator/rules/summary-min.ts
-  - file: packages/msp/src/validator/atomic-index.ts
-  - file: packages/msp/src/validator/cli.ts
 created_at: 2026-05-03T13:24:25.656+07:00
-aliases: &a4
+aliases:
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  id: BLUEPRINT--MSP-VALIDATOR
-  phase: 3
-  type: blueprint
   scale_level: L2
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: BLUEPRINT — MSP validator implementation plan
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-03T13:24:25.656+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Implementation plan
-  attributes:
-    id: BLUEPRINT--MSP-VALIDATOR
-    phase: 3
-    type: blueprint
-    scale_level: L2
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: BLUEPRINT — MSP validator implementation plan
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-03T13:24:25.656+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Implementation plan
-    attributes:
-      id: BLUEPRINT--MSP-VALIDATOR
-      phase: 3
-      type: blueprint
-      scale_level: L2
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: BLUEPRINT — MSP validator implementation plan
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-03T13:24:25.656+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Implementation plan
-      attributes:
-        domain: blueprint
-      domain: blueprint
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: aws_secret
-      leak_risk: high
-      encryption_level: none
-    domain: blueprint
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: aws_secret
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/validator/index.ts
+    - file: packages/msp/src/validator/types.ts
+    - file: packages/msp/src/validator/parse.ts
+    - file: packages/msp/src/validator/rules/forbidden-fields.ts
+    - file: packages/msp/src/validator/rules/dangling-wikilinks.ts
+    - file: src/validator/rules/id-uniqueness.ts
+    - file: packages/msp/src/validator/rules/id-format.ts
+    - file: packages/msp/src/validator/rules/future-date.ts
+    - file: packages/msp/src/validator/rules/summary-min.ts
+    - file: packages/msp/src/validator/atomic-index.ts
+    - file: packages/msp/src/validator/cli.ts
   domain: blueprint
   language: markdown
   is_test: false

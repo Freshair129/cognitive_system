@@ -7,93 +7,27 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: BLUEPRINT — Agent Dispatcher — implementation plan for T1/T2/T3 routing
-scale_level: feature
-tags: &a1
+tags:
   - msp
   - agents
   - dispatch
   - blueprint
-crosslinks: &a2
+crosslinks:
   references:
     - CONCEPT--AGENT-TIER-ROUTING
     - ADR--AGENT-TIER-COST-POLICY
     - CONCEPT--AGENT-AGNOSTIC
-linked_symbols: &a3
-  - file: packages/msp/src/agents/dispatch.ts
 created_at: 2026-05-14T01:35:00.000+07:00
-aliases: &a4
+aliases:
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  id: BLUEPRINT--AGENT-DISPATCHER
-  phase: 3
-  type: blueprint
-  status: stable
-  vault_id: default
-  tier: genesis
-  source_type: axiomatic
-  title: BLUEPRINT — Agent Dispatcher — implementation plan for T1/T2/T3 routing
   scale_level: feature
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-14T01:35:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Implementation plan
-  attributes:
-    id: BLUEPRINT--AGENT-DISPATCHER
-    phase: 3
-    type: blueprint
-    status: stable
-    vault_id: default
-    tier: genesis
-    source_type: axiomatic
-    title: BLUEPRINT — Agent Dispatcher — implementation plan for T1/T2/T3 routing
-    scale_level: feature
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-14T01:35:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Implementation plan
-    attributes:
-      id: BLUEPRINT--AGENT-DISPATCHER
-      phase: 3
-      type: blueprint
-      status: stable
-      vault_id: default
-      tier: genesis
-      source_type: axiomatic
-      title: BLUEPRINT — Agent Dispatcher — implementation plan for T1/T2/T3 routing
-      scale_level: feature
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-14T01:35:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Implementation plan
-      attributes:
-        domain: blueprint
-      domain: blueprint
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: blueprint
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/agents/dispatch.ts
   domain: blueprint
   language: markdown
   is_test: false

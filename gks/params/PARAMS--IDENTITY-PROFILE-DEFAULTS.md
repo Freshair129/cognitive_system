@@ -3,86 +3,26 @@ id: PARAMS--IDENTITY-PROFILE-DEFAULTS
 phase: 2
 type: params
 status: stable
+vault_id: default
 tier: process
 source_type: axiomatic
-vault_id: default
 title: Identity Profile Defaults — baseline tunable values
-tags: &a1
+tags:
   - msp
   - identity
   - params
   - configuration
-crosslinks: &a2
+crosslinks:
   references:
     - CONCEPT--IDENTITY-LAYER
 created_at: 2026-05-14T20:30:00+07:00
-aliases: &a3
+aliases:
   - PARAMS
   - implementation_flow
   - Constants / business config
 cluster: implementation_flow
 role: Constants / business config
 attributes:
-  id: PARAMS--IDENTITY-PROFILE-DEFAULTS
-  phase: 2
-  type: params
-  status: stable
-  tier: process
-  source_type: axiomatic
-  vault_id: default
-  title: Identity Profile Defaults — baseline tunable values
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-14T20:30:00+07:00
-  aliases: *a3
-  cluster: implementation_flow
-  role: Constants / business config
-  attributes:
-    id: PARAMS--IDENTITY-PROFILE-DEFAULTS
-    phase: 2
-    type: params
-    status: stable
-    tier: process
-    source_type: axiomatic
-    vault_id: default
-    title: Identity Profile Defaults — baseline tunable values
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-14T20:30:00+07:00
-    aliases: *a3
-    cluster: implementation_flow
-    role: Constants / business config
-    attributes:
-      id: PARAMS--IDENTITY-PROFILE-DEFAULTS
-      phase: 2
-      type: params
-      status: stable
-      tier: process
-      source_type: axiomatic
-      vault_id: default
-      title: Identity Profile Defaults — baseline tunable values
-      tags: *a1
-      crosslinks: *a2
-      created_at: 2026-05-14T20:30:00+07:00
-      aliases: *a3
-      cluster: implementation_flow
-      role: Constants / business config
-      attributes:
-        domain: params
-      domain: params
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: params
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
   domain: params
   language: markdown
   is_test: false

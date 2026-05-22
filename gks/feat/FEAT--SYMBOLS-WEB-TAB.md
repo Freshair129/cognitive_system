@@ -3,106 +3,40 @@ id: FEAT--SYMBOLS-WEB-TAB
 phase: 2
 type: feat
 status: stable
+vault_id: default
 tier: process
 source_type: axiomatic
-vault_id: default
 title: Knowledge Browser Symbols tab — Cytoscape graph + community filter +
   click-through
-tags: &a1
+tags:
   - msp
   - symbol-graph
   - web-ui
   - knowledge-browser
   - cytoscape
   - feat
-crosslinks: &a2
+crosslinks:
   belongs_to: MOD--SYMBOLS
   implements:
     - ADR--SYMBOL-GRAPH-PERSISTENCE
   references:
     - FRAMEWORK--SYMBOL-GRAPH
     - FEAT--MSP-SYMBOL-MCP
-linked_symbols: &a3
-  - file: packages/msp/web/src/components/SymbolsTab.tsx
-  - file: packages/msp/web/src/components/SymbolList.tsx
-  - file: packages/msp/web/src/components/SymbolGraphView.tsx
-  - file: packages/msp/web/src/components/SymbolDetail.tsx
-  - file: packages/msp/web/src/api.ts
-  - file: packages/msp/src/index.ts
 created_at: 2026-05-09T16:54:00.000+07:00
-aliases: &a4
+aliases:
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
-  id: FEAT--SYMBOLS-WEB-TAB
-  phase: 2
-  type: feat
-  status: stable
-  tier: process
-  source_type: axiomatic
-  vault_id: default
-  title: Knowledge Browser Symbols tab — Cytoscape graph + community filter +
-    click-through
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-09T16:54:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Feature spec
-  attributes:
-    id: FEAT--SYMBOLS-WEB-TAB
-    phase: 2
-    type: feat
-    status: stable
-    tier: process
-    source_type: axiomatic
-    vault_id: default
-    title: Knowledge Browser Symbols tab — Cytoscape graph + community filter +
-      click-through
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-09T16:54:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Feature spec
-    attributes:
-      id: FEAT--SYMBOLS-WEB-TAB
-      phase: 2
-      type: feat
-      status: stable
-      tier: process
-      source_type: axiomatic
-      vault_id: default
-      title: Knowledge Browser Symbols tab — Cytoscape graph + community filter +
-        click-through
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-09T16:54:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Feature spec
-      attributes:
-        domain: symbols
-      domain: symbols
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: symbols
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/web/src/components/SymbolsTab.tsx
+    - file: packages/msp/web/src/components/SymbolList.tsx
+    - file: packages/msp/web/src/components/SymbolGraphView.tsx
+    - file: packages/msp/web/src/components/SymbolDetail.tsx
+    - file: packages/msp/web/src/api.ts
+    - file: packages/msp/src/index.ts
   domain: symbols
   language: markdown
   is_test: false

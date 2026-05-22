@@ -2,13 +2,12 @@
 id: BLUEPRINT--SYMBOL-GRAPH-CORE
 phase: 3
 type: blueprint
-scale_level: L2
 status: stable
+vault_id: default
 tier: process
 source_type: axiomatic
-vault_id: default
 title: BLUEPRINT — Symbol Graph core (parser + store + Leiden adapter)
-tags: &a1
+tags:
   - msp
   - symbol-graph
   - blueprint
@@ -17,7 +16,7 @@ tags: &a1
   - sqlite
   - jsonl
   - leiden
-crosslinks: &a2
+crosslinks:
   implements:
     - FEAT--MSP-GRAPH-CLI
     - FEAT--MSP-SYMBOL-MCP
@@ -27,88 +26,21 @@ crosslinks: &a2
     - CONCEPT--PARSER-CHOICE
     - ADR--SYMBOL-GRAPH-PERSISTENCE
     - ADR--LEIDEN-COMMUNITY-DETECTION
-linked_symbols: &a3
-  - file: packages/msp/src/symbols/types.ts
-  - file: packages/msp/src/symbols/parser/typescript.ts
-  - file: packages/msp/src/symbols/store/sqlite.ts
-  - file: packages/msp/src/symbols/store/jsonl.ts
-  - file: packages/msp/src/symbols/communities/leiden.ts
 created_at: 2026-05-09T17:00:00.000+07:00
-aliases: &a4
+aliases:
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  id: BLUEPRINT--SYMBOL-GRAPH-CORE
-  phase: 3
-  type: blueprint
   scale_level: L2
-  status: stable
-  tier: process
-  source_type: axiomatic
-  vault_id: default
-  title: BLUEPRINT — Symbol Graph core (parser + store + Leiden adapter)
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-09T17:00:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Implementation plan
-  attributes:
-    id: BLUEPRINT--SYMBOL-GRAPH-CORE
-    phase: 3
-    type: blueprint
-    scale_level: L2
-    status: stable
-    tier: process
-    source_type: axiomatic
-    vault_id: default
-    title: BLUEPRINT — Symbol Graph core (parser + store + Leiden adapter)
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-09T17:00:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Implementation plan
-    attributes:
-      id: BLUEPRINT--SYMBOL-GRAPH-CORE
-      phase: 3
-      type: blueprint
-      scale_level: L2
-      status: stable
-      tier: process
-      source_type: axiomatic
-      vault_id: default
-      title: BLUEPRINT — Symbol Graph core (parser + store + Leiden adapter)
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-09T17:00:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Implementation plan
-      attributes:
-        domain: blueprint
-      domain: blueprint
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: blueprint
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/symbols/types.ts
+    - file: packages/msp/src/symbols/parser/typescript.ts
+    - file: packages/msp/src/symbols/store/sqlite.ts
+    - file: packages/msp/src/symbols/store/jsonl.ts
+    - file: packages/msp/src/symbols/communities/leiden.ts
   domain: blueprint
   language: markdown
   is_test: false

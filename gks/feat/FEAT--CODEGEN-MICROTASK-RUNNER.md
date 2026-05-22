@@ -7,97 +7,32 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: msp:run-task — execute one T*.task.yaml end to end
-tags: &a1
+tags:
   - msp
   - codegen
   - runner
   - cli
   - user-facing
-crosslinks: &a2
+crosslinks:
   belongs_to: MOD--DEVELOPER
   implements:
     - ADR--CODEGEN-MICROTASK-RUNNER
   references:
     - CONCEPT--CODEGEN-MICROTASK-RUNNER
     - ADR--CODEGEN-RETRY-POLICY
-linked_symbols: &a3
-  - file: packages/msp/src/codegen/runner.ts
-  - file: packages/msp/src/codegen/post-process.ts
-  - file: packages/msp/src/codegen/forbidden-patterns.ts
-  - file: src/codegen/escalate.ts
 created_at: 2026-05-03T14:16:37.122+07:00
-aliases: &a4
+aliases:
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
-  id: FEAT--CODEGEN-MICROTASK-RUNNER
-  phase: 2
-  type: feat
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: msp:run-task — execute one T*.task.yaml end to end
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-03T14:16:37.122+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Feature spec
-  attributes:
-    id: FEAT--CODEGEN-MICROTASK-RUNNER
-    phase: 2
-    type: feat
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: msp:run-task — execute one T*.task.yaml end to end
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-03T14:16:37.122+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Feature spec
-    attributes:
-      id: FEAT--CODEGEN-MICROTASK-RUNNER
-      phase: 2
-      type: feat
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: msp:run-task — execute one T*.task.yaml end to end
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-03T14:16:37.122+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Feature spec
-      attributes:
-        domain: tooling
-      domain: tooling
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: tooling
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/codegen/runner.ts
+    - file: packages/msp/src/codegen/post-process.ts
+    - file: packages/msp/src/codegen/forbidden-patterns.ts
+    - file: src/codegen/escalate.ts
   domain: tooling
   language: markdown
   is_test: false

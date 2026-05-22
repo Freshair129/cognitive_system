@@ -4,7 +4,7 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: Feature Grouping via MOD-- Hierarchy and Domain Metadata
 tags:

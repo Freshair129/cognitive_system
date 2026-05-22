@@ -3,14 +3,21 @@ id: CONCEPT--BELIEF-REVISION
 phase: 1
 type: concept
 status: stable
-tier: genesis
+tier: process
 source_type: axiomatic
 vault_id: default
 title: Belief Revision — protocol for handling contradictions and state regressions
-aliases: [knowledge correction, belief downgrade]
+aliases:
+  - knowledge correction
+  - belief downgrade
 cluster: memory
 role: Strategic intent / PRD
-tags: [msp, memory, logic, correction, reliability]
+tags:
+  - msp
+  - memory
+  - logic
+  - correction
+  - reliability
 crosslinks:
   references:
     - CONCEPT--EPISTEMIC-STATES

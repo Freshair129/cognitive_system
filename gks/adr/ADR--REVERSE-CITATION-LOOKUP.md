@@ -3,93 +3,33 @@ id: ADR--REVERSE-CITATION-LOOKUP
 phase: 2
 type: adr
 status: stable
-created_at: 2026-05-13T12:00:00+07:00
 vault_id: GKS-CORE
-tier: genesis
+tier: process
 title: Bidirectional traceability via reverse citation lookup
-tags: &a1
+tags:
   - traceability
   - drift-detection
   - doc-to-code
   - lookup
-crosslinks: &a2
+crosslinks:
   references:
     - CONCEPT--MEMORY-STORE
     - FEAT--LOOKUP-BY-SYMBOL
   superseded_by: []
   resolves: []
-linked_symbols: &a3
-  - file: packages/gks/src/memory/gks.ts
-    fn: searchBySymbol
-  - file: packages/gks/src/memory/index.ts
-    fn: lookupBySymbol
-aliases: &a4
+created_at: 2026-05-13T12:00:00+07:00
+aliases:
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
-  id: ADR--REVERSE-CITATION-LOOKUP
-  phase: 2
-  type: adr
-  status: stable
-  created_at: 2026-05-13T12:00:00+07:00
-  vault_id: GKS-CORE
-  tier: genesis
-  title: Bidirectional traceability via reverse citation lookup
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  aliases: *a4
-  cluster: implementation_flow
-  role: Architecture decision record
-  attributes:
-    id: ADR--REVERSE-CITATION-LOOKUP
-    phase: 2
-    type: adr
-    status: stable
-    created_at: 2026-05-13T12:00:00+07:00
-    vault_id: GKS-CORE
-    tier: genesis
-    title: Bidirectional traceability via reverse citation lookup
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    aliases: *a4
-    cluster: implementation_flow
-    role: Architecture decision record
-    attributes:
-      id: ADR--REVERSE-CITATION-LOOKUP
-      phase: 2
-      type: adr
-      status: stable
-      created_at: 2026-05-13T12:00:00+07:00
-      vault_id: GKS-CORE
-      tier: genesis
-      title: Bidirectional traceability via reverse citation lookup
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      aliases: *a4
-      cluster: implementation_flow
-      role: Architecture decision record
-      attributes:
-        domain: adr
-      domain: adr
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: adr
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
+  linked_symbols:
+    - file: packages/gks/src/memory/gks.ts
+      fn: searchBySymbol
+    - file: packages/gks/src/memory/index.ts
+      fn: lookupBySymbol
   domain: adr
   language: markdown
   is_test: false

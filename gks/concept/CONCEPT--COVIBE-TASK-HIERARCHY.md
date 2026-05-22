@@ -4,11 +4,18 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: CONCEPT — CoVibe Task Hierarchy — Tree decomposition for 8K context
-tags: [covibe, architecture, tasks, context, scaling]
-aliases: [tree-decomposition, context-isolation]
+tags:
+  - covibe
+  - architecture
+  - tasks
+  - context
+  - scaling
+aliases:
+  - tree-decomposition
+  - context-isolation
 cluster: implementation_flow
 role: Strategic intent / PRD
 crosslinks:

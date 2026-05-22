@@ -7,13 +7,13 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: M8e — PROTO--AUTHORITY-ENFORCEMENT (sanity-check authority.yaml)
-tags: &a1
+tags:
   - msp
   - proto
   - authority
   - audit
   - m8e
-crosslinks: &a2
+crosslinks:
   references:
     - PROTO--AUTHORITY-ENFORCEMENT
     - CONCEPT--PROTO-AUTHORITY-ENFORCEMENT
@@ -21,93 +21,25 @@ crosslinks: &a2
     - FRAMEWORK--AUTHORITY-MATRIX
     - FEAT--PROTO-LOADER
     - AUDIT--PROTO-LOADER
-linked_symbols: &a3
-  - file: packages/msp/src/validator/proto/authority-enforcement.ts
-  - file: gks/proto/PROTO--AUTHORITY-ENFORCEMENT.md
-  - file: packages/msp/test/validator/proto/authority-enforcement.test.ts
-phase_override: &a4
-  skip_blueprint: true
-  reason: "Incremental PROTO rule plugged into the already-blueprinted loader
-    scaffold (BLUEPRINT--PROTO-LOADER). Doc-to-code chain:
-    CONCEPT--PROTO-AUTHORITY-ENFORCEMENT -> PROTO--AUTHORITY-ENFORCEMENT ->
-    predicate -> this audit; per-rule predicates do not each warrant a separate
-    phase-3 blueprint."
 created_at: 2026-05-05T18:12:00.000+07:00
-aliases: &a5
+aliases:
   - AUDIT
   - implementation_flow
   - Test results / quality report
 cluster: implementation_flow
 role: Test results / quality report
 attributes:
-  id: AUDIT--AUTHORITY-ENFORCEMENT-PROTO
-  phase: 6
-  type: audit
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: M8e — PROTO--AUTHORITY-ENFORCEMENT (sanity-check authority.yaml)
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  phase_override: *a4
-  created_at: 2026-05-05T18:12:00.000+07:00
-  aliases: *a5
-  cluster: implementation_flow
-  role: Test results / quality report
-  attributes:
-    id: AUDIT--AUTHORITY-ENFORCEMENT-PROTO
-    phase: 6
-    type: audit
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: M8e — PROTO--AUTHORITY-ENFORCEMENT (sanity-check authority.yaml)
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    phase_override: *a4
-    created_at: 2026-05-05T18:12:00.000+07:00
-    aliases: *a5
-    cluster: implementation_flow
-    role: Test results / quality report
-    attributes:
-      id: AUDIT--AUTHORITY-ENFORCEMENT-PROTO
-      phase: 6
-      type: audit
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: M8e — PROTO--AUTHORITY-ENFORCEMENT (sanity-check authority.yaml)
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      phase_override: *a4
-      created_at: 2026-05-05T18:12:00.000+07:00
-      aliases: *a5
-      cluster: implementation_flow
-      role: Test results / quality report
-      attributes:
-        domain: audit
-      domain: audit
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: audit
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/validator/proto/authority-enforcement.ts
+    - file: gks/proto/PROTO--AUTHORITY-ENFORCEMENT.md
+    - file: packages/msp/test/validator/proto/authority-enforcement.test.ts
+  phase_override:
+    skip_blueprint: true
+    reason: "Incremental PROTO rule plugged into the already-blueprinted loader
+      scaffold (BLUEPRINT--PROTO-LOADER). Doc-to-code chain:
+      CONCEPT--PROTO-AUTHORITY-ENFORCEMENT -> PROTO--AUTHORITY-ENFORCEMENT ->
+      predicate -> this audit; per-rule predicates do not each warrant a
+      separate phase-3 blueprint."
   domain: audit
   language: markdown
   is_test: false

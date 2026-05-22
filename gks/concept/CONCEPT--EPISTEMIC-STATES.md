@@ -3,14 +3,21 @@ id: CONCEPT--EPISTEMIC-STATES
 phase: 1
 type: concept
 status: stable
-tier: genesis
+tier: process
 source_type: axiomatic
 vault_id: default
 title: Epistemic States — tracking confidence as first-class data
-aliases: [belief confidence, knowledge truthiness]
+aliases:
+  - belief confidence
+  - knowledge truthiness
 cluster: memory
 role: Strategic intent / PRD
-tags: [msp, memory, epistemology, confidence, truth]
+tags:
+  - msp
+  - memory
+  - epistemology
+  - confidence
+  - truth
 crosslinks:
   references:
     - CONCEPT--TIERED-MEMORY-DISTILLATION

@@ -4,10 +4,10 @@ phase: 2
 type: adr
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: ADR — Genesis Block on-disk storage layout for P3.2 MVP
-tags: &a1
+tags:
   - msp
   - gks
   - graph
@@ -16,7 +16,7 @@ tags: &a1
   - rust
   - storage
   - decision
-crosslinks: &a2
+crosslinks:
   references:
     - BLUEPRINT--GENESIS-GRAPH-INTEGRATION
     - ADR--GENESIS-GRAPH-AS-GKS-BACKEND
@@ -24,27 +24,13 @@ crosslinks: &a2
     - PROTOCOL--GENESIS-GRAPH-FFI
     - CONCEPT--GENESIS-GRAPH-BACKEND
 created_at: 2026-05-18T19:50:00.000+07:00
-aliases: &a3
+aliases:
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
-  id: ADR--GENESIS-BLOCK-STORAGE-LAYOUT
-  phase: 2
-  type: adr
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: ADR — Genesis Block on-disk storage layout for P3.2 MVP
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-18T19:50:00.000+07:00
-  aliases: *a3
-  cluster: implementation_flow
-  role: Architecture decision record
   domain: adr
   language: markdown
   is_test: false

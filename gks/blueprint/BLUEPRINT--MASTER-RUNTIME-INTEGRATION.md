@@ -3,11 +3,11 @@ id: BLUEPRINT--MASTER-RUNTIME-INTEGRATION
 phase: 3
 type: blueprint
 status: stable
+vault_id: default
 tier: process
 source_type: axiomatic
-vault_id: default
 title: BLUEPRINT — Master ↔ Genesis runtime wiring (Phase F1)
-tags: &a1
+tags:
   - msp
   - master
   - promotion
@@ -15,7 +15,7 @@ tags: &a1
   - registry
   - blueprint
   - phase-f1
-crosslinks: &a2
+crosslinks:
   references:
     - CONCEPT--PROMOTED-BLOCK-REGISTRY
     - CONCEPT--MASTER-PROMOTION
@@ -25,89 +25,24 @@ crosslinks: &a2
     - SPEC--GENESIS-BLOCK-MANIFEST
     - ADR--MASTER-PROMOTION-DOC-TO-CODE
     - ADR--HUMAN-REVIEW-GATES
-linked_symbols: &a3
-  - file: packages/msp/src/master/registry.ts
-  - file: packages/msp/src/master/promote-apply.ts
-  - file: packages/msp/src/master/cli.ts
-  - file: packages/msp/src/genesis/executor.ts
-  - file: packages/msp/src/genesis/types.ts
-  - file: packages/msp/test/master/registry.test.ts
-  - file: packages/msp/test/master/promote-apply.test.ts
-  - file: packages/msp/test/genesis/executor.test.ts
-  - file: .gitignore
 created_at: 2026-05-14T05:05:00.000+07:00
-aliases: &a4
+aliases:
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  id: BLUEPRINT--MASTER-RUNTIME-INTEGRATION
-  phase: 3
-  type: blueprint
-  status: stable
-  tier: process
-  source_type: axiomatic
-  vault_id: default
-  title: BLUEPRINT — Master ↔ Genesis runtime wiring (Phase F1)
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-14T05:05:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Implementation plan
-  attributes:
-    id: BLUEPRINT--MASTER-RUNTIME-INTEGRATION
-    phase: 3
-    type: blueprint
-    status: stable
-    tier: process
-    source_type: axiomatic
-    vault_id: default
-    title: BLUEPRINT — Master ↔ Genesis runtime wiring (Phase F1)
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-14T05:05:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Implementation plan
-    attributes:
-      id: BLUEPRINT--MASTER-RUNTIME-INTEGRATION
-      phase: 3
-      type: blueprint
-      status: stable
-      tier: process
-      source_type: axiomatic
-      vault_id: default
-      title: BLUEPRINT — Master ↔ Genesis runtime wiring (Phase F1)
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-14T05:05:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Implementation plan
-      attributes:
-        domain: blueprint
-      domain: blueprint
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: blueprint
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/master/registry.ts
+    - file: packages/msp/src/master/promote-apply.ts
+    - file: packages/msp/src/master/cli.ts
+    - file: packages/msp/src/genesis/executor.ts
+    - file: packages/msp/src/genesis/types.ts
+    - file: packages/msp/test/master/registry.test.ts
+    - file: packages/msp/test/master/promote-apply.test.ts
+    - file: packages/msp/test/genesis/executor.test.ts
+    - file: .gitignore
   domain: blueprint
   language: markdown
   is_test: false

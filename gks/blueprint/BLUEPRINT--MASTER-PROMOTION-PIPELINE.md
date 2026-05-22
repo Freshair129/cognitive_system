@@ -3,109 +3,43 @@ id: BLUEPRINT--MASTER-PROMOTION-PIPELINE
 phase: 3
 type: blueprint
 status: stable
+vault_id: default
 tier: process
 source_type: axiomatic
-vault_id: default
 title: BLUEPRINT — Master Block promotion pipeline (scan → analyze → propose,
   never auto-write)
-tags: &a1
+tags:
   - msp
   - master
   - promotion
   - genesis-block
   - blueprint
   - phase-e4
-crosslinks: &a2
+crosslinks:
   references:
     - CONCEPT--MASTER-PROMOTION
     - SPEC--GENESIS-BLOCK-MANIFEST
     - ADR--MASTER-PROMOTION-DOC-TO-CODE
     - ADR--HUMAN-REVIEW-GATES
-linked_symbols: &a3
-  - file: packages/msp/src/master/dimensions.ts
-  - file: packages/msp/src/master/scanner.ts
-  - file: packages/msp/src/master/promote.ts
-  - file: packages/msp/src/master/cli.ts
-  - file: packages/msp/test/master/dimensions.test.ts
-  - file: packages/msp/test/master/scanner.test.ts
-  - file: packages/msp/test/master/promote.test.ts
-  - file: packages/msp/test/master/cli.test.ts
-  - file: packages/msp/package.json
-  - file: gks/inbound/
 created_at: 2026-05-13T10:05:00.000+07:00
-aliases: &a4
+aliases:
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  id: BLUEPRINT--MASTER-PROMOTION-PIPELINE
-  phase: 3
-  type: blueprint
-  status: stable
-  tier: process
-  source_type: axiomatic
-  vault_id: default
-  title: BLUEPRINT — Master Block promotion pipeline (scan → analyze → propose,
-    never auto-write)
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-13T10:05:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Implementation plan
-  attributes:
-    id: BLUEPRINT--MASTER-PROMOTION-PIPELINE
-    phase: 3
-    type: blueprint
-    status: stable
-    tier: process
-    source_type: axiomatic
-    vault_id: default
-    title: BLUEPRINT — Master Block promotion pipeline (scan → analyze → propose,
-      never auto-write)
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-13T10:05:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Implementation plan
-    attributes:
-      id: BLUEPRINT--MASTER-PROMOTION-PIPELINE
-      phase: 3
-      type: blueprint
-      status: stable
-      tier: process
-      source_type: axiomatic
-      vault_id: default
-      title: BLUEPRINT — Master Block promotion pipeline (scan → analyze → propose,
-        never auto-write)
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-13T10:05:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Implementation plan
-      attributes:
-        domain: blueprint
-      domain: blueprint
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: blueprint
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/master/dimensions.ts
+    - file: packages/msp/src/master/scanner.ts
+    - file: packages/msp/src/master/promote.ts
+    - file: packages/msp/src/master/cli.ts
+    - file: packages/msp/test/master/dimensions.test.ts
+    - file: packages/msp/test/master/scanner.test.ts
+    - file: packages/msp/test/master/promote.test.ts
+    - file: packages/msp/test/master/cli.test.ts
+    - file: packages/msp/package.json
+    - file: gks/inbound/
   domain: blueprint
   language: markdown
   is_test: false

@@ -3,12 +3,12 @@ id: FEAT--SYMBOLS-FRAMEWORK-AWARENESS
 phase: 2
 type: feat
 status: superseded
+vault_id: default
 tier: process
 source_type: axiomatic
-vault_id: default
 title: Framework-aware symbol indexing — recognizing API routes, ORM models, and
   MCP tools
-tags: &a1
+tags:
   - msp
   - symbol-graph
   - framework
@@ -19,7 +19,7 @@ tags: &a1
   - orm
   - route
   - mcp
-crosslinks: &a2
+crosslinks:
   belongs_to: MOD--SYMBOLS
   implements:
     - ADR--SYMBOL-GRAPH-PERSISTENCE
@@ -32,85 +32,17 @@ crosslinks: &a2
     - ADR--SYMBOLS-FRAMEWORK-AWARENESS
     - ALGO--SYMBOLS-FRAMEWORK-RECOGNITION
     - PROTO--SYMBOLS-FRAMEWORK-INVARIANTS
-linked_symbols: &a3
-  - file: packages/msp/src/symbols/parser/framework.ts
-  - file: packages/msp/src/symbols/parser/orm.ts
 created_at: 2026-05-12T04:48:00.000+07:00
-aliases: &a4
+aliases:
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
-  id: FEAT--SYMBOLS-FRAMEWORK-AWARENESS
-  phase: 2
-  type: feat
-  status: superseded
-  tier: process
-  source_type: axiomatic
-  vault_id: default
-  title: Framework-aware symbol indexing — recognizing API routes, ORM models, and
-    MCP tools
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-12T04:48:00.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Feature spec
-  attributes:
-    id: FEAT--SYMBOLS-FRAMEWORK-AWARENESS
-    phase: 2
-    type: feat
-    status: superseded
-    tier: process
-    source_type: axiomatic
-    vault_id: default
-    title: Framework-aware symbol indexing — recognizing API routes, ORM models, and
-      MCP tools
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-12T04:48:00.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Feature spec
-    attributes:
-      id: FEAT--SYMBOLS-FRAMEWORK-AWARENESS
-      phase: 2
-      type: feat
-      status: superseded
-      tier: process
-      source_type: axiomatic
-      vault_id: default
-      title: Framework-aware symbol indexing — recognizing API routes, ORM models, and
-        MCP tools
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-12T04:48:00.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Feature spec
-      attributes:
-        domain: symbols
-      domain: symbols
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: symbols
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/symbols/parser/framework.ts
+    - file: packages/msp/src/symbols/parser/orm.ts
   domain: symbols
   language: markdown
   is_test: false

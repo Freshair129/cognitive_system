@@ -3,14 +3,22 @@ id: CONCEPT--IDENTITY-EVOLUTION
 phase: 1
 type: concept
 status: stable
-tier: genesis
+tier: process
 source_type: axiomatic
 vault_id: default
-title: Identity Evolution — the feedback loop between distilled beliefs and agent persona
-aliases: [soul evolution, persona feedback loop]
+title: Identity Evolution — the feedback loop between distilled beliefs and
+  agent persona
+aliases:
+  - soul evolution
+  - persona feedback loop
 cluster: memory
 role: Strategic intent / PRD
-tags: [msp, memory, identity, persona, evolution]
+tags:
+  - msp
+  - memory
+  - identity
+  - persona
+  - evolution
 crosslinks:
   references:
     - CONCEPT--TIERED-MEMORY-DISTILLATION

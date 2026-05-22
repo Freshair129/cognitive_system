@@ -4,48 +4,15 @@ phase: 0
 type: genesis
 status: stable
 vault_id: default
-tier: genesis
+tier: master
 source_type: axiomatic
 title: Identity Engine — passport-bound agent identity resolution
-tags: &a1
+tags:
   - msp
   - knowledge-block
   - identity
   - manifest
-manifest_version: 1.0.0
-members: &a2
-  core:
-    cognitive:
-      - COGNITIVE--EGO-DEATH-PASSPORT
-    algo:
-      - ALGO--IDENTITY-RESOLUTION
-    runbook:
-      - RUNBOOK--IDENTITY-MIGRATION
-    concept:
-      - CONCEPT--IDENTITY-LAYER
-    params:
-      - PARAMS--IDENTITY-PROFILE-DEFAULTS
-  optional:
-    guard:
-      - GUARD--IDENTITY-SCHEMA
-      - GUARD--PASSPORT-NONNULL
-    protocol:
-      - PROTOCOL--IDENTITY-API
-    stack:
-      - STACK--MSP-NODE-RUNTIME
-    safety:
-      - SAFETY--PII-REDACTION
-    mod:
-      - MOD--IDENTITY
-daci: &a3
-  driver: MOD--IDENTITY
-  approver:
-    - PERSONA--T3-ARCHITECT
-  contributor:
-    - PERSONA--T2-IMPLEMENTER
-  informed:
-    - ENTITY--MSP-USERS
-crosslinks: &a4
+crosslinks:
   references:
     - SPEC--GENESIS-BLOCK-MANIFEST
     - MOD--IDENTITY
@@ -60,84 +27,46 @@ crosslinks: &a4
     - STACK--MSP-NODE-RUNTIME
     - SAFETY--PII-REDACTION
 created_at: 2026-05-14T21:10:00+07:00
-aliases: &a5
+aliases:
   - GENESIS
   - implementation_flow
   - Block Manifest (v2.3+)
 cluster: implementation_flow
 role: Block Manifest (v2.3+)
 attributes:
-  id: GENESIS--IDENTITY-ENGINE
-  phase: 0
-  type: genesis
-  status: stable
-  vault_id: default
-  tier: genesis
-  source_type: axiomatic
-  title: Identity Engine — passport-bound agent identity resolution
-  tags: *a1
   manifest_version: 1.0.0
-  members: *a2
-  daci: *a3
-  crosslinks: *a4
-  created_at: 2026-05-14T21:10:00+07:00
-  aliases: *a5
-  cluster: implementation_flow
-  role: Block Manifest (v2.3+)
-  attributes:
-    id: GENESIS--IDENTITY-ENGINE
-    phase: 0
-    type: genesis
-    status: stable
-    vault_id: default
-    tier: genesis
-    source_type: axiomatic
-    title: Identity Engine — passport-bound agent identity resolution
-    tags: *a1
-    manifest_version: 1.0.0
-    members: *a2
-    daci: *a3
-    crosslinks: *a4
-    created_at: 2026-05-14T21:10:00+07:00
-    aliases: *a5
-    cluster: implementation_flow
-    role: Block Manifest (v2.3+)
-    attributes:
-      id: GENESIS--IDENTITY-ENGINE
-      phase: 0
-      type: genesis
-      status: stable
-      vault_id: default
-      tier: genesis
-      source_type: axiomatic
-      title: Identity Engine — passport-bound agent identity resolution
-      tags: *a1
-      manifest_version: 1.0.0
-      members: *a2
-      daci: *a3
-      crosslinks: *a4
-      created_at: 2026-05-14T21:10:00+07:00
-      aliases: *a5
-      cluster: implementation_flow
-      role: Block Manifest (v2.3+)
-      attributes:
-        domain: genesis
-      domain: genesis
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: genesis
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  members:
+    core:
+      cognitive:
+        - COGNITIVE--EGO-DEATH-PASSPORT
+      algo:
+        - ALGO--IDENTITY-RESOLUTION
+      runbook:
+        - RUNBOOK--IDENTITY-MIGRATION
+      concept:
+        - CONCEPT--IDENTITY-LAYER
+      params:
+        - PARAMS--IDENTITY-PROFILE-DEFAULTS
+    optional:
+      guard:
+        - GUARD--IDENTITY-SCHEMA
+        - GUARD--PASSPORT-NONNULL
+      protocol:
+        - PROTOCOL--IDENTITY-API
+      stack:
+        - STACK--MSP-NODE-RUNTIME
+      safety:
+        - SAFETY--PII-REDACTION
+      mod:
+        - MOD--IDENTITY
+  daci:
+    driver: MOD--IDENTITY
+    approver:
+      - PERSONA--T3-ARCHITECT
+    contributor:
+      - PERSONA--T2-IMPLEMENTER
+    informed:
+      - ENTITY--MSP-USERS
   domain: genesis
   language: markdown
   is_test: false
@@ -146,6 +75,9 @@ attributes:
   secret_type: high_entropy_string
   leak_risk: high
   encryption_level: none
+promoted_from: CONCEPT--IDENTITY-LAYER
+promoted_at: 2026-05-14T21:10:00.000+07:00
+promotion_adr: ADR--IDENTITY-STORAGE-SHAPE
 ---
 
 # GENESIS — Identity Engine

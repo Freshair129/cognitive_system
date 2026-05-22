@@ -3,14 +3,21 @@ id: ADR--DYNAMIC-COMPOUND-ID-K-SUFFIX
 phase: 2
 type: adr
 status: stable
-tier: genesis
+tier: process
 source_type: axiomatic
 vault_id: default
 title: Dynamic Compound ID Suffix with Phase-Layer K Numbering
-aliases: [ADR, implementation_flow, Architecture decision record]
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
-tags: [msp, architecture, schema, id]
+tags:
+  - msp
+  - architecture
+  - schema
+  - id
 crosslinks:
   references:
     - CONCEPT--CONFIG-AS-SSOT

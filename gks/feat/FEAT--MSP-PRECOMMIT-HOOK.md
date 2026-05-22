@@ -7,96 +7,30 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: pre-commit-validator.sh — bash hook that runs MSP validator on staged atoms
-tags: &a1
+tags:
   - msp
   - precommit
   - hook
   - user-facing
-crosslinks: &a2
+crosslinks:
   belongs_to: MOD--GOVERNANCE
   implements:
     - ADR--MSP-PRECOMMIT-HOOK
   references:
     - CONCEPT--MSP-PRECOMMIT-HOOK
     - FEAT--MSP-VALIDATOR
-linked_symbols: &a3
-  - file: examples/hooks/pre-commit-validator.sh
-  - file: examples/hooks/install.sh
-  - file: examples/hooks/README.md
 created_at: 2026-05-03T14:39:05.322+07:00
-aliases: &a4
+aliases:
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
-  id: FEAT--MSP-PRECOMMIT-HOOK
-  phase: 2
-  type: feat
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: pre-commit-validator.sh — bash hook that runs MSP validator on staged atoms
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-03T14:39:05.322+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Feature spec
-  attributes:
-    id: FEAT--MSP-PRECOMMIT-HOOK
-    phase: 2
-    type: feat
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: pre-commit-validator.sh — bash hook that runs MSP validator on staged atoms
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-03T14:39:05.322+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Feature spec
-    attributes:
-      id: FEAT--MSP-PRECOMMIT-HOOK
-      phase: 2
-      type: feat
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: pre-commit-validator.sh — bash hook that runs MSP validator on staged
-        atoms
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-03T14:39:05.322+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Feature spec
-      attributes:
-        domain: governance
-      domain: governance
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: governance
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: examples/hooks/pre-commit-validator.sh
+    - file: examples/hooks/install.sh
+    - file: examples/hooks/README.md
   domain: governance
   language: markdown
   is_test: false

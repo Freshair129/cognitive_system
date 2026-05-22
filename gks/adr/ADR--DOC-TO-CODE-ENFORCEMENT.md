@@ -3,17 +3,16 @@ id: ADR--DOC-TO-CODE-ENFORCEMENT
 phase: 2
 type: adr
 status: stable
-created_at: 2026-05-13T12:00:00+07:00
 vault_id: GKS-CORE
-tier: genesis
+tier: process
 title: Doc-to-code enforcement model (master-spec §6 → GKS primitives)
-tags: &a1
+tags:
   - workflow
   - enforcement
   - agent-rule
   - hotfix
   - msp-gatekeeper
-crosslinks: &a2
+crosslinks:
   references:
     - ADR--EXTENDED-TAXONOMY
     - ADR--FLAT-ATOM-LAYOUT
@@ -21,96 +20,35 @@ crosslinks: &a2
     - CONCEPT--MASTER-PROMOTION
   partially_superseded_by:
     - ADR--TASK-TRACKING-AT-ORCHESTRATOR
-linked_symbols: &a3
-  - file: packages/gks/src/memory/types.ts
-    fn: normaliseStatus
-  - file: packages/gks/src/memory/types.ts
-    fn: isApprovedStatus
-  - file: packages/gks/src/memory/verify-flow.ts
-    fn: verifyFlow
-  - file: packages/gks/src/memory/validate-links.ts
-    fn: validateLinks
-  - file: packages/gks/src/scaffold/new-feature.ts
-    fn: scaffoldNewFeature
-  - file: packages/gks/src/hotfix/store.ts
-  - file: packages/gks/src/hotfix/types.ts
-  - file: packages/gks/bin/gks.ts
-    fn: cmdVerifyFlow
-  - file: packages/gks/bin/gks.ts
-    fn: cmdValidate
-  - file: packages/gks/bin/gks.ts
-    fn: cmdNewFeature
-  - file: packages/gks/bin/gks.ts
-    fn: cmdHotfix
-aliases: &a4
+created_at: 2026-05-13T12:00:00+07:00
+aliases:
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
-  id: ADR--DOC-TO-CODE-ENFORCEMENT
-  phase: 2
-  type: adr
-  status: stable
-  created_at: 2026-05-13T12:00:00+07:00
-  vault_id: GKS-CORE
-  tier: genesis
-  title: Doc-to-code enforcement model (master-spec §6 → GKS primitives)
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  aliases: *a4
-  cluster: implementation_flow
-  role: Architecture decision record
-  attributes:
-    id: ADR--DOC-TO-CODE-ENFORCEMENT
-    phase: 2
-    type: adr
-    status: stable
-    created_at: 2026-05-13T12:00:00+07:00
-    vault_id: GKS-CORE
-    tier: genesis
-    title: Doc-to-code enforcement model (master-spec §6 → GKS primitives)
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    aliases: *a4
-    cluster: implementation_flow
-    role: Architecture decision record
-    attributes:
-      id: ADR--DOC-TO-CODE-ENFORCEMENT
-      phase: 2
-      type: adr
-      status: stable
-      created_at: 2026-05-13T12:00:00+07:00
-      vault_id: GKS-CORE
-      tier: genesis
-      title: Doc-to-code enforcement model (master-spec §6 → GKS primitives)
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      aliases: *a4
-      cluster: implementation_flow
-      role: Architecture decision record
-      attributes:
-        domain: adr
-      domain: adr
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: adr
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/gks/src/memory/types.ts
+      fn: normaliseStatus
+    - file: packages/gks/src/memory/types.ts
+      fn: isApprovedStatus
+    - file: packages/gks/src/memory/verify-flow.ts
+      fn: verifyFlow
+    - file: packages/gks/src/memory/validate-links.ts
+      fn: validateLinks
+    - file: packages/gks/src/scaffold/new-feature.ts
+      fn: scaffoldNewFeature
+    - file: packages/gks/src/hotfix/store.ts
+    - file: packages/gks/src/hotfix/types.ts
+    - file: packages/gks/bin/gks.ts
+      fn: cmdVerifyFlow
+    - file: packages/gks/bin/gks.ts
+      fn: cmdValidate
+    - file: packages/gks/bin/gks.ts
+      fn: cmdNewFeature
+    - file: packages/gks/bin/gks.ts
+      fn: cmdHotfix
   domain: adr
   language: markdown
   is_test: false

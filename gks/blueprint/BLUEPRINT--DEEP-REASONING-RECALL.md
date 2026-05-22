@@ -3,46 +3,31 @@ id: BLUEPRINT--DEEP-REASONING-RECALL
 phase: 3
 type: blueprint
 status: stable
+vault_id: default
 tier: process
 source_type: axiomatic
-vault_id: default
 title: BLUEPRINT — Deep Reasoning via Genesis Graph integration
-aliases: &a1
-  - BLUEPRINT
-linked_symbols: &a2
-  - file: packages/msp/src/orchestrator/retrieval/sources/graph.ts
-  - file: packages/msp/src/orchestrator/retrieval/index.ts
-  - file: packages/msp/src/orchestrator/retrieval/types.ts
-tags: &a3
+tags:
   - msp
   - ucf
   - graph
   - reasoning
   - blueprint
-crosslinks: &a4
+crosslinks:
   implements:
     - BLUEPRINT--GENESIS-GRAPH-INTEGRATION
   references:
     - CONCEPT--GENESIS-GRAPH-BACKEND
 created_at: 2026-05-17T21:00:00+07:00
+aliases:
+  - BLUEPRINT
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  id: BLUEPRINT--DEEP-REASONING-RECALL
-  phase: 3
-  type: blueprint
-  status: stable
-  tier: process
-  source_type: axiomatic
-  vault_id: default
-  title: BLUEPRINT — Deep Reasoning via Genesis Graph integration
-  aliases: *a1
-  linked_symbols: *a2
-  tags: *a3
-  crosslinks: *a4
-  created_at: 2026-05-17T21:00:00+07:00
-  cluster: implementation_flow
-  role: Implementation plan
+  linked_symbols:
+    - file: packages/msp/src/orchestrator/retrieval/sources/graph.ts
+    - file: packages/msp/src/orchestrator/retrieval/index.ts
+    - file: packages/msp/src/orchestrator/retrieval/types.ts
   domain: blueprint
   language: markdown
   is_test: false

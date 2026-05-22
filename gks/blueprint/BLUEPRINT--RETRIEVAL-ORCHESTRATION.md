@@ -2,108 +2,40 @@
 id: BLUEPRINT--RETRIEVAL-ORCHESTRATION
 phase: 3
 type: blueprint
-scale_level: L2
 status: stable
 vault_id: default
 tier: process
 source_type: axiomatic
 title: BLUEPRINT — retrieval orchestration implementation plan
-tags: &a1
+tags:
   - msp
   - retrieval
   - blueprint
   - implementation
   - m7c
-crosslinks: &a2
+crosslinks:
   implements:
     - FEAT--RETRIEVAL-ORCHESTRATION
   references:
     - ADR--RETRIEVAL-RRF-FUSION
     - CONCEPT--RETRIEVAL-ORCHESTRATION
-linked_symbols: &a3
-  - file: packages/msp/src/orchestrator/retrieval/index.ts
-  - file: packages/msp/src/orchestrator/retrieval/types.ts
-  - file: packages/msp/src/orchestrator/retrieval/fusion.ts
-  - file: packages/msp/src/orchestrator/retrieval/sources/vector.ts
-  - file: packages/msp/src/orchestrator/retrieval/sources/obsidian.ts
-  - file: packages/msp/src/orchestrator/retrieval/sources/episodic.ts
-  - file: packages/msp/src/orchestrator/retrieval/sources/backlinks.ts
 created_at: 2026-05-05T15:56:30.000+07:00
-aliases: &a4
+aliases:
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  id: BLUEPRINT--RETRIEVAL-ORCHESTRATION
-  phase: 3
-  type: blueprint
   scale_level: L2
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: BLUEPRINT — retrieval orchestration implementation plan
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-05T15:56:30.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Implementation plan
-  attributes:
-    id: BLUEPRINT--RETRIEVAL-ORCHESTRATION
-    phase: 3
-    type: blueprint
-    scale_level: L2
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: BLUEPRINT — retrieval orchestration implementation plan
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-05T15:56:30.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Implementation plan
-    attributes:
-      id: BLUEPRINT--RETRIEVAL-ORCHESTRATION
-      phase: 3
-      type: blueprint
-      scale_level: L2
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: BLUEPRINT — retrieval orchestration implementation plan
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-05T15:56:30.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Implementation plan
-      attributes:
-        domain: blueprint
-      domain: blueprint
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: aws_secret
-      leak_risk: high
-      encryption_level: none
-    domain: blueprint
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: aws_secret
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/orchestrator/retrieval/index.ts
+    - file: packages/msp/src/orchestrator/retrieval/types.ts
+    - file: packages/msp/src/orchestrator/retrieval/fusion.ts
+    - file: packages/msp/src/orchestrator/retrieval/sources/vector.ts
+    - file: packages/msp/src/orchestrator/retrieval/sources/obsidian.ts
+    - file: packages/msp/src/orchestrator/retrieval/sources/episodic.ts
+    - file: packages/msp/src/orchestrator/retrieval/sources/backlinks.ts
   domain: blueprint
   language: markdown
   is_test: false

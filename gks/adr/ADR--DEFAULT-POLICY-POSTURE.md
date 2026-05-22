@@ -3,93 +3,30 @@ id: ADR--DEFAULT-POLICY-POSTURE
 phase: 2
 type: adr
 status: stable
-tier: genesis
-source_type: axiomatic
 vault_id: default
+tier: process
+source_type: axiomatic
 title: Default policy posture — default-permit + shadow log, tighten per-endpoint
-tags: &a1
+tags:
   - msp
   - ucf
   - adr
   - abac
   - policy
   - rollout
-crosslinks: &a2
+crosslinks:
   references:
     - CONCEPT--ABAC-POLICY-ENGINE
     - ADR--POLICY-AS-DATA-NOT-CODE
     - FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK
 created_at: 2026-05-14T18:37:54.914+07:00
-aliases: &a3
+aliases:
   - ADR
   - implementation_flow
   - Architecture decision record
 cluster: implementation_flow
 role: Architecture decision record
 attributes:
-  id: ADR--DEFAULT-POLICY-POSTURE
-  phase: 2
-  type: adr
-  status: stable
-  tier: process
-  source_type: axiomatic
-  vault_id: default
-  title: Default policy posture — default-permit + shadow log, tighten per-endpoint
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-14T18:37:54.914+07:00
-  aliases: *a3
-  cluster: implementation_flow
-  role: Architecture decision record
-  attributes:
-    id: ADR--DEFAULT-POLICY-POSTURE
-    phase: 2
-    type: adr
-    status: stable
-    tier: process
-    source_type: axiomatic
-    vault_id: default
-    title: Default policy posture — default-permit + shadow log, tighten per-endpoint
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-14T18:37:54.914+07:00
-    aliases: *a3
-    cluster: implementation_flow
-    role: Architecture decision record
-    attributes:
-      id: ADR--DEFAULT-POLICY-POSTURE
-      phase: 2
-      type: adr
-      status: stable
-      tier: process
-      source_type: axiomatic
-      vault_id: default
-      title: Default policy posture — default-permit + shadow log, tighten
-        per-endpoint
-      tags: *a1
-      crosslinks: *a2
-      created_at: 2026-05-14T18:37:54.914+07:00
-      aliases: *a3
-      cluster: implementation_flow
-      role: Architecture decision record
-      attributes:
-        domain: adr
-      domain: adr
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: adr
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
   domain: adr
   language: markdown
   is_test: false

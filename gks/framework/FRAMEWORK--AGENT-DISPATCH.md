@@ -4,10 +4,10 @@ phase: 0
 type: framework
 status: stable
 vault_id: default
-tier: genesis
+tier: master
 source_type: axiomatic
 title: FRAMEWORK — Agent Dispatch — three-tier agent runtime (T1/T2/T3) for MSP
-tags: &a1
+tags:
   - msp
   - framework
   - agents
@@ -15,7 +15,7 @@ tags: &a1
   - t1
   - t2
   - t3
-crosslinks: &a2
+crosslinks:
   references:
     - FRAMEWORK--MSP-ARCHITECTURE-V2
     - CONCEPT--AGENT-AGNOSTIC
@@ -23,73 +23,13 @@ crosslinks: &a2
     - ADR--AGENT-TIER-COST-POLICY
     - BLUEPRINT--AGENT-DISPATCHER
 created_at: 2026-05-14T03:05:00.000+07:00
-aliases: &a3
+aliases:
   - FRAMEWORK
   - implementation_flow
   - Governance / architectural framework
 cluster: implementation_flow
 role: Governance / architectural framework
 attributes:
-  id: FRAMEWORK--AGENT-DISPATCH
-  phase: 0
-  type: framework
-  status: stable
-  vault_id: default
-  tier: genesis
-  source_type: axiomatic
-  title: FRAMEWORK — Agent Dispatch — three-tier agent runtime (T1/T2/T3) for MSP
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-14T03:05:00.000+07:00
-  aliases: *a3
-  cluster: implementation_flow
-  role: Governance / architectural framework
-  attributes:
-    id: FRAMEWORK--AGENT-DISPATCH
-    phase: 0
-    type: framework
-    status: stable
-    vault_id: default
-    tier: genesis
-    source_type: axiomatic
-    title: FRAMEWORK — Agent Dispatch — three-tier agent runtime (T1/T2/T3) for MSP
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-14T03:05:00.000+07:00
-    aliases: *a3
-    cluster: implementation_flow
-    role: Governance / architectural framework
-    attributes:
-      id: FRAMEWORK--AGENT-DISPATCH
-      phase: 0
-      type: framework
-      status: stable
-      vault_id: default
-      tier: genesis
-      source_type: axiomatic
-      title: FRAMEWORK — Agent Dispatch — three-tier agent runtime (T1/T2/T3) for MSP
-      tags: *a1
-      crosslinks: *a2
-      created_at: 2026-05-14T03:05:00.000+07:00
-      aliases: *a3
-      cluster: implementation_flow
-      role: Governance / architectural framework
-      attributes:
-        domain: framework
-      domain: framework
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: framework
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
   domain: framework
   language: markdown
   is_test: false
@@ -97,6 +37,9 @@ attributes:
   has_secret: false
   leak_risk: low
   encryption_level: none
+promoted_from: CONCEPT--KNOWLEDGE-LAYERS-V2
+promoted_at: 2026-05-13T12:21:49+07:00
+promotion_adr: ADR--TAXONOMY-V2-3-MIGRATION
 ---
 
 # FRAMEWORK — Agent Dispatch

@@ -7,93 +7,30 @@ vault_id: default
 tier: process
 source_type: axiomatic
 title: pre-push-verify.sh — verify-flow per touched FEAT before push
-tags: &a1
+tags:
   - msp
   - prepush
   - hook
   - user-facing
-crosslinks: &a2
+crosslinks:
   belongs_to: MOD--GOVERNANCE
   implements:
     - ADR--MSP-PREPUSH-HOOK
   references:
     - CONCEPT--MSP-PREPUSH-HOOK
     - FEAT--MSP-PRECOMMIT-HOOK
-linked_symbols: &a3
-  - file: examples/hooks/pre-push-verify.sh
-  - file: examples/hooks/install.sh
-  - file: examples/hooks/README.md
 created_at: 2026-05-03T17:39:28.605+07:00
-aliases: &a4
+aliases:
   - FEAT
   - implementation_flow
   - Feature spec
 cluster: implementation_flow
 role: Feature spec
 attributes:
-  id: FEAT--MSP-PREPUSH-HOOK
-  phase: 2
-  type: feat
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: pre-push-verify.sh — verify-flow per touched FEAT before push
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-03T17:39:28.605+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Feature spec
-  attributes:
-    id: FEAT--MSP-PREPUSH-HOOK
-    phase: 2
-    type: feat
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: pre-push-verify.sh — verify-flow per touched FEAT before push
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-03T17:39:28.605+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Feature spec
-    attributes:
-      id: FEAT--MSP-PREPUSH-HOOK
-      phase: 2
-      type: feat
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: pre-push-verify.sh — verify-flow per touched FEAT before push
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-03T17:39:28.605+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Feature spec
-      attributes:
-        domain: governance
-      domain: governance
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: false
-      leak_risk: low
-      encryption_level: none
-    domain: governance
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: false
-    leak_risk: low
-    encryption_level: none
+  linked_symbols:
+    - file: examples/hooks/pre-push-verify.sh
+    - file: examples/hooks/install.sh
+    - file: examples/hooks/README.md
   domain: governance
   language: markdown
   is_test: false

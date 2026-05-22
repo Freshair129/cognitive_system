@@ -3,20 +3,23 @@ id: CONCEPT--SEMANTIC-CONTRADICTION-JUDGE
 phase: 1
 type: concept
 status: stable
-tier: genesis
+tier: process
 source_type: axiomatic
 vault_id: default
-title: "Semantic Contradiction Judge — leveraging T3 reasoning to catch logic drift"
+title: Semantic Contradiction Judge — leveraging T3 reasoning to catch logic drift
 tags:
   - msp
   - validator
   - contradiction
   - judge
   - governance
-crosslinks: {"references":["ADR--CONTRADICTION-DETECTION-STACK","CONCEPT--ATOM-CONTRADICTION-DETECTION"]}
+crosslinks:
+  references:
+    - ADR--CONTRADICTION-DETECTION-STACK
+    - CONCEPT--ATOM-CONTRADICTION-DETECTION
 created_at: 2026-05-18T10:45:00+07:00
 cluster: implementation_flow
-role: "Strategic intent / PRD"
+role: Strategic intent / PRD
 ---
 
 # CONCEPT — Semantic Contradiction Judge

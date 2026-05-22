@@ -3,17 +3,17 @@ id: CONCEPT--TAXONOMY-V2-3
 phase: 1
 type: concept
 status: stable
-tier: genesis
-source_type: axiomatic
 vault_id: default
+tier: process
+source_type: axiomatic
 title: Taxonomy v2.3 — knowledge type prefixes for the Genesis Block era
-tags: &a1
+tags:
   - msp
   - taxonomy
   - knowledge
   - genesis-block
   - foundation
-crosslinks: &a2
+crosslinks:
   references:
     - CONCEPT--KNOWLEDGE-LAYERS-V2
     - CONCEPT--ATOMIC-WRITE-CONTRACT
@@ -21,75 +21,13 @@ crosslinks: &a2
     - ADR--TAXONOMY-V2-3-MIGRATION
     - SPEC--GENESIS-BLOCK-MANIFEST
 created_at: 2026-05-13T12:21:49+07:00
-aliases: &a3
+aliases:
   - CONCEPT
   - implementation_flow
   - Strategic intent / PRD
 cluster: implementation_flow
 role: Strategic intent / PRD
 attributes:
-  id: CONCEPT--TAXONOMY-V2-3
-  phase: 1
-  type: concept
-  status: stable
-  tier: genesis
-  source_type: axiomatic
-  vault_id: default
-  title: Taxonomy v2.3 — knowledge type prefixes for the Genesis Block era
-  tags: *a1
-  crosslinks: *a2
-  created_at: 2026-05-13T12:21:49+07:00
-  aliases: *a3
-  cluster: implementation_flow
-  role: Strategic intent / PRD
-  attributes:
-    id: CONCEPT--TAXONOMY-V2-3
-    phase: 1
-    type: concept
-    status: stable
-    tier: genesis
-    source_type: axiomatic
-    vault_id: default
-    title: Taxonomy v2.3 — knowledge type prefixes for the Genesis Block era
-    tags: *a1
-    crosslinks: *a2
-    created_at: 2026-05-13T12:21:49+07:00
-    aliases: *a3
-    cluster: implementation_flow
-    role: Strategic intent / PRD
-    attributes:
-      id: CONCEPT--TAXONOMY-V2-3
-      phase: 1
-      type: concept
-      status: stable
-      tier: genesis
-      source_type: axiomatic
-      vault_id: default
-      title: Taxonomy v2.3 — knowledge type prefixes for the Genesis Block era
-      tags: *a1
-      crosslinks: *a2
-      created_at: 2026-05-13T12:21:49+07:00
-      aliases: *a3
-      cluster: implementation_flow
-      role: Strategic intent / PRD
-      attributes:
-        domain: concept
-      domain: concept
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: concept
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
   domain: concept
   language: markdown
   is_test: false

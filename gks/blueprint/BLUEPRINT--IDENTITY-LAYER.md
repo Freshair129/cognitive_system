@@ -2,112 +2,44 @@
 id: BLUEPRINT--IDENTITY-LAYER
 phase: 3
 type: blueprint
-scale_level: L2
 status: stable
 vault_id: default
 tier: process
 source_type: axiomatic
 title: BLUEPRINT — identity layer implementation plan
-tags: &a1
+tags:
   - msp
   - identity
   - blueprint
   - implementation
   - m7e
-crosslinks: &a2
+crosslinks:
   implements:
     - FEAT--IDENTITY-LAYER
   references:
     - ADR--IDENTITY-STORAGE-SHAPE
     - CONCEPT--IDENTITY-LAYER
-linked_symbols: &a3
-  - file: packages/msp/src/identity/index.ts
-  - file: packages/msp/src/identity/types.ts
-  - file: packages/msp/src/identity/store.ts
-  - file: packages/msp/src/identity/profile.ts
-  - file: packages/msp/src/identity/voice.ts
-  - file: packages/msp/src/identity/preferences.ts
-  - file: packages/msp/test/identity/store.test.ts
-  - file: packages/msp/test/identity/profile.test.ts
-  - file: packages/msp/test/identity/voice.test.ts
-  - file: packages/msp/test/identity/preferences.test.ts
-  - file: packages/msp/test/identity/index.test.ts
 created_at: 2026-05-05T00:26:30.000+07:00
-aliases: &a4
+aliases:
   - BLUEPRINT
   - implementation_flow
   - Implementation plan
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  id: BLUEPRINT--IDENTITY-LAYER
-  phase: 3
-  type: blueprint
   scale_level: L2
-  status: stable
-  vault_id: default
-  tier: process
-  source_type: axiomatic
-  title: BLUEPRINT — identity layer implementation plan
-  tags: *a1
-  crosslinks: *a2
-  linked_symbols: *a3
-  created_at: 2026-05-05T00:26:30.000+07:00
-  aliases: *a4
-  cluster: implementation_flow
-  role: Implementation plan
-  attributes:
-    id: BLUEPRINT--IDENTITY-LAYER
-    phase: 3
-    type: blueprint
-    scale_level: L2
-    status: stable
-    vault_id: default
-    tier: process
-    source_type: axiomatic
-    title: BLUEPRINT — identity layer implementation plan
-    tags: *a1
-    crosslinks: *a2
-    linked_symbols: *a3
-    created_at: 2026-05-05T00:26:30.000+07:00
-    aliases: *a4
-    cluster: implementation_flow
-    role: Implementation plan
-    attributes:
-      id: BLUEPRINT--IDENTITY-LAYER
-      phase: 3
-      type: blueprint
-      scale_level: L2
-      status: stable
-      vault_id: default
-      tier: process
-      source_type: axiomatic
-      title: BLUEPRINT — identity layer implementation plan
-      tags: *a1
-      crosslinks: *a2
-      linked_symbols: *a3
-      created_at: 2026-05-05T00:26:30.000+07:00
-      aliases: *a4
-      cluster: implementation_flow
-      role: Implementation plan
-      attributes:
-        domain: blueprint
-      domain: blueprint
-      language: markdown
-      is_test: false
-      is_entrypoint: false
-      has_secret: true
-      secret_type: high_entropy_string
-      leak_risk: high
-      encryption_level: none
-    domain: blueprint
-    language: markdown
-    is_test: false
-    is_entrypoint: false
-    has_secret: true
-    secret_type: high_entropy_string
-    leak_risk: high
-    encryption_level: none
+  linked_symbols:
+    - file: packages/msp/src/identity/index.ts
+    - file: packages/msp/src/identity/types.ts
+    - file: packages/msp/src/identity/store.ts
+    - file: packages/msp/src/identity/profile.ts
+    - file: packages/msp/src/identity/voice.ts
+    - file: packages/msp/src/identity/preferences.ts
+    - file: packages/msp/test/identity/store.test.ts
+    - file: packages/msp/test/identity/profile.test.ts
+    - file: packages/msp/test/identity/voice.test.ts
+    - file: packages/msp/test/identity/preferences.test.ts
+    - file: packages/msp/test/identity/index.test.ts
   domain: blueprint
   language: markdown
   is_test: false

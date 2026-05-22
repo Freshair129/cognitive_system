@@ -4,11 +4,18 @@ phase: 1
 type: concept
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: CONCEPT — CoVibe — autonomous music synchronization for riders
-tags: [covibe, vision, music, sync, riders]
-aliases: [EVA-CLI, vibe-coding]
+tags:
+  - covibe
+  - vision
+  - music
+  - sync
+  - riders
+aliases:
+  - EVA-CLI
+  - vibe-coding
 cluster: implementation_flow
 role: Strategic intent / PRD
 crosslinks:
