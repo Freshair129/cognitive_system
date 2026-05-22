@@ -28,11 +28,6 @@ cluster: implementation_flow
 role: Implementation plan
 attributes:
   scale_level: L2
-  linked_symbols:
-    - file: packages/msp/src/codegen/slm/ollama.ts
-    - file: packages/msp/src/codegen/slm/factory.ts
-    - file: packages/msp/src/codegen/slm/types.ts
-    - file: packages/msp/src/codegen/slm/errors.ts
   domain: blueprint
   language: markdown
   is_test: false
@@ -41,6 +36,11 @@ attributes:
   secret_type: high_entropy_string
   leak_risk: high
   encryption_level: none
+linked_symbols:
+  - file: packages/msp/src/codegen/slm/ollama.ts
+  - file: packages/msp/src/codegen/slm/factory.ts
+  - file: packages/msp/src/codegen/slm/types.ts
+  - file: packages/msp/src/codegen/slm/errors.ts
 ---
 
 # BLUEPRINT — Ollama SLM client

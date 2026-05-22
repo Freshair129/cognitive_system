@@ -1,24 +1,44 @@
 ---
 id: ISSUE--TEMPLATE
-tier: genesis
-created_at: 2026-05-13T12:00:00.000+07:00
-phase: 2
-type: issue
-title: <Issue summary>
+phase: 6
+type: issues
 status: draft
-priority: medium                # low | medium | high | urgent
-assignee: <MSP-AGT-... or MSP-USR-...>     # optional initially
-reporter: <MSP-USR-...>
-labels: []
-updated_at: 2026-05-13T12:00:00.000+07:00
-linked_symbols: []
+vault_id: default
+tier: process
+source_type: axiomatic
+title: <Live issue tracker>
+created_at: 2026-05-22T22:36:00.000+07:00
+created_by: Rwang
+last_modify: 2026-05-22T22:36:00.000+07:00
+modify_by: Rwang
+assign_to: ""
+version: "0.1.0"
+priority: medium
+query_counter: 0
+level: low
+summary: "Template for ISSUE atoms — Live issue tracker"
+tags: [issue]
+aliases:
+  - ISSUE
+  - ops
+  - Live issue tracker
+cluster: ops
+role: Live issue tracker
 crosslinks:
-  related_incidents: []         # INC-- if this issue stems from an incident (Backlink)
-  resolved_by: []               # ADR-- / FEAT-- / HOTFIX-- when closing — what fixed it (Forward/Fix Link)
-  duplicates_of: []             # ISSUE-- if this is a duplicate (Peer Link)
-  blocks: []                    # ISSUE-- this one is blocking (Dependency Link)
-  blocked_by: []                # ISSUE-- blocking this one (Dependency Link)
-  references: []                # External discussions / logs / relevant background context
+  references: []
+linked_symbols: []
+granularity: general
+salience_anchor:
+  summary: ""
+  anchor_phrase: ""
+relationship_type: parent
+conflicts_with: []
+epistemic_status:
+  confidence: 1.0
+  source_type: axiom
+  contradictions: []
+attributes:
+  domain: general
 ---
 
 # ISSUE — <Short title>

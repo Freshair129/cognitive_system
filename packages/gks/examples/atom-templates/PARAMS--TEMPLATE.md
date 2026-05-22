@@ -1,17 +1,44 @@
 ---
 id: PARAMS--TEMPLATE
-tier: genesis
-created_at: 2026-05-13T12:00:00.000+07:00
 phase: 2
 type: params
 status: draft
-vault_id: <YOUR-PROJECT>
-title: <One-line business parameters summary>
-tags: [config, constants]
-domain: <domain-name>
+vault_id: default
+tier: process
+source_type: axiomatic
+title: <Constants / business config>
+created_at: 2026-05-22T22:36:00.000+07:00
+created_by: Rwang
+last_modify: 2026-05-22T22:36:00.000+07:00
+modify_by: Rwang
+assign_to: ""
+version: "0.1.0"
+priority: medium
+query_counter: 0
+level: low
+summary: "Template for PARAMS atoms — Constants / business config"
+tags: [params]
+aliases:
+  - PARAMS
+  - implementation_flow
+  - Constants / business config
+cluster: implementation_flow
+role: Constants / business config
 crosslinks:
-  used_by: []                   # FEAT-- / ALGO-- / MOD-- that use these parameters
-  references: []                # CONCEPT-- / ADR-- that justify these values
+  references: []
+linked_symbols: []
+granularity: general
+salience_anchor:
+  summary: ""
+  anchor_phrase: ""
+relationship_type: parent
+conflicts_with: []
+epistemic_status:
+  confidence: 1.0
+  source_type: axiom
+  contradictions: []
+attributes:
+  domain: general
 ---
 
 # PARAMS — <Title>

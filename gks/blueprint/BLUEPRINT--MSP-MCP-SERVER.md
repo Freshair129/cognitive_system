@@ -27,15 +27,6 @@ cluster: implementation_flow
 role: Implementation plan
 attributes:
   scale_level: L2
-  linked_symbols:
-    - file: packages/msp/src/mcp/server.ts
-    - file: packages/msp/src/mcp/types.ts
-    - file: packages/msp/src/mcp/tools/validate.ts
-    - file: src/mcp/tools/propose.ts
-    - file: packages/msp/src/mcp/tools/run-task.ts
-    - file: packages/msp/src/mcp/tools/session-append.ts
-    - file: packages/msp/src/mcp/tools/episode-append.ts
-    - file: packages/msp/src/mcp/tools/backlinks-rebuild.ts
   domain: blueprint
   language: markdown
   is_test: false
@@ -44,6 +35,15 @@ attributes:
   secret_type: high_entropy_string
   leak_risk: high
   encryption_level: none
+linked_symbols:
+  - file: packages/msp/src/mcp/server.ts
+  - file: packages/msp/src/mcp/types.ts
+  - file: packages/msp/src/mcp/tools/validate.ts
+  - file: src/mcp/tools/propose.ts
+  - file: packages/msp/src/mcp/tools/run-task.ts
+  - file: packages/msp/src/mcp/tools/session-append.ts
+  - file: packages/msp/src/mcp/tools/episode-append.ts
+  - file: packages/msp/src/mcp/tools/backlinks-rebuild.ts
 ---
 
 # BLUEPRINT — MSP MCP server

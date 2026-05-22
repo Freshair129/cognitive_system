@@ -29,14 +29,6 @@ cluster: implementation_flow
 role: Implementation plan
 attributes:
   scale_level: L2
-  linked_symbols:
-    - file: packages/msp/src/validator/proto/loader.ts
-    - file: packages/msp/src/validator/proto/types.ts
-    - file: packages/msp/src/validator/proto/sample.ts
-    - file: packages/msp/src/validator/contract.ts
-    - file: packages/msp/src/validator/cli.ts
-    - file: packages/msp/test/validator/proto/loader.test.ts
-    - file: packages/msp/test/validator/proto/sample.test.ts
   domain: blueprint
   language: markdown
   is_test: false
@@ -45,6 +37,14 @@ attributes:
   secret_type: aws_secret
   leak_risk: high
   encryption_level: none
+linked_symbols:
+  - file: packages/msp/src/validator/proto/loader.ts
+  - file: packages/msp/src/validator/proto/types.ts
+  - file: packages/msp/src/validator/proto/sample.ts
+  - file: packages/msp/src/validator/contract.ts
+  - file: packages/msp/src/validator/cli.ts
+  - file: packages/msp/test/validator/proto/loader.test.ts
+  - file: packages/msp/test/validator/proto/sample.test.ts
 ---
 
 # BLUEPRINT — PROTO loader

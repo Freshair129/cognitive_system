@@ -30,25 +30,6 @@ aliases:
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  linked_symbols:
-    - file: packages/msp/src/config/loader.ts
-    - file: packages/msp/src/validator/proto/master-token-cap.ts
-    - file: packages/msp/src/validator/proto/master-body-schema.ts
-    - file: packages/msp/src/validator/proto/phase-gates.ts
-    - file: packages/msp/src/validator/rules/summary-min.ts
-    - file: packages/msp/src/codegen/forbidden-patterns.ts
-    - file: packages/msp/src/codegen/post-process.ts
-    - file: packages/msp/src/orchestrator/retrieval/types.ts
-    - file: packages/msp/src/memory/sessions/lock.ts
-    - file: packages/msp/src/memory/episodic/writer.ts
-    - file: packages/msp/src/memory/episodic/summarisers/heuristic.ts
-    - file: packages/msp/src/memory/backlinks/walk.ts
-    - file: packages/msp/src/mcp/server.ts
-    - file: packages/msp/src/identity/profile.ts
-    - file: packages/msp/src/identity/voice.ts
-    - file: packages/msp/examples/hooks/pre-commit-validator.sh
-    - file: scripts/msp/re-embed.ts
-    - file: scripts/msp/pg-migrate.ts
   domain: blueprint
   language: markdown
   is_test: false
@@ -57,6 +38,25 @@ attributes:
   secret_type: high_entropy_string
   leak_risk: high
   encryption_level: none
+linked_symbols:
+  - file: packages/msp/src/config/loader.ts
+  - file: packages/msp/src/validator/proto/master-token-cap.ts
+  - file: packages/msp/src/validator/proto/master-body-schema.ts
+  - file: packages/msp/src/validator/proto/phase-gates.ts
+  - file: packages/msp/src/validator/rules/summary-min.ts
+  - file: packages/msp/src/codegen/forbidden-patterns.ts
+  - file: packages/msp/src/codegen/post-process.ts
+  - file: packages/msp/src/orchestrator/retrieval/types.ts
+  - file: packages/msp/src/memory/sessions/lock.ts
+  - file: packages/msp/src/memory/episodic/writer.ts
+  - file: packages/msp/src/memory/episodic/summarisers/heuristic.ts
+  - file: packages/msp/src/memory/backlinks/walk.ts
+  - file: packages/msp/src/mcp/server.ts
+  - file: packages/msp/src/identity/profile.ts
+  - file: packages/msp/src/identity/voice.ts
+  - file: packages/msp/examples/hooks/pre-commit-validator.sh
+  - file: scripts/msp/re-embed.ts
+  - file: scripts/msp/pg-migrate.ts
 ---
 
 # ULTRAPLAN — Config Externalization

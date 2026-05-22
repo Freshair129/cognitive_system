@@ -28,11 +28,6 @@ cluster: implementation_flow
 role: Implementation plan
 attributes:
   scale_level: L2
-  linked_symbols:
-    - file: packages/msp/src/memory/sessions/writer.ts
-    - file: packages/msp/src/memory/sessions/types.ts
-    - file: packages/msp/src/memory/sessions/lock.ts
-    - file: packages/msp/src/memory/sessions/schema.ts
   domain: blueprint
   language: markdown
   is_test: false
@@ -41,6 +36,11 @@ attributes:
   secret_type: aws_secret
   leak_risk: high
   encryption_level: none
+linked_symbols:
+  - file: packages/msp/src/memory/sessions/writer.ts
+  - file: packages/msp/src/memory/sessions/types.ts
+  - file: packages/msp/src/memory/sessions/lock.ts
+  - file: packages/msp/src/memory/sessions/schema.ts
 ---
 
 # BLUEPRINT — sessions writer

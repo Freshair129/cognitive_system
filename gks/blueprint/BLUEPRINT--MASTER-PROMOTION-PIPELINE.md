@@ -29,17 +29,6 @@ aliases:
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  linked_symbols:
-    - file: packages/msp/src/master/dimensions.ts
-    - file: packages/msp/src/master/scanner.ts
-    - file: packages/msp/src/master/promote.ts
-    - file: packages/msp/src/master/cli.ts
-    - file: packages/msp/test/master/dimensions.test.ts
-    - file: packages/msp/test/master/scanner.test.ts
-    - file: packages/msp/test/master/promote.test.ts
-    - file: packages/msp/test/master/cli.test.ts
-    - file: packages/msp/package.json
-    - file: gks/inbound/
   domain: blueprint
   language: markdown
   is_test: false
@@ -47,6 +36,17 @@ attributes:
   has_secret: false
   leak_risk: low
   encryption_level: none
+linked_symbols:
+  - file: packages/msp/src/master/dimensions.ts
+  - file: packages/msp/src/master/scanner.ts
+  - file: packages/msp/src/master/promote.ts
+  - file: packages/msp/src/master/cli.ts
+  - file: packages/msp/test/master/dimensions.test.ts
+  - file: packages/msp/test/master/scanner.test.ts
+  - file: packages/msp/test/master/promote.test.ts
+  - file: packages/msp/test/master/cli.test.ts
+  - file: packages/msp/package.json
+  - file: gks/inbound/
 ---
 
 # BLUEPRINT — Master Block promotion pipeline

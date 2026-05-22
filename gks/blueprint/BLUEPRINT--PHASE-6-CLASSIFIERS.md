@@ -24,12 +24,6 @@ aliases:
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  linked_symbols:
-    - file: packages/msp/src/policy/classifiers/types.ts
-    - file: packages/msp/src/policy/classifiers/engine.ts
-    - file: packages/msp/src/policy/classifiers/path.ts
-    - file: packages/msp/src/policy/classifiers/content.ts
-    - file: packages/msp/src/policy/classifiers/cli.ts
   domain: blueprint
   language: markdown
   is_test: false
@@ -37,6 +31,12 @@ attributes:
   has_secret: false
   leak_risk: low
   encryption_level: none
+linked_symbols:
+  - file: packages/msp/src/policy/classifiers/types.ts
+  - file: packages/msp/src/policy/classifiers/engine.ts
+  - file: packages/msp/src/policy/classifiers/path.ts
+  - file: packages/msp/src/policy/classifiers/content.ts
+  - file: packages/msp/src/policy/classifiers/cli.ts
 ---
 
 # BLUEPRINT — Phase 6: Classifiers

@@ -27,11 +27,6 @@ cluster: implementation_flow
 role: Implementation plan
 attributes:
   scale_level: L2
-  linked_symbols:
-    - file: examples/hooks/pre-push-verify.sh
-    - file: examples/hooks/install.sh
-    - file: examples/hooks/README.md
-    - file: packages/msp/test/hooks/pre-push.test.ts
   domain: blueprint
   language: markdown
   is_test: false
@@ -40,6 +35,11 @@ attributes:
   secret_type: aws_secret
   leak_risk: high
   encryption_level: none
+linked_symbols:
+  - file: examples/hooks/pre-push-verify.sh
+  - file: examples/hooks/install.sh
+  - file: examples/hooks/README.md
+  - file: packages/msp/test/hooks/pre-push.test.ts
 ---
 
 # BLUEPRINT — pre-push hook

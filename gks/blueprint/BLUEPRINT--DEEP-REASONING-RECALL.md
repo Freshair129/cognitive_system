@@ -24,10 +24,6 @@ aliases:
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  linked_symbols:
-    - file: packages/msp/src/orchestrator/retrieval/sources/graph.ts
-    - file: packages/msp/src/orchestrator/retrieval/index.ts
-    - file: packages/msp/src/orchestrator/retrieval/types.ts
   domain: blueprint
   language: markdown
   is_test: false
@@ -36,6 +32,10 @@ attributes:
   secret_type: aws_secret
   leak_risk: high
   encryption_level: none
+linked_symbols:
+  - file: packages/msp/src/orchestrator/retrieval/sources/graph.ts
+  - file: packages/msp/src/orchestrator/retrieval/index.ts
+  - file: packages/msp/src/orchestrator/retrieval/types.ts
 ---
 
 # BLUEPRINT — Deep Reasoning Recall

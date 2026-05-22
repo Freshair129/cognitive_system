@@ -23,10 +23,6 @@ cluster: implementation_flow
 role: Implementation plan
 attributes:
   knowledgeId: DYNAMIC-COMPOUND-ID-IMPLEMENTATION
-  linked_symbols:
-    - file: scripts/msp/msp-atom.ts
-    - file: atom_schema.yaml
-    - file: atom_registry.yaml
   domain: blueprint
   language: markdown
   is_test: false
@@ -35,6 +31,10 @@ attributes:
   secret_type: high_entropy_string
   leak_risk: high
   encryption_level: none
+linked_symbols:
+  - file: scripts/msp/msp-atom.ts
+  - file: atom_schema.yaml
+  - file: atom_registry.yaml
 ---
 
 # BLUEPRINT — Dynamic Compound ID and Registry Restructuring

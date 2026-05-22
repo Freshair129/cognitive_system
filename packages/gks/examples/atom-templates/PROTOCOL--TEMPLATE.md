@@ -1,52 +1,65 @@
 ---
 id: PROTOCOL--TEMPLATE
-tier: genesis
-created_at: 2026-05-13T12:00:00.000+07:00
 phase: 2
 type: protocol
 status: draft
-vault_id: <YOUR-PROJECT>
-title: <One-line protocol summary>
-tags: [interaction-contract]
-participants: [agent, system, ...]
+vault_id: default
+tier: process
+source_type: axiomatic
+title: <Interaction contract>
+created_at: 2026-05-22T22:36:00.000+07:00
+created_by: Rwang
+last_modify: 2026-05-22T22:36:00.000+07:00
+modify_by: Rwang
+assign_to: ""
+version: "0.1.0"
+priority: medium
+query_counter: 0
+level: high
+summary: "Template for PROTOCOL atoms — Interaction contract"
+tags: [protocol]
+aliases:
+  - PROTOCOL
+  - agent_governance
+  - Interaction contract
+cluster: agent_governance
+role: Interaction contract
 crosslinks:
-  used_by: []                   # SKILL-- / MOD-- that depend on this (Inverse Link)
-  references: []                # ADR-- / FEAT-- background context (Context Link)
-  governed_by: []               # GUARDRAIL-- limiting this protocol (Governance Link)
+  references: []
+linked_symbols: []
+granularity: general
+salience_anchor:
+  summary: ""
+  anchor_phrase: ""
+relationship_type: parent
+conflicts_with: []
+epistemic_status:
+  confidence: 1.0
+  source_type: axiom
+  contradictions: []
+attributes:
+  domain: general
 ---
 
 # PROTOCOL — <Title>
 
-## Participants
+## Interaction surface
 
-- **<role A>** — <responsibility>
-- **<role B>** — <responsibility>
-
-## Sequence
+Define the sequence and participants involved in this interaction. Who sends what to whom, and in what order?
 
 ```
-1. <role A> ──→ <role B>:  <message + payload schema>
-2. <role B> ──→ <role A>:  <response schema>
-3. ...
+1. <Participant A> ──→ <Participant B>:  <action / request>
+2. <Participant B> ──→ <Participant A>:  <reply / response>
 ```
 
-## Invariants
+## Message shape
 
-- ordering: <strict | unordered>
-- idempotency: <yes / no — explain>
-- timeout: <seconds>
-- retry: <yes — limit; or no>
+Detail the schema and wire format of the messages exchanged in this protocol (e.g. JSON schema, protobuf, or raw string format).
 
-## Failure modes
+## Error semantics
 
-| Failure | Detection | Recovery |
-|---|---|---|
-| <message lost> | <how detected> | <retry / fail-fast> |
+Describe the error codes, messages, and behaviors when a step in the protocol fails (e.g. timeout, invalid signature, payload mismatch).
 
-## Versioning
+## Source
 
-How is the protocol versioned. What's the upgrade story.
-
-## See also
-
-- <related PROTOCOL-- / API-->
+- <Link to the requirements, ADR, or conversation that established this protocol>

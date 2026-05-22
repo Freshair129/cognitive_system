@@ -28,8 +28,6 @@ cluster: implementation_flow
 role: Implementation plan
 attributes:
   scale_level: L2
-  linked_symbols:
-    - file: packages/msp/src/policy/types.ts
   domain: blueprint
   language: markdown
   is_test: false
@@ -38,6 +36,8 @@ attributes:
   secret_type: high_entropy_string
   leak_risk: high
   encryption_level: none
+linked_symbols:
+  - file: packages/msp/src/policy/types.ts
 ---
 
 # BLUEPRINT — Phase 0: plumbing

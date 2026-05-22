@@ -30,11 +30,6 @@ cluster: implementation_flow
 role: Implementation plan
 attributes:
   scale_level: L2
-  linked_symbols:
-    - file: packages/msp/src/policy/pdp.ts
-    - file: packages/msp/src/policy/loader.ts
-    - file: packages/msp/src/policy/operators.ts
-    - file: packages/msp/src/policy/shadow-log.ts
   domain: blueprint
   language: markdown
   is_test: false
@@ -43,6 +38,11 @@ attributes:
   secret_type: aws_secret
   leak_risk: high
   encryption_level: none
+linked_symbols:
+  - file: packages/msp/src/policy/pdp.ts
+  - file: packages/msp/src/policy/loader.ts
+  - file: packages/msp/src/policy/operators.ts
+  - file: packages/msp/src/policy/shadow-log.ts
 ---
 
 # BLUEPRINT — Phase 1: PDP in shadow mode

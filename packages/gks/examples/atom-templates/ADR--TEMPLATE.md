@@ -1,31 +1,55 @@
 ---
 id: ADR--TEMPLATE
-tier: genesis
-created_at: 2026-05-13T12:00:00.000+07:00
 phase: 2
 type: adr
 status: draft
-vault_id: <YOUR-PROJECT>
-title: <Short decision title>
-tags: [architecture]
-domain: <area>
+vault_id: default
+tier: process
+source_type: axiomatic
+title: <Architecture decision record>
+created_at: 2026-05-22T22:36:00.000+07:00
+created_by: Rwang
+last_modify: 2026-05-22T22:36:00.000+07:00
+modify_by: Rwang
+assign_to: ""
+version: "0.1.0"
+priority: medium
+query_counter: 0
+level: high
+summary: "Template for ADR atoms — Architecture decision record"
+tags: [adr]
+aliases:
+  - ADR
+  - implementation_flow
+  - Architecture decision record
+cluster: implementation_flow
+role: Architecture decision record
 crosslinks:
-  references: []                # ADR / FEAT / ALGO / etc this decision builds on (Forward Link)
-  superseded_by: []             # ID of the later ADR that replaces this one (Versioning Link)
-  resolves: []                  # ISSUE-- / INC-- this ADR closes (Resolution Link)
-linked_symbols: []              # see ADR-010 — symbols this decision governs (Code Citation)
+  references: []
+linked_symbols: []
+granularity: general
+salience_anchor:
+  summary: ""
+  anchor_phrase: ""
+relationship_type: parent
+conflicts_with: []
+epistemic_status:
+  confidence: 1.0
+  source_type: axiom
+  contradictions: []
+attributes:
+  domain: general
 ---
 
 # ADR — <Title>
 
 ## Context
 
-What forces are at play? Why is a decision needed now? Reference the
-issue or incident that triggered this if any.
+What forces are at play? Why is a decision needed now? Reference the issue, requirement, or incident that triggered this decision if any.
 
 ## Decision
 
-What did we decide. State as one or two declarative sentences.
+What did we decide? State clearly as one or two declarative sentences.
 
 ## Consequences
 
@@ -42,6 +66,6 @@ What did we decide. State as one or two declarative sentences.
 1. **<Alternative A>** — *Rejected.* <reason>
 2. **<Alternative B>** — *Deferred.* <reason>
 
-## References
+## Source
 
-- <link to background docs / external sources>
+- <Link to the requirements, discussion, or PR that triggered this ADR>

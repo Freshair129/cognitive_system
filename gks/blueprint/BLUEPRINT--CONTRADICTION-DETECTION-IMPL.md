@@ -27,19 +27,6 @@ aliases:
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  linked_symbols:
-    - file: CLAUDE.md
-    - file: .github/pull_request_template.md
-    - file: src/validator/proto/reciprocal-supersession.ts
-    - file: gks/proto/PROTO--RECIPROCAL-SUPERSESSION.md
-    - file: src/validator/proto/domain-uniqueness.ts
-    - file: gks/proto/PROTO--DOMAIN-UNIQUENESS.md
-    - file: .brain/msp/LLM_Contract/atomic_contract.yaml
-    - file: .github/workflows/contradiction-similarity.yml
-    - file: scripts/msp/contradiction-similarity.mjs
-    - file: .github/workflows/contradiction-judge.yml
-    - file: scripts/msp/contradiction-judge.mjs
-    - file: .github/contradiction-detection.yml
   domain: blueprint
   language: markdown
   is_test: false
@@ -48,6 +35,19 @@ attributes:
   secret_type: high_entropy_string
   leak_risk: high
   encryption_level: none
+linked_symbols:
+  - file: CLAUDE.md
+  - file: .github/pull_request_template.md
+  - file: src/validator/proto/reciprocal-supersession.ts
+  - file: gks/proto/PROTO--RECIPROCAL-SUPERSESSION.md
+  - file: src/validator/proto/domain-uniqueness.ts
+  - file: gks/proto/PROTO--DOMAIN-UNIQUENESS.md
+  - file: .brain/msp/LLM_Contract/atomic_contract.yaml
+  - file: .github/workflows/contradiction-similarity.yml
+  - file: scripts/msp/contradiction-similarity.mjs
+  - file: .github/workflows/contradiction-judge.yml
+  - file: scripts/msp/contradiction-judge.mjs
+  - file: .github/contradiction-detection.yml
 ---
 
 # BLUEPRINT — contradiction detection implementation

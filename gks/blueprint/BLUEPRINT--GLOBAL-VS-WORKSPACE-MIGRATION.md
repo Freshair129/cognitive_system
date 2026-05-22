@@ -31,21 +31,6 @@ cluster: implementation_flow
 role: Implementation plan
 attributes:
   scale_level: L2
-  linked_symbols:
-    - file: packages/msp/src/identity/store.ts
-    - file: packages/msp/src/identity/types.ts
-    - file: packages/msp/src/identity/migrate.ts
-    - file: packages/msp/src/identity/index.ts
-    - file: packages/msp/src/projects/registry.ts
-    - file: packages/msp/src/projects/resolve.ts
-    - file: packages/msp/src/projects/types.ts
-    - file: packages/msp/src/lib/msp-home.ts
-    - file: packages/msp/src/mcp/tools/identity-get.ts
-    - file: packages/msp/src/mcp/tools/identity-set.ts
-    - file: packages/msp/test/identity/store.test.ts
-    - file: packages/msp/test/identity/migrate.test.ts
-    - file: packages/msp/test/projects/registry.test.ts
-    - file: packages/msp/test/projects/resolve.test.ts
   domain: blueprint
   language: markdown
   is_test: false
@@ -54,6 +39,21 @@ attributes:
   secret_type: high_entropy_string
   leak_risk: high
   encryption_level: none
+linked_symbols:
+  - file: packages/msp/src/identity/store.ts
+  - file: packages/msp/src/identity/types.ts
+  - file: packages/msp/src/identity/migrate.ts
+  - file: packages/msp/src/identity/index.ts
+  - file: packages/msp/src/projects/registry.ts
+  - file: packages/msp/src/projects/resolve.ts
+  - file: packages/msp/src/projects/types.ts
+  - file: packages/msp/src/lib/msp-home.ts
+  - file: packages/msp/src/mcp/tools/identity-get.ts
+  - file: packages/msp/src/mcp/tools/identity-set.ts
+  - file: packages/msp/test/identity/store.test.ts
+  - file: packages/msp/test/identity/migrate.test.ts
+  - file: packages/msp/test/projects/registry.test.ts
+  - file: packages/msp/test/projects/resolve.test.ts
 ---
 
 # BLUEPRINT — global vs workspace storage migration

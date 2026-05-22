@@ -6,9 +6,18 @@ status: draft
 vault_id: default
 tier: master
 source_type: axiomatic
-title: <Genesis Block name — Engine — short purpose>
-created_at: 2026-05-13T12:00:00.000+07:00
-tags: [manifest, knowledge-block]
+title: <Block Manifest (v2.3+)>
+created_at: 2026-05-22T22:36:00.000+07:00
+created_by: Rwang
+last_modify: 2026-05-22T22:36:00.000+07:00
+modify_by: Rwang
+assign_to: ""
+version: "0.1.0"
+priority: medium
+query_counter: 0
+level: high
+summary: "Template for GENESIS atoms — Block Manifest (v2.3+)"
+tags: [genesis, governance]
 aliases:
   - GENESIS
   - implementation_flow
@@ -18,28 +27,18 @@ role: Block Manifest (v2.3+)
 crosslinks:
   references: []
 linked_symbols: []
+granularity: general
+salience_anchor:
+  summary: ""
+  anchor_phrase: ""
+relationship_type: parent
+conflicts_with: []
+epistemic_status:
+  confidence: 1.0
+  source_type: axiom
+  contradictions: []
 attributes:
-  manifest_version: 0.1.0
   domain: general
-  members:
-    core:
-      cognitive: [COGNITIVE--<...>]
-      algo:      [ALGO--<...>]
-      runbook:   [RUNBOOK--<...>]
-      concept:   [CONCEPT--<...>]
-      params:    [PARAMS--<...>]
-    optional:
-      guard:     []
-      safety:    []
-      stack:     []
-      protocol:  []
-      mod:       []
-      spec:      []
-  daci:
-    driver:       MOD--<...>
-    approver:     []
-    contributor:  []
-    informed:     []
 ---
 
 # GENESIS — <Name>

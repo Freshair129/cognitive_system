@@ -28,16 +28,6 @@ aliases:
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  linked_symbols:
-    - file: package.json
-    - file: packages/gks/package.json
-    - file: packages/msp/package.json
-    - file: .github/workflows/ci.yml
-    - file: .github/workflows/publish-gks.yml
-    - file: eslint.config.js
-    - file: upstream/gks-proposals/
-    - file: scripts/msp/propose.mjs
-    - file: packages/msp/src/memory/backlinks/
   domain: blueprint
   language: markdown
   is_test: false
@@ -46,6 +36,16 @@ attributes:
   secret_type: high_entropy_string
   leak_risk: high
   encryption_level: none
+linked_symbols:
+  - file: package.json
+  - file: packages/gks/package.json
+  - file: packages/msp/package.json
+  - file: .github/workflows/ci.yml
+  - file: .github/workflows/publish-gks.yml
+  - file: eslint.config.js
+  - file: upstream/gks-proposals/
+  - file: scripts/msp/propose.mjs
+  - file: packages/msp/src/memory/backlinks/
 ---
 
 # BLUEPRINT — monorepo migration

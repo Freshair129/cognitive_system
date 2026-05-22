@@ -1,23 +1,44 @@
 ---
 id: HOTFIX--TEMPLATE
-tier: genesis
-created_at: 2026-05-13T12:00:00.000+07:00
 phase: 5
 type: hotfix
 status: draft
-title: <one-line summary of what was fixed>
-valid_from: 2026-05-13T12:00:00.000+07:00
-valid_to: 2026-05-15T12:00:00.000+07:00        # = commit time + 48 h (REQUIRED)
-linked_symbols:
-  - { file: src/affected/file.ts, fn: affectedFn }
+vault_id: default
+tier: process
+source_type: axiomatic
+title: <Hotfix escape-hatch atom>
+created_at: 2026-05-22T22:36:00.000+07:00
+created_by: Rwang
+last_modify: 2026-05-22T22:36:00.000+07:00
+modify_by: Rwang
+assign_to: ""
+version: "0.1.0"
+priority: medium
+query_counter: 0
+level: low
+summary: "Template for HOTFIX atoms — Hotfix escape-hatch atom"
+tags: [hotfix]
+aliases:
+  - HOTFIX
+  - ops
+  - Hotfix escape-hatch atom
+cluster: ops
+role: Hotfix escape-hatch atom
 crosslinks:
-  related_incidents: []          # INC-- if a post-mortem exists (Backlink/Peer Link)
-  resolved_by: []                # filled in by backfill atoms (CONCEPT--, ADR--, BLUEPRINT--) (Resolution Link)
-  references: []                 # Original ISSUE-- or context for the fix (Context Link)
-meta:
-  commit_sha: <full SHA>
-  ref: <branch / tag>
-  reason: <one-line why the bypass>
+  references: []
+linked_symbols: []
+granularity: general
+salience_anchor:
+  summary: ""
+  anchor_phrase: ""
+relationship_type: parent
+conflicts_with: []
+epistemic_status:
+  confidence: 1.0
+  source_type: axiom
+  contradictions: []
+attributes:
+  domain: general
 ---
 
 # HOTFIX — <one-line summary of what was fixed>

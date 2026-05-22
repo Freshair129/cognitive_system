@@ -1,19 +1,44 @@
 ---
 id: GUARD--TEMPLATE
-tier: genesis
-created_at: 2026-05-13T12:00:00.000+07:00
 phase: 2
 type: guard
 status: draft
-severity: critical              # critical | high | medium | low
-vault_id: <YOUR-PROJECT>
-title: <One-line constraint>
-tags: [safety, runtime-enforced]
+vault_id: default
+tier: safety
+source_type: axiomatic
+title: <Structural / behavioural guardrail>
+created_at: 2026-05-22T22:36:00.000+07:00
+created_by: Rwang
+last_modify: 2026-05-22T22:36:00.000+07:00
+modify_by: Rwang
+assign_to: ""
+version: "0.1.0"
+priority: medium
+query_counter: 0
+level: high
+summary: "Template for GUARD atoms — Structural / behavioural guardrail"
+tags: [guard, safety]
+aliases:
+  - GUARD
+  - agent_governance
+  - Structural / behavioural guardrail
+cluster: agent_governance
+role: Structural / behavioural guardrail
 crosslinks:
-  enforces: []                  # POLICY-- / CONSTRAINT-- this rule comes from (Hierarchical Link)
-  enforced_by: []               # SKILL-- / MOD-- that check this at runtime (Inverse Link)
-  references: []                # ADR-- decisions this implements (Context Link)
-  triggered_by: []              # INC-- that led to this guardrail (Resolution Link)
+  references: []
+linked_symbols: []
+granularity: general
+salience_anchor:
+  summary: ""
+  anchor_phrase: ""
+relationship_type: parent
+conflicts_with: []
+epistemic_status:
+  confidence: 1.0
+  source_type: axiom
+  contradictions: []
+attributes:
+  domain: general
 ---
 
 # GUARD — <Title>

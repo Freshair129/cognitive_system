@@ -1,51 +1,64 @@
 ---
 id: ENTITY--TEMPLATE
-tier: genesis
-created_at: 2026-05-13T12:00:00.000+07:00
 phase: 2
 type: entity
 status: draft
-vault_id: <YOUR-PROJECT>
-title: <Entity name + brief role>
-tags: [data-model]
-domain: <domain-name>
+vault_id: default
+tier: process
+source_type: axiomatic
+title: <Data schema>
+created_at: 2026-05-22T22:36:00.000+07:00
+created_by: Rwang
+last_modify: 2026-05-22T22:36:00.000+07:00
+modify_by: Rwang
+assign_to: ""
+version: "0.1.0"
+priority: medium
+query_counter: 0
+level: low
+summary: "Template for ENTITY atoms — Data schema"
+tags: [entity]
+aliases:
+  - ENTITY
+  - implementation_flow
+  - Data schema
+cluster: implementation_flow
+role: Data schema
 crosslinks:
-  used_by: []                   # FEAT-- / ENDPOINT-- that consume this (Manual Backlink)
-  related_entities: []          # ENTITY-- with FK / association (Peer Link)
-  part_of: []                   # MOD-- this entity belongs to (Hierarchical Link)
-  references: []                # General references or external schemas
+  references: []
+linked_symbols: []
+granularity: general
+salience_anchor:
+  summary: ""
+  anchor_phrase: ""
+relationship_type: parent
+conflicts_with: []
+epistemic_status:
+  confidence: 1.0
+  source_type: axiom
+  contradictions: []
+attributes:
+  domain: general
 ---
 
 # ENTITY — <Name>
 
-## Schema
+## Schema definition
+
+Describe the data schema (fields, types, indexing) using YAML, JSON Schema, or SQL table definition.
 
 ```yaml
 fields:
   id:
-    type: string                # uuid | string | int | …
+    type: string
     required: true
-    description: <semantics>
-  created_at:
-    type: timestamp
-    required: true
-  # …
+    description: Primary key UUID.
 ```
 
-## Invariants
+## Relations
 
-- <constraint that must always hold>
+Detail structural relationships (e.g. foreign keys, associations, cardinalities with other ENTITY-- atoms).
 
-## Lifecycle
+## Source
 
-- created when: ...
-- archived when: ...
-- never deleted (or: hard-deleted on policy X)
-
-## Indexes
-
-- by `<field>` — used by FEAT-- / ENDPOINT-- ...
-
-## See also
-
-- DB migration: <migration ID>
+- <Link to the requirements, database migration, or PR that introduced this entity>

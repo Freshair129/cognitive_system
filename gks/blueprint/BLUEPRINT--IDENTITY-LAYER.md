@@ -28,18 +28,6 @@ cluster: implementation_flow
 role: Implementation plan
 attributes:
   scale_level: L2
-  linked_symbols:
-    - file: packages/msp/src/identity/index.ts
-    - file: packages/msp/src/identity/types.ts
-    - file: packages/msp/src/identity/store.ts
-    - file: packages/msp/src/identity/profile.ts
-    - file: packages/msp/src/identity/voice.ts
-    - file: packages/msp/src/identity/preferences.ts
-    - file: packages/msp/test/identity/store.test.ts
-    - file: packages/msp/test/identity/profile.test.ts
-    - file: packages/msp/test/identity/voice.test.ts
-    - file: packages/msp/test/identity/preferences.test.ts
-    - file: packages/msp/test/identity/index.test.ts
   domain: blueprint
   language: markdown
   is_test: false
@@ -48,6 +36,18 @@ attributes:
   secret_type: high_entropy_string
   leak_risk: high
   encryption_level: none
+linked_symbols:
+  - file: packages/msp/src/identity/index.ts
+  - file: packages/msp/src/identity/types.ts
+  - file: packages/msp/src/identity/store.ts
+  - file: packages/msp/src/identity/profile.ts
+  - file: packages/msp/src/identity/voice.ts
+  - file: packages/msp/src/identity/preferences.ts
+  - file: packages/msp/test/identity/store.test.ts
+  - file: packages/msp/test/identity/profile.test.ts
+  - file: packages/msp/test/identity/voice.test.ts
+  - file: packages/msp/test/identity/preferences.test.ts
+  - file: packages/msp/test/identity/index.test.ts
 ---
 
 # BLUEPRINT — identity layer implementation plan

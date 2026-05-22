@@ -1,20 +1,44 @@
 ---
 id: AUDIT--TEMPLATE
-tier: genesis
-created_at: 2026-05-13T12:00:00.000+07:00
 phase: 6
 type: audit
 status: draft
-vault_id: <YOUR-PROJECT>
-title: <Audit subject>
-tags: [verification]
+vault_id: default
+tier: process
+source_type: axiomatic
+title: <Test results / quality report>
+created_at: 2026-05-22T22:36:00.000+07:00
+created_by: Rwang
+last_modify: 2026-05-22T22:36:00.000+07:00
+modify_by: Rwang
+assign_to: ""
+version: "0.1.0"
+priority: medium
+query_counter: 0
+level: low
+summary: "Template for AUDIT atoms — Test results / quality report"
+tags: [audit]
+aliases:
+  - AUDIT
+  - implementation_flow
+  - Test results / quality report
+cluster: implementation_flow
+role: Test results / quality report
 crosslinks:
-  audits: BLUEPRINT--FEAT-<NNN>     # The implementation plan being verified (Plan Link)
-  resolves: []                      # FR-- / NFR-- / ISSUE-- / INC-- proven/fixed by this audit (Resolution Link)
-  references: []                    # TASK-- / FEAT-- background (Context Link)
-  governed_by: []                   # ADR-- / FRAME-- criteria (Governance Link)
-audited_at: <ISO timestamp>
-auditor: <MSP-AGT-... or MSP-USR-...>
+  references: []
+linked_symbols: []
+granularity: general
+salience_anchor:
+  summary: ""
+  anchor_phrase: ""
+relationship_type: parent
+conflicts_with: []
+epistemic_status:
+  confidence: 1.0
+  source_type: axiom
+  contradictions: []
+attributes:
+  domain: general
 ---
 
 # AUDIT — <Subject>

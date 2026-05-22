@@ -28,12 +28,6 @@ cluster: implementation_flow
 role: Implementation plan
 attributes:
   scale_level: feature
-  linked_symbols:
-    - file: packages/msp/src/genesis/types.ts
-    - file: packages/msp/src/genesis/loader.ts
-    - file: packages/msp/src/genesis/composer.ts
-    - file: packages/msp/src/genesis/executor.ts
-    - file: packages/msp/src/genesis/cli.ts
   domain: blueprint
   language: markdown
   is_test: false
@@ -41,6 +35,12 @@ attributes:
   has_secret: false
   leak_risk: low
   encryption_level: none
+linked_symbols:
+  - file: packages/msp/src/genesis/types.ts
+  - file: packages/msp/src/genesis/loader.ts
+  - file: packages/msp/src/genesis/composer.ts
+  - file: packages/msp/src/genesis/executor.ts
+  - file: packages/msp/src/genesis/cli.ts
 ---
 
 # BLUEPRINT — Genesis Block Runtime

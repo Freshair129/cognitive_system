@@ -1,18 +1,44 @@
 ---
 id: LLM--TEMPLATE
-tier: genesis
-created_at: 2026-05-13T12:00:00.000+07:00
 phase: 2
 type: llm
 status: draft
-vault_id: <YOUR-PROJECT>
-title: <Model Name & Version>
-tags: [ai, inference, llm, reasoning]
-domain: ai-inference
+vault_id: default
+tier: process
+source_type: axiomatic
+title: <Large reasoning engine>
+created_at: 2026-05-22T22:36:00.000+07:00
+created_by: Rwang
+last_modify: 2026-05-22T22:36:00.000+07:00
+modify_by: Rwang
+assign_to: ""
+version: "0.1.0"
+priority: medium
+query_counter: 0
+level: high
+summary: "Template for LLM atoms — Large reasoning engine"
+tags: [llm]
+aliases:
+  - LLM
+  - agent_governance
+  - Large reasoning engine
+cluster: agent_governance
+role: Large reasoning engine
 crosslinks:
-  enforces: []                  # GUARD-- or PROTO-- this model must follow
-  references: []                # ADR-- that selected this model
-linked_symbols: []              # Pointer to the adapter code
+  references: []
+linked_symbols: []
+granularity: general
+salience_anchor:
+  summary: ""
+  anchor_phrase: ""
+relationship_type: parent
+conflicts_with: []
+epistemic_status:
+  confidence: 1.0
+  source_type: axiom
+  contradictions: []
+attributes:
+  domain: general
 ---
 
 # LLM — <Model Name>

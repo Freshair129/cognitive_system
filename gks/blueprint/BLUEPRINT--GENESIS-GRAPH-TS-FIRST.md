@@ -29,11 +29,6 @@ aliases:
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  linked_symbols:
-    - file: packages/gks/src/memory/graph/genesis-graph.ts
-    - file: packages/gks/src/memory/graph/cypher-v0.ts
-    - file: packages/gks/src/memory/graph/genesis-graph-errors.ts
-    - file: packages/gks/src/memory/index.ts
   domain: blueprint
   language: markdown
   is_test: false
@@ -42,6 +37,11 @@ attributes:
   secret_type: high_entropy_string
   leak_risk: high
   encryption_level: none
+linked_symbols:
+  - file: packages/gks/src/memory/graph/genesis-graph.ts
+  - file: packages/gks/src/memory/graph/cypher-v0.ts
+  - file: packages/gks/src/memory/graph/genesis-graph-errors.ts
+  - file: packages/gks/src/memory/index.ts
 ---
 
 # BLUEPRINT — Genesis Block Phase 0 (TS-first)

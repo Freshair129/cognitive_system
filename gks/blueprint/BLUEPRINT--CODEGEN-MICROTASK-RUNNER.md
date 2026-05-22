@@ -27,16 +27,6 @@ cluster: implementation_flow
 role: Implementation plan
 attributes:
   scale_level: L2
-  linked_symbols:
-    - file: packages/msp/src/codegen/runner.ts
-    - file: packages/msp/src/codegen/load-task.ts
-    - file: packages/msp/src/codegen/prompt-builder.ts
-    - file: src/codegen/slm-client.ts
-    - file: packages/msp/src/codegen/post-process.ts
-    - file: packages/msp/src/codegen/forbidden-patterns.ts
-    - file: src/codegen/acceptance.ts
-    - file: src/codegen/escalate.ts
-    - file: packages/msp/src/codegen/cli.ts
   domain: blueprint
   language: markdown
   is_test: false
@@ -45,6 +35,16 @@ attributes:
   secret_type: high_entropy_string
   leak_risk: high
   encryption_level: none
+linked_symbols:
+  - file: packages/msp/src/codegen/runner.ts
+  - file: packages/msp/src/codegen/load-task.ts
+  - file: packages/msp/src/codegen/prompt-builder.ts
+  - file: src/codegen/slm-client.ts
+  - file: packages/msp/src/codegen/post-process.ts
+  - file: packages/msp/src/codegen/forbidden-patterns.ts
+  - file: src/codegen/acceptance.ts
+  - file: src/codegen/escalate.ts
+  - file: packages/msp/src/codegen/cli.ts
 ---
 
 # BLUEPRINT — codegen microtask runner

@@ -1,18 +1,44 @@
 ---
 id: RUNBOOK--TEMPLATE
-tier: genesis
-created_at: 2026-05-13T12:00:00.000+07:00
-phase: 2
+phase: 6
 type: runbook
 status: draft
-vault_id: <YOUR-PROJECT>
-title: <One-line scenario>
-tags: [runbook, on-call]
-last_drilled: 2026-05-13T12:00:00.000+07:00
+vault_id: default
+tier: process
+source_type: axiomatic
+title: <Operational response guide>
+created_at: 2026-05-22T22:36:00.000+07:00
+created_by: Rwang
+last_modify: 2026-05-22T22:36:00.000+07:00
+modify_by: Rwang
+assign_to: ""
+version: "0.1.0"
+priority: medium
+query_counter: 0
+level: low
+summary: "Template for RUNBOOK atoms — Operational response guide"
+tags: [runbook]
+aliases:
+  - RUNBOOK
+  - ops
+  - Operational response guide
+cluster: ops
+role: Operational response guide
 crosslinks:
-  triggered_by: []              # alert / SLO-- breach / INC-- pattern (Event/Trigger Link)
-  related_incidents: []         # INC-- where this runbook was used (Backlink/Peer Link)
-  references: []                # ADR-- / FEAT-- background context (Context Link)
+  references: []
+linked_symbols: []
+granularity: general
+salience_anchor:
+  summary: ""
+  anchor_phrase: ""
+relationship_type: parent
+conflicts_with: []
+epistemic_status:
+  confidence: 1.0
+  source_type: axiom
+  contradictions: []
+attributes:
+  domain: general
 ---
 
 # RUNBOOK — <Scenario>

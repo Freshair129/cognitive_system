@@ -33,11 +33,6 @@ cluster: implementation_flow
 role: Implementation plan
 attributes:
   scale_level: L2
-  linked_symbols:
-    - file: packages/msp/src/vault/registry.ts
-    - file: packages/msp/src/vault/types.ts
-    - file: packages/msp/src/orchestrator/resolution/tier.ts
-    - file: packages/msp/src/orchestrator/resolution/budget.ts
   domain: blueprint
   language: markdown
   is_test: false
@@ -46,6 +41,11 @@ attributes:
   secret_type: aws_secret
   leak_risk: high
   encryption_level: none
+linked_symbols:
+  - file: packages/msp/src/vault/registry.ts
+  - file: packages/msp/src/vault/types.ts
+  - file: packages/msp/src/orchestrator/resolution/tier.ts
+  - file: packages/msp/src/orchestrator/resolution/budget.ts
 ---
 
 # BLUEPRINT — Phase 3: vault composition + resolution gradient

@@ -1,23 +1,44 @@
 ---
 id: INC--TEMPLATE
-tier: genesis
-created_at: 2026-05-13T12:00:00.000+07:00
-phase: 2
-type: incident
+phase: 6
+type: inc
 status: draft
-severity: high                  # critical | high | medium | low
-vault_id: <YOUR-PROJECT>
-title: <One-line incident summary>
-tags: [post-mortem]
-occurred_at: <ISO timestamp>
-resolved_at: <ISO timestamp>
-duration_min: <int>
+vault_id: default
+tier: process
+source_type: axiomatic
+title: <Incident post-mortem>
+created_at: 2026-05-22T22:36:00.000+07:00
+created_by: Rwang
+last_modify: 2026-05-22T22:36:00.000+07:00
+modify_by: Rwang
+assign_to: ""
+version: "0.1.0"
+priority: medium
+query_counter: 0
+level: low
+summary: "Template for INC atoms — Incident post-mortem"
+tags: [inc]
+aliases:
+  - INC
+  - ops
+  - Incident post-mortem
+cluster: ops
+role: Incident post-mortem
 crosslinks:
-  trigger_events: []            # MSP-INC-* raw event log entries (Log Reference)
-  related_issues: []            # ISSUE-- this incident touched (Peer/Backlink)
-  resolved_by: []               # ADR-- / FEAT-- chosen as remediation (Resolution Link)
-  references: []                # Prior incidents or background context (Context Link)
-linked_symbols: []              # symbols implicated
+  references: []
+linked_symbols: []
+granularity: general
+salience_anchor:
+  summary: ""
+  anchor_phrase: ""
+relationship_type: parent
+conflicts_with: []
+epistemic_status:
+  confidence: 1.0
+  source_type: axiom
+  contradictions: []
+attributes:
+  domain: general
 ---
 
 # INC — <Incident summary>

@@ -1,48 +1,56 @@
 ---
 id: NFR--TEMPLATE
-tier: genesis
-created_at: 2026-05-13T12:00:00.000+07:00
 phase: 1
 type: nfr
 status: draft
-vault_id: <YOUR-PROJECT>
-title: <One-line target>
-tags: [non-functional]
-domain: <domain-name>
+vault_id: default
+tier: process
+source_type: axiomatic
+title: <Non-functional requirement>
+created_at: 2026-05-22T22:36:00.000+07:00
+created_by: Rwang
+last_modify: 2026-05-22T22:36:00.000+07:00
+modify_by: Rwang
+assign_to: ""
+version: "0.1.0"
 priority: medium
-target:
-  metric: <e.g. p99-latency-ms | error-rate | rps | uptime-%>
-  threshold: <e.g. < 200 | < 0.001 | > 1000 | > 99.9>
+query_counter: 0
+level: high
+summary: "Template for NFR atoms — Non-functional requirement"
+tags: [nfr]
+aliases:
+  - NFR
+  - requirements
+  - Non-functional requirement
+cluster: requirements
+role: Non-functional requirement
 crosslinks:
-  parent: REQ--<umbrella>       # if part of a larger requirement (Hierarchical Link)
-  satisfied_by: []              # FEAT-- that satisfy this NFR (Inverse Link)
-  verified_by: []               # AUDIT-- / load-test report / SLO-- monitoring (Resolution Link)
-  governed_by: []               # ADR-- architecture decision dictating this NFR (Governance Link)
-  references: []                # Contextual background / external benchmarks (Context Link)
+  references: []
+linked_symbols: []
+granularity: general
+salience_anchor:
+  summary: ""
+  anchor_phrase: ""
+relationship_type: parent
+conflicts_with: []
+epistemic_status:
+  confidence: 1.0
+  source_type: axiom
+  contradictions: []
+attributes:
+  domain: general
 ---
 
 # NFR — <Title>
 
-## Statement
+## Quality attribute
 
-System **shall** maintain <metric> <comparator> <threshold> under <load /
-condition>.
+Describe the non-functional requirement statement. System **shall** maintain <metric> <comparator> <threshold> under <load / condition>.
 
-## Verification approach
+## Verification
 
-- **method:** load test | chaos test | pen test | continuous monitoring
-- **tooling:** <k6 / locust / SLO dashboard / etc>
-- **frequency:** every release / weekly / on-demand
+Explain how this non-functional requirement is verified (e.g. k6 load test, chaos test, security pen test).
 
-## Threshold rationale
+## Source
 
-Why this number? (SLA, customer expectation, technical constraint)
-
-## Failure mode
-
-What happens if we miss this target? (degraded UX, alert fires,
-incident triggered, refund obligation)
-
-## See also
-
-- SLO--<related-objective> (when promoted to live monitoring)
+- <Link to the REQ-- or CONCEPT-- that originated this requirement>

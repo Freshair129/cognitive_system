@@ -28,16 +28,6 @@ cluster: implementation_flow
 role: Implementation plan
 attributes:
   scale_level: L2
-  linked_symbols:
-    - file: packages/msp/src/orchestrator/compressor/index.ts
-    - file: packages/msp/src/orchestrator/compressor/types.ts
-    - file: packages/msp/src/orchestrator/compressor/tokens.ts
-    - file: packages/msp/src/orchestrator/compressor/trim.ts
-    - file: packages/msp/src/orchestrator/compressor/resummarise.ts
-    - file: packages/msp/test/orchestrator/compressor/tokens.test.ts
-    - file: packages/msp/test/orchestrator/compressor/trim.test.ts
-    - file: packages/msp/test/orchestrator/compressor/resummarise.test.ts
-    - file: packages/msp/test/orchestrator/compressor/index.test.ts
   domain: blueprint
   language: markdown
   is_test: false
@@ -46,6 +36,16 @@ attributes:
   secret_type: aws_secret
   leak_risk: high
   encryption_level: none
+linked_symbols:
+  - file: packages/msp/src/orchestrator/compressor/index.ts
+  - file: packages/msp/src/orchestrator/compressor/types.ts
+  - file: packages/msp/src/orchestrator/compressor/tokens.ts
+  - file: packages/msp/src/orchestrator/compressor/trim.ts
+  - file: packages/msp/src/orchestrator/compressor/resummarise.ts
+  - file: packages/msp/test/orchestrator/compressor/tokens.test.ts
+  - file: packages/msp/test/orchestrator/compressor/trim.test.ts
+  - file: packages/msp/test/orchestrator/compressor/resummarise.test.ts
+  - file: packages/msp/test/orchestrator/compressor/index.test.ts
 ---
 
 # BLUEPRINT — compressor implementation plan

@@ -18,10 +18,6 @@ aliases:
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  linked_symbols:
-    - file: scripts/msp/msp-atom.ts
-    - file: scripts/msp/codegen-schemas.ts
-    - file: packages/msp/src/validator/rules/registry-drift.ts
   domain: blueprint
   language: markdown
   is_test: false
@@ -29,6 +25,10 @@ attributes:
   has_secret: false
   leak_risk: low
   encryption_level: none
+linked_symbols:
+  - file: scripts/msp/msp-atom.ts
+  - file: scripts/msp/codegen-schemas.ts
+  - file: packages/msp/src/validator/rules/registry-drift.ts
 ---
 
 # BLUEPRINT — Registry-Driven Atom CLI

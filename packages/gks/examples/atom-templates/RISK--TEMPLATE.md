@@ -1,49 +1,59 @@
 ---
 id: RISK--TEMPLATE
-tier: genesis
-created_at: 2026-05-13T12:00:00.000+07:00
-phase: 2
+phase: 1
 type: risk
 status: draft
-likelihood: medium              # low | medium | high
-impact: medium                  # low | medium | high | critical
-vault_id: <YOUR-PROJECT>
-title: <One-line risk summary>
+vault_id: default
+tier: process
+source_type: axiomatic
+title: <Identified risk + mitigation>
+created_at: 2026-05-22T22:36:00.000+07:00
+created_by: Rwang
+last_modify: 2026-05-22T22:36:00.000+07:00
+modify_by: Rwang
+assign_to: ""
+version: "0.1.0"
+priority: medium
+query_counter: 0
+level: low
+summary: "Template for RISK atoms — Identified risk + mitigation"
 tags: [risk]
-identified_at: 2026-05-13T12:00:00.000+07:00
+aliases:
+  - RISK
+  - ops
+  - Identified risk + mitigation
+cluster: ops
+role: Identified risk + mitigation
 crosslinks:
-  mitigated_by: []              # ADR-- / GUARDRAIL-- / RUNBOOK-- addressing this (Inverse Link)
-  related_incidents: []         # INC-- where this risk materialised (becomes one) (Backlink/Peer Link)
-  references: []                # Context / background for this risk (Context Link)
+  references: []
+linked_symbols: []
+granularity: general
+salience_anchor:
+  summary: ""
+  anchor_phrase: ""
+relationship_type: parent
+conflicts_with: []
+epistemic_status:
+  confidence: 1.0
+  source_type: axiom
+  contradictions: []
+attributes:
+  domain: general
 ---
 
 # RISK — <Title>
 
-## Description
+## Risk
 
-What could go wrong, and under what circumstances.
+Describe what could go wrong, under what circumstances, and the early-warning indicators that this risk is materializing.
 
-## Likelihood × Impact
+- **Likelihood:** <low / medium / high>
+- **Impact:** <low / medium / high / critical>
 
-- **Likelihood:** <low / medium / high> — <reasoning>
-- **Impact:** <low / medium / high / critical> — <reasoning>
-- **Score:** <combined>
+## Mitigation
 
-## Indicators
+Detail the mitigation strategies, planned tasks, or fallback plans to address this risk.
 
-Early-warning signs that this risk is materialising:
+## Source
 
-- ...
-
-## Mitigations
-
-| Mitigation | Status | Owner |
-|---|---|---|
-| <approach 1> | <planned/in-progress/done> | ... |
-
-## Acceptance
-
-If mitigation is "accept the risk":
-
-- **why:** ...
-- **review:** <when to re-evaluate>
+- <Link to the originating feature requirement, incident, or system review>

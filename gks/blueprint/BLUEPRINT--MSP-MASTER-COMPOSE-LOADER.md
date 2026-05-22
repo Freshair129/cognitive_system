@@ -28,12 +28,6 @@ aliases:
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  linked_symbols:
-    - file: packages/msp/src/master/compose-cli.ts
-    - file: packages/msp/src/master/trigger-eval.ts
-    - file: packages/msp/package.json
-    - file: packages/msp/test/master/trigger-eval.test.ts
-    - file: packages/msp/test/master/compose-cli.test.ts
   domain: blueprint
   language: markdown
   is_test: false
@@ -41,6 +35,12 @@ attributes:
   has_secret: false
   leak_risk: low
   encryption_level: none
+linked_symbols:
+  - file: packages/msp/src/master/compose-cli.ts
+  - file: packages/msp/src/master/trigger-eval.ts
+  - file: packages/msp/package.json
+  - file: packages/msp/test/master/trigger-eval.test.ts
+  - file: packages/msp/test/master/compose-cli.test.ts
 ---
 
 # BLUEPRINT — msp master compose CLI loader

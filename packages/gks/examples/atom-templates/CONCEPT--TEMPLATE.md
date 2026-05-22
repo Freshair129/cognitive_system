@@ -6,9 +6,18 @@ status: draft
 vault_id: default
 tier: process
 source_type: axiomatic
-title: <Concept / Strategic intent / PRD title>
-created_at: 2026-05-13T12:00:00.000+07:00
-tags: [concept, PRD]
+title: <Strategic intent / PRD>
+created_at: 2026-05-22T22:36:00.000+07:00
+created_by: Rwang
+last_modify: 2026-05-22T22:36:00.000+07:00
+modify_by: Rwang
+assign_to: ""
+version: "0.1.0"
+priority: medium
+query_counter: 0
+level: high
+summary: "Template for CONCEPT atoms — Strategic intent / PRD"
+tags: [concept]
 aliases:
   - CONCEPT
   - implementation_flow
@@ -18,6 +27,16 @@ role: Strategic intent / PRD
 crosslinks:
   references: []
 linked_symbols: []
+granularity: general
+salience_anchor:
+  summary: ""
+  anchor_phrase: ""
+relationship_type: parent
+conflicts_with: []
+epistemic_status:
+  confidence: 1.0
+  source_type: axiom
+  contradictions: []
 attributes:
   domain: general
 ---

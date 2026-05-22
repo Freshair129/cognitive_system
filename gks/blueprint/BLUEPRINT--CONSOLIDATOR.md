@@ -28,17 +28,6 @@ cluster: implementation_flow
 role: Implementation plan
 attributes:
   scale_level: L2
-  linked_symbols:
-    - file: packages/msp/src/orchestrator/consolidator/index.ts
-    - file: packages/msp/src/orchestrator/consolidator/types.ts
-    - file: packages/msp/src/orchestrator/consolidator/score.ts
-    - file: packages/msp/src/orchestrator/consolidator/boundary.ts
-    - file: packages/msp/src/orchestrator/consolidator/summarise.ts
-    - file: packages/msp/src/orchestrator/consolidator/llm.ts
-    - file: packages/msp/test/orchestrator/consolidator/score.test.ts
-    - file: packages/msp/test/orchestrator/consolidator/boundary.test.ts
-    - file: packages/msp/test/orchestrator/consolidator/summarise.test.ts
-    - file: packages/msp/test/orchestrator/consolidator/index.test.ts
   domain: blueprint
   language: markdown
   is_test: false
@@ -47,6 +36,17 @@ attributes:
   secret_type: aws_secret
   leak_risk: high
   encryption_level: none
+linked_symbols:
+  - file: packages/msp/src/orchestrator/consolidator/index.ts
+  - file: packages/msp/src/orchestrator/consolidator/types.ts
+  - file: packages/msp/src/orchestrator/consolidator/score.ts
+  - file: packages/msp/src/orchestrator/consolidator/boundary.ts
+  - file: packages/msp/src/orchestrator/consolidator/summarise.ts
+  - file: packages/msp/src/orchestrator/consolidator/llm.ts
+  - file: packages/msp/test/orchestrator/consolidator/score.test.ts
+  - file: packages/msp/test/orchestrator/consolidator/boundary.test.ts
+  - file: packages/msp/test/orchestrator/consolidator/summarise.test.ts
+  - file: packages/msp/test/orchestrator/consolidator/index.test.ts
 ---
 
 # BLUEPRINT — consolidator implementation plan

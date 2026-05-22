@@ -1,40 +1,68 @@
 ---
 id: FEAT--TEMPLATE
-tier: genesis
-created_at: 2026-05-13T12:00:00.000+07:00
 phase: 2
 type: feat
 status: draft
-vault_id: <YOUR-PROJECT>
-title: <One-line feature summary>
-tags: [user-facing]
-domain: <area>
+vault_id: default
+tier: process
+source_type: axiomatic
+title: <Feature spec>
+created_at: 2026-05-22T22:36:00.000+07:00
+created_by: Rwang
+last_modify: 2026-05-22T22:36:00.000+07:00
+modify_by: Rwang
+assign_to: ""
+version: "0.1.0"
+priority: medium
+query_counter: 0
+level: high
+summary: "Template for FEAT atoms — Feature spec"
+tags: [feat]
+aliases:
+  - FEAT
+  - implementation_flow
+  - Feature spec
+cluster: implementation_flow
+role: Feature spec
 crosslinks:
-  implements: []                # FR-- / NFR-- this feature satisfies (Requirement Link)
-  satisfies: []                 # Explicitly link to functional/non-functional requirements
-  references: []                # CONCEPT-- / ADR-- background context (Context Link)
-  governed_by: []               # ADR-- that dictates how this feature is built (Governance Link)
-  blueprint: BLUEPRINT--<feature-id> # The implementation plan for this feature (Plan Link)
-linked_symbols: []              # files / functions implementing this (Code Citation)
+  references: []
+linked_symbols: []
+granularity: general
+salience_anchor:
+  summary: ""
+  anchor_phrase: ""
+relationship_type: parent
+conflicts_with: []
+epistemic_status:
+  confidence: 1.0
+  source_type: axiom
+  contradictions: []
+attributes:
+  domain: general
 ---
 
 # FEAT — <Title>
 
 ## User-facing behaviour
 
-When user does X, system Y. Describe in plain language; no implementation
-details. Reviewer should be able to write acceptance criteria from this.
+Describe how the feature behaves from the user's perspective. Explain what happens under different states in plain language.
 
-## Acceptance criteria
+```ts
+// Provide a small TypeScript / JS API example of how this feature is invoked if applicable
+```
+
+## Verification
+
+### Acceptance criteria
 
 - [ ] <observable behaviour 1>
 - [ ] <observable behaviour 2>
-- [ ] error case: <what should happen when X fails>
+- [ ] error case: <what happens on failure>
 
 ## Out of scope
 
 - <related-but-deferred concerns>
 
-## Open questions
+## Source
 
-- <any unresolved spec questions>
+- <Link to the requirements, CONCEPT, or issue that drove this feature spec>

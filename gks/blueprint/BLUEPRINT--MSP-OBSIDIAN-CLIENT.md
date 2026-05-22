@@ -28,13 +28,6 @@ cluster: implementation_flow
 role: Implementation plan
 attributes:
   scale_level: L2
-  linked_symbols:
-    - file: packages/msp/src/obsidian/client.ts
-    - file: packages/msp/src/obsidian/types.ts
-    - file: packages/msp/src/obsidian/rest.ts
-    - file: packages/msp/src/obsidian/filesystem.ts
-    - file: packages/msp/src/obsidian/env.ts
-    - file: packages/msp/test/obsidian/client.test.ts
   domain: blueprint
   language: markdown
   is_test: false
@@ -43,6 +36,13 @@ attributes:
   secret_type: high_entropy_string
   leak_risk: high
   encryption_level: none
+linked_symbols:
+  - file: packages/msp/src/obsidian/client.ts
+  - file: packages/msp/src/obsidian/types.ts
+  - file: packages/msp/src/obsidian/rest.ts
+  - file: packages/msp/src/obsidian/filesystem.ts
+  - file: packages/msp/src/obsidian/env.ts
+  - file: packages/msp/test/obsidian/client.test.ts
 ---
 
 # BLUEPRINT — MSP Obsidian client implementation plan

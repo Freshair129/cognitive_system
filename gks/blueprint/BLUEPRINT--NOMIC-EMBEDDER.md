@@ -14,8 +14,6 @@ cluster: implementation_flow
 role: Implementation plan
 attributes:
   scale_level: L2
-  linked_symbols:
-    - file: packages/gks/src/memory/vector/embedder-nomic.ts
   links:
     - CONCEPT--EMBEDDING-STRATEGY
     - ADR--NOMIC-EMBEDDER
@@ -26,6 +24,8 @@ attributes:
   has_secret: false
   leak_risk: low
   encryption_level: none
+linked_symbols:
+  - file: packages/gks/src/memory/vector/embedder-nomic.ts
 ---
 
 # BLUEPRINT — Implementation plan for nomic-embed-text-v1.5 embedder

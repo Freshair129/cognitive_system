@@ -29,18 +29,6 @@ cluster: implementation_flow
 role: Implementation plan
 attributes:
   scale_level: L2
-  linked_symbols:
-    - file: packages/msp/src/mcp/server.ts
-    - file: packages/msp/src/mcp/tools/recall.ts
-    - file: packages/msp/src/mcp/tools/remember.ts
-    - file: packages/msp/src/mcp/tools/compress.ts
-    - file: packages/msp/src/mcp/tools/identity-get.ts
-    - file: packages/msp/src/mcp/tools/identity-set.ts
-    - file: packages/msp/test/mcp/tools/recall.test.ts
-    - file: packages/msp/test/mcp/tools/remember.test.ts
-    - file: packages/msp/test/mcp/tools/compress.test.ts
-    - file: packages/msp/test/mcp/tools/identity-get.test.ts
-    - file: packages/msp/test/mcp/tools/identity-set.test.ts
   domain: blueprint
   language: markdown
   is_test: false
@@ -49,6 +37,18 @@ attributes:
   secret_type: high_entropy_string
   leak_risk: high
   encryption_level: none
+linked_symbols:
+  - file: packages/msp/src/mcp/server.ts
+  - file: packages/msp/src/mcp/tools/recall.ts
+  - file: packages/msp/src/mcp/tools/remember.ts
+  - file: packages/msp/src/mcp/tools/compress.ts
+  - file: packages/msp/src/mcp/tools/identity-get.ts
+  - file: packages/msp/src/mcp/tools/identity-set.ts
+  - file: packages/msp/test/mcp/tools/recall.test.ts
+  - file: packages/msp/test/mcp/tools/remember.test.ts
+  - file: packages/msp/test/mcp/tools/compress.test.ts
+  - file: packages/msp/test/mcp/tools/identity-get.test.ts
+  - file: packages/msp/test/mcp/tools/identity-set.test.ts
 ---
 
 # BLUEPRINT — MSP MCP tool expansion

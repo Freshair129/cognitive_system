@@ -1,19 +1,44 @@
 ---
 id: FLOW--TEMPLATE
-tier: genesis
-created_at: 2026-05-13T12:00:00.000+07:00
 phase: 2
 type: flow
 status: draft
-vault_id: <YOUR-PROJECT>
-title: <One-line flow summary>
-domain: <domain-name>
-tags: [data-flow|ui-flow|sequence]
+vault_id: default
+tier: process
+source_type: axiomatic
+title: <Data / UI flow>
+created_at: 2026-05-22T22:36:00.000+07:00
+created_by: Rwang
+last_modify: 2026-05-22T22:36:00.000+07:00
+modify_by: Rwang
+assign_to: ""
+version: "0.1.0"
+priority: medium
+query_counter: 0
+level: low
+summary: "Template for FLOW atoms — Data / UI flow"
+tags: [flow]
+aliases:
+  - FLOW
+  - implementation_flow
+  - Data / UI flow
+cluster: implementation_flow
+role: Data / UI flow
 crosslinks:
-  participants: []              # MOD-- / ENTITY-- / ENDPOINT-- involved (Peer/Actor Link)
-  references: []                # ADR-- / FEAT-- background context (Context Link)
-  preceded_by: []               # FLOW-- that happens before this one (Sequence Link)
-  followed_by: []               # FLOW-- that happens after this one (Sequence Link)
+  references: []
+linked_symbols: []
+granularity: general
+salience_anchor:
+  summary: ""
+  anchor_phrase: ""
+relationship_type: parent
+conflicts_with: []
+epistemic_status:
+  confidence: 1.0
+  source_type: axiom
+  contradictions: []
+attributes:
+  domain: general
 ---
 
 # FLOW — <Title>

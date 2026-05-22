@@ -33,16 +33,6 @@ aliases:
 cluster: implementation_flow
 role: Implementation plan
 attributes:
-  linked_symbols:
-    - file: packages/msp/src/master/registry.ts
-    - file: packages/msp/src/master/promote-apply.ts
-    - file: packages/msp/src/master/cli.ts
-    - file: packages/msp/src/genesis/executor.ts
-    - file: packages/msp/src/genesis/types.ts
-    - file: packages/msp/test/master/registry.test.ts
-    - file: packages/msp/test/master/promote-apply.test.ts
-    - file: packages/msp/test/genesis/executor.test.ts
-    - file: .gitignore
   domain: blueprint
   language: markdown
   is_test: false
@@ -51,6 +41,16 @@ attributes:
   secret_type: high_entropy_string
   leak_risk: high
   encryption_level: none
+linked_symbols:
+  - file: packages/msp/src/master/registry.ts
+  - file: packages/msp/src/master/promote-apply.ts
+  - file: packages/msp/src/master/cli.ts
+  - file: packages/msp/src/genesis/executor.ts
+  - file: packages/msp/src/genesis/types.ts
+  - file: packages/msp/test/master/registry.test.ts
+  - file: packages/msp/test/master/promote-apply.test.ts
+  - file: packages/msp/test/genesis/executor.test.ts
+  - file: .gitignore
 ---
 
 # BLUEPRINT — Master ↔ Genesis runtime wiring (Phase F1)
