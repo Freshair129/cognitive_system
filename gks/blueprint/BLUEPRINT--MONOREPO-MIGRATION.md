@@ -46,6 +46,7 @@ attributes:
   secret_type: high_entropy_string
   leak_risk: high
   encryption_level: none
+linked_symbols: []
 ---
 
 # BLUEPRINT — monorepo migration

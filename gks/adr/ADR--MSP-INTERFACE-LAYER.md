@@ -5,7 +5,7 @@ type: adr
 status: stable
 vault_id: default
 tier: process
-source_type: documented_source
+source_type: axiomatic
 title: MSP Interface Layer — Hexagonal seam for inbound adapters (Smart Proxy Pattern)
 tags:
   - msp

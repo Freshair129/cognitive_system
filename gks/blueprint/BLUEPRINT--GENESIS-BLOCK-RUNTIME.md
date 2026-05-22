@@ -41,6 +41,7 @@ attributes:
   has_secret: false
   leak_risk: low
   encryption_level: none
+linked_symbols: []
 ---
 
 # BLUEPRINT — Genesis Block Runtime

@@ -30,6 +30,7 @@ attributes:
   secret_type: aws_secret
   leak_risk: high
   encryption_level: none
+linked_symbols: []
 ---
 
 # BLUEPRINT — Predicate Context Extension for Symbol Graph

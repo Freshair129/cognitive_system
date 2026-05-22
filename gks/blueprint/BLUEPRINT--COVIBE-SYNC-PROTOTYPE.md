@@ -17,6 +17,14 @@ crosslinks:
   references:
     - FEAT--COVIBE-SYNC-PROTOTYPE
 created_at: 2026-05-22T08:15:00+07:00
+attributes:
+  task_ids:
+    - p0-s0-1
+    - p0-s0-2
+    - p0-s0-3
+    - p0-s0-4
+    - p0-s0-5
+    - p0-s0-6
 ---
 
 # BLUEPRINT — CoVibe Sync Prototype
