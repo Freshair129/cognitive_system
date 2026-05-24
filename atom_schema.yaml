@@ -62,6 +62,22 @@ schema_spec:
           type: array
           items: string
           description: Legacy atoms deprecated or replaced by this atom
+        related_to:
+          type: array
+          items: string
+          description: Sibling or external atom IDs related to this atom
+        contradicts:
+          type: array
+          items: string
+          description: Sibling or external atom IDs that this atom contradicts
+        expands_on:
+          type: array
+          items: string
+          description: Sibling or external atom IDs that this atom expands on
+        depends_on:
+          type: array
+          items: string
+          description: Sibling or external atom IDs that this atom depends on
     created_at:
       type: string
       format: date-time

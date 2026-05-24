@@ -428,8 +428,12 @@ app.post('/api/brains/switch', async (req, res) => {
   res.json({ success: true, activeBrainIndex })
 })
 
+import { startWsServer } from './agents/ws-agent-server.js'
+
 const PORT = process.env.PORT ?? 3000
 app.listen(PORT, () => {
-
   console.log(`MSP listening on :${PORT}`)
 })
+
+// Start WebSocket server for Covibe Backlog UI integration
+startWsServer(8787, getActiveRoot)

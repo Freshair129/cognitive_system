@@ -74,6 +74,7 @@ function run(cmd: string, args: string[], cwd: string, opts: { input?: string } 
 }
 
 function chmodX(path: string): Promise<void> {
+  if (process.platform === 'win32') return Promise.resolve()
   return new Promise((resolve, reject) => {
     const c = spawn('chmod', ['+x', path])
     c.on('close', (code) => (code === 0 ? resolve() : reject(new Error(`chmod ${code}`))))
@@ -155,7 +156,11 @@ beforeAll(async () => {
   await mkdir(join(wt, 'gks/00_index'), { recursive: true })
   await mkdir(join(wt, 'gks/feat'), { recursive: true })
   await mkdir(join(wt, 'gks/concept'), { recursive: true })
-  run('ln', ['-s', workspaceNodeModules, join(wt, 'node_modules')], wt)
+  if (process.platform === 'win32') {
+    await symlink(workspaceNodeModules, join(wt, 'node_modules'), 'junction')
+  } else {
+    await symlink(workspaceNodeModules, join(wt, 'node_modules'))
+  }
   await ensureGksBin(workspaceNodeModules)
   // Tiny package.json so npx works
   await writeFile(

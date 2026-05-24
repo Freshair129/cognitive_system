@@ -26,5 +26,9 @@
   },
   "dependencies": {
     "glob": "^13.0.6"
+  },
+  "devDependencies": {
+    "@esbuild/win32-x64": "^0.28.0",
+    "@rollup/rollup-win32-x64-msvc": "^4.60.4"
   }
 }

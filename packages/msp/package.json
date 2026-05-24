@@ -54,8 +54,10 @@
     "@freshair129/gks": "*",
     "@modelcontextprotocol/sdk": "^1.6.0",
     "@notionhq/client": "^5.22.0",
+    "@types/ws": "^8.18.1",
     "better-sqlite3": "^11.9.1",
     "chalk": "^5.4.1",
+    "commander": "^14.0.3",
     "dotenv": "^16.4.5",
     "express": "^4.21.2",
     "graphology": "^0.25.4",
@@ -66,6 +68,7 @@
     "proper-lockfile": "^4.1.2",
     "tree-sitter-python": "^0.25.0",
     "web-tree-sitter": "^0.26.8",
+    "ws": "^8.21.0",
     "yaml": "^2.7.0",
     "zod": "^3.24.2"
   },

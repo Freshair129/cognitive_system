@@ -97,7 +97,7 @@ export async function recall(opts: RecallOptions): Promise<RetrievalResult> {
   const graphRes = await graphSource(sourceOpts)
 
   const vectorRes = results.find((r) => r.source === 'gks-vector')!
-  const obsidianRes = results.find((r) => r.source === 'obsidian-text')!
+  const obsidianRes = results.find((r) => r.source === 'obsidian-text') || results[1]
   const episodicRes = results.find((r) => r.source === 'episodic')!
 
   // Phase C: fuse.

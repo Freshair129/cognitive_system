@@ -1,5 +1,5 @@
 import { spawn, spawnSync } from 'node:child_process'
-import { copyFile, mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises'
+import { copyFile, mkdir, mkdtemp, rm, symlink, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -93,22 +93,25 @@ async function makeFixtureRepo(): Promise<string> {
     ),
   )
 
-  // Bring in node_modules (validator + tsx) by symlinking to the real one.
-  // On systems where symlinks are restricted, fall back to a copy. For CI we keep symlinks.
-  run('ln', ['-s', join(repoRoot, 'node_modules'), join(dir, 'node_modules')], dir)
-
-  // Symlink atom_schema.yaml + atom_registry.yaml so the validator can find
-  // the type taxonomy from either the --root flag or fallback walk-up.
-  run('ln', ['-s', join(repoRoot, 'atom_schema.yaml'), join(dir, 'atom_schema.yaml')], dir)
-  run('ln', ['-s', join(repoRoot, 'atom_registry.yaml'), join(dir, 'atom_registry.yaml')], dir)
+  if (process.platform === 'win32') {
+    await symlink(join(repoRoot, 'node_modules'), join(dir, 'node_modules'), 'junction')
+    await copyFile(join(repoRoot, 'atom_schema.yaml'), join(dir, 'atom_schema.yaml'))
+    await copyFile(join(repoRoot, 'atom_registry.yaml'), join(dir, 'atom_registry.yaml'))
+  } else {
+    await symlink(join(repoRoot, 'node_modules'), join(dir, 'node_modules'))
+    await symlink(join(repoRoot, 'atom_schema.yaml'), join(dir, 'atom_schema.yaml'))
+    await symlink(join(repoRoot, 'atom_registry.yaml'), join(dir, 'atom_registry.yaml'))
+  }
 
   // Install our hook.
   await mkdir(join(dir, '.git/hooks'), { recursive: true })
   await copyFile(hookSrc, join(dir, '.git/hooks/pre-commit'))
-  await new Promise<void>((resolve, reject) => {
-    const c = spawn('chmod', ['+x', join(dir, '.git/hooks/pre-commit')])
-    c.on('close', (code) => (code === 0 ? resolve() : reject(new Error(`chmod exit ${code}`))))
-  })
+  if (process.platform !== 'win32') {
+    await new Promise<void>((resolve, reject) => {
+      const c = spawn('chmod', ['+x', join(dir, '.git/hooks/pre-commit')])
+      c.on('close', (code) => (code === 0 ? resolve() : reject(new Error(`chmod exit ${code}`))))
+    })
+  }
 
   // Make the gks/concept dir so committed atoms have a valid path.
   await mkdir(join(dir, 'gks/concept'), { recursive: true })

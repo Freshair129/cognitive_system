@@ -21,7 +21,7 @@ program
   .description('List all atoms in the index')
   .option('-t, --type <type>', 'filter by atom type')
   .option('--json', 'output as JSON')
-  .action(async (opts) => {
+  .action(async (opts: Record<string, any>) => {
     try {
       const indexPath = join(process.cwd(), 'gks/00_index/atomic_index.jsonl')
       const content = await readFile(indexPath, 'utf8')
@@ -51,7 +51,7 @@ program
   .command('get <id>')
   .description('Get atom content and metadata by ID')
   .option('--json', 'output as JSON')
-  .action(async (id, opts) => {
+  .action(async (id: string, opts: Record<string, any>) => {
     try {
       const indexPath = join(process.cwd(), 'gks/00_index/atomic_index.jsonl')
       const content = await readFile(indexPath, 'utf8')

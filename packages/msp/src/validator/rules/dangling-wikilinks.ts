@@ -11,6 +11,9 @@ const CROSSLINK_KEYS = [
   'superseded_by',
   'partially_superseded_by',
   'resolves',
+  'related_to',
+  'expands_on',
+  'depends_on',
 ] as const
 
 function selfId(fm: Record<string, unknown>): string | undefined {

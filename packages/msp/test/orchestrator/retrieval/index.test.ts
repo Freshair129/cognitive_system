@@ -148,7 +148,7 @@ describe('recall — end-to-end', () => {
       obsidian: mockObsidian('rest', []),
       timeoutMs: 1500,
     })
-    expect(result.fallback_reasons).toContain('gks-vector: no-embedder')
+    expect(result.fallback_reasons).toContain('gks-vector: error: no-embedder')
     expect(result.semantic_available).toBe(false)
   })
 

@@ -108,16 +108,20 @@ describe('openSession + appendTurn', () => {
     const lockPath = `${sessionPath}.lock`
 
     // Spawn a child that acquires + kills itself before release.
+    // Create the proper-lockfile structure: directory with lock.json containing the PID.
     const script = `
       import { mkdir, writeFile } from 'node:fs/promises'
-      import { dirname } from 'node:path'
+      import { join } from 'node:path'
       const lockPath = ${JSON.stringify(lockPath)}
-      await mkdir(dirname(lockPath), { recursive: true })
-      await writeFile(lockPath, String(process.pid), { flag: 'wx' })
+      await mkdir(lockPath, { recursive: true })
+      await writeFile(join(lockPath, 'lock.json'), JSON.stringify({ pid: process.pid, stale: Date.now() + 10000 }))
       process.exit(0)
     `
     const r = spawnSync('node', ['--input-type=module', '-e', script], { encoding: 'utf8' })
     expect(r.status).toBe(0)
+
+    // Give Windows OS time to reap the dead child process PID
+    await new Promise(resolve => setTimeout(resolve, 500))
 
     // Now openSession should detect dead PID, clean, and acquire.
     const s = await openSession({ root, episodicId: 'ep_stale' })

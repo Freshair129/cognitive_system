@@ -11,7 +11,7 @@ export function addBootstrapCommand(program: Command) {
     .command('bootstrap <targetDir>')
     .description('Instantiate a fresh production-ready GKS/MSP project')
     .option('--name <name>', 'Project name (namespace)', 'new-project')
-    .action(async (targetDir, opts) => {
+    .action(async (targetDir: string, opts: Record<string, any>) => {
       const srcRoot = process.cwd()
       const destRoot = resolve(targetDir)
       const projectName = opts.name

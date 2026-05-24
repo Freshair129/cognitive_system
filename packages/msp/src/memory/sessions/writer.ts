@@ -29,23 +29,23 @@ export async function openSession(opts: OpenOpts): Promise<Session> {
   // Ensure file exists so proper-lockfile can lock it
   await appendFile(path, '', 'utf8')
 
+  // Acquire lock for the duration of the open session
+  const release = await lockSession(path)
+
   let disposed = false
 
   return {
     async appendTurn(row: SessionTurn) {
       if (disposed) throw new Error('session closed; cannot appendTurn')
       
-      const release = await lockSession(path)
-      try {
-        const validated = validateTurn(row)
-        const line = serialiseTurn(validated)
-        await appendFile(path, line + '\n', 'utf8')
-      } finally {
-        await release()
-      }
+      const validated = validateTurn(row)
+      const line = serialiseTurn(validated)
+      await appendFile(path, line + '\n', 'utf8')
     },
     async close() {
+      if (disposed) return
       disposed = true
+      await release()
     },
   }
 }
