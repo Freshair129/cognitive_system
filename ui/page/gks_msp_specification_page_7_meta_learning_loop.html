@@ -160,6 +160,17 @@
                             กลไก <strong>Skill Creator (หรือรหัสเครื่องยนต์ Hermes)</strong> ทำหน้าที่เรียนรู้พฤติกรรมความสำเร็จในอดีตมาสร้างเป็นชุดคู่มือปฏิบัติงานอัตโนมัติ (SKILL--) เพื่อลดภาระและประหยัดงบประมาณโทเค็นของเอเจนต์ในลูปถัดไป โดยรันงานเป็น Background Worker ภายใต้เงื่อนไขอย่างเคร่งครัด (<code class="text-xs bg-slate-100 text-pink-600 px-1.5 py-0.5 rounded">FEAT--SKILL-CREATOR</code>):
                         </p>
 
+                        <!-- Architectural Note to prevent naming collision -->
+                        <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg">
+                            <h4 class="font-semibold text-amber-800 flex items-center gap-2">
+                                <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                ข้อชี้แจงสถาปัตยกรรม (Naming Ambiguity Note)
+                            </h4>
+                            <p class="text-xs text-amber-700 mt-1 leading-relaxed">
+                                <strong>"Hermes Engine"</strong> ในหัวข้อนี้เป็นรหัสเรียกของเครื่องยนต์สร้างทักษะภายในระบบ MLL เท่านั้น (Background Worker) โปรดอย่าสับสนกับ <strong>"Hermes Client"</strong> ซึ่งเป็นเอเจนต์ผู้รับบริการภายนอก (Cognitive-Layer Client) ค่ายอื่นที่เชื่อมเข้ากับ MSP
+                            </p>
+                        </div>
+
                         <!-- Trigger Conditions Grid -->
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div class="bg-white p-5 border border-slate-200 rounded-xl shadow-sm">
@@ -321,7 +332,7 @@ crosslinks:
                                 <span class="text-xs font-mono font-bold text-slate-400">STEP 2</span>
                                 <h5 class="font-bold text-slate-900 mt-1 mb-2">Parallel Execution</h5>
                                 <p class="text-[10px] text-slate-500 leading-relaxed">
-                                    ยิงคำสั่งวิเคราะห์ไปหา 3 โมเดลค่ายต่างกัน: Gemini 1.5 Pro, Claude 3.5 Sonnet และ Local Ollama Qwen
+                                    ยิงคำสั่งวิเคราะห์ไปหา 3 โมเดลค่ายต่างกัน: Gemini 1.5 Pro, Claude 3.5 Sonnet และ Local Ollama Qwen 2.5 Coder
                                 </p>
                             </div>
 
