@@ -64,25 +64,44 @@ attributes:
 ### กลไกการทำงาน
 
 ```
-Chain:  A ←→ B ←→ C ←→ [D] ←→ E ←→ F
+Chain: /| Y~4 ←→ Z~3 ←→ A~2 ←→ (B ←→ {C ←→ [D] ←→ E} ←→ F) |\
 
-ค้นหา D:
+ค้นหา D (Search Origin):
 
   Hop 0 → [D]    → FULL     เห็นทุกอย่าง (body + frontmatter + crosslinks)
   Hop 1 → {C, E} → SUMMARY  เห็น summary, anchor, salient, trigger, hook
   Hop 2 → (B, F) → SKELETON เห็นแค่ title, anchor, salient, trigger, hook
-  Hop 3 → (A |   → MENTION  เห็นแค่ id — | คือสุดทางของ chain
+  Hop 3+ → Node~hop (เช่น A~2, Z~3, Y~4) → MENTION เห็นแค่ id และจำนวน hop
+
+สัญลักษณ์และระบบคำบรรยาย Chain (Hybrid Notation):
+
+  [ Node ]      Focus Node / Parent (Hop 0) — แสดงแบบ FULL
+  { Node }      Child / Near Node (Hop 1)   — แสดงแบบ SUMMARY
+  ( Node )      Grandchild / Far Node (Hop 2) — แสดงแบบ SKELETON (ยังมี chain ต่อ)
+  Node~hop      Mention / Deep Node (Hop 3+) — แสดงแบบ MENTION โดยมีเลข hop กำกับ (เช่น Node~3, Node~4)
+
+สัญลักษณ์แสดงทิศทางสุดทาง (End of Chain / Terminal Node):
+
+  /|            สุดสายสัมพันธ์ด้านซ้าย (Left Terminal Node)
+  |\            สุดสายสัมพันธ์ด้านขวา (Right Terminal Node)
+  /| |\         สุดสายสัมพันธ์ทั้งซ้ายและขวา (เช่นมีโหนดเดียวโดดๆ หรือสายเดี่ยวที่จบสมบูรณ์)
+  
+สัญลักษณ์สายเชื่อมสัมพันธ์ (Edge / Relationships):
+
+  ←             ความสัมพันธ์ทิศทางเดียว (ชี้กลับฝั่งซ้าย)
+  →             ความสัมพันธ์ทิศทางเดียว (ชี้ไปฝั่งขวา)
+  ←→            ความสัมพันธ์สองทิศทาง (Bidirectional Link)
 ```
 
 ### สัญลักษณ์แสดง Chain Boundary
 
 ```
-สัญลักษณ์   ความหมาย
-────────────────────────────────
-[ X ]       Focus Node — FULL detail
-{ X }       Near Nodes — SUMMARY
-( X )       Far Nodes  — SKELETON (ยังมี chain ต่อ)
-( X |       End of Chain — MENTION (สุดทาง)
+สัญลักษณ์      ความหมาย
+────────────────────────────────────────────────────────────
+[ X ]         Focus Node (Hop 0) — FULL Detail
+{ X }         Near Node (Hop 1) — SUMMARY
+( X )         Far Node (Hop 2) — SKELETON (ยังมี chain ไปต่อ)
+X~hop / | X | End of Chain / Terminal Node — MENTION (สุดทาง หรือ อยู่ระดับลึก Hop 3+)
 ```
 
 ### Anchor Fields (ฟิลด์สมอที่ปรากฏในทุก Tier)
@@ -180,16 +199,16 @@ Hop 2 [SKELETON]:
   ADR--MSP-OBSIDIAN-INTEGRATION    (via CONCEPT references, weight 0.25)
 
 Hop 3 [MENTION]:
-  FRAMEWORK--MSP-ARCHITECTURE-V2 |  (สุดทาง chain)
+  FRAMEWORK--MSP-ARCHITECTURE-V2 |\ (สุดทาง chain)
 ```
 
 Agent จะเห็น:
 ```
-📄 RUNBOOK--OBSIDIAN-LINTER-SETUP         ← FULL (เห็นทุกอย่าง)
-  📋 PARAMS--LINTER-SETUP-PROFILE01       ← SUMMARY (เห็นตาราง + สรุป)
-  📋 CONCEPT--OBSIDIAN-AS-RUNTIME         ← SUMMARY (เห็นสรุปย่อ)
-    📌 ADR--MSP-OBSIDIAN-INTEGRATION      ← SKELETON (เห็นแค่หัวข้อ)
-      🔗 FRAMEWORK--MSP-ARCHITECTURE-V2 | ← MENTION (รู้ว่ามี แต่ไม่เห็น)
+📄 RUNBOOK--OBSIDIAN-LINTER-SETUP           ← FULL (เห็นทุกอย่าง)
+  📋 PARAMS--LINTER-SETUP-PROFILE01         ← SUMMARY (เห็นตาราง + สรุป)
+  📋 CONCEPT--OBSIDIAN-AS-RUNTIME           ← SUMMARY (เห็นสรุปย่อ)
+    📌 ADR--MSP-OBSIDIAN-INTEGRATION        ← SKELETON (เห็นแค่หัวข้อ)
+      🔗 FRAMEWORK--MSP-ARCHITECTURE-V2 |\  ← MENTION (รู้ว่ามี แต่ไม่เห็น - สุดทาง)
 ```
 
 ## Verification
