@@ -12,6 +12,8 @@ import {
   type RetrievalOptions,
   retain as gksRetain,
   verifyFlow,
+  renderByTier,
+  type ResolutionTier,
 } from '@freshair129/gks'
 
 import { runTask as runCodegenTask } from '../codegen/runner.js'
@@ -23,6 +25,7 @@ import { evaluatePolicy } from '../policy/pdp.js'
 import { logShadowDecision } from '../policy/shadow-log.js'
 import { handleEscalation } from '../policy/escalation.js'
 import { enforcePolicy } from '../policy/pep.js'
+import { runNexusmind } from './nexusmind.js'
 import { recall as mspRecall } from '../orchestrator/retrieval/index.js'
 
 import { ftsSearch } from './fts.js'
@@ -64,6 +67,7 @@ export async function createCognitiveLayer(
               : opts.graphBackend,
         }
       : {}),
+    ...(opts.embedder ? { embedder: opts.embedder } : {}),
   }
   const store = new MemoryStore(memOpts)
   await store.init()
@@ -98,24 +102,69 @@ export async function createCognitiveLayer(
         vectorBackend: await store.getVectorStore('atomic'),
       })
 
-      const hits = result.hits.map((h) => {
+      let thinkingLevel = 2
+      if (retrievalOpts.thinkingLevel !== undefined) {
+        thinkingLevel = retrievalOpts.thinkingLevel
+      } else if (subject.attributes?.tier === 'T1') {
+        thinkingLevel = 1
+      } else if (subject.attributes?.tier === 'T2') {
+        thinkingLevel = 3
+      } else if (subject.attributes?.tier === 'T3') {
+        thinkingLevel = 5
+      }
+
+      const seedIds = result.hits.map((h) => h.atomId)
+      const nexus = await runNexusmind(store, seedIds, thinkingLevel)
+
+      const finalHits: CognitiveRecallHit[] = []
+
+      for (const h of result.hits) {
+        const note = await store.lookup(h.atomId)
+        const tier = nexus.tiers.get(h.atomId) ?? 'FULL'
         const hit: CognitiveRecallHit = {
           id: h.atomId,
           atomId: h.atomId,
           source: h.source === 'gks-vector' ? 'vector' : (h.source as any),
           score: h.score,
-          snippet: h.snippet ?? '',
+          snippet: note ? renderByTier(note, tier) : h.snippet ?? '',
           metadata: {
             ...h.attributes,
             perSourceRanks: h.perSourceRanks,
+            tier,
+            informationValue: nexus.informationValues.get(h.atomId),
           },
         }
-        return markAuditOnly(hit)
-      })
+        finalHits.push(markAuditOnly(hit))
+      }
+
+      for (const expandedId of nexus.expandedIds) {
+        if (seedIds.includes(expandedId)) continue
+        const note = await store.lookup(expandedId)
+        if (note) {
+          const tier = nexus.tiers.get(expandedId) ?? 'FULL'
+          const hit: CognitiveRecallHit = {
+            id: note.id,
+            atomId: note.id,
+            source: 'atomic',
+            score: (nexus.informationValues.get(note.id) ?? 0.5) * 0.9,
+            snippet: renderByTier(note, tier),
+            metadata: {
+              phase: note.phase,
+              type: note.type,
+              status: note.status,
+              tier,
+              informationValue: nexus.informationValues.get(note.id),
+            },
+          }
+          finalHits.push(markAuditOnly(hit))
+        }
+      }
+
+      finalHits.sort((a, b) => b.score - a.score)
 
       return {
         query,
-        hits,
+        hits: finalHits,
         strategy: 'multi',
         tookMs: result.timings.fusion,
         fallback_reasons: result.fallback_reasons,

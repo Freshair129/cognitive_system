@@ -6,6 +6,9 @@ export {
   MemoryStore,
   recall,
   retain,
+  renderByTier,
+  walkGraph,
+  DEFAULT_REL_WEIGHTS,
 } from './memory/index.js'
 export type {
   BgeRerankerOptions,
@@ -14,4 +17,5 @@ export type {
   RetrievalHit,
   RetrievalOptions,
   RetrievalResult,
+  ResolutionTier,
 } from './memory/index.js'

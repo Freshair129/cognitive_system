@@ -10,6 +10,18 @@ import type { ParsedAtom, ValidationContext, ValidationError } from '../types.js
 export const ID_PATTERN =
   /^(?:ADR-\d{3}|HOTFIX--[a-f0-9]+|[A-Z][A-Z0-9_]+-\d+--[A-Z0-9][A-Z0-9_-]*(?:--K\d+)?|[A-Z][A-Z0-9_]*--[A-Z0-9][A-Z0-9_-]*)$/
 
+// Obsidian RUNBOOK sub-pattern (atom_schema.yaml §naming_conventions.obsidian_runbook)
+// Format: RUNBOOK--OBSIDIAN-{PLUGIN_TYPE}-{PLUGIN_NAME}-SETUP
+//   PLUGIN_TYPE  : COM_PG  (community plugin)
+//                  CORE_PG (core plugin)
+//   PLUGIN_NAME  : UPPER_SNAKE_CASE identifier for the plugin, e.g. LINTER, METADATA_MENU
+// Examples:
+//   RUNBOOK--OBSIDIAN-COM_PG-LINTER-SETUP
+//   RUNBOOK--OBSIDIAN-COM_PG-METADATA_MENU-SETUP
+//   RUNBOOK--OBSIDIAN-CORE_PG-TEMPLATES-SETUP
+export const OBSIDIAN_RUNBOOK_PATTERN =
+  /^RUNBOOK--OBSIDIAN-(?:COM_PG|CORE_PG)-[A-Z][A-Z0-9_]*-SETUP$/
+
 function getId(fm: Record<string, unknown>): string | undefined {
   const id = fm['id']
   if (typeof id === 'string' && id.length > 0) return id
@@ -38,6 +50,20 @@ export function idFormat(
         rule: 'id-format',
         severity: 'error',
         message: `id '${id}' does not match the canonical pattern (TYPE--SLUG or ADR-NNN)`,
+        offending: id,
+      },
+    ]
+  }
+  // Sub-rule: Obsidian RUNBOOK atoms must follow the plugin-type naming convention.
+  // See: atom_schema.yaml §naming_conventions.obsidian_runbook
+  if (id.startsWith('RUNBOOK--OBSIDIAN-') && !OBSIDIAN_RUNBOOK_PATTERN.test(id)) {
+    return [
+      {
+        rule: 'id-format',
+        severity: 'error',
+        message:
+          `Obsidian RUNBOOK id '${id}' must follow RUNBOOK--OBSIDIAN-{PLUGIN_TYPE}-{PLUGIN_NAME}-SETUP ` +
+          `where PLUGIN_TYPE is COM_PG or CORE_PG`,
         offending: id,
       },
     ]

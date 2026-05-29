@@ -77,6 +77,7 @@ interface ManifestFrontmatter {
   members?: unknown
   daci?: unknown
   attributes?: unknown
+  crosslinks?: unknown
 }
 
 /** Strip the leading `---\nYAML\n---` block and parse it; null on failure. */
@@ -139,8 +140,8 @@ export function checkManifest(
   const manifest_version = fm.manifest_version !== undefined ? fm.manifest_version : attrs['manifest_version']
   const daci = fm.daci !== undefined ? fm.daci : attrs['daci']
 
-  // If members block is undefined, dynamically build it from references/related_to in crosslinks.
-  if (members === undefined) {
+  // If members block is undefined and crosslinks is specified, dynamically build it from references/related_to in crosslinks.
+  if (members === undefined && fm.crosslinks !== undefined) {
     const crosslinks = fm.crosslinks && typeof fm.crosslinks === 'object'
       ? (fm.crosslinks as Record<string, unknown>)
       : {}

@@ -390,3 +390,90 @@ export interface GraphBackend {
   neighbors(seed: string, q?: NeighborQuery): Promise<NeighborResult[]> | NeighborResult[]
   cypher(query: string): Promise<Array<Record<string, unknown>>>
 }
+
+export interface WalkResult {
+  nodeId: string
+  hop: number
+  path: GraphEdge[]
+  score: number
+}
+
+export const DEFAULT_REL_WEIGHTS: Record<string, number> = {
+  depends_on: 1.0,
+  belongs_to: 1.0,
+  implements: 0.9,
+  expands_on: 0.8,
+  references: 0.5,
+  supersedes: 0.3,
+}
+
+export async function walkGraph(
+  backend: GraphBackend,
+  seeds: string[],
+  maxDepth: number,
+  relWeights: Record<string, number> = DEFAULT_REL_WEIGHTS,
+  decayRate = 0.8,
+): Promise<Map<string, WalkResult>> {
+  const result = new Map<string, WalkResult>()
+  const visited = new Set<string>(seeds)
+
+  const queue: Array<{ id: string; hop: number; path: GraphEdge[]; pathWeight: number }> = []
+  for (const s of seeds) {
+    queue.push({ id: s, hop: 0, path: [], pathWeight: 1.0 })
+    result.set(s, { nodeId: s, hop: 0, path: [], score: 1.0 })
+  }
+
+  let head = 0
+  while (head < queue.length) {
+    const frame = queue[head++]!
+    if (frame.hop >= maxDepth) continue
+
+    let neighbors: NeighborResult[] = []
+    try {
+      const res = backend.neighbors(frame.id, {
+        depth: 1,
+        direction: 'both',
+      })
+      neighbors = res instanceof Promise ? await res : res
+    } catch (err) {
+      log.warn(`walkGraph: neighbors failed for ${frame.id}`, { error: (err as Error).message })
+      continue
+    }
+
+    for (const n of neighbors) {
+      const neighborNode = n.node
+      const edge = n.path[n.path.length - 1]
+      if (!edge) continue
+
+      const edgeWeight = relWeights[edge.rel] ?? 0.5
+      const newPathWeight = frame.pathWeight * edgeWeight
+      const newHop = frame.hop + 1
+      const newPath = [...frame.path, edge]
+
+      const score = newPathWeight * Math.pow(decayRate, newHop)
+
+      const existing = result.get(neighborNode.id)
+      if (!existing || score > existing.score) {
+        result.set(neighborNode.id, {
+          nodeId: neighborNode.id,
+          hop: newHop,
+          path: newPath,
+          score,
+        })
+
+        if (!visited.has(neighborNode.id)) {
+          visited.add(neighborNode.id)
+          queue.push({
+            id: neighborNode.id,
+            hop: newHop,
+            path: newPath,
+            pathWeight: newPathWeight,
+          })
+        }
+      }
+    }
+  }
+
+  return result
+}
+

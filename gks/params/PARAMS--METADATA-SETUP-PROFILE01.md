@@ -1,12 +1,19 @@
 ---
 id: PARAMS--METADATA-SETUP-PROFILE01
+phase: 2
+type: params
+status: active
+vault_id: default
+tier: process
+source_type: axiomatic
 title: Recommended Metadata Profile — Metadata Menu Plugin (Obsidian)
+created_at: 2026-05-29T08:06:00.000+07:00
 cluster: standards
 role: Parameter definition
 crosslinks:
   references:
-    - RUNBOOK--OBSIDIAN-METADATA-SETUP
-    - RUNBOOK--OBSIDIAN-LINTER-SETUP
+    - RUNBOOK--OBSIDIAN-COM_PG-METADATA_MENU-SETUP
+    - RUNBOOK--OBSIDIAN-COM_PG-LINTER-SETUP
 attributes:
   domain: standards
   language: markdown

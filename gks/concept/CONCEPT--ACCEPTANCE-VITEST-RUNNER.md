@@ -1,4 +1,6 @@
 ---
+"1":
+"2":
 id: CONCEPT--ACCEPTANCE-VITEST-RUNNER
 phase: 1
 type: concept
@@ -14,9 +16,8 @@ tags:
   - vitest
   - runtime
 crosslinks:
-  references:
-    - FEAT--CODEGEN-MICROTASK-RUNNER
-    - ADR--CODEGEN-RETRY-POLICY
+multi:
+  - 10
 created_at: 2026-05-03T16:27:17.430+07:00
 aliases:
   - CONCEPT

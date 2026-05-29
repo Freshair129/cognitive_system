@@ -24,9 +24,10 @@ created_at: 2026-05-13T17:22:01.640+07:00
 aliases:
   - CONCEPT
   - implementation_flow
-  - Strategic intent / PRD
+  - Strategic intent
+  - PRD
 cluster: implementation_flow
-role: Strategic intent / PRD
+role: Strategic_intent_PRD
 attributes:
   domain:
     - ucf
@@ -46,7 +47,7 @@ attributes:
 >
 > Spec section: `UNIVERSAL-CONTEXT-FRAMEWORK_spec.md` §7. Related decisions: D-1 (YAML language), D-7 (default-permit + shadow log).
 
-## Problem
+## Problem️
 
 MSP today does not have a uniform access control mechanism. Checks (when present) are scattered across modules: HTTP routes, MCP tools, the facade. Each location interprets caller identity differently, audits inconsistently, and bypasses easily. Adding a new check requires editing N call sites; removing a check requires finding them all.
 

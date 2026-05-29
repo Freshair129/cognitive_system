@@ -1,5 +1,5 @@
-schema_version: "2.5"
-last_updated: 2026-05-17T09:14:00+07:00
+schema_version: "2.6"
+last_updated: 2026-05-29T09:00:00+07:00
 
 schema_spec:
   compound_id_format: "{aliases}-{atomId}--{knowledgeId}--K{atomtype_counter}"
@@ -696,3 +696,36 @@ decision_rule:
     Insight: INSIGHT
     Fact: FACT
     Rule: RULE
+
+naming_conventions:
+  description: |
+    Special naming rules that override or extend the generic TYPE--SLUG pattern.
+    Enforced by: packages/msp/src/validator/rules/id-format.ts
+    Cross-referenced by: FRAMEWORK_MASTER_SPEC.md §4.4 RUNBOOK--
+
+  obsidian_runbook:
+    description: |
+      Naming convention for all RUNBOOK atoms that document Obsidian plugin setup.
+      Every such atom MUST follow the format:
+        RUNBOOK--OBSIDIAN-{PLUGIN_TYPE}-{PLUGIN_NAME}-SETUP
+    pattern: "^RUNBOOK--OBSIDIAN-(?:COM_PG|CORE_PG)-[A-Z][A-Z0-9_]*-SETUP$"
+    enforced_by: "packages/msp/src/validator/rules/id-format.ts::OBSIDIAN_RUNBOOK_PATTERN"
+    plugin_types:
+      COM_PG:
+        label: Community Plugin
+        description: Third-party plugins installed via Obsidian Community Plugins browser
+        examples:
+          - RUNBOOK--OBSIDIAN-COM_PG-LINTER-SETUP
+          - RUNBOOK--OBSIDIAN-COM_PG-METADATA_MENU-SETUP
+      CORE_PG:
+        label: Core Plugin
+        description: Built-in plugins shipped with Obsidian (can be toggled on/off)
+        examples:
+          - RUNBOOK--OBSIDIAN-CORE_PG-TEMPLATES-SETUP
+          - RUNBOOK--OBSIDIAN-CORE_PG-DAILY_NOTES-SETUP
+    plugin_name_rules:
+      - Must be UPPER_SNAKE_CASE (e.g. METADATA_MENU not MetadataMenu)
+      - Must be a stable, recognisable abbreviation of the plugin's display name
+      - Multi-word names use underscore as separator (no hyphens within the name segment)
+    decided_at: 2026-05-29T09:00:00+07:00
+    decided_by: Rwang (อาหวัง) + Antigravity IDE

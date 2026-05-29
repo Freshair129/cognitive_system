@@ -1,5 +1,5 @@
 ---
-id: RUNBOOK--OBSIDIAN-METADATA-SETUP
+id: RUNBOOK--OBSIDIAN-COM_PG-METADATA_MENU-SETUP
 phase: 6
 type: runbook
 status: active
@@ -8,13 +8,14 @@ tier: process
 source_type: axiomatic
 title: Obsidian Metadata Menu Setup Guide
 created_at: 2026-05-29T08:06:00.000+07:00
+last_updated: 2026-05-29T09:00:00.000+07:00
 cluster: ops
 role: Operational response guide
 crosslinks:
   depends_on:
     - PARAMS--METADATA-SETUP-PROFILE01
   references:
-    - RUNBOOK--OBSIDIAN-LINTER-SETUP
+    - RUNBOOK--OBSIDIAN-COM_PG-LINTER-SETUP
 attributes:
   domain: operations
   language: markdown
@@ -173,7 +174,7 @@ npm run dev --workspace=packages/ui
 ## Source
 
 - [PARAMS--METADATA-SETUP-PROFILE01](file:///c:/Users/freshair/cognitive_system/gks/params/PARAMS--METADATA-SETUP-PROFILE01.md) — Metadata Menu recommended parameter profile
-- [RUNBOOK--OBSIDIAN-LINTER-SETUP](file:///c:/Users/freshair/cognitive_system/gks/runbook/RUNBOOK--OBSIDIAN-LINTER-SETUP.md) — Linter plugin setup (for YAML formatting)
+- [RUNBOOK--OBSIDIAN-COM_PG-LINTER-SETUP](file:///c:/Users/freshair/cognitive_system/gks/runbook/RUNBOOK--OBSIDIAN-COM_PG-LINTER-SETUP.md) — Linter plugin setup (for YAML formatting)
 - [atom_schema.yaml](file:///c:/Users/freshair/cognitive_system/atom_schema.yaml) — GKS frontmatter standard schema
 - [Metadata Menu Documentation](https://mdelobelle.github.io/metadatamenu) — Official plugin docs
 

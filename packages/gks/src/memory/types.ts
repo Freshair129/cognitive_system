@@ -67,6 +67,10 @@ export interface AtomicEntry {
   vault_id: string
   path: string
   title?: string
+  summary?: string
+  domain?: string
+  created_at?: string
+  source_type?: string
   tags?: string[]
   crosslinks?: Record<string, string[]>
   valid_from?: string
@@ -286,6 +290,8 @@ export interface RetrievalOptions {
   crossNamespace?: boolean
   boostStable?: boolean
   sources?: Array<'atomic' | 'vector' | 'episodic' | 'obsidian'>
+  enableHopResolution?: boolean
+  maxHopDepth?: number
 }
 
 export interface RetrievalResult {
@@ -295,12 +301,15 @@ export interface RetrievalResult {
   tookMs: number
 }
 
+export type ResolutionTier = 'FULL' | 'SUMMARY' | 'SKELETON' | 'MENTION'
+
 export interface RetrievalHit {
   id: string
   source: 'atomic' | 'vector' | 'episodic' | 'obsidian'
   score: number
   path?: string
   title?: string
+  tier?: ResolutionTier
   /**
    * SECURITY: snippet text is sourced from user-controlled memory (retain
    * inputs, session traces, Obsidian notes). When passed into a downstream

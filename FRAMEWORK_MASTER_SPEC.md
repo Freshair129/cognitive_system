@@ -382,6 +382,35 @@ packages/msp/src/
 > - **POLICY--** = "data retention 90 วัน / rate limit 100rps" (system-level access/config)
 > - **PROTOCOL--** = "agent กับ MCP server คุยกันยังไง" (interaction contract)
 
+#### 4.4.1 RUNBOOK Obsidian — Sub-naming Convention (v2.6)
+
+RUNBOOK atoms ที่เกี่ยวกับการตั้งค่า Obsidian plugin **ต้องใช้ format พิเศษ** แทนที่จะใช้ `RUNBOOK--<SLUG>` ทั่วไป:
+
+```
+RUNBOOK--OBSIDIAN-{PLUGIN_TYPE}-{PLUGIN_NAME}-SETUP
+```
+
+| ส่วน | ค่าที่ถูกต้อง | ความหมาย |
+|---|---|---|
+| `PLUGIN_TYPE` | `COM_PG` | Community Plugin (ติดตั้งผ่าน Obsidian Community Plugins) |
+| `PLUGIN_TYPE` | `CORE_PG` | Core Plugin (built-in ใน Obsidian) |
+| `PLUGIN_NAME` | `UPPER_SNAKE_CASE` | ชื่อ plugin เป็นตัวพิมพ์ใหญ่ คั่นด้วย `_` เช่น `METADATA_MENU`, `LINTER` |
+
+**ตัวอย่างที่ถูกต้อง:**
+- `RUNBOOK--OBSIDIAN-COM_PG-LINTER-SETUP`
+- `RUNBOOK--OBSIDIAN-COM_PG-METADATA_MENU-SETUP`
+- `RUNBOOK--OBSIDIAN-CORE_PG-TEMPLATES-SETUP`
+
+**ตัวอย่างที่ผิด (Validator จะ reject):**
+- `RUNBOOK--OBSIDIAN-LINTER-SETUP` ← ขาด PLUGIN_TYPE
+- `RUNBOOK--OBSIDIAN-community-linter-SETUP` ← ใช้ตัวเล็ก
+- `RUNBOOK--OBSIDIAN-PLUGIN-MetadataMenu-SETUP` ← PLUGIN_TYPE ไม่ถูกต้อง + PLUGIN_NAME ไม่ใช่ UPPER_SNAKE
+
+> **Enforcement:** กฎนี้ถูก enforce โดยอัตโนมัติผ่าน `OBSIDIAN_RUNBOOK_PATTERN` ใน
+> `packages/msp/src/validator/rules/id-format.ts` และบันทึก SSOT ไว้ใน
+> `atom_schema.yaml §naming_conventions.obsidian_runbook`
+> **ตัดสินใจ:** 2026-05-29 โดย Rwang (อาหวัง)
+
 ### 4.5 ประเภทความรู้: Blueprints (`blueprints/` หรือ `blueprint/`)
 - **ID Prefix:** `BLUEPRINT--` (Phase 3)
 - **เป้าหมาย:** แปลงความรู้ → แผนงานเทคนิคที่รัดกุม (low-water, executable)

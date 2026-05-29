@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { mkdir, mkdtemp, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
+import { mockEmbedder } from '@freshair129/gks'
 
 import { createCognitiveLayer } from '../../src/cognitive/index.js'
 
@@ -28,7 +29,7 @@ describe('createCognitiveLayer', () => {
   it('initialises with defaults and exposes the MemoryStore + GraphBackend escape hatches', async () => {
     const root = await makeRoot()
     roots.push(root)
-    const layer = await createCognitiveLayer({ root })
+    const layer = await createCognitiveLayer({ root, embedder: mockEmbedder(64) })
     expect(layer.store).toBeDefined()
     expect(layer.graph).toBeDefined()
     expect(typeof layer.graph.addNode).toBe('function')
@@ -37,7 +38,7 @@ describe('createCognitiveLayer', () => {
   it('remember() returns a vectorDocId', async () => {
     const root = await makeRoot()
     roots.push(root)
-    const layer = await createCognitiveLayer({ root })
+    const layer = await createCognitiveLayer({ root, embedder: mockEmbedder(64) })
     const r = await layer.remember('Cortex handles planning in the Tri-Brain.')
     expect(typeof r.id).toBe('string')
     expect(r.id.length).toBeGreaterThan(0)
@@ -46,7 +47,8 @@ describe('createCognitiveLayer', () => {
   it('recall() returns hits with cognitive shape and audit_only stamp on episodic', async () => {
     const root = await makeRoot()
     roots.push(root)
-    const layer = await createCognitiveLayer({ root })
+    const layer = await createCognitiveLayer({ root, embedder: mockEmbedder(64) })
+    ;(layer.store as any).vectorScoreThreshold = -1
     await layer.remember('Cortex handles planning.', { tags: ['cortex'] })
     const result = await layer.recall('cortex planning', { topK: 5, scoreThreshold: -1 })
     expect(Array.isArray(result.hits)).toBe(true)
@@ -58,7 +60,7 @@ describe('createCognitiveLayer', () => {
   it('mcpServer() returns a McpServer instance', async () => {
     const root = await makeRoot()
     roots.push(root)
-    const layer = await createCognitiveLayer({ root })
+    const layer = await createCognitiveLayer({ root, embedder: mockEmbedder(64) })
     const server = layer.mcpServer()
     expect(server).toBeDefined()
   })

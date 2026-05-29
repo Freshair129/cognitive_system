@@ -11,7 +11,7 @@ tags: [config, constants, linter]
 domain: operations
 crosslinks:
   used_by:
-    - RUNBOOK--OBSIDIAN-LINTER-SETUP
+    - RUNBOOK--OBSIDIAN-COM_PG-LINTER-SETUP
 ---
 
 # PARAMS — Linter Setup Profile 01

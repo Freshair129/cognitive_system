@@ -25,6 +25,16 @@ vi.mock('../../src/genesis/loader.js', () => ({
     mocks.loadMembersMock(manifest, root),
 }))
 
+vi.mock('../../src/genesis/bridge.js', () => ({
+  GenesisBlockBridge: class {
+    constructor(public root: string) {}
+    async resolveMembers(blockId: string) {
+      const manifest = await mocks.loadManifestMock(blockId, this.root)
+      return mocks.loadMembersMock(manifest, this.root)
+    }
+  }
+}))
+
 vi.mock('../../src/master/registry.js', () => ({
   findActiveMaster: (root: string, blockId: string) =>
     mocks.findActiveMasterMock(root, blockId),
@@ -67,7 +77,7 @@ describe('executeBlock', () => {
       id: 'IDENTITY-ENGINE',
       members: { cognitive: ['COGNITIVE--A'], algo: ['ALGO--B'] },
     }
-    mocks.loadManifestMock.mockResolvedValueOnce(manifest)
+    mocks.loadManifestMock.mockResolvedValue(manifest)
 
     const members = emptyMembers()
     members.cognitive = [
@@ -123,7 +133,7 @@ describe('executeBlock', () => {
   })
 
   it('forwards opts.tier to dispatch as budget_hint', async () => {
-    mocks.loadManifestMock.mockResolvedValueOnce({
+    mocks.loadManifestMock.mockResolvedValue({
       id: 'FOO',
       members: {},
     })
@@ -141,7 +151,7 @@ describe('executeBlock', () => {
   })
 
   it('returns members_loaded = 0 when manifest has no members', async () => {
-    mocks.loadManifestMock.mockResolvedValueOnce({ id: 'EMPTY', members: {} })
+    mocks.loadManifestMock.mockResolvedValue({ id: 'EMPTY', members: {} })
     mocks.loadMembersMock.mockResolvedValueOnce(emptyMembers())
     mocks.dispatchMock.mockResolvedValueOnce(okDispatch())
 
@@ -150,7 +160,7 @@ describe('executeBlock', () => {
   })
 
   it('propagates loadManifest errors', async () => {
-    mocks.loadManifestMock.mockRejectedValueOnce(new Error('manifest gone'))
+    mocks.loadManifestMock.mockRejectedValue(new Error('manifest gone'))
     await expect(
       executeBlock('MISSING', { root: '/r', prompt: 'p' }),
     ).rejects.toThrow(/manifest gone/)
@@ -158,7 +168,7 @@ describe('executeBlock', () => {
   })
 
   it('propagates dispatch errors', async () => {
-    mocks.loadManifestMock.mockResolvedValueOnce({
+    mocks.loadManifestMock.mockResolvedValue({
       id: 'FOO',
       members: {},
     })
@@ -171,7 +181,7 @@ describe('executeBlock', () => {
   })
 
   it('uses the dispatcher tier_used in the result', async () => {
-    mocks.loadManifestMock.mockResolvedValueOnce({ id: 'FOO', members: {} })
+    mocks.loadManifestMock.mockResolvedValue({ id: 'FOO', members: {} })
     mocks.loadMembersMock.mockResolvedValueOnce(emptyMembers())
     mocks.dispatchMock.mockResolvedValueOnce(okDispatch({ tier_used: 'T3' }))
 
@@ -186,7 +196,7 @@ describe('executeBlock', () => {
       status: 'active',
     }
     mocks.findActiveMasterMock.mockResolvedValueOnce(entry)
-    mocks.loadManifestMock.mockResolvedValueOnce({
+    mocks.loadManifestMock.mockResolvedValue({
       id: 'IDENTITY-ENGINE',
       members: {},
     })
@@ -213,7 +223,7 @@ describe('executeBlock', () => {
       promoted_at: '2026-05-14T04:00:00.000Z',
       status: 'active',
     })
-    mocks.loadManifestMock.mockResolvedValueOnce({
+    mocks.loadManifestMock.mockResolvedValue({
       id: 'BIG-BLOCK',
       members: {},
     })
