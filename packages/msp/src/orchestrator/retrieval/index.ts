@@ -81,28 +81,47 @@ export async function recall(opts: RecallOptions): Promise<RetrievalResult> {
     candidateAtomIds: [] as string[], 
   }
 
-  // Phase B: run sources.
-  const tasks: Array<Promise<SourceResult>> = [
+  // Phase B: run primary sources.
+  const primaryTasks: Array<Promise<SourceResult>> = [
     vectorSource(sourceOpts),
     obsidianSource(sourceOpts),
     grepSource(sourceOpts),
     episodicSource(sourceOpts),
-    backlinksSource(sourceOpts),
     narrativeSource(sourceOpts),
     identitySource(sourceOpts),
   ]
 
-  const results = await Promise.all(tasks)
+  const primaryResults = await Promise.all(primaryTasks)
 
-  const graphRes = await graphSource(sourceOpts)
+  // Extract all unique candidate atom IDs from primary hits to populate candidateAtomIds
+  const candidateIdsSet = new Set<string>()
+  for (const res of primaryResults) {
+    if (res.hits) {
+      for (const hit of res.hits) {
+        if (hit.atomId) candidateIdsSet.add(hit.atomId)
+      }
+    }
+  }
+  sourceOpts.candidateAtomIds = Array.from(candidateIdsSet)
 
-  const vectorRes = results.find((r) => r.source === 'gks-vector')!
-  const obsidianRes = results.find((r) => r.source === 'obsidian-text') || results[1]
-  const episodicRes = results.find((r) => r.source === 'episodic')!
+  // Run secondary expansion sources in parallel using the populated candidates
+  const secondaryTasks: Array<Promise<SourceResult>> = [
+    backlinksSource(sourceOpts),
+    graphSource(sourceOpts),
+  ]
+
+  const secondaryResults = await Promise.all(secondaryTasks)
+
+  // Combine results
+  const allResults = [...primaryResults, ...secondaryResults]
+
+  const vectorRes = allResults.find((r) => r.source === 'gks-vector')!
+  const obsidianRes = allResults.find((r) => r.source === 'obsidian-text') || allResults[1]!
+  const episodicRes = allResults.find((r) => r.source === 'episodic')!
+  const graphRes = allResults.find((r) => r.source === 'graph')!
 
   // Phase C: fuse.
   const fuseStart = performance.now()
-  const allResults: SourceResult[] = [...results, graphRes]
   const fusedHits = rrfFuse(allResults, { k: rrfK, weights, topK: opts.rerank ? (opts.rerankLimit ?? 30) : topK })
   const fusionMs = performance.now() - fuseStart
 
@@ -169,8 +188,8 @@ export async function recall(opts: RecallOptions): Promise<RetrievalResult> {
       obsidian: obsidianRes.latencyMs,
       episodic: episodicRes.latencyMs,
       graph: graphRes.latencyMs,
-      narrative: results.find(r => r.source === 'narrative')?.latencyMs,
-      identity: results.find(r => r.source === 'identity')?.latencyMs,
+      narrative: allResults.find((r: SourceResult) => r.source === 'narrative')?.latencyMs,
+      identity: allResults.find((r: SourceResult) => r.source === 'identity')?.latencyMs,
       fusion: Math.round(fusionMs),
       rerank: rerankMs,
     },

@@ -51,12 +51,15 @@ export interface CognitiveLayerOptions {
   slm?: CognitiveSlmOptions
   /** Namespace stamped on retain / recall calls. */
   defaultNamespace?: Namespace
+  /** Optional embedder override for memory store (useful in tests). */
+  embedder?: any
 }
 
 export interface PolicyContext {
   subject?: Subject
   action?: Action
   context?: RequestContext
+  thinkingLevel?: number
 }
 
 export interface CognitiveRunTaskOptions extends RunOptions, PolicyContext {

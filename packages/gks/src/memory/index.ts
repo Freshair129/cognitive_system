@@ -20,10 +20,12 @@ import { resolve, join } from 'node:path'
 import type {
   AtomicEntry,
   AtomicHit,
+  AtomicNote,
   EpisodicMemory,
   InboundArtifact,
   InboundReceipt,
   Namespace,
+  ResolutionTier,
   RetrievalHit,
   RetrievalOptions,
   RetrievalResult,
@@ -34,7 +36,7 @@ import type {
 
 import { AtomicLayer } from './gks.js'
 import { AuditLog, type AuditLogOptions, type AuditEvent } from './audit.js'
-import { GraphStore, type GraphBackend } from './graph.js'
+import { GraphStore, type GraphBackend, walkGraph } from './graph.js'
 import { VectorStore } from './vector/index.js'
 import type {
   VectorBackend,
@@ -581,9 +583,70 @@ export class MemoryStore {
       : candidates
 
     const finalHits = reranked.slice(0, dedupMax)
+    const enableHop = opts.enableHopResolution ?? true
+    const maxHopDepth = opts.maxHopDepth ?? 3
+
+    let hitsToReturn: RetrievalHit[] = await Promise.all(
+      finalHits.map(async (h) => {
+        if (h.source === 'atomic') {
+          const note = await this.lookup(h.id)
+          if (note) {
+            return {
+              ...h,
+              tier: 'FULL' as ResolutionTier,
+              snippet: renderByTier(note, 'FULL'),
+            }
+          }
+        }
+        return { ...h, tier: 'FULL' as ResolutionTier }
+      })
+    )
+
+    if (enableHop && this.graph && finalHits.length > 0) {
+      try {
+        const seedIds = finalHits.map((h) => h.id)
+        const walk = await walkGraph(this.graph, seedIds, maxHopDepth)
+        const expandedHits: RetrievalHit[] = []
+
+        for (const [nodeId, walkRes] of walk.entries()) {
+          if (seedIds.includes(nodeId)) {
+            continue
+          }
+
+          const note = await this.lookup(nodeId)
+          if (note) {
+            let tier: ResolutionTier = 'MENTION'
+            if (walkRes.hop === 1) tier = 'SUMMARY'
+            else if (walkRes.hop === 2) tier = 'SKELETON'
+
+            expandedHits.push({
+              id: note.id,
+              source: 'atomic',
+              score: walkRes.score * 0.9,
+              path: note.path,
+              title: note.title,
+              tier,
+              snippet: renderByTier(note, tier),
+              metadata: {
+                phase: note.phase,
+                type: note.type,
+                status: note.status,
+                hop: walkRes.hop,
+                walkScore: walkRes.score,
+              },
+            })
+          }
+        }
+
+        hitsToReturn = [...hitsToReturn, ...expandedHits].sort((a, b) => b.score - a.score)
+      } catch (err) {
+        log.warn('hop resolution failed, returning unexpanded hits', { error: (err as Error).message })
+      }
+    }
+
     const tookMs = Date.now() - started
     span.setAttributes({
-      'gks.hit_count': finalHits.length,
+      'gks.hit_count': hitsToReturn.length,
       'gks.candidate_count': candidates.length,
       'gks.took_ms': tookMs,
       'gks.cross_namespace': !!opts.crossNamespace,
@@ -593,7 +656,7 @@ export class MemoryStore {
       strategy,
       ...(activeNamespace.tenant_id ? { tenant_id: activeNamespace.tenant_id } : {}),
     })
-    incrementCounter(METRIC_NAMES.recallHits, finalHits.length, { strategy })
+    incrementCounter(METRIC_NAMES.recallHits, hitsToReturn.length, { strategy })
 
     if (this.audit) {
       await this.audit.emit({
@@ -604,7 +667,7 @@ export class MemoryStore {
             ? { namespace: activeNamespace }
             : {}),
         query,
-        hit_count: finalHits.length,
+        hit_count: hitsToReturn.length,
         strategy,
         ...(opts.crossNamespace ? { meta: { cross_namespace: true } } : {}),
       })
@@ -612,7 +675,7 @@ export class MemoryStore {
 
     return {
       query,
-      hits: finalHits,
+      hits: hitsToReturn,
       strategy,
       tookMs,
     }
@@ -800,6 +863,30 @@ function snippetFrom(text: string, max: number): string {
   return clean.length <= max ? clean : clean.slice(0, max - 1) + '…'
 }
 
+export function renderByTier(note: AtomicNote, tier: ResolutionTier): string {
+  if (tier === 'FULL') {
+    return note.body
+  }
+
+  const lines: string[] = []
+  lines.push(`id: ${note.id}`)
+
+  if (tier === 'SUMMARY' || tier === 'SKELETON') {
+    if (note.title) lines.push(`title: ${note.title}`)
+    const attrs = note.attributes ?? {}
+    if (attrs.salient) lines.push(`salient: ${attrs.salient}`)
+    if (attrs.trigger) lines.push(`trigger: ${attrs.trigger}`)
+    if (attrs.hook) lines.push(`hook: ${attrs.hook}`)
+  }
+
+  if (tier === 'SUMMARY') {
+    if (note.summary) lines.push(`summary: ${note.summary}`)
+  }
+
+  return lines.join('\n')
+}
+
+
 /**
  * Score boost added when a hit's metadata.status === 'stable'. Tunable: a
  * higher value pushes promoted/canonical notes harder above raw vector hits.
@@ -910,7 +997,7 @@ export type {
   PricingKey,
 } from '../lib/cost-tracker.js'
 
-export { GraphStore } from './graph.js'
+export { GraphStore, walkGraph, DEFAULT_REL_WEIGHTS } from './graph.js'
 export { HotfixStore } from '../hotfix/store.js'
 export type { HotfixStoreOptions, OpenHotfixArgs } from '../hotfix/store.js'
 export type { Hotfix } from '../hotfix/types.js'
@@ -925,6 +1012,7 @@ export type {
   NeighborQuery,
   NeighborResult,
   GraphStoreOptions,
+  WalkResult,
 } from './graph.js'
 export type {
   ObsidianAdapter,

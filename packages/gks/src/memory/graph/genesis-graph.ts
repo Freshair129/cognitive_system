@@ -98,6 +98,9 @@ export function createGenesisGraphBackend(
 function tryLoadNativeBackend(
   opts: GenesisGraphBackendOptions,
 ): NativeGenesisGraphBackend | null {
+  if (process.env.GKS_DISABLE_NATIVE_GRAPH || process.env.NODE_ENV === 'test') {
+    return null
+  }
   try {
     // Lazy CJS require — keeps the optional dep truly optional. Use
     // `createRequire` because this file is compiled to ESM and `require`

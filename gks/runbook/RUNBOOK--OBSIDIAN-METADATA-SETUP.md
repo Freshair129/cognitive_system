@@ -1,6 +1,13 @@
 ---
 id: RUNBOOK--OBSIDIAN-METADATA-SETUP
+phase: 6
+type: runbook
+status: active
+vault_id: default
+tier: process
+source_type: axiomatic
 title: Obsidian Metadata Menu Setup Guide
+created_at: 2026-05-29T08:06:00.000+07:00
 cluster: ops
 role: Operational response guide
 crosslinks:

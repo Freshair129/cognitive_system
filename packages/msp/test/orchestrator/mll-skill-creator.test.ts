@@ -1,18 +1,28 @@
 import { describe, expect, it, vi } from 'vitest'
 import { distillSkillFromEpisodes } from '../../src/orchestrator/mll/skill-creator.js'
 import * as dispatchModule from '../../src/agents/dispatch.js'
-import { resolve } from 'node:path'
-import { rm, access } from 'node:fs/promises'
+import { resolve, join } from 'node:path'
+import { rm, access, mkdtemp } from 'node:fs/promises'
+import { tmpdir } from 'node:os'
+import { createGenesisGraphBackend } from '@freshair129/gks'
 
 vi.mock('../../src/agents/dispatch.js', () => ({
   dispatch: vi.fn()
 }))
 
 describe('MLL Phase 1: Skill Creator', () => {
-  const root = resolve(process.cwd())
-  const candidateDir = resolve(root, '.brain/msp/projects/test-mll/candidates')
-
   it('distills a skill from mock episodes and saves a candidate', async () => {
+    const root = await mkdtemp(join(tmpdir(), 'msp-mll-test-'))
+    const candidateDir = resolve(root, '.brain/msp/projects/test-mll/candidates')
+
+    // Populate graph with root and an episode node
+    const dbPath = resolve(root, 'gks')
+    const backend = createGenesisGraphBackend({ path: dbPath })
+    await backend.load()
+    await backend.addNode({ id: 'N-ROOT', labels: ['Root'], props: {} })
+    await backend.addNode({ id: 'EPISODE--1', labels: ['episode'], props: { success: true } })
+    await backend.addEdge({ from: 'N-ROOT', to: 'EPISODE--1', rel: 'has_episode' })
+
     const mockOutput = `---
 id: SKILL--MOCK-SKILL
 version: 1.0
@@ -44,6 +54,6 @@ Mock skill description.
     await expect(access(filePath)).resolves.toBeUndefined()
 
     // Cleanup
-    await rm(resolve(root, '.brain/msp/projects/test-mll'), { recursive: true, force: true })
+    await rm(root, { recursive: true, force: true })
   })
 })
