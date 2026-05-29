@@ -5,7 +5,7 @@ type: audit
 status: stable
 vault_id: GKS-CORE
 tier: process
-source_type: episodic
+source_type: learned
 title: Root Cause Analysis — Layout and Security Issues in codev_dashboard
 created_at: 2026-05-28T15:35:00.000+07:00
 tags: [audit, rca, ui, hotfix]

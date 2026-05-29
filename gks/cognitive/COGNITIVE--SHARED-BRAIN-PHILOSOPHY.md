@@ -4,7 +4,7 @@ phase: 1
 type: cognitive
 status: stable
 vault_id: default
-tier: genesis
+tier: process
 source_type: axiomatic
 title: Cognitive Model — Shared Brain Philosophy
 tags:

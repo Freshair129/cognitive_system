@@ -1,6 +1,6 @@
 ---
 id: ADR--GKS-SINGULAR-TAXONOMY
-tier: genesis
+tier: process
 created_at: 2026-05-28T15:05:00.000+07:00
 phase: 2
 type: adr

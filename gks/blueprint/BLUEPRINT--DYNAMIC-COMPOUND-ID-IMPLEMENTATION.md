@@ -24,6 +24,7 @@ role: Implementation plan
 attributes:
   knowledgeId: DYNAMIC-COMPOUND-ID-IMPLEMENTATION
   linked_symbols:
+    - file: packages/gks/src/memory/atomic-id.ts
     - file: scripts/msp/msp-atom.ts
     - file: atom_schema.yaml
     - file: atom_registry.yaml
@@ -35,7 +36,12 @@ attributes:
   secret_type: high_entropy_string
   leak_risk: high
   encryption_level: none
-linked_symbols: []
+linked_symbols:
+  - file: packages/gks/src/memory/atomic-id.ts
+  - file: packages/msp/src/validator/utils/registry.ts
+  - file: scripts/msp/msp-atom.ts
+  - file: scripts/msp/codegen-schemas.ts
+  - file: atom_registry.yaml
 ---
 
 # BLUEPRINT — Dynamic Compound ID and Registry Restructuring

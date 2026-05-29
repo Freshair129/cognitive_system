@@ -41,7 +41,8 @@ attributes:
   has_secret: false
   leak_risk: low
   encryption_level: none
-linked_symbols: []
+linked_symbols:
+  - file: packages/msp/src/index.ts
 ---
 
 # BLUEPRINT — Genesis Block Runtime

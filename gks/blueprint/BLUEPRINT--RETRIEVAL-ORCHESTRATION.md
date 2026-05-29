@@ -44,7 +44,8 @@ attributes:
   secret_type: aws_secret
   leak_risk: high
   encryption_level: none
-linked_symbols: []
+linked_symbols:
+  - file: packages/msp/src/index.ts
 ---
 
 # BLUEPRINT — retrieval orchestration implementation plan

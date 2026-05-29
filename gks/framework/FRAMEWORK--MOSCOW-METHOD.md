@@ -4,7 +4,10 @@ phase: 0
 type: framework
 status: stable
 vault_id: default
-tier: genesis
+tier: master
+promoted_from: genesis
+promoted_at: 2026-05-14T11:30:00+07:00
+promotion_adr: ADR--MASTER-PROMOTION-DOC-TO-CODE
 source_type: axiomatic
 title: MoSCoW Method — scope and requirement categorization framework
 tags:

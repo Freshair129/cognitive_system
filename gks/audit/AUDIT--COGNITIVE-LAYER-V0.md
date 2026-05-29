@@ -5,7 +5,7 @@ type: audit
 status: stable
 vault_id: default
 tier: process
-source_type: direct_experience
+source_type: learned
 title: AUDIT — Cognitive Layer V0 (Genesis Block + PgGraph + Gemini-as-subagent
   + createCognitiveLayer facade)
 tags:

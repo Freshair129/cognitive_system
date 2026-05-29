@@ -100,6 +100,7 @@ async function* walkMd(dir: string): AsyncGenerator<string> {
       if (entry.name === 'candidates') continue // proposed atoms; not yet promoted
       yield* walkMd(p)
     } else if (entry.isFile() && entry.name.endsWith('.md')) {
+      if (entry.name.startsWith('livesync_log_')) continue
       yield p
     }
   }
