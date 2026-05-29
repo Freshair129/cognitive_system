@@ -1,3 +1,5 @@
+import { resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { describe, expect, it, vi } from 'vitest'
 import { judgeContradiction } from '../../src/validator/contradiction-judge.js'
 import * as dispatchModule from '../../src/agents/dispatch.js'
@@ -5,6 +7,9 @@ import * as dispatchModule from '../../src/agents/dispatch.js'
 vi.mock('../../src/agents/dispatch.js', () => ({
   dispatch: vi.fn()
 }))
+
+const packageRoot = fileURLToPath(new URL('../..', import.meta.url))
+const repoRoot = resolve(packageRoot, '../..')
 
 describe('The Machine Judge: Semantic Contradiction Detection', () => {
   it('correctly reports a definite contradiction from LLM response', async () => {
@@ -29,7 +34,7 @@ describe('The Machine Judge: Semantic Contradiction Detection', () => {
 
     // We use a real file for parsing
     const result = await judgeContradiction('gks/adr/ADR--ANTI-HALLUCINATION-RULES.md', {
-      root: process.cwd(),
+      root: repoRoot,
       limit: 1
     })
 
@@ -47,7 +52,7 @@ describe('The Machine Judge: Semantic Contradiction Detection', () => {
     })
 
     const result = await judgeContradiction('gks/adr/ADR--ANTI-HALLUCINATION-RULES.md', {
-      root: process.cwd(),
+      root: repoRoot,
       limit: 1
     })
 

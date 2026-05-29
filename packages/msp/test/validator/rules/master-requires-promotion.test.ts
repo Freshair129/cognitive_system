@@ -17,6 +17,12 @@ describe('masterRequiresPromotion', () => {
   })
 
   it('passes when tier:master atom has all promotion fields', () => {
+    ctx.atomicIndex.set('ADR--MASTER-PROMOTION-FOO', {
+      id: 'ADR--MASTER-PROMOTION-FOO',
+      type: 'adr',
+      status: 'stable',
+    } as any)
+
     expect(
       masterRequiresPromotion(
         atom({
@@ -41,6 +47,12 @@ describe('masterRequiresPromotion', () => {
   })
 
   it('errors when tier:master carries learned_from (Master is instinct, not learned)', () => {
+    ctx.atomicIndex.set('ADR--MASTER-PROMOTION-X', {
+      id: 'ADR--MASTER-PROMOTION-X',
+      type: 'adr',
+      status: 'stable',
+    } as any)
+
     const errs = masterRequiresPromotion(
       atom({
         type: 'master',

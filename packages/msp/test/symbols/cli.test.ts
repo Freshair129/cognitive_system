@@ -21,6 +21,7 @@ function runCli(args: string[], cwd: string): Promise<SpawnResult> {
     const child = spawn('npx', ['tsx', cliSrc, ...args], {
       cwd,
       env: { ...process.env, MSP_ROOT: cwd },
+      shell: process.platform === 'win32',
     })
     let stdout = ''
     let stderr = ''
