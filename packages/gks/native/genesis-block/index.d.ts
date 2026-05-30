@@ -19,6 +19,7 @@ export interface NodeOutput {
   labels: Array<string>
   props: any
   impact?: number
+  embedding?: Array<number>
 }
 export interface EdgeInput {
   id?: string
