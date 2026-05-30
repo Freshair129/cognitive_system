@@ -112,7 +112,7 @@ export class HotfixStore {
   private readonly audit: AuditLog | null
 
   constructor(opts: HotfixStoreOptions = {}) {
-    this.dir = opts.hotfixDir ?? join(opts.root ?? process.cwd(), 'gks', 'hotfix')
+    this.dir = opts.hotfixDir ?? join(opts.root ?? process.cwd(), '.brain', 'gks', 'hotfix')
     this.audit = opts.audit ?? null
   }
 

@@ -42,7 +42,7 @@ Options (propose):
   --body=<TEXT>       Initial markdown body (default: empty)
   --rationale=<TEXT>  Why this atom is proposed
   --confidence=<N>    Agent confidence 0.0–1.0
-  --namespace=<ns>    MSP project namespace (default: evaAI)
+  --namespace=<ns>    MSP project namespace (default: process.env.MSP_PROJECT or 'default')
   --root=<dir>        Project root (default: cwd)
   --help              Show this message
 

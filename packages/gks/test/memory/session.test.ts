@@ -11,8 +11,8 @@ const FIXTURES = resolve(__dirname, '..', 'fixtures', 'gks')
 
 async function withStore(extra: Partial<ConstructorParameters<typeof MemoryStore>[0]> = {}) {
   const root = await mkdtemp(join(tmpdir(), 'gks-sess-'))
-  await mkdir(join(root, 'gks'), { recursive: true })
-  await cp(FIXTURES, join(root, 'gks'), { recursive: true })
+  await mkdir(join(root, '.brain', 'gks'), { recursive: true })
+  await cp(FIXTURES, join(root, '.brain', 'gks'), { recursive: true })
   const store = new MemoryStore({
     root,
     embedder: mockEmbedder(32),

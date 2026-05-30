@@ -253,7 +253,7 @@ packages/msp/src/
     ├── gks/global/                  # ความรู้ข้ามโปรเจกต์
     └── msp/                         # Memory processing engine
         └── projects/<path-encoded>/ # project-specific session data & memory
-            └── candidates/          # candidate atoms รอ human PR review
+                     └── candidates/          # candidate atoms รอ human PR review
 
 [PROJECT — D:\yourproject\]
 ├── CLAUDE.md                        # instruction สำหรับ T3 agent

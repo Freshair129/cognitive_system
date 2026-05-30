@@ -70,17 +70,17 @@ import {
 const log = createLogger('memory')
 
 export interface MemoryStoreOptions {
-  /** Repo root — used to resolve default paths under .brain/ and gks/. */
+  /** Repo root — used to resolve default paths under .brain/. */
   root: string
-  /** Override: path to atomic_index.jsonl (default: <root>/gks/00_index/atomic_index.jsonl) */
+  /** Override: path to atomic_index.jsonl (default: <root>/.brain/gks/00_index/atomic_index.jsonl) */
   atomicIndexPath?: string
-  /** Override: directory for vector stores (default: <root>/.brain/msp/projects/evaAI/vector) */
+  /** Override: directory for vector stores (default: <root>/.brain/msp/projects/default/vector) */
   vectorDir?: string
-  /** Override: episodic memory dir (default: <root>/.brain/msp/projects/evaAI/memory) */
+  /** Override: episodic memory dir (default: <root>/.brain/msp/projects/default/memory) */
   episodicDir?: string
-  /** Override: session trace dir (default: <root>/.brain/msp/projects/evaAI/session) */
+  /** Override: session trace dir (default: <root>/.brain/msp/projects/default/session) */
   sessionDir?: string
-  /** Override: inbound queue dir (default: <root>/.brain/msp/projects/evaAI/inbound) */
+  /** Override: inbound queue dir (default: <root>/.brain/msp/projects/default/inbound) */
   inboundDir?: string
   /** Optional pre-built embedder. If omitted, createEmbedder(embedderOptions) is used lazily. */
   embedder?: Embedder
@@ -741,10 +741,11 @@ export function gksLayout(root: string): {
   atomicIndex: string
 } {
   const r = resolve(root)
-  const projectName = process.env.MSP_PROJECT || 'cognitive_system'
+  const projectName = process.env.MSP_PROJECT || 'default'
   const brain = join(r, '.brain', 'msp', 'projects', projectName)
 
-  const gksBase = process.env.MSP_BRAIN_PATH ? resolve(process.env.MSP_BRAIN_PATH) : join(r, 'gks')
+  // Canonical Layout v1.4.0: Knowledge base is nested under .brain/gks
+  const gksBase = process.env.MSP_BRAIN_PATH ? resolve(process.env.MSP_BRAIN_PATH) : join(r, '.brain', 'gks')
 
   return {
     root: r,

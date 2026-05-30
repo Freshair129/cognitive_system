@@ -5,7 +5,7 @@
  */
 
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
-import { mkdtemp, readFile, writeFile, rm } from 'node:fs/promises'
+import { mkdtemp, readFile, writeFile, rm, mkdir } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
@@ -16,13 +16,14 @@ describe('HotfixStore', () => {
   let root = ''
   beforeEach(async () => {
     root = await mkdtemp(join(tmpdir(), 'gks-hotfix-'))
+    await mkdir(join(root, '.brain', 'gks', 'hotfix'), { recursive: true })
   })
   afterEach(async () => {
     await rm(root, { recursive: true, force: true })
   })
 
   it('open() writes a well-formed atom with valid_to = now + 48h', async () => {
-    const store = new HotfixStore({ root })
+    const store = new HotfixStore({ root, path: join(root, '.brain', 'gks', 'hotfix') })
     const before = Date.now()
     const hotfix = await store.open({
       commitSha: 'abc1234567890def',
@@ -37,14 +38,14 @@ describe('HotfixStore', () => {
     const validToMs = new Date(hotfix.valid_to).getTime()
     expect(validToMs - before).toBeGreaterThanOrEqual(HOTFIX_BACKFILL_MS - 2_000)
     expect(validToMs - before).toBeLessThanOrEqual(HOTFIX_BACKFILL_MS + 2_000)
-    const text = await readFile(join(root, 'gks', 'hotfix', 'HOTFIX--ABC1234.md'), 'utf8')
+    const text = await readFile(join(root, '.brain', 'gks', 'hotfix', 'HOTFIX--ABC1234.md'), 'utf8')
     expect(text).toContain('id: HOTFIX--ABC1234')
     expect(text).toContain('type: hotfix')
     expect(text).toContain('src/api/rate-limit.ts')
   })
 
   it('list() returns every hotfix on disk', async () => {
-    const store = new HotfixStore({ root })
+    const store = new HotfixStore({ root, path: join(root, '.brain', 'gks', 'hotfix') })
     await store.open({ commitSha: 'aaa0000', title: 'first' })
     await store.open({ commitSha: 'bbb0000', title: 'second' })
     const all = await store.list()
@@ -53,12 +54,12 @@ describe('HotfixStore', () => {
   })
 
   it('listOverdue() filters by valid_to < now and not-closed', async () => {
-    const store = new HotfixStore({ root })
+    const store = new HotfixStore({ root, path: join(root, '.brain', 'gks', 'hotfix') })
     const future = await store.open({ commitSha: 'fff0000', title: 'future' })
     expect(await store.listOverdue()).toHaveLength(0)
 
     // Manually backdate one atom's valid_to to simulate overdue.
-    const path = join(root, 'gks', 'hotfix', `${future.id}.md`)
+    const path = join(root, '.brain', 'gks', 'hotfix', `${future.id}.md`)
     const text = await readFile(path, 'utf8')
     await writeFile(path, text.replace(/valid_to: .+/, 'valid_to: 2020-01-01T00:00:00Z'))
     const overdue = await store.listOverdue()
@@ -67,10 +68,10 @@ describe('HotfixStore', () => {
   })
 
   it('close() sets closed_at + crosslinks.resolved_by; subsequent listOverdue excludes it', async () => {
-    const store = new HotfixStore({ root })
+    const store = new HotfixStore({ root, path: join(root, '.brain', 'gks', 'hotfix') })
     const opened = await store.open({ commitSha: 'ccc0000', title: 'closed-soon' })
     // Backdate to simulate overdue first.
-    const path = join(root, 'gks', 'hotfix', `${opened.id}.md`)
+    const path = join(root, '.brain', 'gks', 'hotfix', `${opened.id}.md`)
     const text = await readFile(path, 'utf8')
     await writeFile(path, text.replace(/valid_to: .+/, 'valid_to: 2020-01-01T00:00:00Z'))
     expect(await store.listOverdue()).toHaveLength(1)

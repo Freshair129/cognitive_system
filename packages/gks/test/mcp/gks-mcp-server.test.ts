@@ -131,7 +131,7 @@ describe('gks-mcp-server', () => {
     // re-indexer does this; the MCP test bypasses it.
     const fs = await import('node:fs/promises')
     const root = (store as unknown as { root: string }).root
-    const indexDir = join(root, 'gks', '00_index')
+    const indexDir = join(root, '.brain', 'gks', '00_index')
     await fs.mkdir(indexDir, { recursive: true })
     const row = {
       id: 'ADR--PARSE-TRACE-NORM',

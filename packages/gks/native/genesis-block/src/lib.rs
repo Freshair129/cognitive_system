@@ -135,6 +135,15 @@ pub struct Snapshot {
     pub in_idx: HashMap<String, HashSet<String>>,
 }
 
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct NodeMetadata {
+    pub arena_id: u32,
+    pub timestamp: u64,
+    pub vector_dim: u16,
+    pub embedding_offset: u64,
+    pub gks_attributes: Vec<u8>,
+}
+
 pub struct Storage {
     pub(crate) path: PathBuf,
     pub(crate) read_only: bool,
@@ -142,12 +151,23 @@ pub struct Storage {
     pub(crate) edges: HashMap<String, EdgeOutput>,
     pub(crate) out_idx: HashMap<String, HashSet<String>>,
     pub(crate) in_idx: HashMap<String, HashSet<String>>,
+    pub(crate) vector_arena: Vec<f32>,
+    pub(crate) metadata_arena: Vec<NodeMetadata>,
     pub(crate) log_path: PathBuf,
     pub(crate) bin_path: PathBuf,
     pub(crate) _lock_file: Option<File>,
 }
 
 impl Storage {
+    // Helper function for aligned allocation (aligned to 64-byte cache lines)
+    pub(crate) fn allocate_aligned_offset(current_offset: usize, align: usize) -> usize {
+        if current_offset % align == 0 {
+            current_offset
+        } else {
+            current_offset + align - (current_offset % align)
+        }
+    }
+
     pub fn open(opts: OpenOptions) -> Result<Self> {
         let root = PathBuf::from(opts.path.clone());
         if !root.exists() {
@@ -167,6 +187,8 @@ impl Storage {
             edges: HashMap::new(),
             out_idx: HashMap::new(),
             in_idx: HashMap::new(),
+            vector_arena: Vec::new(),
+            metadata_arena: Vec::new(),
             log_path: log_path.clone(),
             bin_path,
             _lock_file: Some(lock_file),

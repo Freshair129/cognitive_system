@@ -60,7 +60,7 @@ describe('gks-mcp-gates', () => {
   })
 
   it('gks_validate_links detects broken wikilinks', async () => {
-    const indexDir = join(root, 'gks', '00_index')
+    const indexDir = join(root, '.brain', 'gks', '00_index')
     await mkdir(indexDir, { recursive: true })
     const row = {
       id: 'FEAT--BROKEN',
@@ -83,7 +83,7 @@ describe('gks-mcp-gates', () => {
   })
 
   it('gks_verify_flow reports chain status', async () => {
-    const indexDir = join(root, 'gks', '00_index')
+    const indexDir = join(root, '.brain', 'gks', '00_index')
     await mkdir(indexDir, { recursive: true })
     const concept = {
       id: 'CONCEPT--GOOD',

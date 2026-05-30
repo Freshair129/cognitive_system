@@ -1,4 +1,5 @@
 import { mkdir, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises'
+import { homedir } from 'node:os'
 import { dirname, resolve } from 'node:path'
 
 import {
@@ -17,7 +18,7 @@ import {
   type CandidateWriterOpts,
 } from './types.js'
 
-const DEFAULT_NAMESPACE = 'evaAI'
+const DEFAULT_NAMESPACE = 'default'
 
 export class CandidateWriter {
   private readonly root: string
@@ -26,12 +27,14 @@ export class CandidateWriter {
 
   constructor(opts: CandidateWriterOpts) {
     this.root = opts.root
-    this.namespace = opts.namespace ?? DEFAULT_NAMESPACE
+    this.namespace = opts.namespace ?? process.env.MSP_PROJECT ?? DEFAULT_NAMESPACE
     this.proposedBy = opts.proposedBy ?? 'agent'
   }
 
   candidatesDir(): string {
-    return resolve(this.root, '.brain/msp/projects', this.namespace, 'candidates')
+    // Candidates MUST be stored in the Global Brain (~/.brain) for control/orchestration,
+    // not in the project-local shared brain.
+    return resolve(homedir(), '.brain/msp/projects', this.namespace, 'candidates')
   }
 
   candidatePath(proposedId: string): string {

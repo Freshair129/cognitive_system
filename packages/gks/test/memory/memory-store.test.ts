@@ -14,8 +14,8 @@ async function withStore() {
   const root = await mkdtemp(join(tmpdir(), 'gks-root-'))
   // Copy the atomic fixtures into the temp root so the MemoryStore can resolve
   // paths exactly as it would in production.
-  await mkdir(join(root, 'gks'), { recursive: true })
-  await cp(FIXTURES, join(root, 'gks'), { recursive: true })
+  await mkdir(join(root, '.brain', 'gks'), { recursive: true })
+  await cp(FIXTURES, join(root, '.brain', 'gks'), { recursive: true })
 
   const store = new MemoryStore({
     root,
@@ -76,8 +76,8 @@ describe('MemoryStore', () => {
       title: 'Test Foo',
       body: 'Body of the test insight.',
     })
-    expect(receipt.path).toContain(join('.brain', 'msp', 'projects', 'cognitive_system', 'inbound'))
-    expect(receipt.path).not.toContain(`${join(root, 'gks')}`)
+    expect(receipt.path).toContain(join('.brain', 'msp', 'projects', 'default', 'inbound'))
+    expect(receipt.path).not.toContain(`${join(root, '.brain', 'gks')}`)
 
     const md = await readFile(receipt.path, 'utf8')
     expect(md).toContain('proposed_id: INSIGHT--TEST-FOO')
@@ -112,7 +112,7 @@ describe('MemoryStore', () => {
     expect(out.memory.session_id).toBe(sessionId)
     expect(out.memory.summary).toContain('Cortex')
 
-    const dir = join(root, '.brain', 'msp', 'projects', 'cognitive_system', 'memory')
+    const dir = join(root, '.brain', 'msp', 'projects', 'default', 'memory')
     const files = await readdir(dir)
     expect(files.some((f) => f.includes(sessionId))).toBe(true)
   })
@@ -132,8 +132,8 @@ describe('MemoryStore', () => {
   it('graphBackend option accepts an injected GenesisGraphBackend', async () => {
     const root = await mkdtemp(join(tmpdir(), 'gks-root-gb-'))
     cleanup.push(root)
-    await mkdir(join(root, 'gks'), { recursive: true })
-    await cp(FIXTURES, join(root, 'gks'), { recursive: true })
+    await mkdir(join(root, '.brain', 'gks'), { recursive: true })
+    await cp(FIXTURES, join(root, '.brain', 'gks'), { recursive: true })
 
     const { createGenesisGraphBackend } = await import('../../src/memory/graph/genesis-graph.js')
     const dir = join(root, '.brain', 'msp', 'projects', 'cognitive_system', 'graph')

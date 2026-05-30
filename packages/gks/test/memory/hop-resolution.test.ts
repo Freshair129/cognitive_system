@@ -95,7 +95,7 @@ describe('Hop-Based Resolution in retrieve()', () => {
 
   beforeEach(async () => {
     root = await mkdtemp(join(tmpdir(), 'gks-hop-test-'))
-    const gksDir = join(root, 'gks')
+    const gksDir = join(root, '.brain', 'gks')
     await mkdir(join(gksDir, '00_index'), { recursive: true })
     await mkdir(join(gksDir, 'concept'), { recursive: true })
 

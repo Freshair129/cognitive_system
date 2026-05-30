@@ -23,10 +23,10 @@ describe('InboundQueue list / promote', () => {
 
   beforeEach(async () => {
     root = await mkdtemp(join(tmpdir(), 'gks-inbound-promote-'))
-    await mkdir(join(root, 'gks'), { recursive: true })
+    await mkdir(join(root, '.brain', 'gks'), { recursive: true })
     inbound = new InboundQueue({
       inboundDir: join(root, 'inbound'),
-      gksRoot: join(root, 'gks'),
+      gksRoot: join(root, '.brain', 'gks'),
     })
   })
 
@@ -64,7 +64,7 @@ describe('InboundQueue list / promote', () => {
   it('promote() moves to gks/<type>/<id>.md with stripped review metadata', async () => {
     await inbound.propose(adrArtifact('P1'))
     const r = await inbound.promote('ADR--P1')
-    expect(r.dest).toBe(join(root, 'gks', 'adr', 'ADR--P1.md'))
+    expect(r.dest).toBe(join(root, '.brain', 'gks', 'adr', 'ADR--P1.md'))
     const text = await readFile(r.dest, 'utf8')
     expect(text).toContain('id: ADR--P1')
     expect(text).toContain('status: stable')
@@ -80,13 +80,13 @@ describe('InboundQueue list / promote', () => {
 
   it('promote() refuses to overwrite an existing destination unless force=true', async () => {
     await inbound.propose(adrArtifact('OVER'))
-    await mkdir(join(root, 'gks', 'adr'), { recursive: true })
-    await writeFile(join(root, 'gks', 'adr', 'ADR--OVER.md'), 'existing\n')
+    await mkdir(join(root, '.brain', 'gks', 'adr'), { recursive: true })
+    await writeFile(join(root, '.brain', 'gks', 'adr', 'ADR--OVER.md'), 'existing\n')
     await expect(inbound.promote('ADR--OVER')).rejects.toThrow(/already exists/)
     // With force=true, it goes through (and we re-propose since the first
     // attempt didn't delete the inbound file because it threw).
     await inbound.promote('ADR--OVER', { force: true })
-    const text = await readFile(join(root, 'gks', 'adr', 'ADR--OVER.md'), 'utf8')
+    const text = await readFile(join(root, '.brain', 'gks', 'adr', 'ADR--OVER.md'), 'utf8')
     expect(text).toContain('id: ADR--OVER')
   })
 

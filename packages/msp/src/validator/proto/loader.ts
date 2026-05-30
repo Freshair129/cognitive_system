@@ -62,14 +62,14 @@ function normaliseSeverity(s: unknown): Severity {
 }
 
 /**
- * Discover PROTO atoms under `gks/proto/` and parse their metadata.
+ * Discover PROTO atoms under `.brain/gks/proto/` and parse their metadata.
  *
  * Atoms that fail validation (bad id, missing enforces, missing impl path,
  * impl file doesn't exist) are silently dropped. The validator's main rules
  * still run against them — they just don't get loaded as PROTOs.
  */
 export async function discoverProtos(repoRoot: string): Promise<ProtoMeta[]> {
-  const dir = resolve(repoRoot, 'gks/proto')
+  const dir = resolve(repoRoot, '.brain/gks/proto')
   let entries: string[]
   try {
     entries = await readdir(dir)

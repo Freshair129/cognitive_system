@@ -99,7 +99,7 @@ describe('gks CLI', () => {
     // Seed a hand-crafted atomic index (orchestrator/MSP normally does this
     // via the re-indexer; the CLI is paradigm-agnostic about how it got here).
     const fs = await import('node:fs/promises')
-    const indexDir = join(workdir, 'gks', '00_index')
+    const indexDir = join(workdir, '.brain', 'gks', '00_index')
     await fs.mkdir(indexDir, { recursive: true })
     const rows = [
       {
@@ -174,7 +174,7 @@ describe('gks CLI', () => {
     expect(r.code).toBe(0)
     expect(r.stdout).toMatch(/linked_symbols: 2/)
 
-    const inboundDir = join(workdir, '.brain/msp/projects/cognitive_system/inbound')
+    const inboundDir = join(workdir, '.brain/msp/projects/default/inbound')
     const fs = await import('node:fs/promises')
     const files = await fs.readdir(inboundDir)
     const artifact = files.find((f) => f.startsWith('ADR--LINKED-SYMBOL-CLI'))

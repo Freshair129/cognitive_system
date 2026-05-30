@@ -17,9 +17,9 @@ Usage:
   msp-validate --json <file>...
 
 Flags:
-  --all              walk gks/ recursively
+  --all              walk .brain/gks/ recursively
   --root=<dir>       project root (default: cwd)
-  --index=<path>     atomic index path (default: <root>/gks/00_index/atomic_index.jsonl)
+  --index=<path>     atomic index path (default: <root>/.brain/gks/00_index/atomic_index.jsonl)
   --json             machine-readable output
   --help             this message
 
@@ -90,7 +90,7 @@ async function main(): Promise<number> {
   }
 
   const root = resolve(values.root ?? process.cwd())
-  const indexPath = resolve(values.index ?? `${root}/gks/00_index/atomic_index.jsonl`)
+  const indexPath = resolve(values.index ?? `${root}/.brain/gks/00_index/atomic_index.jsonl`)
 
   const subject = makeSubject('scheduled-job', 'validator-cli')
   const context = makeContext('cli', `val-${Date.now()}`)
@@ -126,7 +126,7 @@ async function main(): Promise<number> {
   let results: ValidationResult[]
 
   if (values.all) {
-    const dirs = [resolve(root, 'gks')]
+    const dirs = [resolve(root, '.brain', 'gks')]
     results = await validateAll(dirs, ctx)
   } else if (positionals.length > 0) {
     results = []

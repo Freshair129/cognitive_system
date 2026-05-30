@@ -202,8 +202,8 @@ describe('MemoryStore + Obsidian source', () => {
   it('retrieve({strategy:"multi"}) includes Obsidian hits when adapter is wired', async () => {
     const root = await mkdtemp(join(tmpdir(), 'gks-obs-'))
     cleanup.push(root)
-    await mkdir(join(root, 'gks'), { recursive: true })
-    await cp(FIXTURES, join(root, 'gks'), { recursive: true })
+    await mkdir(join(root, '.brain', 'gks'), { recursive: true })
+    await cp(FIXTURES, join(root, '.brain', 'gks'), { recursive: true })
 
     const obsidian = createMockObsidianAdapter(sampleVault())
     const store = new MemoryStore({

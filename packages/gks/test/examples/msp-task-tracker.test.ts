@@ -27,11 +27,11 @@ describe('msp-task-tracker example', () => {
   it('runs the full task lifecycle and proposes an audit', async () => {
     // 1. Setup BLUEPRINT
     const blueprintId = 'BLUEPRINT--TEST'
-    const blueprintDir = join(root, 'gks', '03_blueprint')
+    const blueprintDir = join(root, '.brain', 'gks', '03_blueprint')
     await mkdir(blueprintDir, { recursive: true })
     await writeFile(join(blueprintDir, 'test.md'), '# TEST')
 
-    const indexDir = join(root, 'gks', '00_index')
+    const indexDir = join(root, '.brain', 'gks', '00_index')
     await mkdir(indexDir, { recursive: true })
     const row = {
       id: blueprintId,
@@ -67,7 +67,7 @@ describe('msp-task-tracker example', () => {
     expect(receipt.path).toContain('AUDIT--TEST')
 
     // 5. Verify file exists
-    const inboundDir = join(root, '.brain', 'msp', 'projects', 'cognitive_system', 'inbound')
+    const inboundDir = join(root, '.brain', 'msp', 'projects', 'default', 'inbound')
     const files = await readdir(inboundDir)
     expect(files.some(f => f.startsWith('AUDIT--TEST'))).toBe(true)
   })

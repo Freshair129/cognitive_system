@@ -550,26 +550,6 @@ taxonomy:
             - Valid until
             - Commit SHA
             - Source
-        RISK:
-          name: Risk
-          phase: 1
-          role: Identified risk + mitigation
-          tier: process
-          folder: risk
-          sections:
-            - Risk
-            - Mitigation
-            - Source
-        RUNBOOK:
-          name: Runbook
-          phase: 6
-          role: Incident response playbook
-          tier: process
-          folder: runbook
-          sections:
-            - Steps
-            - Escalation
-            - Source
         TEST:
           name: Test Plan / Test Case
           phase: 5 
@@ -635,6 +615,15 @@ taxonomy:
     memory:
       description: Auto-extracted by Consolidator.
       types:
+        EPISODE:
+          phase: 6
+          role: Recorded event or agent run
+          tier: process
+          folder: episode
+          sections:
+            - Summary
+            - Metadata
+            - Source
         INSIGHT:
           phase: 1
           role: Session-derived observation

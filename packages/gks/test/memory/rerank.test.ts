@@ -116,8 +116,8 @@ describe('MemoryStore + reranker integration', () => {
   async function withStore(rerankerOpts?: MemoryStoreOptions['reranker']) {
     const root = await mkdtemp(join(tmpdir(), 'gks-rerank-'))
     cleanup.push(root)
-    await mkdir(join(root, 'gks'), { recursive: true })
-    await cp(FIXTURES, join(root, 'gks'), { recursive: true })
+    await mkdir(join(root, '.brain', 'gks'), { recursive: true })
+    await cp(FIXTURES, join(root, '.brain', 'gks'), { recursive: true })
     const store = new MemoryStore({
       root,
       embedder: mockEmbedder(64),

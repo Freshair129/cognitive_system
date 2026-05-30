@@ -31,13 +31,13 @@ function run(args: string[]): { stdout: string; stderr: string; code: number } {
 }
 
 async function writeAtom(root: string, relPath: string, frontmatter: string, body = ''): Promise<void> {
-  const full = join(root, 'gks', relPath)
+  const full = join(root, '.brain', 'gks', relPath)
   await mkdir(join(full, '..'), { recursive: true })
   await writeFile(full, `---\n${frontmatter}\n---\n\n${body}\n`, 'utf8')
 }
 
 async function readIndex(root: string): Promise<Array<Record<string, unknown>>> {
-  const text = await readFile(join(root, 'gks', '00_index', 'atomic_index.jsonl'), 'utf8')
+  const text = await readFile(join(root, '.brain', 'gks', '00_index', 'atomic_index.jsonl'), 'utf8')
   return text
     .split('\n')
     .filter((l) => l.length > 0)
@@ -136,8 +136,8 @@ describe('re-indexer (npm run msp:index)', () => {
     // End-to-end with the AtomicLayer reverse query — the index this
     // script just produced should be lookupBySymbol-ready.
     const layer = new AtomicLayer({
-      indexPath: join(root, 'gks', '00_index', 'atomic_index.jsonl'),
-      gksRoot: join(root, 'gks'),
+      indexPath: join(root, '.brain', 'gks', '00_index', 'atomic_index.jsonl'),
+      gksRoot: join(root, '.brain', 'gks'),
     })
     await layer.loadIndex()
     expect(layer.searchBySymbol('src/x.ts:foo').map((e) => e.id)).toEqual([
@@ -188,15 +188,15 @@ describe('re-indexer (npm run msp:index)', () => {
 
     // Index file should NOT exist.
     await expect(
-      readFile(join(root, 'gks', '00_index', 'atomic_index.jsonl'), 'utf8'),
+      readFile(join(root, '.brain', 'gks', '00_index', 'atomic_index.jsonl'), 'utf8'),
     ).rejects.toThrow(/ENOENT/)
   }, 30_000)
 
   it('skips the 00_index directory itself (no self-reference)', async () => {
     // Pre-existing index — re-indexer must not try to parse it as an atom.
-    await mkdir(join(root, 'gks', '00_index'), { recursive: true })
+    await mkdir(join(root, '.brain', 'gks', '00_index'), { recursive: true })
     await writeFile(
-      join(root, 'gks', '00_index', 'atomic_index.jsonl'),
+      join(root, '.brain', 'gks', '00_index', 'atomic_index.jsonl'),
       JSON.stringify({ id: 'STALE--ROW' }) + '\n',
     )
     await writeAtom(
