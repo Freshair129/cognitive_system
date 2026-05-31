@@ -25,6 +25,7 @@
     "msp:check-links": "gks validate --links --root=."
   },
   "dependencies": {
+    "@freshair129/gks-genesis-block-native": "github:Freshair129/GenesisBlock",
     "glob": "^13.0.6"
   },
   "devDependencies": {
