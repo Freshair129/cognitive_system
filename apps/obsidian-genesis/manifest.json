@@ -1,0 +1,10 @@
+{
+  "id": "genesis-obsidian-plugin",
+  "name": "Genesis Shadow Sync",
+  "version": "1.0.0",
+  "minAppVersion": "1.5.0",
+  "description": "Connects Obsidian to the GenesisDB engine for JIT Context rendering and Shadow Sync.",
+  "author": "GKS Architect",
+  "authorUrl": "",
+  "isDesktopOnly": true
+}
