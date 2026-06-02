@@ -1,0 +1,3 @@
+﻿# DOMAIN: Diagram & Flow (Update)
+The Audit Agent approved the structure.
+To see the full rules, reference the physical DOMAIN_GUIDE.md created in the gks/diagram_flow/ directory.

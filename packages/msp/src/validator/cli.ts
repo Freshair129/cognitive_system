@@ -90,7 +90,7 @@ async function main(): Promise<number> {
   }
 
   const root = resolve(values.root ?? process.cwd())
-  const indexPath = resolve(values.index ?? `${root}/.brain/gks/00_index/atomic_index.jsonl`)
+  const indexPath = resolve(values.index ?? `${root}/.brain/cognitive-system-knowledge-block/00_index/atomic_index.jsonl`)
 
   const subject = makeSubject('scheduled-job', 'validator-cli')
   const context = makeContext('cli', `val-${Date.now()}`)
@@ -126,7 +126,7 @@ async function main(): Promise<number> {
   let results: ValidationResult[]
 
   if (values.all) {
-    const dirs = [resolve(root, '.brain', 'gks')]
+    const dirs = [resolve(root, '.brain', 'cognitive-system-knowledge-block')]
     results = await validateAll(dirs, ctx)
   } else if (positionals.length > 0) {
     results = []

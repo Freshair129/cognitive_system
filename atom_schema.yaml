@@ -55,13 +55,25 @@ schema_spec:
 
     created_at:
       type: string
-      format: [date-time,created_by]
-      description: Creation timestamp in ISO-8601 with ICT/Thailand offset (+07:00), by whom
+      format: date-time
+      description: Creation timestamp in ISO-8601 with ICT/Thailand offset (+07:00)
 
-    last_updated:
+    created_by:
       type: string
-      format: [date-time,updated_by]
-      description: Last updated timestamp in ISO-8601 with ICT/Thailand offset (+07:00), by whom
+      description: Identity or system that created the atom
+
+    last_update:
+      type: string
+      format: date-time
+      description: Last updated timestamp in ISO-8601
+
+    delivery_from:
+      type: string
+      description: Source of delivery (e.g., agent, prompt, manual)
+
+    superseded_by:
+      type: string
+      description: ID of the atom that supersedes this one
 
     vault_id:
       type: string
@@ -107,7 +119,7 @@ schema_spec:
         implements:
           type: array
           items: string
-          description: Specifications or blueprints implemented by this atom
+          description: Specification
 
         parent_blueprint:
           type: array
@@ -142,7 +154,7 @@ schema_spec:
     aliases:
       type: array
       items: string
-      description: Obsidian aliases array, index 0 MUST be the UPPERCASE type prefix
+      description: Obsidian aliases array, index 0 MUST be the UPPERCASE type prefix ที่มีแน่ๆคือ {atomictype}--
 
     cluster:
       type: string

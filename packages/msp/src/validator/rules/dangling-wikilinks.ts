@@ -55,8 +55,9 @@ export function danglingWikilinks(
     for (const key of CROSSLINK_KEYS) {
       const list = cl[key]
       if (!Array.isArray(list)) continue
-      for (const id of list) {
-        if (typeof id !== 'string') continue
+      for (const rawId of list) {
+        if (typeof rawId !== 'string') continue
+        const id = rawId.replace(/^\[\[(.*)\]\]$/, '$1')
         if (!exists(id)) {
           errors.push({
             rule: 'dangling-wikilink',

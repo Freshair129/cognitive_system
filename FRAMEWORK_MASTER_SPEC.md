@@ -247,61 +247,66 @@ packages/msp/src/
 > **Monorepo variant:** ถ้าใช้ npm workspaces จะมี `packages/<pkg>/gks/...` โดย root มี `package.json` ที่ระบุ workspaces (ดู `ADR--MONOREPO-STRUCTURE` ของ MSP เป็นตัวอย่าง)
 
 ```text
-[GLOBAL — ~/ home folder]
-├── .<agent>/                        # scratchpad ของ agent แต่ละตัว
-└── .brain/
-    ├── gks/global/                  # ความรู้ข้ามโปรเจกต์
-    └── msp/                         # Memory processing engine
-        └── projects/<path-encoded>/ # project-specific session data & memory
-                     └── candidates/          # candidate atoms รอ human PR review
+💾 C:\ (System & Global Config)
+├── 📁 Users/
+│   ├── 📁 freshair/                                          # ── [ โฟลเดอร์หลักของคุณ ] ──
+│   │   │   ├── 📁 .brain/                                    # 🟢 GLOBAL CONFIG (สมองส่วนกลางประจำตัวคุณ)
+│   │   │   │   ├── 📁 gks/                                   # genesisblockDB & genesisgraph  
+│   │   │   │   │   ├── gks.db                                # Sqlite DB
+│   │   │   │   │   ├── gks.graph                             # Graph DB
+│   │   │   │   │   ├── gks.hnsw                              # HNSW
+│   │   │   │   │   ├── gks.jsonl                             # JSONL
+│   │   │   │   │   └── gks.md                                # MD
+│   │   │   │   ├── 📁 {agent-name}-knowledge-block/          # genesisblockDB & genesisgraph  
+│   │   │   │   │   ├── .obsidian/                            # Obsidian Vault
+│   │   │   │   │   └── 00_index/MOC.md                       # L0 search index (atomic_index.jsonl)   
+│   │   │   │   ├── 📁 msp/                                  # Memory processing engine
+│   │   │   │   │   ├── 📁 plugins/
+│   │   │   │   │   ├── 📁 memory/
+│   │   │   │   │   ├── 📁 session/                              # Sqlite DB
+│   │   │   │   │   ├── 📁 skills/                             # Graph DB
+│   │   │   │   │   ├── 📁 projects/                           # project-specific session data & memory
+│   │   │   │   │   ├── └── 📁 D--zuri/                          # Project folders encoded         
+│   │   │   │   │   ├──     └── 📁 candidates/               # candidate atoms รอ human PR review
+│   │   │   │   │   ├── 📄 .credentials.json                              # HNSW
+│   │   │   │   │   ├── 📄 mcp_config.md
+│   │   │   │   │   └── 📄 config.json 
+│   │   │   │   └── 📄 AGENT.md                                # user-profile,global-prompts บอก AI ว่าคุณคือใคร (สไตล์ดีไซน์, สไตล์การเขียนโค้ด)
 
-[PROJECT — D:\yourproject\]
-├── CLAUDE.md                        # instruction สำหรับ T3 agent
-├── GEMINI.md                        # instruction สำหรับ T2 agent
-├── registry.yaml                    # Master Registry & ID Standards
-├── system_config.yaml               # master config (ROLES ONLY — no business config)
-├── .agents/                         # project-specific skills & hooks
-├── gks/                             # 🧠 The Shared Brain
-│   ├── 00_index/                    # L0 search index (atomic_index.jsonl)
-│   │   ├── MOC.md
-│   │   ├── agent-protocol.md
-│   │   ├── atomic_index.jsonl       # ← agents scan THIS first (~22 KB)
-│   │   └── atomic_validation_report.json
-│   ├── 00_MASTER_DASHBOARD.md       # command center
-│   ├── ideas/                       # ⚪ (IDEA--)
-│   ├── concepts/                    # 🟢 (CONCEPT--)
-│   ├── adrs/                        # 🟡 (ADR--)
-│   ├── algorithms/                  # 🟡 (ALGO--)
-│   ├── entities/                    # 🟡 (ENTITY--)
-│   ├── features/                    # 🟡 (FEAT--)
-│   ├── flows/                       # 🟡 (FLOW--)
-│   ├── frameworks/                  # 🟡 (FRAME--)
-│   ├── modules/                     # 🟡 (MOD--)
-│   ├── parameters/                  # 🟡 (PARAMS--)
-│   ├── blueprints/                  # 🔴 (BLUEPRINT--)
-│   ├── microtasks/                  # 🟣 (T* tasks)
-│   │   ├── _SCHEMA.yaml
-│   │   ├── _templates/
-│   │   └── FEAT-NNN/
-│   │       ├── manifest.yaml
-│   │       ├── Tn_*.task.yaml
-│   │       └── _outputs/            # SLM outputs
-│   ├── audits/                      # 🟠 (AUDIT--)
-│   ├── ops/                         # 🔵 deployment configs, IaC & live ops
-│   └── devlog/
-│       ├── task/                    # daily task logs (TSK)
-│       ├── implement/               # MSP-IMP-*.md
-│       ├── walkthrough/             # MSP-WKT-*.md (wktId)
-│       ├── incidents/
-│       ├── reviews/
-│       └── experiment/              # benchmark / pilot reports
-├── msp/                             # 🛡️ Project Governance & Contracts (Local SSOT)
-│   ├── ARCHITECTURE_OVERVIEW.md     # วิสัยทัศน์และแผนผังเชิงเทคนิคของโปรเจกต์
-│   ├── LLM_Contract/                # Schema contracts (phase2, codegen) - บังคับติดไปกับ Git
-│   └── rules/                       # กฎและข้อจำกัดเฉพาะของ Agent ในโปรเจกต์นี้
-├── scripts/msp/                     # index + validate + codegen + compose
-├── src/                             # 🟥 generated + hand-written code
-└── CHANGELOG.md                     # sliding window v2.X.Y
+───────────────────────────────────────────────────────────────────────────────────────────          
+
+💾 D:\ (Development & Workspaces)
+│
+├── 📁 work-space-1-zuri/                   # 🚀 MONOREPO: ZURI PLATFORM
+│   ├── 📁 .brain/                        # 🧠 สมองเฉพาะโปรเจกต์ Zuri (ล็อกสแต็ก เช่น Supabase)
+│   │   ├── 📁 msp/                      
+│   │   ├── 📁 gks/                     # genesisblockDB & genesisgraph  
+│   │   │   ├── gks.db                   # Sqlite DB
+│   │   │   ├── gks.graph                # Graph DB
+│   │   │   ├── gks.hnsw                 # HNSW
+│   │   │   ├── gks.jsonl                # JSONL
+│   │   │   └── gks.md                   # MD
+│   │   ├── 📄 system_config.yaml               # master config (ROLES ONLY — no business config)   
+│   │   ├── 📄 AGENT.md 
+│   │   ├── 📄 .env
+│   │   ├── 📄 mcp_config.md  
+│   │   ├── {projectname}-knowledge-block/   # 🧠 The Shared vault/Brain
+│   │   │   ├── 00_index/                    # L0 search index (atomic_index.jsonl)
+│   │   │   │   ├── MOC.md
+│   │   │   │   ├── agent-protocol.md
+│   │   │   │   ├── atomic_index.jsonl       # ← agents scan THIS first (~22 KB)
+│   │   │   │   └── atomic_validation_report.json
+│   │   │   ├── 00_MASTER_DASHBOARD.md       # command center
+│   │   │   ├── 📁 ideas/                       # ⚪ (IDEA--)
+│   │   │   ├── 📁 concepts/                    # 🟢 (CONCEPT--)  
+│   │   │   ├── 📁 .../                           # เอกสารสเปกหลัก, API Specifications, ไดอะแกรม
+│   ├── 📁 platforms/
+│   │   └── 📁 zuri-enterprise/
+│   │       ├── 📁 apps/ 
+│   │       ├── 📁 docs/                   # Systems ย่อย (zuri-ui, crm-api, line-webhook)
+│   │       └── 📁 packages/               # โมดูลฐานข้อมูลและไลบรารีแชร์ภายใน Zuri
+│   └── 📄 package.json
+
 ```
 
 ### 4.2.1 ประเภทความรู้: Ideas (`ideas/`)

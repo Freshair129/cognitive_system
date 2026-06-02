@@ -744,8 +744,8 @@ export function gksLayout(root: string): {
   const projectName = process.env.MSP_PROJECT || 'default'
   const brain = join(r, '.brain', 'msp', 'projects', projectName)
 
-  // Canonical Layout v1.4.0: Knowledge base is nested under .brain/gks
-  const gksBase = process.env.MSP_BRAIN_PATH ? resolve(process.env.MSP_BRAIN_PATH) : join(r, '.brain', 'gks')
+  // Canonical Layout v1.4.0: Knowledge base is nested under .brain/cognitive-system-knowledge-block
+  const gksBase = process.env.MSP_BRAIN_PATH ? resolve(process.env.MSP_BRAIN_PATH) : join(r, '.brain', 'cognitive-system-knowledge-block')
 
   return {
     root: r,

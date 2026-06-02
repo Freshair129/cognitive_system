@@ -3,20 +3,19 @@ dist/
 .env
 *.log
 .DS_Store
-.brain/
-!.brain/gks/
-.brain/gks/00_index/atomic_index.jsonl
-.brain/gks/00_index/backlinks.jsonl
+.brain/*
+!.brain/cognitive-system-knowledge-block/
+.brain/cognitive-system-knowledge-block/00_index/atomic_index.jsonl
+.brain/cognitive-system-knowledge-block/00_index/backlinks.jsonl
 
 # Promoted-Block Registry (derived state — CONCEPT--PROMOTED-BLOCK-REGISTRY)
-.brain/gks/master/registry.jsonl
+.brain/cognitive-system-knowledge-block/master/registry.jsonl
 
 # Obsidian / Excalidraw editor cruft
-.brain/gks/.obsidian/
-.brain/gks/.smart-env/
-.brain/gks/Excalidraw/
-.brain/gks/Untitled*.canvas
-.brain/gks/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9].md
+.brain/cognitive-system-knowledge-block/.obsidian/
+.brain/cognitive-system-knowledge-block/.smart-env/
+.brain/cognitive-system-knowledge-block/Excalidraw/
+.brain/cognitive-system-knowledge-block/Untitled*.canvas
+.brain/cognitive-system-knowledge-block/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9].md
 mcp_config.json
 .mcp.json
-
