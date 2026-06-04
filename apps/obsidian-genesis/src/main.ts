@@ -2,6 +2,8 @@ import { Plugin, WorkspaceLeaf, TFile, Notice } from 'obsidian';
 import { JitContextView, JIT_CONTEXT_VIEW_TYPE } from './JitContextView';
 
 export default class GenesisObsidianPlugin extends Plugin {
+    private rebuildTimeout: NodeJS.Timeout | null = null;
+
     async onload() {
         console.log('Loading Genesis Shadow Sync Plugin');
 
@@ -44,6 +46,7 @@ export default class GenesisObsidianPlugin extends Plugin {
 
     onunload() {
         console.log('Unloading Genesis Shadow Sync Plugin');
+        if (this.rebuildTimeout) clearTimeout(this.rebuildTimeout);
     }
 
     async activateView() {
@@ -68,39 +71,36 @@ export default class GenesisObsidianPlugin extends Plugin {
     }
 
     async updateContextView(file: TFile) {
-        // Find the active JIT Context View
         const leaves = this.app.workspace.getLeavesOfType(JIT_CONTEXT_VIEW_TYPE);
-        if (leaves.length === 0) return; // View not open
+        if (leaves.length === 0) return; 
 
         const view = leaves[0].view as JitContextView;
-        
-        // Extract a clean ID from the filename (e.g., "FEAT--TAX-DEDUCT.md" -> "FEAT--TAX-DEDUCT")
         const fileId = file.basename;
-        
         await view.updateContext(fileId);
     }
 
     async handleFileModified(file: TFile) {
         if (file.extension !== 'md') return;
 
-        // Parse Frontmatter using Obsidian's metadata cache
         const cache = this.app.metadataCache.getFileCache(file);
         const frontmatter = cache?.frontmatter;
-
         if (!frontmatter) return;
 
         const id = frontmatter.id || file.basename;
         const type = frontmatter.type || 'note';
         
-        // Read the file content to parse json:genesis blocks
         const content = await this.app.vault.read(file);
         const genesisRegex = /```json:genesis\n([\s\S]*?)\n```/g;
-        let props: Record<string, any> = { ...frontmatter };
-        delete props.id;
-        delete props.type;
+        
+        // ARCHITECTURAL OPTIMIZATION: Pre-filter properties
+        // Only include specific valuable keys to keep RAM footprint lean
+        let props: Record<string, any> = {};
+        const allowedKeys = ['status', 'title', 'tags', 'created', 'updated', 'impact_override'];
+        for (const key of allowedKeys) {
+            if (frontmatter[key] !== undefined) props[key] = frontmatter[key];
+        }
 
         let embedding: number[] | null = null;
-
         let match;
         while ((match = genesisRegex.exec(content)) !== null) {
             try {
@@ -109,6 +109,7 @@ export default class GenesisObsidianPlugin extends Plugin {
                     embedding = parsed.embedding;
                     delete parsed.embedding;
                 }
+                // Merge other genesis-specific props
                 props = { ...props, ...parsed };
             } catch (e) {
                 console.error("Failed to parse json:genesis block in", file.path, e);
@@ -132,9 +133,27 @@ export default class GenesisObsidianPlugin extends Plugin {
                 console.error("Shadow Sync Failed:", await response.text());
             } else {
                 console.debug(`Shadow Sync: ${id} updated in GenesisDB`);
+                // ARCHITECTURAL OPTIMIZATION: Trigger Idle Rebuild (10s debounce)
+                this.scheduleIdleRebuild();
             }
         } catch (e) {
             console.error("Shadow Sync Error: Cannot reach GenesisDB", e);
         }
+    }
+
+    private scheduleIdleRebuild() {
+        if (this.rebuildTimeout) clearTimeout(this.rebuildTimeout);
+        this.rebuildTimeout = setTimeout(async () => {
+            try {
+                console.log("GenesisDB: Triggering Idle Index Rebuild...");
+                const response = await fetch('http://127.0.0.1:3000/v1/bulk/rebuild', { method: 'POST' });
+                if (response.ok) {
+                    console.log("GenesisDB: Idle Index Rebuild Complete.");
+                    new Notice("GenesisDB: Brain Rebuilt (Idle Sync)");
+                }
+            } catch (e) {
+                console.error("Idle Rebuild Failed:", e);
+            }
+        }, 10000); // 10 seconds of idle
     }
 }

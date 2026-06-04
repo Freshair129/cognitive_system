@@ -15,7 +15,7 @@ tags:
   - pdp
   - pep
   - policy
-crosslinks: 
+crosslinks:
   references:
     - FRAMEWORK--UNIVERSAL-CONTEXT-FRAMEWORK
     - CONCEPT--SUBJECT-RESOURCE-ACTION-CONTEXT
@@ -39,6 +39,7 @@ attributes:
   secret_type: high_entropy_string
   leak_risk: high
   encryption_level: none
+members:
 ---
 
 # CONCEPT — ABAC policy engine
