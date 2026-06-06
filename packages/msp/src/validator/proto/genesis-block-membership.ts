@@ -23,6 +23,7 @@ import { readFile } from 'node:fs/promises'
 import { isAbsolute, join, resolve } from 'node:path'
 
 import { parse as parseYaml } from 'yaml'
+import { gksLayout } from '@freshair129/gks'
 
 import type { AtomicIndexEntry } from '../types.js'
 
@@ -249,6 +250,10 @@ export function checkManifest(
 
 function resolveAtomPath(repoRoot: string, relPath: string): string {
   if (isAbsolute(relPath)) return relPath
+  // If path already contains .brain or gks (repo-relative), don't prepend gks
+  if (relPath.startsWith('.brain/') || relPath.startsWith('gks/')) {
+    return resolve(repoRoot, relPath)
+  }
   return resolve(join(repoRoot, 'gks', relPath))
 }
 

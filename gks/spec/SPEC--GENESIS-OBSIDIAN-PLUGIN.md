@@ -1,9 +1,15 @@
-﻿---
+---
 id: SPEC--GENESIS-OBSIDIAN-PLUGIN
+phase: 2
 type: spec
-status: draft
+status: stable
+vault_id: GKS-CORE
+tier: process
+source_type: axiomatic
 title: "Genesis Obsidian Plugin: The Shadow Sync Bridge"
 summary: Specification for the Obsidian plugin that connects the local Markdown vault to the GenesisDB (Mark III) engine, enabling Just-In-Time Context rendering and hybrid data syncing.
+tags: [obsidian, plugin, bridge, spec]
+created_at: 2026-06-03T10:00:00+07:00
 ---
 
 # SPEC--GENESIS-OBSIDIAN-PLUGIN

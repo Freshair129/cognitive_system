@@ -8,6 +8,7 @@ export {
   retain,
   renderByTier,
   walkGraph,
+  gksLayout,
   DEFAULT_REL_WEIGHTS,
 } from './memory/index.js'
 export type {

@@ -26,12 +26,14 @@ describe('msp-task-tracker example', () => {
 
   it('runs the full task lifecycle and proposes an audit', async () => {
     // 1. Setup BLUEPRINT
+    const { gksLayout } = await import('../../src/memory/index.js')
+    const layout = gksLayout(root)
     const blueprintId = 'BLUEPRINT--TEST'
-    const blueprintDir = join(root, '.brain', 'gks', '03_blueprint')
+    const blueprintDir = join(layout.gks, '03_blueprint')
     await mkdir(blueprintDir, { recursive: true })
     await writeFile(join(blueprintDir, 'test.md'), '# TEST')
 
-    const indexDir = join(root, '.brain', 'gks', '00_index')
+    const indexDir = join(layout.gks, '00_index')
     await mkdir(indexDir, { recursive: true })
     const row = {
       id: blueprintId,

@@ -2,14 +2,11 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": ".",
-    "declaration": true,
-    "noUncheckedIndexedAccess": false,
-    "baseUrl": ".",
-    "paths": {
-      "@freshair129/gks": ["../gks/src"]
-    }
+    "rootDir": "."
   },
+  "references": [
+    { "path": "../gks" }
+  ],
   "include": ["src/**/*", "test/**/*"],
   "exclude": [
     "node_modules",

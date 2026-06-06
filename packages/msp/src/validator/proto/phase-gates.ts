@@ -18,9 +18,10 @@
  */
 
 import { readFile } from 'node:fs/promises'
-import { resolve } from 'node:path'
+import { resolve, join } from 'node:path'
 
 import { parse as parseYaml } from 'yaml'
+import { gksLayout } from '@freshair129/gks'
 
 import type {
   Predicate,
@@ -76,7 +77,7 @@ async function hasSkipBlueprint(
   repoRoot: string,
 ): Promise<boolean> {
   if (typeof entry.path !== 'string' || entry.path.length === 0) return false
-  const abs = resolve(repoRoot, 'gks', entry.path)
+  const abs = resolve(repoRoot, entry.path)
   let raw: string
   try {
     raw = await readFile(abs, 'utf8')
@@ -85,7 +86,12 @@ async function hasSkipBlueprint(
   }
   const fm = parseFrontmatter(raw)
   if (fm === null) return false
-  const override = fm['phase_override']
+  
+  const attrs = (typeof (fm as any).attributes === 'object' && (fm as any).attributes !== null)
+    ? (fm as any).attributes
+    : {}
+  
+  const override = fm['phase_override'] ?? attrs['phase_override']
   if (typeof override !== 'object' || override === null) return false
   const skip = (override as { skip_blueprint?: unknown }).skip_blueprint
   return skip === true

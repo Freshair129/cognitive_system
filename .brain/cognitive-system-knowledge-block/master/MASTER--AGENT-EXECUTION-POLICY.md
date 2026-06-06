@@ -20,11 +20,10 @@ cluster: governance
 role: Root level policy
 crosslinks:
   references:
-    - "[[RUNBOOK--CONTEXT-RESOLUTION-LOOP]]"
+    - "RUNBOOK--CONTEXT-RESOLUTION-LOOP"
   parent_blueprint:
-    - "[[GENESIS--COGNITIVE-ENGINE]]"
+    - "GENESIS--COGNITIVE-ENGINE"
 ---
-
 # ⚖️ MASTER--AGENT-EXECUTION-POLICY
 
 **Agent Execution Policy (The Prime Directive)**

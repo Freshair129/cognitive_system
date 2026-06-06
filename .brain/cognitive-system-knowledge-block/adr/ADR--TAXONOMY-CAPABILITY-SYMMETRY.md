@@ -17,13 +17,12 @@ cluster: governance
 role: Architecture Decision Record
 crosslinks:
   resolves:
-    - "[[ISSUE--ASYMMETRIC-TAXONOMY]]"
+    - "ISSUE--ASYMMETRIC-TAXONOMY"
   references:
-    - "[[CONCEPT--DOC-DRIVEN-DEVELOPMENT]]"
-    - "[[SKILL--DOC-TO-CODE]]"
-    - "[[SKILL--DIAGRAM-TO-CODE]]"
+    - "CONCEPT--DOC-DRIVEN-DEVELOPMENT"
+    - "SKILL--DOC-TO-CODE"
+    - "SKILL--DIAGRAM-TO-CODE"
 ---
-
 # 🏛️ ADR--TAXONOMY-CAPABILITY-SYMMETRY
 
 **Architecture Decision Record: Taxonomy & Capability Symmetry**

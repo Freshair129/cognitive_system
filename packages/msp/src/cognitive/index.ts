@@ -114,7 +114,22 @@ export async function createCognitiveLayer(
       }
 
       const seedIds = result.hits.map((h) => h.atomId)
-      const nexus = await runNexusmind(store, seedIds, thinkingLevel)
+      const vectorScores = new Map<string, number>(result.hits.map((h) => [h.atomId, h.score]))
+      
+      const nexus = await runNexusmind(store, seedIds, thinkingLevel, { vectorScores })
+
+      // Handle Epistemic State Shifts (ADR--NEXUSMIND-EPISTEMIC-TRANSITIONS)
+      for (const shift of nexus.stateShifts) {
+        await store.proposeInbound({
+          proposed_id: shift.id,
+          type: 'audit',
+          phase: 6,
+          title: `State Shift Proposal for ${shift.id}`,
+          body: `K-Impact: ${shift.kImpact.toFixed(3)}\nFrom: ${shift.from}\nTo: ${shift.to}\n\nSuggested by Nexusmind N5 thinking level.`,
+          reason: `Nexusmind detected K-Impact variance (${shift.kImpact.toFixed(3)}) suggesting status update from ${shift.from} to ${shift.to}.`,
+          source_session: context.trace_id,
+        })
+      }
 
       const finalHits: CognitiveRecallHit[] = []
 
@@ -168,6 +183,7 @@ export async function createCognitiveLayer(
         strategy: 'multi',
         tookMs: result.timings.fusion,
         fallback_reasons: result.fallback_reasons,
+        stateShifts: nexus.stateShifts,
       }
     },
 

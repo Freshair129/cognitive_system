@@ -312,7 +312,7 @@ export const GalaxyView: React.FC<GalaxyViewProps> = ({ notes, edges, onOpen }) 
         if (al < 0.02) continue;
         const sz  = Math.max(0.4, p.sz * prj.scale * 0.65);
         ctx.fillStyle = `rgba(${p.r},${p.g},${p.b},${al.toFixed(3)})`;
-        ctx.fillRect(x, y, p.sz * proj.scale, p.sz * proj.scale);
+        ctx.fillRect(px, py, sz, sz);
       }
     }
 

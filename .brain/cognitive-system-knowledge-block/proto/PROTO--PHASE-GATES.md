@@ -38,6 +38,7 @@ attributes:
   has_secret: false
   leak_risk: low
   encryption_level: none
+
 ---
 
 # PROTO — PHASE-GATES

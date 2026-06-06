@@ -15,6 +15,7 @@
  * source='obsidian' are no-ops so the shape of the API stays stable.
  */
 
+import { existsSync } from 'node:fs'
 import { resolve, join } from 'node:path'
 
 import type {
@@ -745,7 +746,15 @@ export function gksLayout(root: string): {
   const brain = join(r, '.brain', 'msp', 'projects', projectName)
 
   // Canonical Layout v1.4.0: Knowledge base is nested under .brain/cognitive-system-knowledge-block
-  const gksBase = process.env.MSP_BRAIN_PATH ? resolve(process.env.MSP_BRAIN_PATH) : join(r, '.brain', 'cognitive-system-knowledge-block')
+  const modernGks = join(r, '.brain', 'cognitive-system-knowledge-block')
+  const legacyGks = join(r, '.brain', 'gks')
+  
+  const modernIndex = join(modernGks, '00_index', 'atomic_index.jsonl')
+  const legacyIndex = join(legacyGks, '00_index', 'atomic_index.jsonl')
+
+  const gksBase = process.env.MSP_BRAIN_PATH 
+    ? resolve(process.env.MSP_BRAIN_PATH) 
+    : (existsSync(modernIndex) ? modernGks : (existsSync(legacyIndex) ? legacyGks : modernGks))
 
   return {
     root: r,

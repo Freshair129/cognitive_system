@@ -110,41 +110,88 @@ export const Graph2DView: React.FC<Graph2DViewProps> = ({ notes, edges, focusId,
     }
 
     // Edges
+    ctx.beginPath();
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+    ctx.lineWidth = 0.5 * k;
     for (const l of links) {
       const isFocus = focusId && (l.source.id === focusId || l.target.id === focusId);
-      const isDim = focusId && !isFocus;
-      ctx.strokeStyle = isFocus ? 'rgba(124, 92, 255, 0.8)' : `rgba(70, 75, 90, ${isDim ? 0.15 : 0.35})`;
-      ctx.lineWidth = isFocus ? 1.5 : 0.75;
-      ctx.beginPath();
+      const isHover = hover && (l.source.id === hover.id || l.target.id === hover.id);
+      if (isFocus || isHover) continue; // Draw highlighted later
       ctx.moveTo(CX + l.source.x * k, CY + l.source.y * k);
       ctx.lineTo(CX + l.target.x * k, CY + l.target.y * k);
+    }
+    ctx.stroke();
+
+    // Hover Edges (Accent links)
+    if (hover) {
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(0, 220, 255, 0.45)'; // Cyan accent for hover
+      ctx.lineWidth = 1.0 * k;
+      for (const l of links) {
+        if (l.source.id === hover.id || l.target.id === hover.id) {
+          ctx.moveTo(CX + l.source.x * k, CY + l.source.y * k);
+          ctx.lineTo(CX + l.target.x * k, CY + l.target.y * k);
+        }
+      }
+      ctx.stroke();
+    }
+
+    // Hot Edges (Focus links)
+    if (focusId) {
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(124, 92, 255, 0.6)'; // Purple for focus
+      ctx.lineWidth = 1.2 * k;
+      for (const l of links) {
+        if (l.source.id === focusId || l.target.id === focusId) {
+          ctx.moveTo(CX + l.source.x * k, CY + l.source.y * k);
+          ctx.lineTo(CX + l.target.x * k, CY + l.target.y * k);
+        }
+      }
       ctx.stroke();
     }
 
     // Nodes
     for (const n of nodes) {
+      const nx = CX + n.x * k, ny = CY + n.y * k;
+      if (nx < -50 || nx > size.w + 50 || ny < -50 || ny > size.h + 50) continue;
+
       const isFocus = n.id === focusId;
       const isNbr = neighbors.has(n.id);
       const isDim = focusId && !isFocus && !isNbr;
       const r = Math.max(2, (3 + Math.sqrt(n.deg) * 1.5) * k * nodeSize);
 
-      const meta = GKS_SERVICE.TYPE_META[n.type as NoteType] || { raw: '#6b7390' };
+      const isTag = n.id.startsWith('tag:');
+      const meta = isTag ? { raw: 'rgba(124, 92, 255, 0.9)' } : (GKS_SERVICE.TYPE_META[n.type as NoteType] || { raw: '#6b7390' });
       
+      ctx.fillStyle = isDim ? 'rgba(60, 60, 70, 0.3)' : meta.raw;
       ctx.beginPath();
-      ctx.arc(CX + n.x * k, CY + n.y * k, r, 0, Math.PI * 2);
-      ctx.fillStyle = meta.raw;
-      ctx.globalAlpha = isDim ? 0.2 : 1;
+      if (isTag) {
+        ctx.rect(nx - 3*k, ny - 3*k, 6*k, 6*k); // Square for tags
+      } else {
+        ctx.arc(nx, ny, r, 0, Math.PI * 2);
+      }
       ctx.fill();
-      ctx.globalAlpha = 1;
 
-      if (isFocus || isNbr || (k > 1.2 && n.deg >= 10)) {
-        ctx.fillStyle = 'rgba(255,255,255,0.85)';
-        ctx.font = `${isFocus ? '600' : '400'} 10px Inter`;
+      if (isFocus) {
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      } else if (hover && n.id === hover.id) {
+        ctx.strokeStyle = 'rgba(0, 220, 255, 0.8)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+
+      // Labels
+      const isHovered = hover && n.id === hover.id;
+      if (k > 0.6 && (isFocus || isNbr || isHovered || (k > 1.2 && n.deg > 5))) {
+        ctx.fillStyle = isFocus || isHovered ? '#fff' : 'rgba(230, 232, 240, 0.7)';
+        ctx.font = `${isFocus || isHovered ? '600 ' : ''}10px var(--font-sans)`;
         ctx.textAlign = 'center';
-        ctx.fillText(n.title, CX + n.x * k, CY + n.y * k + r + 12);
+        ctx.fillText(n.title, nx, ny + r + 12);
       }
     }
-  }, [size, focusId, nodeSize]);
+  }, [size, focusId, nodeSize, hover]);
 
   // Animation Loop
   useEffect(() => {
@@ -211,116 +258,7 @@ export const Graph2DView: React.FC<Graph2DViewProps> = ({ notes, edges, focusId,
 
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [size, focusId]);
-
-  const draw = () => {
-    const canvas = canvasRef.current; if (!canvas) return;
-    const ctx = canvas.getContext('2d'); if (!ctx) return;
-    const dpr = window.devicePixelRatio || 1;
-    if (canvas.width !== size.w * dpr) {
-      canvas.width = size.w * dpr;
-      canvas.height = size.h * dpr;
-    }
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-    const { nodes, links } = simRef.current;
-    const { x, y, k } = transform.current;
-    const CX = size.w / 2 + x, CY = size.h / 2 + y;
-
-    ctx.fillStyle = '#111111';
-    ctx.fillRect(0, 0, size.w, size.h);
-
-    // Edges
-    ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
-    ctx.lineWidth = 0.5 * k;
-    for (const l of links) {
-      const isFocus = focusId && (l.source.id === focusId || l.target.id === focusId);
-      const isHover = hover && (l.source.id === hover.id || l.target.id === hover.id);
-      if (isFocus || isHover) continue; // Draw highlighted later
-      ctx.moveTo(CX + l.source.x * k, CY + l.source.y * k);
-      ctx.lineTo(CX + l.target.x * k, CY + l.target.y * k);
-    }
-    ctx.stroke();
-
-    // Hover Edges (Accent links)
-    if (hover) {
-      ctx.beginPath();
-      ctx.strokeStyle = 'rgba(0, 220, 255, 0.45)'; // Cyan accent for hover
-      ctx.lineWidth = 1.0 * k;
-      for (const l of links) {
-        if (l.source.id === hover.id || l.target.id === hover.id) {
-          ctx.moveTo(CX + l.source.x * k, CY + l.source.y * k);
-          ctx.lineTo(CX + l.target.x * k, CY + l.target.y * k);
-        }
-      }
-      ctx.stroke();
-    }
-
-    // Hot Edges (Focus links)
-    if (focusId) {
-      ctx.beginPath();
-      ctx.strokeStyle = 'rgba(124, 92, 255, 0.6)'; // Purple for focus
-      ctx.lineWidth = 1.2 * k;
-      for (const l of links) {
-        if (l.source.id === focusId || l.target.id === focusId) {
-          ctx.moveTo(CX + l.source.x * k, CY + l.source.y * k);
-          ctx.lineTo(CX + l.target.x * k, CY + l.target.y * k);
-        }
-      }
-      ctx.stroke();
-    }
-
-    // Nodes
-    const neighbors = new Set<string>();
-    if (focusId) {
-      links.forEach(l => {
-        if (l.source.id === focusId) neighbors.add(l.target.id);
-        if (l.target.id === focusId) neighbors.add(l.source.id);
-      });
-    }
-
-    for (const n of nodes) {
-      const nx = CX + n.x * k, ny = CY + n.y * k;
-      if (nx < -50 || nx > size.w + 50 || ny < -50 || ny > size.h + 50) continue;
-
-      const isFocus = n.id === focusId;
-      const isNbr = neighbors.has(n.id);
-      const isDim = focusId && !isFocus && !isNbr;
-      const r = Math.max(2, (3 + Math.sqrt(n.deg) * 1.5) * k * nodeSize);
-
-      const isTag = n.id.startsWith('tag:');
-      const meta = isTag ? { raw: 'rgba(124, 92, 255, 0.9)' } : (GKS_SERVICE.TYPE_META[n.type as NoteType] || { raw: '#6b7390' });
-      
-      ctx.fillStyle = isDim ? 'rgba(60, 60, 70, 0.3)' : meta.raw;
-      ctx.beginPath();
-      if (isTag) {
-        ctx.rect(nx - 3*k, ny - 3*k, 6*k, 6*k); // Square for tags
-      } else {
-        ctx.arc(nx, ny, r, 0, Math.PI * 2);
-      }
-      ctx.fill();
-
-      if (isFocus) {
-        ctx.strokeStyle = '#fff';
-        ctx.lineWidth = 2;
-        ctx.stroke();
-      } else if (hover && n.id === hover.id) {
-        ctx.strokeStyle = 'rgba(0, 220, 255, 0.8)';
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-      }
-
-      // Labels
-      const isHovered = hover && n.id === hover.id;
-      if (k > 0.6 && (isFocus || isNbr || isHovered || (k > 1.2 && n.deg > 5))) {
-        ctx.fillStyle = isFocus || isHovered ? '#fff' : 'rgba(230, 232, 240, 0.7)';
-        ctx.font = `${isFocus || isHovered ? '600 ' : ''}10px var(--font-sans)`;
-        ctx.textAlign = 'center';
-        ctx.fillText(n.title, nx, ny + r + 12);
-      }
-    }
-  };
+  }, [size, focusId, draw]);
 
   // Interaction handlers
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -383,7 +321,7 @@ export const Graph2DView: React.FC<Graph2DViewProps> = ({ notes, edges, focusId,
           hit = n; break;
         }
       }
-      setHover(hit ? { id: hit.id, x: mx, y: my } : null);
+      setHover(hit ? { id: hit.id, x: mx, y: my, title: hit.title } : null);
     }
   };
 

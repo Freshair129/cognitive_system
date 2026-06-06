@@ -28,7 +28,7 @@ aliases:
 cluster: implementation_flow
 role: Machine-enforced invariant
 attributes:
-  severity: warning
+  severity: error
   linked_symbols:
     - file: packages/msp/src/validator/proto/scaling-level-gate.ts
   domain: proto

@@ -78,8 +78,13 @@ attributes:
 promoted_from: CONCEPT--IDENTITY-LAYER
 promoted_at: 2026-05-14T21:10:00.000+07:00
 promotion_adr: ADR--IDENTITY-STORAGE-SHAPE
+manifest_version: "1.0"
+daci:
+  driver: System
+  approver: Architect
+  contributor: Agents
+  informed: Users
 ---
-
 # GENESIS — Identity Engine
 
 The **Identity Engine** is the first canonical Genesis Block in the MSP ecosystem. It aggregates the five essential dimensions required to define and maintain a stable agent identity ("soul") across heterogeneous sessions and providers.

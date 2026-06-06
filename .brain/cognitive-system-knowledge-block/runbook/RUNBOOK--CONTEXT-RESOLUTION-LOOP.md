@@ -17,14 +17,13 @@ cluster: ops
 role: Operational response guide
 crosslinks:
   references:
-    - "[[FRAMEWORK--WORKFLOW-DYNAMICS]]"
-    - "[[FRAMEWORK--HIERARCHY-COMPACTION-STANDARDS]]"
+    - "FRAMEWORK--WORKFLOW-DYNAMICS"
+    - "FRAMEWORK--HIERARCHY-COMPACTION-STANDARDS"
   implements:
-    - "[[MASTER--AGENT-EXECUTION-POLICY]]"
+    - "MASTER--AGENT-EXECUTION-POLICY"
   parent_blueprint:
-    - "[[GENESIS--COGNITIVE-ENGINE]]"
+    - "GENESIS--COGNITIVE-ENGINE"
 ---
-
 # 📚 RUNBOOK--CONTEXT-RESOLUTION-LOOP
 
 **Hierarchical Context Resolution Loop**

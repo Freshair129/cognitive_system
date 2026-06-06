@@ -24,11 +24,10 @@ cluster: implementation_flow
 role: Strategic intent / PRD
 crosslinks:
   references:
-    - "[[CONCEPT--SPECIFICATION-TO-SYSTEM]]"
+    - "CONCEPT--SPECIFICATION-TO-SYSTEM"
   origin_episodes:
-    - "[[EPISODE--DDD-TEXT-LIMITATION-TO-D2C]]"
+    - "EPISODE--DDD-TEXT-LIMITATION-TO-D2C"
 ---
-
 # 🎨 CONCEPT--DIAGRAM-TO-CODE
 
 **Diagram-to-Code: Visual Structure to Executable Primitives**

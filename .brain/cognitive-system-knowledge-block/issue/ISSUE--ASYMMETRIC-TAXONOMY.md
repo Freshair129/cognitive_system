@@ -17,12 +17,11 @@ cluster: governance
 role: Issue tracker
 crosslinks:
   references:
-    - "[[CONCEPT--DOC-DRIVEN-DEVELOPMENT]]"
-    - "[[SKILL--DIAGRAM-TO-CODE]]"
+    - "CONCEPT--DOC-DRIVEN-DEVELOPMENT"
+    - "SKILL--DIAGRAM-TO-CODE"
   resolved_by:
-    - "[[ADR--TAXONOMY-CAPABILITY-SYMMETRY]]"
+    - "ADR--TAXONOMY-CAPABILITY-SYMMETRY"
 ---
-
 # 🚨 ISSUE--ASYMMETRIC-TAXONOMY
 
 **Title:** Asymmetric Taxonomy: DDD vs Diagram-to-Code

@@ -86,7 +86,7 @@ describe('re-indexer (npm run msp:index)', () => {
     const rows = await readIndex(root)
     // Sorted by id alphabetically (deterministic output for diff-friendly).
     expect(rows.map((r) => r['id'])).toEqual(['ADR--FOO', 'CONCEPT--EVA'])
-    expect((rows[0]!['path'] as string).replace(/\\/g, '/')).toBe('adr/foo.md')
+    expect((rows[0]!['path'] as string).replace(/\\/g, '/')).toBe('.brain/gks/adr/foo.md')
     expect(rows[1]!['title']).toBe('EVA')
     expect(rows[1]!['tags']).toEqual(['a', 'b'])
   }, 30_000)

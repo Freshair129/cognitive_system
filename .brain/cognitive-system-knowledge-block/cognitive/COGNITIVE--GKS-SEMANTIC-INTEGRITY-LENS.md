@@ -2,7 +2,7 @@
 id: COGNITIVE--GKS-SEMANTIC-INTEGRITY-LENS
 phase: 1
 type: cognitive
-status: active
+status: stable
 vault_id: GKS-CORE
 tier: process
 source_type: axiomatic

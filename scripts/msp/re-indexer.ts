@@ -1,27 +1,22 @@
 /**
  * Atomic index re-builder for MSP.
  *
- * Walks `gks/` markdown atoms, parses YAML frontmatter, and writes
- * a normalised `gks/00_index/atomic_index.jsonl`.
+ * Walks multiple potential knowledge base roots (vaults), parses YAML
+ * frontmatter, and writes a unified `atomic_index.jsonl`.
  *
- * Vendored from @freshair129/gks scripts/msp/re-indexer.ts (v3.5.6) and
- * adapted to import from the published package instead of local sources.
- *
- * Usage:
- *   npm run msp:index                                   # default cwd
- *   tsx scripts/msp/re-indexer.ts --root=/path/to/repo
- *   tsx scripts/msp/re-indexer.ts --dry-run             # preview only
- *   tsx scripts/msp/re-indexer.ts --verbose             # list each file
+ * Path Strategy:
+ *   Entries in the index store `path` relative to the MONOREPO ROOT.
+ *   This ensures a unified addressing space across all monorepo tools.
  */
 
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises'
+import { existsSync } from 'node:fs'
 import { dirname, join, relative, resolve } from 'node:path'
 import { parseArgs } from 'node:util'
 
 import { parse as parseYaml } from 'yaml'
 
-import { gksLayout, isAtomicId } from '@freshair129/gks'
-import { normaliseStatus } from '@freshair129/gks'
+import { gksLayout, isAtomicId, normaliseStatus } from '@freshair129/gks'
 
 interface IndexRow {
   id: string
@@ -52,7 +47,7 @@ async function* walkMarkdown(dir: string): AsyncGenerator<string> {
   for (const entry of entries) {
     const p = join(dir, entry.name)
     if (entry.isDirectory()) {
-      if (entry.name === '00_index') continue
+      if (entry.name === '00_index' || entry.name === 'node_modules' || entry.name === '.git') continue
       yield* walkMarkdown(p)
     } else if (entry.isFile() && entry.name.endsWith('.md')) {
       yield p
@@ -168,49 +163,78 @@ async function main(): Promise<void> {
   const verbose = values['verbose'] === true
 
   const layout = gksLayout(root)
-  console.log(`[index] gks root:    ${layout.gks}`)
-  console.log(`[index] output:      ${layout.atomicIndex}${dryRun ? '  (dry-run)' : ''}`)
+  console.log(`[index] target:      ${layout.atomicIndex}${dryRun ? '  (dry-run)' : ''}`)
 
   const rows: IndexRow[] = []
   const skipped: Array<{ path: string; reason: string }> = []
   let scanned = 0
 
-  for await (const file of walkMarkdown(layout.gks)) {
-    scanned++
-    const pathRel = relative(layout.gks, file)
-    let text: string
-    try {
-      text = await readFile(file, 'utf8')
-    } catch {
-      skipped.push({ path: pathRel, reason: 'read error' })
-      continue
-    }
+  // VAULT ROOTS
+  const modernBrain = layout.gks
+  const canonDir = resolve(root, 'gks')
+  const legacyBrain = resolve(root, '.brain', 'gks')
 
-    const fm = extractFrontmatter(text)
-    if (!fm) {
-      skipped.push({ path: pathRel, reason: 'no frontmatter' })
-      continue
-    }
-
-    const { row, reason } = rowFromFrontmatter(fm, pathRel)
-    if (!row) {
-      skipped.push({ path: pathRel, reason: reason ?? 'invalid' })
-      continue
-    }
-    rows.push(row)
-    if (verbose) console.log(`  + ${row.id}  ${pathRel}`)
+  const scanDir = (dir: string, name: string) => {
+    if (!existsSync(dir)) return null
+    return { dir, name, vaultRoot: dir }
   }
 
-  const seen = new Set<string>()
+  const roots = [
+    { dir: modernBrain, name: 'brain', vaultRoot: modernBrain },
+    { dir: canonDir, name: 'canon', vaultRoot: canonDir },
+    { dir: legacyBrain, name: 'legacy-brain', vaultRoot: legacyBrain },
+  ].filter((r) => existsSync(r.dir))
+
+  // Dedupe by absolute path
+  const seenRoots = new Set<string>()
+  const finalRoots = roots.filter(r => {
+    const abs = resolve(r.dir)
+    if (seenRoots.has(abs)) return false
+    seenRoots.add(abs)
+    return true
+  })
+
+  for (const r of finalRoots) {
+    console.log(`[index] scanning ${r.name}:  ${r.dir}`)
+    for await (const file of walkMarkdown(r.dir)) {
+      scanned++
+      
+      // REPO-RELATIVE: Essential for monorepo-wide addressing and hard-governance resolution.
+      const pathRelRoot = relative(root, file).replace(/\\/g, '/')
+      
+      let text: string
+      try {
+        text = await readFile(file, 'utf8')
+      } catch {
+        skipped.push({ path: pathRelRoot, reason: 'read error' })
+        continue
+      }
+
+      const fm = extractFrontmatter(text)
+      if (!fm) {
+        skipped.push({ path: pathRelRoot, reason: 'no frontmatter' })
+        continue
+      }
+
+      const { row, reason } = rowFromFrontmatter(fm, pathRelRoot)
+      if (!row) {
+        skipped.push({ path: pathRelRoot, reason: reason ?? 'invalid' })
+        continue
+      }
+      rows.push(row)
+      if (verbose) console.log(`  + ${row.id}  ${pathRelRoot}`)
+    }
+  }
+
+  const seenIds = new Set<string>()
   const deduped: IndexRow[] = []
   let duplicates = 0
   for (const r of rows) {
-    if (seen.has(r.id)) {
+    if (seenIds.has(r.id)) {
       duplicates++
-      console.warn(`[index] duplicate id ${r.id} at ${r.path} — keeping first occurrence`)
       continue
     }
-    seen.add(r.id)
+    seenIds.add(r.id)
     deduped.push(r)
   }
 
@@ -221,19 +245,25 @@ async function main(): Promise<void> {
   console.log(`[index] skipped:     ${skipped.length}`)
   console.log(`[index] duplicates:  ${duplicates}`)
 
-  if (skipped.length > 0 && verbose) {
-    for (const s of skipped) console.log(`  - ${s.path}  (${s.reason})`)
-  }
-
   if (dryRun) {
     console.log('[index] dry-run — no write')
     return
   }
 
   const body = deduped.map((r) => JSON.stringify(r)).join('\n') + (deduped.length > 0 ? '\n' : '')
+  
+  // Materialize the index at the adaptive layout path
   await mkdir(dirname(layout.atomicIndex), { recursive: true })
   await writeFile(layout.atomicIndex, body, 'utf8')
   console.log(`[index] wrote ${layout.atomicIndex}`)
+
+  // Mirror to legacy path if it exists for tool compatibility
+  const legacyIndexFile = resolve(root, '.brain', 'gks', '00_index', 'atomic_index.jsonl')
+  if (resolve(layout.atomicIndex) !== legacyIndexFile && existsSync(dirname(dirname(legacyIndexFile)))) {
+    await mkdir(dirname(legacyIndexFile), { recursive: true })
+    await writeFile(legacyIndexFile, body, 'utf8')
+    console.log(`[index] mirrored to legacy path: ${legacyIndexFile}`)
+  }
 }
 
 main().catch((err) => {

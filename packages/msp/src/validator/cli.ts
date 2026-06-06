@@ -8,18 +8,20 @@ import { discoverProtos, runProtos, shouldFailExit } from './proto/loader.js'
 import type { ProtoSummary } from './proto/types.js'
 import { ValidatorIOError, type ValidationResult } from './types.js'
 import { makeContext, makeSubject } from '../policy/types.js'
+import { gksLayout } from '@freshair129/gks'
 
 const HELP = `msp-validate — schema/ID/wikilink/anti-hallucination gate over MSP atoms
 
 Usage:
   msp-validate <file>...
   msp-validate --all [--root=<dir>]
+  msp-validate --index=<path>
   msp-validate --json <file>...
 
 Flags:
-  --all              walk .brain/gks/ recursively
+  --all              walk knowledge base recursively
   --root=<dir>       project root (default: cwd)
-  --index=<path>     atomic index path (default: <root>/.brain/gks/00_index/atomic_index.jsonl)
+  --index=<path>     atomic index path (default: <root>/.brain/.../atomic_index.jsonl)
   --json             machine-readable output
   --help             this message
 
@@ -90,7 +92,8 @@ async function main(): Promise<number> {
   }
 
   const root = resolve(values.root ?? process.cwd())
-  const indexPath = resolve(values.index ?? `${root}/.brain/cognitive-system-knowledge-block/00_index/atomic_index.jsonl`)
+  const layout = gksLayout(root)
+  const indexPath = resolve(values.index ?? layout.atomicIndex)
 
   const subject = makeSubject('scheduled-job', 'validator-cli')
   const context = makeContext('cli', `val-${Date.now()}`)
@@ -126,7 +129,7 @@ async function main(): Promise<number> {
   let results: ValidationResult[]
 
   if (values.all) {
-    const dirs = [resolve(root, '.brain', 'cognitive-system-knowledge-block')]
+    const dirs = [resolve(root, 'gks'), layout.gks]
     results = await validateAll(dirs, ctx)
   } else if (positionals.length > 0) {
     results = []

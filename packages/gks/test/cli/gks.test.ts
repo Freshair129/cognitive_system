@@ -108,7 +108,7 @@ describe('gks CLI', () => {
         type: 'adr',
         status: 'stable',
         vault_id: 'V',
-        path: 'concept/adr-parse-trace-norm.md',
+        path: '.brain/gks/concept/adr-parse-trace-norm.md',
         title: 'Parse-trace normalization',
         linked_symbols: [{ file: 'src/memory/consolidator-llm.ts', fn: 'formatStep' }],
       },
@@ -118,10 +118,11 @@ describe('gks CLI', () => {
         type: 'blueprint',
         status: 'stable',
         vault_id: 'V',
-        path: 'blueprint/feat-stock.yaml',
-        title: 'Stock blueprint',
-        geography: ['src/stock/fefo.ts:applyFefo'],
+        path: '.brain/gks/blueprint/blueprint-feat-stock.md',
+        geography: ['src/stock/fefo.ts'],
+        linked_symbols: [{ file: 'src/stock/fefo.ts', fn: 'applyFefo' }],
       },
+
     ]
     await fs.writeFile(
       join(indexDir, 'atomic_index.jsonl'),

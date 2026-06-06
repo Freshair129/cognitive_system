@@ -13,9 +13,10 @@
  */
 
 import { readFile } from 'node:fs/promises'
-import { resolve } from 'node:path'
+import { resolve, join } from 'node:path'
 
 import { parse as parseYaml } from 'yaml'
+import { gksLayout } from '@freshair129/gks'
 
 import type {
   ParsedAtom,
@@ -81,7 +82,7 @@ export function ruleAdapter(
 
     for (const entry of ctx.atomicIndex) {
       if (opts.filter && !opts.filter(entry)) continue
-      const filepath = resolve(ctx.repoRoot, 'gks', entry.path)
+      const filepath = resolve(ctx.repoRoot, entry.path)
       const atom = await loadParsedAtom(filepath)
       if (atom === null) continue
 

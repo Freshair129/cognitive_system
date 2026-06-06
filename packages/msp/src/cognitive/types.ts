@@ -25,6 +25,10 @@ import type { Action, RequestContext, Subject } from '../policy/types.js'
 import type { SubagentScope } from '../policy/task-scope.js'
 import type { ResolutionTier } from '../orchestrator/resolution/tier.js'
 
+import type { StateShift } from './nexusmind.js'
+
+export type { StateShift }
+
 /** §17.3 — 3-tier agent mapping (T1 = Ollama+qwen2.5-coder, T2 = mid LLM, T3 = large LLM). */
 export type CognitiveTier = 'T1' | 'T2' | 'T3'
 
@@ -83,6 +87,7 @@ export interface CognitiveRecallResult extends Omit<RetrievalResult, 'hits'> {
   hits: CognitiveRecallHit[]
   tookMs: number
   fallback_reasons?: string[]
+  stateShifts?: StateShift[]
 }
 
 export interface EscalationRequest {
