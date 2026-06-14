@@ -97,6 +97,10 @@ var JitContextView = class extends import_obsidian.ItemView {
 
 // src/main.ts
 var GenesisObsidianPlugin = class extends import_obsidian2.Plugin {
+  constructor() {
+    super(...arguments);
+    this.rebuildTimeout = null;
+  }
   async onload() {
     console.log("Loading Genesis Shadow Sync Plugin");
     this.registerView(
@@ -128,6 +132,8 @@ var GenesisObsidianPlugin = class extends import_obsidian2.Plugin {
   }
   onunload() {
     console.log("Unloading Genesis Shadow Sync Plugin");
+    if (this.rebuildTimeout)
+      clearTimeout(this.rebuildTimeout);
   }
   async activateView() {
     const { workspace } = this.app;
@@ -165,9 +171,12 @@ var GenesisObsidianPlugin = class extends import_obsidian2.Plugin {
     const type = frontmatter.type || "note";
     const content = await this.app.vault.read(file);
     const genesisRegex = /```json:genesis\n([\s\S]*?)\n```/g;
-    let props = { ...frontmatter };
-    delete props.id;
-    delete props.type;
+    let props = {};
+    const allowedKeys = ["status", "title", "tags", "created", "updated", "impact_override"];
+    for (const key of allowedKeys) {
+      if (frontmatter[key] !== void 0)
+        props[key] = frontmatter[key];
+    }
     let embedding = null;
     let match;
     while ((match = genesisRegex.exec(content)) !== null) {
@@ -197,9 +206,26 @@ var GenesisObsidianPlugin = class extends import_obsidian2.Plugin {
         console.error("Shadow Sync Failed:", await response.text());
       } else {
         console.debug(`Shadow Sync: ${id} updated in GenesisDB`);
+        this.scheduleIdleRebuild();
       }
     } catch (e) {
       console.error("Shadow Sync Error: Cannot reach GenesisDB", e);
     }
+  }
+  scheduleIdleRebuild() {
+    if (this.rebuildTimeout)
+      clearTimeout(this.rebuildTimeout);
+    this.rebuildTimeout = setTimeout(async () => {
+      try {
+        console.log("GenesisDB: Triggering Idle Index Rebuild...");
+        const response = await fetch("http://127.0.0.1:3000/v1/bulk/rebuild", { method: "POST" });
+        if (response.ok) {
+          console.log("GenesisDB: Idle Index Rebuild Complete.");
+          new import_obsidian2.Notice("GenesisDB: Brain Rebuilt (Idle Sync)");
+        }
+      } catch (e) {
+        console.error("Idle Rebuild Failed:", e);
+      }
+    }, 1e4);
   }
 };

@@ -17,7 +17,7 @@ For incremental design decisions, see the ADR series in
 > [`KNOWLEDGE-TYPES.md`](./KNOWLEDGE-TYPES.md).
 >
 > **Naming reminder**: the `genesis-block.ts` backend wired into
-> `GraphBackend` is the **Genesis Graph Backend** (storage / DB). It is
+> `GraphBackend` is the **Genesis Graph Backend** or ***GenesisBlockDB*** (storage / DB). It is
 > NOT the same as a **Genesis Block** (composite knowledge unit
 > declared via a `FRAME--` manifest). The two layers are orthogonal —
 > a Genesis Block's edges can be persisted in a Genesis Graph Backend

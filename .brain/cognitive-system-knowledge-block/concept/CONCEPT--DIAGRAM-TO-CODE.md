@@ -8,7 +8,6 @@ delivered_from: "agent"
 type: concept
 status: stable
 vault_id: default
-tier: process
 source_type: axiomatic
 title: "Diagram-to-Code Concept"
 summary: แนวคิดการแปลงแผนภาพ (Diagram) โครงสร้างความสัมพันธ์เชิงภาพ (Node/Edge) ให้เป็นโค้ดหรือระบบที่เครื่องคอมพิวเตอร์เข้าใจได้โดยอัตโนมัติ
@@ -19,14 +18,12 @@ tags:
 version: 1.0.0
 enforcement_state: active
 aliases:
-  - CONCEPT--DIAGRAM-TO-CODE
+  - CONCEPT--,DIAGRAM-TO-CODE
 cluster: implementation_flow
 role: Strategic intent / PRD
 crosslinks:
   references:
     - "CONCEPT--SPECIFICATION-TO-SYSTEM"
-  origin_episodes:
-    - "EPISODE--DDD-TEXT-LIMITATION-TO-D2C"
 ---
 # 🎨 CONCEPT--DIAGRAM-TO-CODE
 

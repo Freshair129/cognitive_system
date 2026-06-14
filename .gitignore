@@ -19,3 +19,16 @@ dist/
 .brain/cognitive-system-knowledge-block/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9].md
 mcp_config.json
 .mcp.json
+
+# Build Caches & Temp files
+.turbo/
+*.tsbuildinfo
+*.cjs
+*.py
+*.rs
+*.txt
+*.json
+debug_validate.js
+!mcp_config.json
+!.mcp.json
+
