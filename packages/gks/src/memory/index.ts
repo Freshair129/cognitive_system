@@ -51,7 +51,7 @@ import {
 } from './vector/embedder.js'
 import { CostTracker, type CostTrackerOptions } from '../lib/cost-tracker.js'
 import { EpisodicLayer } from './episodic.js'
-import { InboundQueue } from './inbound.js'
+import { InboundQueue, type InboundCandidate } from './inbound.js'
 import { ATOMIC_ID_PATTERN, isAtomicId } from './atomic-id.js'
 import { createReranker, rerank, type Reranker, type RerankerOptions } from './rerank.js'
 import { BgeReranker, type BgeRerankerOptions } from './vector/reranker.js'
@@ -213,7 +213,8 @@ export class MemoryStore {
 
     this.atomic = new AtomicLayer({
       indexPath: opts.atomicIndexPath ?? layout.atomicIndex,
-      gksRoot: layout.gks,
+      // Index entries store paths relative to the repo root (re-indexer.ts).
+      pathBase: this.root,
     })
 
     this.vectorDir = opts.vectorDir ?? layout.vector
@@ -691,6 +692,11 @@ export class MemoryStore {
         meta: { session_id: memory.session_id, duration_min: memory.duration_min },
       })
     }
+  }
+
+  /** Inbound candidates currently awaiting human review. */
+  async listInbound(): Promise<InboundCandidate[]> {
+    return this.inbound.list()
   }
 
   async proposeInbound(artifact: InboundArtifact): Promise<InboundReceipt> {

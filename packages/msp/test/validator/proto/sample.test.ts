@@ -9,7 +9,7 @@ const frameAtom = {
   type: 'frame',
   status: 'stable',
   vault_id: 'default',
-  path: 'frame/FRAME--MSP-ARCHITECTURE-V2.md',
+  path: 'gks/frame/FRAME--MSP-ARCHITECTURE-V2.md',
 } as AtomicIndexEntry
 
 const conceptAtom = {
@@ -18,7 +18,7 @@ const conceptAtom = {
   type: 'concept',
   status: 'stable',
   vault_id: 'default',
-  path: 'concept/CONCEPT--FOO.md',
+  path: 'gks/concept/CONCEPT--FOO.md',
 } as AtomicIndexEntry
 
 describe('PROTO--SAMPLE-RULE predicate', () => {

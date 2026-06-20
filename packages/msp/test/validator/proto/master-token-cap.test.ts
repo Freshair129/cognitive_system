@@ -20,7 +20,7 @@ function masterEntry(id: string): AtomicIndexEntry {
     type: 'master',
     status: 'draft',
     vault_id: 'default',
-    path: `master/${id}.md`,
+    path: `gks/master/${id}.md`,
     tier: 'master',
   } as AtomicIndexEntry
 }

@@ -41,7 +41,7 @@ describe('msp-task-tracker example', () => {
       type: 'blueprint',
       status: 'stable',
       vault_id: 'V',
-      path: '03_blueprint/test.md',
+      path: '.brain/cognitive-system-knowledge-block/03_blueprint/test.md',
       geography: ['file1.ts', 'file2.ts']
     }
     await writeFile(join(indexDir, 'atomic_index.jsonl'), JSON.stringify(row) + '\n')

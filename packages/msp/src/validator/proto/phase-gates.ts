@@ -18,10 +18,9 @@
  */
 
 import { readFile } from 'node:fs/promises'
-import { resolve, join } from 'node:path'
+import { resolve } from 'node:path'
 
 import { parse as parseYaml } from 'yaml'
-import { gksLayout } from '@freshair129/gks'
 
 import type {
   Predicate,

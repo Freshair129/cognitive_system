@@ -202,8 +202,8 @@ describe('pre-push hook', () => {
     await writeFile(join(wt, 'gks/feat/FEAT--TEST-OK.md'), STABLE_FEAT)
     // Build a minimal atomic_index for verify-flow
     const idx = [
-      JSON.stringify({ id: 'CONCEPT--TEST-OK', phase: 1, type: 'concept', status: 'stable', vault_id: 'TEST', path: 'concept/CONCEPT--TEST-OK.md' }),
-      JSON.stringify({ id: 'FEAT--TEST-OK', phase: 2, type: 'feat', status: 'stable', vault_id: 'TEST', path: 'feat/FEAT--TEST-OK.md', crosslinks: { references: ['CONCEPT--TEST-OK'] } }),
+      JSON.stringify({ id: 'CONCEPT--TEST-OK', phase: 1, type: 'concept', status: 'stable', vault_id: 'TEST', path: 'gks/concept/CONCEPT--TEST-OK.md' }),
+      JSON.stringify({ id: 'FEAT--TEST-OK', phase: 2, type: 'feat', status: 'stable', vault_id: 'TEST', path: 'gks/feat/FEAT--TEST-OK.md', crosslinks: { references: ['CONCEPT--TEST-OK'] } }),
     ].join('\n') + '\n'
     await writeFile(join(wt, 'gks/00_index/atomic_index.jsonl'), idx)
     run('git', ['add', '.'], wt)
@@ -218,9 +218,9 @@ describe('pre-push hook', () => {
     await writeFile(join(wt, 'gks/feat/FEAT--TEST-BROKEN.md'), BROKEN_FEAT)
     // Index doesn't have CONCEPT--DOES-NOT-EXIST → verify-flow fails
     const idx = [
-      JSON.stringify({ id: 'CONCEPT--TEST-OK', phase: 1, type: 'concept', status: 'stable', vault_id: 'TEST', path: 'concept/CONCEPT--TEST-OK.md' }),
-      JSON.stringify({ id: 'FEAT--TEST-OK', phase: 2, type: 'feat', status: 'stable', vault_id: 'TEST', path: 'feat/FEAT--TEST-OK.md', crosslinks: { references: ['CONCEPT--TEST-OK'] } }),
-      JSON.stringify({ id: 'FEAT--TEST-BROKEN', phase: 2, type: 'feat', status: 'stable', vault_id: 'TEST', path: 'feat/FEAT--TEST-BROKEN.md', crosslinks: { references: ['CONCEPT--DOES-NOT-EXIST'] } }),
+      JSON.stringify({ id: 'CONCEPT--TEST-OK', phase: 1, type: 'concept', status: 'stable', vault_id: 'TEST', path: 'gks/concept/CONCEPT--TEST-OK.md' }),
+      JSON.stringify({ id: 'FEAT--TEST-OK', phase: 2, type: 'feat', status: 'stable', vault_id: 'TEST', path: 'gks/feat/FEAT--TEST-OK.md', crosslinks: { references: ['CONCEPT--TEST-OK'] } }),
+      JSON.stringify({ id: 'FEAT--TEST-BROKEN', phase: 2, type: 'feat', status: 'stable', vault_id: 'TEST', path: 'gks/feat/FEAT--TEST-BROKEN.md', crosslinks: { references: ['CONCEPT--DOES-NOT-EXIST'] } }),
     ].join('\n') + '\n'
     await writeFile(join(wt, 'gks/00_index/atomic_index.jsonl'), idx)
     run('git', ['add', '.'], wt)

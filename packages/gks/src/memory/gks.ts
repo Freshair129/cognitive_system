@@ -28,10 +28,13 @@ export interface AtomicLayerOptions {
   /** Absolute path to atomic_index.jsonl. */
   indexPath: string
   /**
-   * Root to resolve `entry.path` against. Defaults to the grandparent of
-   * `indexPath` (i.e. if indexPath is `<gks>/00_index/atomic_index.jsonl`,
-   * gksRoot becomes `<gks>`).
+   * Root that `entry.path` values are resolved against. The atomic index
+   * stores paths relative to the monorepo root (see scripts/msp/re-indexer.ts),
+   * so callers should pass the repo root here. Falls back to the legacy
+   * `gksRoot`, then to the grandparent of `indexPath`.
    */
+  pathBase?: string
+  /** @deprecated Use `pathBase`. Retained as a resolution fallback. */
   gksRoot?: string
   /** Cache note bodies after first read. Default true. */
   cacheBodies?: boolean
@@ -39,7 +42,8 @@ export interface AtomicLayerOptions {
 
 export class AtomicLayer {
   private readonly indexPath: string
-  private readonly gksRoot: string
+  /** Base directory that `entry.path` is resolved against (repo root). */
+  private readonly pathBase: string
   private readonly cacheBodies: boolean
 
   private entries: AtomicEntry[] = []
@@ -50,8 +54,11 @@ export class AtomicLayer {
 
   constructor(opts: AtomicLayerOptions) {
     this.indexPath = resolve(opts.indexPath)
-    // Default: <gks>/00_index/atomic_index.jsonl  →  <gks>
-    this.gksRoot = resolve(opts.gksRoot ?? resolve(dirname(this.indexPath), '..'))
+    // Index entries are repo-root-relative; default fallbacks keep older
+    // callers (gksRoot, or <gks>/00_index/atomic_index.jsonl → <gks>) working.
+    this.pathBase = resolve(
+      opts.pathBase ?? opts.gksRoot ?? resolve(dirname(this.indexPath), '..'),
+    )
     this.cacheBodies = opts.cacheBodies ?? true
   }
 
@@ -176,13 +183,13 @@ export class AtomicLayer {
 
   private async readBody(entry: AtomicEntry): Promise<string> {
     // Defense-in-depth: even though atomic_index.jsonl is treated as trusted,
-    // verify the resolved path stays inside gksRoot. A poisoned index entry
+    // verify the resolved path stays inside pathBase. A poisoned index entry
     // with `path: "../../etc/passwd"` would otherwise leak arbitrary files.
-    const abs = resolve(this.gksRoot, entry.path)
-    const rel = relative(this.gksRoot, abs)
+    const abs = resolve(this.pathBase, entry.path)
+    const rel = relative(this.pathBase, abs)
     if (rel.startsWith('..') || resolve(rel) === rel) {
       throw new Error(
-        `AtomicLayer: refusing to read '${entry.path}' for ${entry.id} — escapes gksRoot`,
+        `AtomicLayer: refusing to read '${entry.path}' for ${entry.id} — escapes pathBase`,
       )
     }
     if (this.cacheBodies) {

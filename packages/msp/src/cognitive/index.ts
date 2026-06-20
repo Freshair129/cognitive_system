@@ -118,17 +118,25 @@ export async function createCognitiveLayer(
       
       const nexus = await runNexusmind(store, seedIds, thinkingLevel, { vectorScores })
 
-      // Handle Epistemic State Shifts (ADR--NEXUSMIND-EPISTEMIC-TRANSITIONS)
-      for (const shift of nexus.stateShifts) {
-        await store.proposeInbound({
-          proposed_id: shift.id,
-          type: 'audit',
-          phase: 6,
-          title: `State Shift Proposal for ${shift.id}`,
-          body: `K-Impact: ${shift.kImpact.toFixed(3)}\nFrom: ${shift.from}\nTo: ${shift.to}\n\nSuggested by Nexusmind N5 thinking level.`,
-          reason: `Nexusmind detected K-Impact variance (${shift.kImpact.toFixed(3)}) suggesting status update from ${shift.from} to ${shift.to}.`,
-          source_session: context.trace_id,
-        })
+      // Handle Epistemic State Shifts (ADR--NEXUSMIND-EPISTEMIC-TRANSITIONS).
+      // Recall is a read path: dedup against the existing inbound queue so
+      // repeated recalls over the same atom don't flood human review with
+      // duplicate State-Shift proposals (one pending proposal per atom).
+      if (nexus.stateShifts.length > 0) {
+        const pending = new Set((await store.listInbound()).map((c) => c.proposed_id))
+        for (const shift of nexus.stateShifts) {
+          if (pending.has(shift.id)) continue
+          pending.add(shift.id)
+          await store.proposeInbound({
+            proposed_id: shift.id,
+            type: 'audit',
+            phase: 6,
+            title: `State Shift Proposal for ${shift.id}`,
+            body: `K-Impact: ${shift.kImpact.toFixed(3)}\nFrom: ${shift.from}\nTo: ${shift.to}\n\nSuggested by Nexusmind N5 thinking level.`,
+            reason: `Nexusmind detected K-Impact variance (${shift.kImpact.toFixed(3)}) suggesting status update from ${shift.from} to ${shift.to}.`,
+            source_session: context.trace_id,
+          })
+        }
       }
 
       const finalHits: CognitiveRecallHit[] = []
@@ -227,8 +235,10 @@ export async function createCognitiveLayer(
         throw new Error(`expand: atom not found: ${req.id}`)
       }
 
-      // Read full body first to allow content-based policy checks (UCF Phase 4)
-      const absPath = resolve(root, 'gks', atom.path)
+      // Read full body first to allow content-based policy checks (UCF Phase 4).
+      // atom.path is repo-root-relative (re-indexer.ts) — resolve against root,
+      // do NOT prepend 'gks/' (that double-prefixes and ENOENTs).
+      const absPath = resolve(root, atom.path)
       const raw = await readFile(absPath, 'utf8')
       const body = raw.split('\n---').pop()?.trim() ?? ''
 

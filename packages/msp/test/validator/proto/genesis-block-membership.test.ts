@@ -17,7 +17,7 @@ import predicate, {
 import type { AtomicIndexEntry } from '../../../src/validator/types.js'
 
 function entry(id: string, type: string, status = 'stable'): AtomicIndexEntry {
-  return { id, type, status, phase: 0, vault_id: 'default', path: `${type}/${id}.md` }
+  return { id, type, status, phase: 0, vault_id: 'default', path: `gks/${type}/${id}.md` }
 }
 
 function indexOf(...entries: AtomicIndexEntry[]): Map<string, AtomicIndexEntry> {
@@ -286,7 +286,7 @@ describe('PROTO--GENESIS-BLOCK-MEMBERSHIP predicate', () => {
     const { index } = happyCore()
     const result = await predicate({
       atomicIndex: [
-        { id, type: 'genesis', status: 'stable', phase: 0, vault_id: 'default', path: `genesis/${id}.md` },
+        { id, type: 'genesis', status: 'stable', phase: 0, vault_id: 'default', path: `gks/genesis/${id}.md` },
         ...index.values(),
       ],
       repoRoot,
@@ -316,7 +316,7 @@ describe('PROTO--GENESIS-BLOCK-MEMBERSHIP predicate', () => {
 
     const result = await predicate({
       atomicIndex: [
-        { id, type: 'genesis', status: 'draft', phase: 0, vault_id: 'default', path: `genesis/${id}.md` },
+        { id, type: 'genesis', status: 'draft', phase: 0, vault_id: 'default', path: `gks/genesis/${id}.md` },
         entry('COGNITIVE--LENS', 'cognitive'),
       ],
       repoRoot,
@@ -330,7 +330,7 @@ describe('PROTO--GENESIS-BLOCK-MEMBERSHIP predicate', () => {
     const id = 'GENESIS--MISSING-FILE'
     const result = await predicate({
       atomicIndex: [
-        { id, type: 'genesis', status: 'draft', phase: 0, vault_id: 'default', path: `genesis/${id}.md` },
+        { id, type: 'genesis', status: 'draft', phase: 0, vault_id: 'default', path: `gks/genesis/${id}.md` },
       ],
       repoRoot,
     })

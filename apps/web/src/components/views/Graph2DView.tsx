@@ -38,6 +38,10 @@ export const Graph2DView: React.FC<Graph2DViewProps> = ({ notes, edges, focusId,
   const [isDragging, setIsDragging] = useState(false);
   const [hover, setHover] = useState<{ id: string; x: number; y: number; title?: string } | null>(null);
   const alphaRef = useRef(1.0); // Simulation energy level
+  // Mirror hover into a ref so the RAF draw reads the latest hover WITHOUT
+  // re-creating `draw` (rule 4: useState in the render loop resets effects).
+  const hoverRef = useRef(hover);
+  useEffect(() => { hoverRef.current = hover; }, [hover]);
 
   // Initialize simulation
   useEffect(() => {
@@ -94,6 +98,7 @@ export const Graph2DView: React.FC<Graph2DViewProps> = ({ notes, edges, focusId,
     }
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
+    const hover = hoverRef.current; // latest hover; not a dep (see hoverRef)
     const { nodes, links } = simRef.current;
     const { x, y, k } = transform.current;
     const CX = size.w / 2 + x, CY = size.h / 2 + y;
@@ -191,7 +196,13 @@ export const Graph2DView: React.FC<Graph2DViewProps> = ({ notes, edges, focusId,
         ctx.fillText(n.title, nx, ny + r + 12);
       }
     }
-  }, [size, focusId, nodeSize, hover]);
+  }, [size, focusId, nodeSize]);
+
+  // Keep a stable handle to the latest `draw` so the animation loop can call it
+  // without listing `draw` as an effect dep (which would restart the loop and
+  // re-heat the simulation on every hover/nodeSize change).
+  const drawRef = useRef(draw);
+  useEffect(() => { drawRef.current = draw; }, [draw]);
 
   // Animation Loop
   useEffect(() => {
@@ -252,13 +263,13 @@ export const Graph2DView: React.FC<Graph2DViewProps> = ({ notes, edges, focusId,
         alphaRef.current *= 0.992; // Cool down
       }
 
-      draw();
+      drawRef.current();
       raf = requestAnimationFrame(tick);
     };
 
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [size, focusId, draw]);
+  }, [size, focusId]);
 
   // Interaction handlers
   const handleMouseDown = (e: React.MouseEvent) => {

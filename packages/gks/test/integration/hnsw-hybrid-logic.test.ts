@@ -54,7 +54,7 @@ describe('GenesisDB HNSW Hybrid Search Logic', () => {
     })
     
     expect(resSemantic).toHaveLength(2)
-    expect(resSemantic[0].node.id).toBe('NODE--A')
+    expect(resSemantic[0]!.node.id).toBe('NODE--A')
 
     // Test 2: Hybrid (alpha = 0.9)
     // Node B should be #1 due to significantly higher K-Impact (1.0 vs 0.4)
@@ -65,6 +65,6 @@ describe('GenesisDB HNSW Hybrid Search Logic', () => {
     })
 
     expect(resHybrid).toHaveLength(2)
-    expect(resHybrid[0].node.id).toBe('NODE--B')
+    expect(resHybrid[0]!.node.id).toBe('NODE--B')
   })
 })

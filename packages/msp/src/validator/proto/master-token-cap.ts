@@ -19,8 +19,7 @@
  * exceeds the corresponding threshold.
  */
 import { readFile } from 'node:fs/promises'
-import { isAbsolute, join, resolve } from 'node:path'
-import { gksLayout } from '@freshair129/gks'
+import { isAbsolute, resolve } from 'node:path'
 
 import type { AtomicIndexEntry } from '../types.js'
 

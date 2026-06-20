@@ -135,7 +135,14 @@ export async function runNexusmind(
 
     // Step 3: K-Impact Evaluation (N4-N5)
     if (level >= 4) {
-      const ageInDays = note.created_at ? (Date.now() - Date.parse(note.created_at)) / (1000 * 60 * 60 * 24) : 0
+      // Guard against malformed created_at: Date.parse → NaN would propagate
+      // through timeDecay into kImpact, making both shift thresholds false and
+      // silently suppressing the epistemic transition. Treat unparseable dates
+      // as age 0 (no decay) instead.
+      const parsedCreated = note.created_at ? Date.parse(note.created_at) : NaN
+      const ageInDays = Number.isNaN(parsedCreated)
+        ? 0
+        : (Date.now() - parsedCreated) / (1000 * 60 * 60 * 24)
       const reliability = note.status === 'stable' ? 1.0 : 0.6
       const incoming = await store.graph.query({ to: nodeId })
       const evidenceCount = incoming.length

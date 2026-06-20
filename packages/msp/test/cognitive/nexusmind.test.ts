@@ -29,7 +29,7 @@ describe('Nexusmind Thinking Levels', () => {
       type: 'concept',
       status: 'stable',
       vault_id: 'default',
-      path: 'concept/CONCEPT--SEED.md',
+      path: '.brain/cognitive-system-knowledge-block/concept/CONCEPT--SEED.md',
       domain: 'knowledge'
     }) + '\n' + JSON.stringify({
       id: 'CONCEPT--NEIGHBOR',
@@ -37,7 +37,7 @@ describe('Nexusmind Thinking Levels', () => {
       type: 'concept',
       status: 'draft',
       vault_id: 'default',
-      path: 'concept/CONCEPT--NEIGHBOR.md',
+      path: '.brain/cognitive-system-knowledge-block/concept/CONCEPT--NEIGHBOR.md',
       domain: 'knowledge'
     }) + '\n'
     await writeFile(join(gksDir, '00_index', 'atomic_index.jsonl'), indexLine, 'utf8')
@@ -116,7 +116,7 @@ describe('Cognitive Layer Recall thinkingLevel Routing', () => {
       type: 'concept',
       status: 'stable',
       vault_id: 'default',
-      path: 'concept/CONCEPT--SEED.md',
+      path: '.brain/cognitive-system-knowledge-block/concept/CONCEPT--SEED.md',
       title: 'Seed Note',
       summary: 'Seed summary',
     }) + '\n' + JSON.stringify({
@@ -125,7 +125,7 @@ describe('Cognitive Layer Recall thinkingLevel Routing', () => {
       type: 'concept',
       status: 'stable',
       vault_id: 'default',
-      path: 'concept/CONCEPT--NEIGHBOR.md',
+      path: '.brain/cognitive-system-knowledge-block/concept/CONCEPT--NEIGHBOR.md',
       title: 'Neighbor Note',
       summary: 'Neighbor summary',
     }) + '\n'

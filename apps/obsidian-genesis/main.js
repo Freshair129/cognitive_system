@@ -172,7 +172,25 @@ var GenesisObsidianPlugin = class extends import_obsidian2.Plugin {
     const content = await this.app.vault.read(file);
     const genesisRegex = /```json:genesis\n([\s\S]*?)\n```/g;
     let props = {};
-    const allowedKeys = ["status", "title", "tags", "created", "updated", "impact_override"];
+    const allowedKeys = [
+      "status",
+      "title",
+      "tags",
+      "created",
+      "updated",
+      "created_at",
+      "impact_override",
+      "domain",
+      "source_type",
+      "summary",
+      "priority",
+      "phase",
+      "valid_until",
+      "vault_id",
+      "tier",
+      "role",
+      "crosslinks"
+    ];
     for (const key of allowedKeys) {
       if (frontmatter[key] !== void 0)
         props[key] = frontmatter[key];

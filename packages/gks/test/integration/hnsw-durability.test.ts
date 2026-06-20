@@ -50,7 +50,7 @@ describe('GenesisDB HNSW Durability (WAL Replay)', () => {
       })
 
       expect(results).toHaveLength(1)
-      expect(results[0].node.id).toBe('NODE--WAL')
+      expect(results[0]!.node.id).toBe('NODE--WAL')
       console.log('✓ Successfully reconstructed HNSW from WAL replay.')
     }
   })

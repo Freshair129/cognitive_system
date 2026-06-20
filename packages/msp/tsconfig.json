@@ -2,7 +2,10 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "."
+    "rootDir": ".",
+    // MSP opts out of noUncheckedIndexedAccess (base default is `true`).
+    // Scoped here, not in tsconfig.base.json, so gks/web keep the strict guard.
+    "noUncheckedIndexedAccess": false
   },
   "references": [
     { "path": "../gks" }

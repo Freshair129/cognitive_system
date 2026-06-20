@@ -23,12 +23,5 @@ mcp_config.json
 # Build Caches & Temp files
 .turbo/
 *.tsbuildinfo
-*.cjs
-*.py
-*.rs
-*.txt
-*.json
 debug_validate.js
-!mcp_config.json
-!.mcp.json
 

@@ -18,7 +18,7 @@ function masterEntry(id: string): AtomicIndexEntry {
     type: 'master',
     status: 'draft',
     vault_id: 'default',
-    path: `master/${id}.md`,
+    path: `gks/master/${id}.md`,
   } as AtomicIndexEntry & { tier: string }
 }
 
@@ -115,7 +115,7 @@ describe('PROTO--MASTER-BODY-SCHEMA predicate', () => {
         type: 'concept',
         status: 'stable',
         vault_id: 'default',
-        path: 'concept/CONCEPT--FOO.md',
+        path: 'gks/concept/CONCEPT--FOO.md',
       } as AtomicIndexEntry,
       'genesis',
     )

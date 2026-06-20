@@ -13,7 +13,7 @@ async function freshRoot(): Promise<string> {
 
 /**
  * Write an atom file under `<root>/gks/<relPath>`.
- * Returns the relPath for putting back into AtomicIndexEntry.path.
+ * Returns the repo-root-relative path (`gks/<relPath>`) for AtomicIndexEntry.path.
  */
 async function writeAtom(
   root: string,
@@ -28,7 +28,7 @@ async function writeAtom(
     .map(([k, v]) => `${k}: ${JSON.stringify(v)}`)
     .join('\n')
   await writeFile(abs, `---\n${fmYaml}\n---\n\n${body}\n`)
-  return relPath
+  return `gks/${relPath}`
 }
 
 function entry(partial: Partial<AtomicIndexEntry>): AtomicIndexEntry {
