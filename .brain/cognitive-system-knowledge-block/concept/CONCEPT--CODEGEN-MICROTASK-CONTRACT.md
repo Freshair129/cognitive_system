@@ -36,7 +36,7 @@ attributes:
 
 # CONCEPT — codegen microtask contract
 
-T1 SLMs (Qwen 2.5 Coder, Llama local) execute `T*.task.yaml` files in `gks/microtasks/`. Their output is unreliable in predictable ways: extra prose, fenced markdown wrapping, hallucinated imports, `console.log` debug, `req.body` Pages-Router idioms, `// TODO` punts. The codegen contract is the deterministic post-processor + pattern-checker that catches these before the acceptance test runs.
+T1 SLMs (example:Qwen 2.5 Coder, Llama local) execute `T*.task.yaml` files in `gks/microtasks/`. Their output is unreliable in predictable ways: extra prose, fenced markdown wrapping, hallucinated imports, `console.log` debug, `req.body` Pages-Router idioms, `// TODO` punts. The codegen contract is the deterministic post-processor + pattern-checker that catches these before the acceptance test runs.
 
 ## Pipeline
 
