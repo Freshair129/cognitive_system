@@ -32,7 +32,7 @@ To provide a CLI-based tool that can instantiate a fresh, production-ready Cogni
 
 ## Problem
 
-Currently, starting a new project (like CoVibe) requires manually copying files or cloning this repo and then "cleaning it up" (deleting design docs, ultraplans, etc.). This is error-prone and mixes framework debt with project implementation.
+Currently, starting a new project requires manually copying files or cloning this repo and then "cleaning it up" (deleting design docs, ultraplans, etc.). This is error-prone and mixes framework debt with project implementation.
 
 ## Hypothesis
 

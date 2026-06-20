@@ -2,14 +2,18 @@
 id: CONCEPT--DOMAIN-GUIDE
 phase: 1
 type: concept
-status: [draft]
+status: deprecated
 tier: process
 source_type: axiomatic
 title: Domain Guide
 created_at: 2026-06-02T20:13:00.000+07:00
 ---
 
-﻿# DOMAIN: Diagram & Flow
+﻿> **DEPRECATED (archived 2026-06-20).** Early draft superseded by the canonical
+> `diagram_flow/` domain restructuring and the stable [[CONCEPT--DIAGRAM-TO-CODE]].
+> Retained for history only — do not use as a live reference.
+
+# DOMAIN: Diagram & Flow
 
 หมวดหมู่นี้ใช้สำหรับเก็บแผนภาพ (Diagrams) และตรรกะการไหลของข้อมูล (Flows) เพื่อใช้ "ก่อนเริ่มเขียนโค้ด" แบ่งออกเป็น 3 กลุ่มหลัก:
 

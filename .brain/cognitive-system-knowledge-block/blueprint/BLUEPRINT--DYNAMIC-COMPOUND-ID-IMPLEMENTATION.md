@@ -15,7 +15,6 @@ tags:
 crosslinks:
   references:
     - ADR--DYNAMIC-COMPOUND-ID-K-SUFFIX
-    - CONCEPT--USAGE-ROLLUPS
 created_at: 2026-05-17T10:07:15.100+07:00
 aliases:
   - BLUEPRINT

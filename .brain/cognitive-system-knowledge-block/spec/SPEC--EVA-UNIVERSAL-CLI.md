@@ -65,9 +65,9 @@ When installed via `npm install -g eva-cli`, the `eva` command is added to the s
 ## 4. Distribution Flow
 
 1. **User:** `npm install -g @freshair129/eva-cli`
-2. **User:** `eva init G:\covibe`
+2. **User:** `eva init G:\my-project`
 3. **EVA:** Creates clean layout -> copies binaries -> initializes GKS.
-4. **User:** `cd G:\covibe && eva vibe`
+4. **User:** `cd G:\my-project && eva vibe`
 5. **EVA:** Agent starts working on the project using the clean production core.
 
 ## 5. Success Metrics

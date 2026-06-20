@@ -8,15 +8,12 @@ tier: process
 source_type: axiomatic
 title: Schema Visualizer — Interactive Database ERD in developer command center
 tags:
-  - covibe
   - database
   - schema
   - erd
   - web-ui
   - cytoscape
   - feat
-crosslinks:
-  belongs_to: MOD--COVIBE-DASHBOARD
 created_at: 2026-05-24T05:55:00.000+07:00
 ---
 

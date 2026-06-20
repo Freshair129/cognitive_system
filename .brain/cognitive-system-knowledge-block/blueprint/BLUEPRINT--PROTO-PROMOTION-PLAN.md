@@ -2,7 +2,7 @@
 id: BLUEPRINT--PROTO-PROMOTION-PLAN
 phase: 3
 type: blueprint
-status: draft
+status: stable
 vault_id: default
 tier: process
 source_type: axiomatic

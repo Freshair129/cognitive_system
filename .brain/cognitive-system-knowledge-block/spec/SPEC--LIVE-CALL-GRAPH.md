@@ -8,7 +8,6 @@ tier: process
 source_type: axiomatic
 title: Live Call Graph UI and Mock Database Specification
 tags:
-  - covibe
   - spec
   - symbol-graph
   - call-graph
