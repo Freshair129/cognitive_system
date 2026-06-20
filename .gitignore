@@ -25,3 +25,13 @@ mcp_config.json
 *.tsbuildinfo
 debug_validate.js
 
+# Local scratch / debug scripts & dumps (ROOT-LEVEL ONLY — leading slash keeps
+# real source under packages/ and apps/ unaffected; intentionally NOT /*.json so
+# root configs like package.json/tsconfig.json/turbo.json stay tracked).
+/*.cjs
+/*.py
+/*.rs
+/*.txt
+/failures.json
+/Untitled*
+
