@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
-import { mkdtemp, mkdir, cp, rm, readFile, readdir } from 'node:fs/promises'
+import { mkdtemp, mkdir, cp, rm, readFile, readdir, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 
@@ -10,12 +10,36 @@ import type { TraceStep } from '../../src/memory/types.js'
 
 const FIXTURES = resolve(__dirname, '..', 'fixtures', 'gks')
 
+/**
+ * The shared fixture index stores vault-relative paths (for gks.test.ts, which
+ * resolves bodies against `<fixtures>/gks`). MemoryStore resolves `entry.path`
+ * against the repo root (here, the temp `root`), and the fixture is copied into
+ * `<root>/.brain/gks/`, so rewrite the copied index to repo-root-relative paths.
+ */
+async function rerootIndex(root: string): Promise<void> {
+  const indexPath = join(root, '.brain', 'gks', '00_index', 'atomic_index.jsonl')
+  const raw = await readFile(indexPath, 'utf8')
+  const rerooted = raw
+    .split('\n')
+    .map((line) => {
+      if (!line.trim()) return line
+      const row = JSON.parse(line)
+      if (typeof row.path === 'string' && !row.path.startsWith('.brain/')) {
+        row.path = `.brain/gks/${row.path}`
+      }
+      return JSON.stringify(row)
+    })
+    .join('\n')
+  await writeFile(indexPath, rerooted, 'utf8')
+}
+
 async function withStore() {
   const root = await mkdtemp(join(tmpdir(), 'gks-root-'))
   // Copy the atomic fixtures into the temp root so the MemoryStore can resolve
   // paths exactly as it would in production.
   await mkdir(join(root, '.brain', 'gks'), { recursive: true })
   await cp(FIXTURES, join(root, '.brain', 'gks'), { recursive: true })
+  await rerootIndex(root)
 
   const store = new MemoryStore({
     root,
@@ -134,6 +158,7 @@ describe('MemoryStore', () => {
     cleanup.push(root)
     await mkdir(join(root, '.brain', 'gks'), { recursive: true })
     await cp(FIXTURES, join(root, '.brain', 'gks'), { recursive: true })
+    await rerootIndex(root)
 
     const { createGenesisGraphBackend } = await import('../../src/memory/graph/genesis-graph.js')
     const dir = join(root, '.brain', 'msp', 'projects', 'cognitive_system', 'graph')

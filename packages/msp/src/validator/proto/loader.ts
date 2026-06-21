@@ -4,6 +4,8 @@ import { pathToFileURL } from 'node:url'
 
 import { parse as parseYaml } from 'yaml'
 
+import { gksLayout } from '@freshair129/gks'
+
 import type {
   Predicate,
   PredicateContext,
@@ -69,7 +71,8 @@ function normaliseSeverity(s: unknown): Severity {
  * still run against them — they just don't get loaded as PROTOs.
  */
 export async function discoverProtos(repoRoot: string): Promise<ProtoMeta[]> {
-  const dir = resolve(repoRoot, '.brain/gks/proto')
+  const layout = gksLayout(repoRoot)
+  const dir = join(layout.gks, 'proto')
   let entries: string[]
   try {
     entries = await readdir(dir)
@@ -91,16 +94,22 @@ export async function discoverProtos(repoRoot: string): Promise<ProtoMeta[]> {
     const fm = parseFrontmatter(raw)
     if (!fm) continue
 
+    const attrs = (typeof (fm as any).attributes === 'object' && (fm as any).attributes !== null)
+      ? (fm as any).attributes
+      : {}
+
     const id = typeof fm.id === 'string' ? fm.id : ''
     if (!PROTO_ID_PATTERN.test(id)) continue
 
     const status = normaliseStatus(fm.status)
     if (status === null) continue
 
+    const severityRaw = fm.severity ?? attrs.severity
     const enforces = extractEnforces(fm.crosslinks)
     if (enforces.length === 0) continue
 
-    const implPath = extractImplPath(fm.linked_symbols)
+    const linkedSymbols = fm.linked_symbols ?? attrs.linked_symbols
+    const implPath = extractImplPath(linkedSymbols)
     if (implPath === null) continue
 
     // Verify impl file exists
@@ -116,7 +125,7 @@ export async function discoverProtos(repoRoot: string): Promise<ProtoMeta[]> {
     out.push({
       id,
       status,
-      severity: normaliseSeverity(fm.severity),
+      severity: normaliseSeverity(severityRaw),
       enforces,
       implPath,
       filepath,

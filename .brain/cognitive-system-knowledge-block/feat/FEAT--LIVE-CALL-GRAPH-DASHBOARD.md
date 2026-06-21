@@ -8,14 +8,12 @@ tier: process
 source_type: axiomatic
 title: Live Call Graph Dashboard View — Cytoscape integration in developer command center
 tags:
-  - covibe
   - symbol-graph
   - call-graph
   - web-ui
   - cytoscape
   - feat
 crosslinks:
-  belongs_to: MOD--COVIBE-DASHBOARD
   references:
     - CONCEPT--SYMBOL-GRAPH
     - ALGO--SYMBOLS-CALL-GRAPH-TRAVERSAL

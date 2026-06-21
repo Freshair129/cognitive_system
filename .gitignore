@@ -19,3 +19,19 @@ dist/
 .brain/cognitive-system-knowledge-block/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9].md
 mcp_config.json
 .mcp.json
+
+# Build Caches & Temp files
+.turbo/
+*.tsbuildinfo
+debug_validate.js
+
+# Local scratch / debug scripts & dumps (ROOT-LEVEL ONLY — leading slash keeps
+# real source under packages/ and apps/ unaffected; intentionally NOT /*.json so
+# root configs like package.json/tsconfig.json/turbo.json stay tracked).
+/*.cjs
+/*.py
+/*.rs
+/*.txt
+/failures.json
+/Untitled*
+

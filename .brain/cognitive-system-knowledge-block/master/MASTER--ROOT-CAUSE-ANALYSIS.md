@@ -83,3 +83,8 @@ Any bug report, runtime error, ambiguous user request that does not match the ob
 - [[CONCEPT--ROOT-CAUSE-ANALYSIS]]
 - [[ADR--MASTER-PROMOTION-ROOT-CAUSE-ANALYSIS]]
 - [[FRAMEWORK--KNOWLEDGE-3-TIER]]
+
+## CHANGELOG
+
+| Version | Date | Status | Summary |
+|---------|------|--------|---------|

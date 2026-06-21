@@ -45,7 +45,7 @@ async function writeAtomFile(
     id: spec.id,
     type: spec.type,
     status: spec.status,
-    path: spec.pathUnderGks,
+    path: `gks/${spec.pathUnderGks}`,
   } as AtomicIndexEntry
 }
 

@@ -2,9 +2,10 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "noEmit": false,
+    // rootDir must be `src` (not the inherited `.`) so emit lands directly in
+    // dist/ — package.json `main`/`bin` point at ./dist/<x>.js, not ./dist/src/.
     "rootDir": "src",
     "outDir": "dist",
-    "declaration": true,
     "sourceMap": false
   },
   "include": ["src/**/*"],

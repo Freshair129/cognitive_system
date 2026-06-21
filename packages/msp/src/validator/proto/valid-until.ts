@@ -23,6 +23,7 @@ import { resolve } from 'node:path'
 import { parse as parseYaml } from 'yaml'
 
 import type {
+
   Predicate,
   PredicateContext,
   PredicateResult,
@@ -72,8 +73,7 @@ const predicate: Predicate = async (
   for (const atom of ctx.atomicIndex) {
     if (atom.status === 'superseded') continue
 
-    // `path` in atomic index entries is repo-relative under gks/.
-    const fullPath = resolve(ctx.repoRoot, 'gks', atom.path)
+    const fullPath = resolve(ctx.repoRoot, atom.path)
     let raw: string
     try {
       raw = await readFile(fullPath, 'utf8')

@@ -20,7 +20,7 @@
  * predicate passes trivially — behavioural coverage lives in the unit test.
  */
 import { readFile } from 'node:fs/promises'
-import { isAbsolute, join, resolve } from 'node:path'
+import { isAbsolute, resolve } from 'node:path'
 
 import { parse as parseYaml } from 'yaml'
 
@@ -249,7 +249,10 @@ export function checkManifest(
 
 function resolveAtomPath(repoRoot: string, relPath: string): string {
   if (isAbsolute(relPath)) return relPath
-  return resolve(join(repoRoot, 'gks', relPath))
+  // Index entries are repo-root-relative (re-indexer.ts); resolve directly.
+  // Must match the sibling protos (master-body-schema, master-token-cap, …)
+  // so every validator reads the same file for a given atom.
+  return resolve(repoRoot, relPath)
 }
 
 const predicate: Predicate = async (

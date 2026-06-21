@@ -16,7 +16,7 @@ function blueprint(id: string, status: string = 'active'): AtomicIndexEntry {
     id,
     type: 'blueprint',
     status,
-    path: `blueprint/${id}.md`,
+    path: `gks/blueprint/${id}.md`,
   } as AtomicIndexEntry
 }
 
@@ -47,7 +47,7 @@ describe('PROTO--SCALE-LEVEL-GATE predicate', () => {
   })
 
   it('skips non-blueprint atoms', async () => {
-    const index = [{ id: 'FEAT--X', type: 'feat', status: 'active', path: 'feat/FEAT--X.md' } as AtomicIndexEntry]
+    const index = [{ id: 'FEAT--X', type: 'feat', status: 'active', path: 'gks/feat/FEAT--X.md' } as AtomicIndexEntry]
     const result = await predicate({
       atomicIndex: index,
       repoRoot: '/tmp',

@@ -17,7 +17,7 @@
  * string match. A missing section emits a `severity: 'error'` violation.
  */
 import { readFile } from 'node:fs/promises'
-import { isAbsolute, join, resolve } from 'node:path'
+import { isAbsolute, resolve } from 'node:path'
 
 import type { AtomicIndexEntry } from '../types.js'
 
@@ -66,7 +66,7 @@ function readField(entry: AtomicIndexEntry, key: string): unknown {
 
 function resolveAtomPath(repoRoot: string, relPath: string): string {
   if (isAbsolute(relPath)) return relPath
-  return resolve(join(repoRoot, 'gks', relPath))
+  return resolve(repoRoot, relPath)
 }
 
 const predicate: Predicate = async (

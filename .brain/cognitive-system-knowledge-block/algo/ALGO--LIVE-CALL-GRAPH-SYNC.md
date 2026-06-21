@@ -8,7 +8,6 @@ tier: process
 source_type: axiomatic
 title: Interactive Call Path Highlighting and Node Traversing Algorithm
 tags:
-  - covibe
   - algo
   - algorithm
   - call-graph

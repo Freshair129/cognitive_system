@@ -81,7 +81,7 @@ export function ruleAdapter(
 
     for (const entry of ctx.atomicIndex) {
       if (opts.filter && !opts.filter(entry)) continue
-      const filepath = resolve(ctx.repoRoot, 'gks', entry.path)
+      const filepath = resolve(ctx.repoRoot, entry.path)
       const atom = await loadParsedAtom(filepath)
       if (atom === null) continue
 

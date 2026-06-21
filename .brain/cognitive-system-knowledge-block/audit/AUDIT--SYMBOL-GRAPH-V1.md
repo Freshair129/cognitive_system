@@ -24,6 +24,8 @@ crosslinks:
     - FEAT--MSP-GRAPH-CLI
     - FEAT--SYMBOLS-WEB-TAB
     - BLUEPRINT--SYMBOL-GRAPH-CORE
+  parent_blueprint:
+    - BLUEPRINT--SYMBOL-GRAPH-CORE
 created_at: 2026-05-09T19:30:00.000+07:00
 aliases:
   - AUDIT

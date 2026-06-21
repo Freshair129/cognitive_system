@@ -15,6 +15,7 @@
  * source='obsidian' are no-ops so the shape of the API stays stable.
  */
 
+import { existsSync } from 'node:fs'
 import { resolve, join } from 'node:path'
 
 import type {
@@ -50,7 +51,7 @@ import {
 } from './vector/embedder.js'
 import { CostTracker, type CostTrackerOptions } from '../lib/cost-tracker.js'
 import { EpisodicLayer } from './episodic.js'
-import { InboundQueue } from './inbound.js'
+import { InboundQueue, type InboundCandidate } from './inbound.js'
 import { ATOMIC_ID_PATTERN, isAtomicId } from './atomic-id.js'
 import { createReranker, rerank, type Reranker, type RerankerOptions } from './rerank.js'
 import { BgeReranker, type BgeRerankerOptions } from './vector/reranker.js'
@@ -212,7 +213,8 @@ export class MemoryStore {
 
     this.atomic = new AtomicLayer({
       indexPath: opts.atomicIndexPath ?? layout.atomicIndex,
-      gksRoot: layout.gks,
+      // Index entries store paths relative to the repo root (re-indexer.ts).
+      pathBase: this.root,
     })
 
     this.vectorDir = opts.vectorDir ?? layout.vector
@@ -692,6 +694,11 @@ export class MemoryStore {
     }
   }
 
+  /** Inbound candidates currently awaiting human review. */
+  async listInbound(): Promise<InboundCandidate[]> {
+    return this.inbound.list()
+  }
+
   async proposeInbound(artifact: InboundArtifact): Promise<InboundReceipt> {
     const receipt = await this.inbound.propose(artifact)
     if (this.audit) {
@@ -745,7 +752,15 @@ export function gksLayout(root: string): {
   const brain = join(r, '.brain', 'msp', 'projects', projectName)
 
   // Canonical Layout v1.4.0: Knowledge base is nested under .brain/cognitive-system-knowledge-block
-  const gksBase = process.env.MSP_BRAIN_PATH ? resolve(process.env.MSP_BRAIN_PATH) : join(r, '.brain', 'cognitive-system-knowledge-block')
+  const modernGks = join(r, '.brain', 'cognitive-system-knowledge-block')
+  const legacyGks = join(r, '.brain', 'gks')
+  
+  const modernIndex = join(modernGks, '00_index', 'atomic_index.jsonl')
+  const legacyIndex = join(legacyGks, '00_index', 'atomic_index.jsonl')
+
+  const gksBase = process.env.MSP_BRAIN_PATH 
+    ? resolve(process.env.MSP_BRAIN_PATH) 
+    : (existsSync(modernIndex) ? modernGks : (existsSync(legacyIndex) ? legacyGks : modernGks))
 
   return {
     root: r,

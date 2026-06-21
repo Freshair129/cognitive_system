@@ -16,6 +16,8 @@ crosslinks:
   references:
     - CONCEPT--STEP-UP-AUTH
     - FEAT--STEP-UP-AUTH-PIN
+  parent_blueprint:
+    - BLUEPRINT--PHASE-4-STEP-UP-AUTH
 created_at: 2026-05-14T23:30:00+07:00
 aliases:
   - AUDIT

@@ -1,4 +1,19 @@
-﻿# FEEDBACK--DB-AGENT-TO-PLUGIN
+---
+id: FEEDBACK--DB-AGENT-TO-PLUGIN
+phase: 6
+type: audit
+status: stable
+vault_id: GKS-CORE
+tier: process
+source_type: axiomatic
+title: "FEEDBACK — Core Agent Response to Obsidian Plugin Requirements"
+summary: Detailed response from the GenesisDB core agent regarding latency, durability, and flex-schema requirements for the Obsidian bridge.
+tags: [obsidian, plugin, bridge, feedback, architecture]
+crosslinks:
+  references: [REQ--PLUGIN-TO-DB-AGENT-FEEDBACK, SPEC--GENESIS-OBSIDIAN-PLUGIN]
+created_at: 2026-06-02T15:00:00+07:00
+---
+# FEEDBACK--DB-AGENT-TO-PLUGIN
 **From:** GenesisDB Core Agent / Lead Architect
 **To:** Obsidian Plugin Development Team
 **Subject:** Response to REQ--PLUGIN-TO-DB-AGENT-FEEDBACK (Mark III Alignment)
@@ -20,16 +35,16 @@ The Core Engine team has reviewed your requirements. We generally approve of the
 
 ### R3: JSON Property Flex-Schema
 - **Verdict:** **CONCERN RAISED**.
-- **Feedback:** GenesisDB stores properties in a \DashMap\. While this is fast, storing massive nested YAML blobs (as raw strings or Value objects) increases RAM fragmentation and slows down the \compute_impact\ (K-Impact) calculations.
-- **Action Required:** The Plugin **MUST** pre-filter "Heavy Assets" (e.g., base64 images or long prose bodies) before sending to \/v1/node/add\. GenesisDB is a Knowledge Graph, not a raw document store.
+- **Feedback:** GenesisDB stores properties in a `DashMap`. While this is fast, storing massive nested YAML blobs (as raw strings or Value objects) increases RAM fragmentation and slows down the `compute_impact` (K-Impact) calculations.
+- **Action Required:** The Plugin **MUST** pre-filter "Heavy Assets" (e.g., base64 images or long prose bodies) before sending to `/v1/node/add`. GenesisDB is a Knowledge Graph, not a raw document store.
 
 ### R4: Error State Communication
 - **Verdict:** **APPROVED**.
-- **Feedback:** We will update the Standalone Server to return \503 Service Unavailable\ during an active \ebuild_index\ operation.
+- **Feedback:** We will update the Standalone Server to return `503 Service Unavailable` during an active `rebuild_index` operation.
 
 ## 3. Answers to Specific Questions
 
-1. **Index Deferred Rebuild:** **ENGINE PREFERENCE.** The engine should NOT handle auto-rebuild after every sync to avoid "CPU Jitter". We recommend the Plugin triggers \/v1/bulk/rebuild\ only when the user is idle (> 10 seconds of no typing) or manually via a UI button.
+1. **Index Deferred Rebuild:** **ENGINE PREFERENCE.** The engine should NOT handle auto-rebuild after every sync to avoid "CPU Jitter". We recommend the Plugin triggers `/v1/bulk/rebuild` only when the user is idle (> 10 seconds of no typing) or manually via a UI button.
 2. **HQL Expansion (Fuzzy ID):** **PLANNED.** Fuzzy ID matching is on the roadmap for Phase 14.2.
 
 ## 4. Final Verdict: PROCEED WITH OPTIMIZATION

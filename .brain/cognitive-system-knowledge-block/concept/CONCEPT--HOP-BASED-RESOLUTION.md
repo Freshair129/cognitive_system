@@ -2,7 +2,7 @@
 id: CONCEPT--HOP-BASED-RESOLUTION
 phase: 1
 type: concept
-status: draft
+status: stable
 vault_id: default
 tier: process
 source_type: axiomatic
@@ -195,7 +195,7 @@ Hop 1 [SUMMARY]:
   CONCEPT--OBSIDIAN-AS-RUNTIME     (via references, weight 0.5)
 
 Hop 2 [SKELETON]:
-  RUNBOOK--COVIBE-BACKLOG-SYNC     (via PARAMS used_by, weight 0.5)
+  RUNBOOK--CONTEXT-RESOLUTION-LOOP     (via PARAMS used_by, weight 0.5)
   ADR--MSP-OBSIDIAN-INTEGRATION    (via CONCEPT references, weight 0.25)
 
 Hop 3 [MENTION]:

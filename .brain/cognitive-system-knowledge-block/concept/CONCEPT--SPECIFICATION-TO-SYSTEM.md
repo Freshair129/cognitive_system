@@ -25,12 +25,11 @@ cluster: implementation_flow
 role: Core philosophy
 crosslinks:
   references:
-    - "[[CONCEPT--DOC-DRIVEN-DEVELOPMENT]]"
-    - "[[CONCEPT--DIAGRAM-TO-CODE]]"
+    - "CONCEPT--DOC-DRIVEN-DEVELOPMENT"
+    - "CONCEPT--DIAGRAM-TO-CODE"
   parent_blueprint:
-    - "[[GENESIS--COGNITIVE-ENGINE]]"
+    - "GENESIS--COGNITIVE-ENGINE"
 ---
-
 # 🌐 CONCEPT--SPECIFICATION-TO-SYSTEM
 
 **Specification-to-System (S2S) / Intent-to-System**

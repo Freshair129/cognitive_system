@@ -17,11 +17,10 @@ cluster: ops
 role: Agent capability
 crosslinks:
   references:
-    - "[[CONCEPT--DIAGRAM-TO-CODE]]"
+    - "CONCEPT--DIAGRAM-TO-CODE"
   parent_blueprint:
-    - "[[GENESIS--COGNITIVE-ENGINE]]"
+    - "GENESIS--COGNITIVE-ENGINE"
 ---
-
 # 🛠️ SKILL--DIAGRAM-TO-CODE
 
 **Diagram-to-Code Capability**

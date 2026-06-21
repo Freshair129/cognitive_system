@@ -8,7 +8,6 @@ tier: process
 source_type: axiomatic
 title: Schema Visualizer Technical Specification and Table Schemas
 tags:
-  - covibe
   - database
   - schema
   - spec

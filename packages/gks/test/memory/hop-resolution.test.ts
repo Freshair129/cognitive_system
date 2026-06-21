@@ -106,14 +106,14 @@ describe('Hop-Based Resolution in retrieve()', () => {
       type: 'concept',
       status: 'stable',
       vault_id: 'default',
-      path: 'concept/CONCEPT--SEED.md',
+      path: '.brain/gks/concept/CONCEPT--SEED.md',
     }) + '\n' + JSON.stringify({
       id: 'CONCEPT--NEIGHBOR',
       phase: 1,
       type: 'concept',
       status: 'stable',
       vault_id: 'default',
-      path: 'concept/CONCEPT--NEIGHBOR.md',
+      path: '.brain/gks/concept/CONCEPT--NEIGHBOR.md',
     }) + '\n'
     await writeFile(join(gksDir, '00_index', 'atomic_index.jsonl'), indexLine, 'utf8')
 

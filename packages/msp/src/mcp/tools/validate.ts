@@ -1,5 +1,6 @@
 import { resolve } from 'node:path'
 
+import { gksLayout } from '@freshair129/gks'
 import { z } from 'zod'
 
 import { loadAtomicIndex, validate, validateAll } from '../../validator/index.js'
@@ -24,7 +25,10 @@ export const inputSchema = {
 export function handler(ctx: ToolHandlerCtx) {
   return async (args: { files?: string[]; all?: boolean; root?: string }): Promise<ToolTextResult> => {
     const root = resolve(args.root ?? ctx.root)
-    const indexPath = resolve(root, 'gks/00_index/atomic_index.jsonl')
+    // Resolve the vault + index via gksLayout (the canonical vault is under
+    // .brain/cognitive-system-knowledge-block, NOT <root>/gks) — matches the CLI.
+    const layout = gksLayout(root)
+    const indexPath = layout.atomicIndex
 
     try {
       const subject = ctx.subject ?? makeSubject('user', 'anonymous')
@@ -52,7 +56,7 @@ export function handler(ctx: ToolHandlerCtx) {
       let results
       if (args.all) {
         results = await validateAll(
-          [resolve(root, 'gks'), resolve(root, '.brain/msp/projects')],
+          [resolve(root, 'gks'), layout.gks],
           validationCtx,
         )
       } else if (args.files && args.files.length > 0) {

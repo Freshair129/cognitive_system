@@ -23,7 +23,7 @@ describe('HotfixStore', () => {
   })
 
   it('open() writes a well-formed atom with valid_to = now + 48h', async () => {
-    const store = new HotfixStore({ root, path: join(root, '.brain', 'gks', 'hotfix') })
+    const store = new HotfixStore({ root, hotfixDir: join(root, '.brain', 'gks', 'hotfix') })
     const before = Date.now()
     const hotfix = await store.open({
       commitSha: 'abc1234567890def',
@@ -45,7 +45,7 @@ describe('HotfixStore', () => {
   })
 
   it('list() returns every hotfix on disk', async () => {
-    const store = new HotfixStore({ root, path: join(root, '.brain', 'gks', 'hotfix') })
+    const store = new HotfixStore({ root, hotfixDir: join(root, '.brain', 'gks', 'hotfix') })
     await store.open({ commitSha: 'aaa0000', title: 'first' })
     await store.open({ commitSha: 'bbb0000', title: 'second' })
     const all = await store.list()
@@ -54,7 +54,7 @@ describe('HotfixStore', () => {
   })
 
   it('listOverdue() filters by valid_to < now and not-closed', async () => {
-    const store = new HotfixStore({ root, path: join(root, '.brain', 'gks', 'hotfix') })
+    const store = new HotfixStore({ root, hotfixDir: join(root, '.brain', 'gks', 'hotfix') })
     const future = await store.open({ commitSha: 'fff0000', title: 'future' })
     expect(await store.listOverdue()).toHaveLength(0)
 
@@ -68,7 +68,7 @@ describe('HotfixStore', () => {
   })
 
   it('close() sets closed_at + crosslinks.resolved_by; subsequent listOverdue excludes it', async () => {
-    const store = new HotfixStore({ root, path: join(root, '.brain', 'gks', 'hotfix') })
+    const store = new HotfixStore({ root, hotfixDir: join(root, '.brain', 'gks', 'hotfix') })
     const opened = await store.open({ commitSha: 'ccc0000', title: 'closed-soon' })
     // Backdate to simulate overdue first.
     const path = join(root, '.brain', 'gks', 'hotfix', `${opened.id}.md`)

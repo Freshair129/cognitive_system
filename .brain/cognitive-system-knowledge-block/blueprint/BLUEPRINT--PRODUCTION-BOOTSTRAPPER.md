@@ -55,7 +55,7 @@ Implement the `msp-bootstrap` CLI tool inside `packages/msp` that creates a new 
 
 ```bash
 # In the framework repo
-npx msp-bootstrap G:\covibe
+npx msp-bootstrap G:\my-project
 ```
 
 ## 4. Verification Plan

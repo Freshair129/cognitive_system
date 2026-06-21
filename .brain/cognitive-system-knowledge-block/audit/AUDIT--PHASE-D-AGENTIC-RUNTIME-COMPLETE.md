@@ -22,6 +22,8 @@ crosslinks:
     - ADR--BRAIN-PATH-RESOLUTION
     - CONCEPT--AGENT-TIER-ROUTING
     - CONCEPT--TWO-BRAIN-ARCHITECTURE
+  parent_blueprint:
+    - BLUEPRINT--AGENT-DISPATCHER
 created_at: 2026-05-14T03:00:00.000+07:00
 aliases:
   - AUDIT

@@ -435,5 +435,5 @@ app.listen(PORT, () => {
   console.log(`MSP listening on :${PORT}`)
 })
 
-// Start WebSocket server for Covibe Backlog UI integration
+// Start WebSocket server for Backlog UI integration
 startWsServer(8787, getActiveRoot)

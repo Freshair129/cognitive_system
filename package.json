@@ -3,6 +3,7 @@
   "version": "0.4.0",
   "description": "Cognitive System — agentic monorepo (GKS storage engine + MSP orchestrator + multi-tier agent runtime)",
   "private": true,
+  "packageManager": "npm@11.12.1",
   "type": "module",
   "workspaces": [
     "packages/*",
@@ -13,9 +14,9 @@
   },
   "scripts": {
     "dev": "npm run dev --workspace=packages/msp",
-    "test": "npm test --workspaces",
-    "build": "npm run build --workspaces",
-    "typecheck": "npm run typecheck --workspaces",
+    "test": "turbo run test",
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
     "msp:codegen": "tsx scripts/msp/codegen-schemas.ts",
     "msp:index": "tsx scripts/msp/re-indexer.ts --root=.",
     "msp:validate": "tsx packages/msp/src/validator/cli.ts --all --root=.",
@@ -26,11 +27,12 @@
     "install": "npm run build"
   },
   "dependencies": {
-    "@freshair129/gks-genesis-block-native": "github:Freshair129/GenesisBlock",
     "glob": "^13.0.6"
   },
+  "optionalDependencies": {
+    "@freshair129/gks-genesis-block-native": "github:Freshair129/GenesisBlock#claude/fix-napi-install-gate-bin-targets"
+  },
   "devDependencies": {
-    "@esbuild/win32-x64": "^0.28.0",
-    "@rollup/rollup-win32-x64-msvc": "^4.60.4"
+    "turbo": "^2.9.16"
   }
 }

@@ -13,7 +13,6 @@ tags:
   - mcp
 crosslinks:
   implements:
-    - FEAT--COVIBE-SYNC-PROTOTYPE
     - FEAT--MSP-GRAPH-CLI
     - FEAT--MSP-MCP-SERVER
     - FEAT--MSP-MCP-TOOL-EXPANSION
@@ -29,7 +28,6 @@ This module acts as the boundary and entry point for all mcp-related features.
 
 ## 1. Features
 
-- [[FEAT--COVIBE-SYNC-PROTOTYPE]]
 - [[FEAT--MSP-GRAPH-CLI]]
 - [[FEAT--MSP-MCP-SERVER]]
 - [[FEAT--MSP-MCP-TOOL-EXPANSION]]

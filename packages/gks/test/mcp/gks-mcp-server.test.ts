@@ -130,8 +130,10 @@ describe('gks-mcp-server', () => {
     // Seed the atomic index with a citation-bearing entry. Normally the MSP
     // re-indexer does this; the MCP test bypasses it.
     const fs = await import('node:fs/promises')
+    const { gksLayout } = await import('../../src/memory/index.js')
     const root = (store as unknown as { root: string }).root
-    const indexDir = join(root, '.brain', 'gks', '00_index')
+    const layout = gksLayout(root)
+    const indexDir = join(layout.gks, '00_index')
     await fs.mkdir(indexDir, { recursive: true })
     const row = {
       id: 'ADR--PARSE-TRACE-NORM',
@@ -139,7 +141,7 @@ describe('gks-mcp-server', () => {
       type: 'adr',
       status: 'stable',
       vault_id: 'V',
-      path: 'concept/adr-parse-trace-norm.md',
+      path: '.brain/gks/concept/adr-parse-trace-norm.md',
       title: 'Parse-trace normalization',
       linked_symbols: [{ file: 'src/memory/consolidator-llm.ts', fn: 'formatStep' }],
     }

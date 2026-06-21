@@ -17,7 +17,6 @@ tags:
 crosslinks:
   references:
     - SPEC--USAGE-ATOM
-    - CONCEPT--USAGE-ROLLUPS
     - CONCEPT--COST-TRACKING
     - ADR--AGENT-TIER-COST-POLICY
 created_at: 2026-05-14T05:01:00.000+07:00
@@ -174,6 +173,5 @@ e   `type: usage`). No new contract entries needed.
 
 ## Connections
 
-- [[CONCEPT--USAGE-ROLLUPS]]
 - [[CONCEPT--COST-TRACKING]]
 - [[ADR--AGENT-TIER-COST-POLICY]]

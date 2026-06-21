@@ -1787,28 +1787,28 @@ npm run msp:hotfix:check 2>/dev/null  # ถ้ามี hotfix utility
 
 ---
 
-## 11. Meta Learning Loop (MLL) — The Self-Improving Brain
+## 20. Meta Learning Loop (MLL) — The Self-Improving Brain
 
 **Meta Learning Loop (MLL)** คือระบบที่ทำหน้าที่เป็น "โรงงานกลั่นความรู้" (Refinery) เพื่อเชื่อมโยงประสบการณ์การทำงาน (Experience) กลับไปเป็นความรู้ถาวร (Durable Knowledge)
 
-### 11.1 MLL Skill Creator (Hermes-style)
+### 20.1 MLL Skill Creator (Hermes-style)
 เมื่อเอเจนต์ทำงานสำเร็จ (P5/P6) MLL จะสกัดเอา "ทักษะที่เพิ่งใช้งาน" ออกมาเป็น **`SKILL--`** หรือ **`TOOL--`** อัตโนมัติ:
 1.  **Immediate Learning:** วิเคราะห์ร่องรอยการทำงาน (Execution Trace) ทันทีที่จบ Task
 2.  **Candidate Stage:** สร้าง Atom ในโฟลเดอร์ `candidates/` (Staging Area)
 3.  **Human Verification:** ร้องขอให้ผู้ใช้ตรวจสอบความถูกต้องผ่านระบบ PR/Review ก่อนจะบันทึกลง GKS อย่างเป็นทางการ
 
-### 11.2 Bottom-up 4D Evolution
+### 20.2 Bottom-up 4D Evolution
 MLL บังคับใช้เกณฑ์ **4D Completeness** สำหรับความรู้ที่สำคัญ (Master Tier):
 - ต้องมีครบ 4 มิติ: **Algo, Concept, Frame, Proto**
 - หากขาดมิติใด MLL จะสร้าง Task ให้เอเจนต์หรือมนุษย์เข้ามาเติมเต็มความรู้ส่วนที่หายไป
 
-### 11.3 Tension Detection (Drift Control)
+### 20.3 Tension Detection (Drift Control)
 ตรวจสอบความขัดแย้งระหว่าง "สิ่งที่ระบบเชื่อ" (Atoms) กับ "ความเป็นจริงในโค้ด" (12-Stage Graph):
 - หากพบความขัดแย้ง MLL จะสร้าง **Tension Event** เพื่อแจ้งเตือนความเสี่ยง (Risk) หรือความคลาดเคลื่อนของข้อมูล
 
 ---
 
-## 20. Principles — หลักคิด 8 ข้อที่คงไว้เสมอ
+## 21. Principles — หลักคิด 8 ข้อที่คงไว้เสมอ
 
 1. **Context Isolation → Precision + Cost efficiency**
    ยิ่งจำกัดขอบเขตที่ agent เห็น ยิ่ง hallucinate น้อย ยิ่งถูก

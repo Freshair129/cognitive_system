@@ -28,7 +28,7 @@ const CONFIG = {
 
 async function setupGenesisDB() {
     await fs.mkdir(CONFIG.DB_PATH, { recursive: true });
-    const db = await GenesisDatabase.open({ path: CONFIG.DB_PATH, read_only: false });
+    const db = await GenesisDatabase.open({ path: CONFIG.DB_PATH, readOnly: false });
     
     console.log('[GenesisDB] Seeding graph...');
     for (let i = 0; i < CONFIG.NODE_COUNT; i++) {

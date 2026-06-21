@@ -8,7 +8,10 @@ tier: master
 source_type: axiomatic
 title: GKS Reorganization Block — Semantic Integrity Initiative
 created_at: 2026-05-28T15:15:00.000+07:00
-tags: [manifest, knowledge-block, reorg]
+tags:
+  - manifest
+  - knowledge-block
+  - reorg
 aliases:
   - GENESIS
   - implementation_flow
@@ -30,21 +33,34 @@ attributes:
   domain: general
   members:
     core:
-      cognitive: [COGNITIVE--GKS-SEMANTIC-INTEGRITY-LENS]
-      algo:      [ALGO--RECURSIVE-LINK-PATCHING]
-      runbook:   [RUNBOOK--GKS-REORG-OPS]
-      concept:   [CONCEPT--GKS-REORG-INTEGRITY]
-      params:    [PARAMS--GKS-REORG-THRESHOLDS]
+      cognitive:
+        - COGNITIVE--GKS-SEMANTIC-INTEGRITY-LENS
+      algo:
+        - ALGO--RECURSIVE-LINK-PATCHING
+      runbook:
+        - RUNBOOK--GKS-REORG-OPS
+      concept:
+        - CONCEPT--GKS-REORG-INTEGRITY
+      params:
+        - PARAMS--GKS-REORG-THRESHOLDS
   daci:
-    driver:       MOD--GEMINI-T2
-    approver:     PERSONA--BOSS
-    contributor:  [PERSONA--QWEN-T1, PERSONA--CLAUDE-T3]
-    informed:     [ANTIGRAVITY]
+    driver: MOD--GEMINI-T2
+    approver: PERSONA--BOSS
+    contributor:
+      - PERSONA--QWEN-T1
+      - PERSONA--CLAUDE-T3
+    informed:
+      - ANTIGRAVITY
 promoted_from: ADR--GKS-SINGULAR-TAXONOMY
 promoted_at: 2026-05-28T16:30:00+07:00
 promotion_adr: ADR--GKS-SINGULAR-TAXONOMY
+manifest_version: "1.0"
+daci:
+  driver: System
+  approver: Architect
+  contributor: Agents
+  informed: Users
 ---
-
 # GENESIS — GKS Reorganization Block
 
 ## Manifest Members

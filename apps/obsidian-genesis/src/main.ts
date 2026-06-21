@@ -93,9 +93,16 @@ export default class GenesisObsidianPlugin extends Plugin {
         const genesisRegex = /```json:genesis\n([\s\S]*?)\n```/g;
         
         // ARCHITECTURAL OPTIMIZATION: Pre-filter properties
-        // Only include specific valuable keys to keep RAM footprint lean
+        // Only include specific valuable keys to keep RAM footprint lean.
+        // NOTE: keep this list in sync with the fields nexusmind/validator read —
+        // domain & source_type feed K-Impact and domain-congruence scoring;
+        // dropping them silently degrades recall ranking (no error surfaced).
         let props: Record<string, any> = {};
-        const allowedKeys = ['status', 'title', 'tags', 'created', 'updated', 'impact_override'];
+        const allowedKeys = [
+            'status', 'title', 'tags', 'created', 'updated', 'created_at',
+            'impact_override', 'domain', 'source_type', 'summary', 'priority',
+            'phase', 'valid_until', 'vault_id', 'tier', 'role', 'crosslinks',
+        ];
         for (const key of allowedKeys) {
             if (frontmatter[key] !== undefined) props[key] = frontmatter[key];
         }

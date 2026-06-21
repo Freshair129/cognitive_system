@@ -17,14 +17,13 @@ cluster: implementation_flow
 role: Strategic intent / PRD
 crosslinks:
   references:
-    - "[[FRAMEWORK--WORKFLOW-DYNAMICS]]"
-    - "[[CONCEPT--SPECIFICATION-TO-SYSTEM]]"
-    - "[[ADR--DOC-TO-CODE-ENFORCEMENT]]"
-    - "[[ADR--MASTER-PROMOTION-DOC-TO-CODE]]"
+    - "FRAMEWORK--WORKFLOW-DYNAMICS"
+    - "CONCEPT--SPECIFICATION-TO-SYSTEM"
+    - "ADR--DOC-TO-CODE-ENFORCEMENT"
+    - "ADR--MASTER-PROMOTION-DOC-TO-CODE"
   parent_blueprint:
-    - "[[GENESIS--COGNITIVE-ENGINE]]"
+    - "GENESIS--COGNITIVE-ENGINE"
 ---
-
 # 📝 CONCEPT--DOC-DRIVEN-DEVELOPMENT
 
 **Doc-Driven Development (DDD) / Specification-to-System**

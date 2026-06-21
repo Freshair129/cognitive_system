@@ -29,16 +29,24 @@ attributes:
   manifest_version: 1.0.0
   domain: genesis
   daci:
-    driver:       MOD--COGNITIVE
-    approver:     Boss
-    contributor:  [QWEN-T1, CLAUDE-T3]
-    informed:     [ANTIGRAVITY]
+    driver: MOD--COGNITIVE
+    approver: Boss
+    contributor:
+      - QWEN-T1
+      - CLAUDE-T3
+    informed:
+      - ANTIGRAVITY
 created_at: 2026-05-28T14:30:00+07:00
 promoted_from: CONCEPT--TIERED-MEMORY-DISTILLATION
 promoted_at: 2026-05-28T14:30:00.000+07:00
 promotion_adr: ADR--MONOREPO-STRUCTURE
+manifest_version: "1.0"
+daci:
+  driver: System
+  approver: Architect
+  contributor: Agents
+  informed: Users
 ---
-
 # GENESIS — Cognitive System Master Manifest
 
 เอกสารฉบับนี้คือ **Runtime Entry-point** สำหรับระบบ Cognitive System ทำหน้าที่เป็นแผนที่นำทาง (Map of Maps) เพื่อเชื่อมโยงและสรุปสาระสำคัญของสถาปัตยกรรมหลัก โดยไม่ต้องไล่อ่านเอกสารต้นฉบับทั้งหมด

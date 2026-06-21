@@ -2,7 +2,7 @@
 id: ADR--SHADOW-REPO-SHARED-BRAIN
 phase: 2
 type: adr
-status: draft
+status: stable
 vault_id: default
 tier: process
 source_type: axiomatic
@@ -16,6 +16,7 @@ tags:
   - gitops
 crosslinks:
   references:
+    - CONCEPT--TIERED-MEMORY-DISTILLATION
     - COGNITIVE--SHARED-BRAIN-PHILOSOPHY
     - RUNBOOK--BRAIN-SYNC-PROCEDURE
     - PROTO--BRAIN-INDEXING-MANDATE

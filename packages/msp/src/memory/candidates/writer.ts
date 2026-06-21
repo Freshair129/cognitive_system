@@ -1,5 +1,4 @@
 import { mkdir, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises'
-import { homedir } from 'node:os'
 import { dirname, resolve } from 'node:path'
 
 import {
@@ -18,7 +17,8 @@ import {
   type CandidateWriterOpts,
 } from './types.js'
 
-const DEFAULT_NAMESPACE = 'default'
+// Match the sibling memory writers (episodic/sessions), which default to 'evaAI'.
+const DEFAULT_NAMESPACE = 'evaAI'
 
 export class CandidateWriter {
   private readonly root: string
@@ -32,9 +32,9 @@ export class CandidateWriter {
   }
 
   candidatesDir(): string {
-    // Candidates MUST be stored in the Global Brain (~/.brain) for control/orchestration,
-    // not in the project-local shared brain.
-    return resolve(homedir(), '.brain/msp/projects', this.namespace, 'candidates')
+    // Candidates live in the WORKSPACE brain (<root>/.brain), scoped per project
+    // under the resolved root (the MCP tool honours args.root over ctx.root).
+    return resolve(this.root, '.brain/msp/projects', this.namespace, 'candidates')
   }
 
   candidatePath(proposedId: string): string {

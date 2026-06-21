@@ -8,7 +8,6 @@ tier: safety
 source_type: axiomatic
 title: Verification Protocol and Invariants for Call Graph Integration
 tags:
-  - covibe
   - proto
   - verification
   - validation
