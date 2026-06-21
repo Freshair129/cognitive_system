@@ -4,6 +4,8 @@ import { join } from 'node:path'
 
 import { describe, expect, it } from 'vitest'
 
+import { gksLayout } from '@freshair129/gks'
+
 import {
   discoverProtos,
   runProtos,
@@ -22,7 +24,9 @@ async function writeProtoAtom(
   fname: string,
   body: string,
 ): Promise<void> {
-  const dir = join(root, 'gks/proto')
+  // discoverProtos scans gksLayout(root).gks/proto (the resolved vault), NOT
+  // <root>/gks/proto — write where it actually reads.
+  const dir = join(gksLayout(root).gks, 'proto')
   await mkdir(dir, { recursive: true })
   await writeFile(join(dir, fname), body)
 }
@@ -58,7 +62,7 @@ describe('discoverProtos', () => {
 
   it('returns [] when gks/proto/ is empty', async () => {
     const root = await freshRoot()
-    await mkdir(join(root, 'gks/proto'), { recursive: true })
+    await mkdir(join(gksLayout(root).gks, 'proto'), { recursive: true })
     const protos = await discoverProtos(root)
     expect(protos).toEqual([])
   })

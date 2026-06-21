@@ -5,7 +5,20 @@ import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 import { existsSync } from 'node:fs'
 
-describe('GenesisDB Standalone Server Integration', () => {
+// `genesis-db-server` is an OPTIONAL native binary. The napi crate's bin targets
+// are gated out of the default `napi build` (they can't link napi as standalone
+// executables on Linux), so this binary only exists where it was explicitly built
+// (typically Windows local dev). Locate it across platforms + hoist locations;
+// skip the suite when it isn't present rather than failing the whole run.
+function findServerBinary(): string | null {
+  const exe = process.platform === 'win32' ? '.exe' : ''
+  const rel = `node_modules/@freshair129/gks-genesis-block-native/target/release/genesis-db-server${exe}`
+  const candidates = [resolve(process.cwd(), rel), resolve(process.cwd(), '../..', rel)]
+  return candidates.find((p) => existsSync(p)) ?? null
+}
+const serverBinary = findServerBinary()
+
+describe.skipIf(!serverBinary)('GenesisDB Standalone Server Integration', () => {
   let serverProcess: ChildProcess | null = null
   let tempDir = ''
   const port = 3007
@@ -13,19 +26,7 @@ describe('GenesisDB Standalone Server Integration', () => {
 
   beforeAll(async () => {
     tempDir = await mkdtemp(join(tmpdir(), 'genesis-server-test-'))
-    
-    // Search for binary in node_modules or local target (fallback)
-    let binaryPath = resolve(process.cwd(), 'node_modules/@freshair129/gks-genesis-block-native/target/release/genesis-db-server.exe')
-    
-    if (!existsSync(binaryPath)) {
-        // Fallback for different environments or local dev
-        binaryPath = resolve(process.cwd(), '../../node_modules/@freshair129/gks-genesis-block-native/target/release/genesis-db-server.exe')
-    }
-
-    if (!existsSync(binaryPath)) {
-        throw new Error(`GenesisDB Server binary not found at ${binaryPath}. Ensure 'npm install' finished the build.`)
-    }
-    
+    const binaryPath = serverBinary!
     console.log(`[TEST] Spawning server at ${binaryPath}`)
     serverProcess = spawn(binaryPath, [], {
       env: {
