@@ -33,7 +33,7 @@ describe('The Machine Judge: Semantic Contradiction Detection', () => {
     })
 
     // We use a real file for parsing
-    const result = await judgeContradiction(resolve(repoRoot, 'gks/adr/ADR--ANTI-HALLUCINATION-RULES.md'), {
+    const result = await judgeContradiction(resolve(repoRoot, '.brain/cognitive-system-knowledge-block/adr/ADR--ANTI-HALLUCINATION-RULES.md'), {
       root: repoRoot,
       limit: 1
     })
@@ -51,7 +51,7 @@ describe('The Machine Judge: Semantic Contradiction Detection', () => {
       cost_usd: 0.01
     })
 
-    const result = await judgeContradiction(resolve(repoRoot, 'gks/adr/ADR--ANTI-HALLUCINATION-RULES.md'), {
+    const result = await judgeContradiction(resolve(repoRoot, '.brain/cognitive-system-knowledge-block/adr/ADR--ANTI-HALLUCINATION-RULES.md'), {
       root: repoRoot,
       limit: 1
     })

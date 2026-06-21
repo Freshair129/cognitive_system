@@ -1,5 +1,5 @@
 import { resolve } from 'node:path'
-import { createGenesisGraphBackend } from '@freshair129/gks'
+import { createGenesisGraphBackend, gksLayout } from '@freshair129/gks'
 import { dispatch } from '../agents/dispatch.js'
 import { parseFile } from './parse.js'
 
@@ -37,8 +37,10 @@ export async function judgeContradiction(
   const newAtom = await parseFile(filepath)
   const atomId = newAtom.fm['id'] as string
   
-  // 2. Use Genesis Graph to find relevant stable neighbors
-  const dbPath = resolve(root, 'gks')
+  // 2. Use Genesis Graph to find relevant stable neighbors. The graph lives in
+  // the resolved vault (gksLayout.gks = .brain/cognitive-system-knowledge-block),
+  // NOT <root>/gks.
+  const dbPath = gksLayout(root).gks
   const backend = createGenesisGraphBackend({ path: dbPath })
   await backend.load()
 
