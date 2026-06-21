@@ -65,7 +65,7 @@ jobs:
           npx tsc --version | tee -a build-logs/_versions.log
           echo "::endgroup::"
           fail=0
-          for ws in @freshair129/gks msp @freshair129/gks-cli @freshair129/gks-mcp @freshair129/gks-tui @freshair129/genesis-ui; do
+          for ws in @freshair129/gks msp @freshair129/gks-cli-app @freshair129/gks-mcp-app @freshair129/gks-tui @freshair129/genesis-ui; do
             slug=$(echo "$ws" | tr '/@' '__')
             echo "::group::build $ws"
             npm run build --workspace="$ws" --if-present 2>&1 | tee "build-logs/${slug}.log"
