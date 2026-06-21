@@ -156,6 +156,10 @@ jobs:
       - name: verify-flow per FEAT
         run: |
           set -e
+          # nullglob: the canonical FEAT vault is root gks/feat/. During the
+          # .brain migration that dir can be empty, so without nullglob the glob
+          # stays literal and `verify-flow "FEAT--*"` errors. No-op when empty.
+          shopt -s nullglob
           for feat_path in gks/feat/FEAT--*.md; do
             feat=$(basename "$feat_path" .md)
             # Skip FEATs whose status marks them as terminal or in-flight —
