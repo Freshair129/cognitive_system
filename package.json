@@ -27,8 +27,10 @@
     "install": "npm run build"
   },
   "dependencies": {
-    "@freshair129/gks-genesis-block-native": "github:Freshair129/GenesisBlock#claude/fix-napi-install-gate-bin-targets",
     "glob": "^13.0.6"
+  },
+  "optionalDependencies": {
+    "@freshair129/gks-genesis-block-native": "github:Freshair129/GenesisBlock#claude/fix-napi-install-gate-bin-targets"
   },
   "devDependencies": {
     "turbo": "^2.9.16"
