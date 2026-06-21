@@ -86,7 +86,11 @@ export async function createMspMcpServer(opts: ServerOpts = {}): Promise<McpServ
       t.name,
       {
         description: t.description,
-        inputSchema: t.inputSchema,
+        // Widen to any: the union of every tool's Zod inputSchema makes the SDK's
+        // registerTool generic instantiate too deeply on some tsc versions
+        // (TS2589). Runtime is unaffected — the real schema object is still passed.
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        inputSchema: t.inputSchema as any,
       },
       // SDK accepts our handler shape: (args) => Promise<{content,isError?}>
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
