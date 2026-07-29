@@ -37,7 +37,7 @@ describe('resolve — combines P1 routing + P2 vaults', () => {
     projectRepo = path.join(tmp, 'project');
     projectDeep = path.join(projectRepo, 'sub', 'deep');
 
-    // global brain layout: $globalDir/skills/SKILL--FOO.md
+    // A legacy global skills folder may exist, but SKILL is not read from it.
     await writeAtom(
       path.join(globalDir, 'skills'),
       'SKILL--FOO.md',
@@ -82,7 +82,7 @@ describe('resolve — combines P1 routing + P2 vaults', () => {
     );
   });
 
-  it('project shadows global for SKILL collisions', async () => {
+  it('resolves SKILL metadata from the project brain only', async () => {
     const hits = await resolve({ type: 'SKILL' });
     expect(hits).toHaveLength(1);
     expect(hits[0]!.atom.id).toBe('SKILL--FOO');
@@ -92,7 +92,7 @@ describe('resolve — combines P1 routing + P2 vaults', () => {
     );
   });
 
-  it('respects explicit id filter (project shadow still applies)', async () => {
+  it('respects explicit id filter for project SKILL metadata', async () => {
     const hits = await resolve({ type: 'SKILL', id: 'SKILL--FOO' });
     expect(hits).toHaveLength(1);
     expect(hits[0]!.source).toBe('project');

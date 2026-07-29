@@ -12,6 +12,7 @@ const PROJECT_ONLY_TYPES: AtomType[] = [
   'FRAMEWORK',
   'SPEC',
   'PROTOCOL',
+  'SKILL',
   'EPISODE',
   'MOD',
   'MASTER',
@@ -20,7 +21,7 @@ const PROJECT_ONLY_TYPES: AtomType[] = [
   'ISSUE',
 ];
 
-const GLOBAL_FIRST_TYPES: AtomType[] = ['SKILL', 'ALGO', 'PROTO', 'PARAMS'];
+const GLOBAL_FIRST_TYPES: AtomType[] = ['ALGO', 'PROTO', 'PARAMS'];
 
 const GLOBAL_ONLY_TYPES: AtomType[] = ['IDENTITY', 'REGISTRY'];
 
@@ -55,14 +56,6 @@ describe('routingFor — global-only atom types', () => {
 });
 
 describe('writeTargetFor — resolves the conflict sentinel via vault_id', () => {
-  it('SKILL with no vault_id writes to global by default', () => {
-    expect(writeTargetFor('SKILL', undefined)).toBe('global');
-  });
-
-  it('SKILL with vault_id set writes to project', () => {
-    expect(writeTargetFor('SKILL', 'team-a')).toBe('project');
-  });
-
   it('PROTO with vault_id set writes to project', () => {
     expect(writeTargetFor('PROTO', 'default')).toBe('project');
   });

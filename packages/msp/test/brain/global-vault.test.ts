@@ -72,8 +72,8 @@ describe('globalSubdir', () => {
     vi.unstubAllEnvs();
   });
 
-  it('returns skills/ for SKILL', () => {
-    expect(globalSubdir('SKILL')).toBe(path.join('/x', 'brain', 'skills'));
+  it('rejects SKILL because executable skills are not global-brain data', () => {
+    expect(() => globalSubdir('SKILL')).toThrow(/not routed to the global brain/);
   });
 
   it('returns proto/ for PROTO', () => {

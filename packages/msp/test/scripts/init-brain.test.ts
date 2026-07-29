@@ -83,7 +83,7 @@ describe('scripts/msp/init-brain.mjs', () => {
     const r = runScript([], fakeHome)
     expect(r.code).toBe(0)
     expect(existsSync(brainRoot)).toBe(true)
-    expect(existsSync(join(brainRoot, 'skills'))).toBe(true)
+    expect(existsSync(join(brainRoot, 'skills'))).toBe(false)
     expect(existsSync(join(brainRoot, 'episodic'))).toBe(true)
     expect(existsSync(join(brainRoot, 'proto'))).toBe(true)
     expect(existsSync(join(brainRoot, 'params'))).toBe(true)
@@ -98,6 +98,15 @@ describe('scripts/msp/init-brain.mjs', () => {
     const registry = readFileSync(join(brainRoot, 'registry.yaml'), 'utf8')
     expect(registry).toMatch(/^# ~\/\.brain\/registry\.yaml/m)
     expect(registry).toMatch(/^projects: \[\]/m)
+  })
+
+  it('does not delete or migrate an existing global skills folder', () => {
+    mkdirSync(join(brainRoot, 'skills'), { recursive: true })
+    writeFileSync(join(brainRoot, 'skills', 'legacy.md'), 'preserve\n')
+
+    const r = runScript(['--force'], fakeHome)
+    expect(r.code).toBe(0)
+    expect(readFileSync(join(brainRoot, 'skills', 'legacy.md'), 'utf8')).toBe('preserve\n')
   })
 
   it('is idempotent — second run says already initialised and exits 0', () => {

@@ -37,8 +37,8 @@ role: Implementation blueprint
 |---|---|---|
 | Global Brain state | `%USERPROFILE%/.brain/state/` or `$XDG_DATA_HOME/brain/state/` | MSP |
 | Workspace Brain state | `<workspace>/.brain/state/` | MSP |
-| Workspace proof | `<workspace>/.brain/msp/proof/YYYY-MM-DD.jsonl` | MSP |
-| Workspace code knowledge | `<workspace>/gks/code-knowledge/<record-id>.json` | GKS via MSP |
+| Workspace proof | `<workspace>/.brain/msp/proof/YYYY-MM-DD--<record-id>--<hash>.json` | MSP |
+| Workspace code knowledge | GKS `GraphStore` at `<workspace>/.brain/msp/projects/<project>/graph/graph.jsonl` | GKS via MSP |
 | Executable skills | `.govibe/skills/<id>/<version>/SKILL.md` | GoVibe |
 
 All caller-supplied workspace paths are resolved to absolute paths. A target outside the declared workspace is rejected.
@@ -63,11 +63,11 @@ Resolution:
 
 ## `msp_knowledge_write`
 
-Input conforms to `gks-code-knowledge/v1`. The handler requires a safe record ID, non-empty `provenance_ref`, at least one supported knowledge collection, and no proof/evidence fields. It writes canonical JSON atomically under `gks/code-knowledge` and returns a relative `knowledge_ref` plus source hash.
+Input conforms to `gks-code-knowledge/v1`. The handler requires a safe record ID, non-empty `provenance_ref`, at least one supported knowledge collection, and no proof/evidence fields. It validates nodes, symbols, edges, communities, and processes before writing through the GKS `GraphStore`, then returns a graph `knowledge_ref` plus source hash.
 
 ## `msp_proof_append`
 
-Input conforms to `msp-proof/v1`. The handler requires provenance type, actor, timestamp, source hash, verdict, and optional `knowledge_ref`. It rejects symbol/graph collections, appends one canonical JSON line, and returns a stable proof reference plus record hash.
+Input conforms to `msp-proof/v1`. The handler requires provenance type, authenticated actor, timestamp, source hash, verdict, and optional `knowledge_ref`. It rejects symbol/graph collections and creates an immutable hash-addressed JSON record with an atomic hard-link claim, returning a stable proof reference plus record hash.
 
 ## Verification
 

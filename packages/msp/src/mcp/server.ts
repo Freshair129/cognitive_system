@@ -8,6 +8,7 @@ import * as backlinksRebuild from './tools/backlinks-rebuild.js'
 import * as brainResolve from './tools/brain-resolve.js'
 import * as candidate from './tools/candidate.js'
 import * as compressTool from './tools/compress.js'
+import * as contextResolve from './tools/context-resolve.js'
 import * as dispatchTool from './tools/dispatch.js'
 import * as distillTool from './tools/distill.js'
 import * as identityBeliefsTool from './tools/identity-beliefs.js'
@@ -17,6 +18,7 @@ import * as identitySet from './tools/identity-set.js'
 import * as projectList from './tools/project-list.js'
 import * as projectRegister from './tools/project-register.js'
 import * as projectResolve from './tools/project-resolve.js'
+import * as proofAppend from './tools/proof-append.js'
 import * as recallTool from './tools/recall.js'
 import * as remember from './tools/remember.js'
 import * as runTask from './tools/run-task.js'
@@ -28,6 +30,7 @@ import * as symbolNeighbors from './tools/symbol-neighbors.js'
 import * as symbolSearch from './tools/symbol-search.js'
 import * as symbolTrace from './tools/symbol-trace.js'
 import * as validateTool from './tools/validate.js'
+import * as knowledgeWrite from './tools/knowledge-write.js'
 import * as escalateTool from './tools/escalate.js'
 import * as expandTool from './tools/expand.js'
 import type { ToolHandlerCtx } from './types.js'
@@ -40,6 +43,7 @@ export interface ServerOpts {
 const TOOLS = [
   validateTool,
   brainResolve,
+  contextResolve,
   dispatchTool,
   distillTool,
   identityBeliefsTool,
@@ -56,6 +60,8 @@ const TOOLS = [
   projectList,
   projectRegister,
   projectResolve,
+  proofAppend,
+  knowledgeWrite,
   symbolLookup,
   symbolNeighbors,
   symbolImpact,
