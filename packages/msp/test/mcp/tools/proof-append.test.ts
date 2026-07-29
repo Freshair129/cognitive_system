@@ -93,7 +93,7 @@ describe('msp_proof_append tool', () => {
     try {
       const result = await handler(ctx())(validRecord())
       expect(result.isError).toBe(true)
-      expect(result.content[0]!.text).toMatch(/symbolic link/)
+      expect(result.content[0]!.text).toMatch(/symbolic link|must be a regular file/)
       expect(await fs.readFile(outside, 'utf8')).toBe('outside\n')
     } finally {
       await fs.rm(outside, { force: true })
