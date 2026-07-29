@@ -111,7 +111,7 @@ const REGISTRY_YAML_HEADER =
 
 const IDENTITY_JSON_DEFAULT = '{}\n';
 
-const SUBDIRS = ['skills', 'episodic', 'proto', 'params'];
+const SUBDIRS = ['episodic', 'proto', 'params'];
 
 // ---------------------------------------------------------------------------
 // Migration: copy a directory tree (recursive, preserves source until done)

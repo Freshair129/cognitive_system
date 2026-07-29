@@ -5,7 +5,6 @@ import path from 'node:path';
 import type { AtomType } from './types.js';
 
 const GLOBAL_SUBDIR: Partial<Record<AtomType, string>> = {
-  SKILL: 'skills',
   ALGO: 'algo',
   PROTO: 'proto',
   PARAMS: 'params',

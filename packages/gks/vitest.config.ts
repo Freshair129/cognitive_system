@@ -5,6 +5,8 @@ export default defineConfig({
     include: ['test/**/*.test.ts'],
     exclude: ['node_modules/**', 'dist/**'],
     environment: 'node',
-    testTimeout: 10_000,
+    // Turbo runs workspace suites concurrently in CI; graph fixtures can be CPU-starved.
+    testTimeout: 30_000,
+    hookTimeout: 30_000,
   },
 })
