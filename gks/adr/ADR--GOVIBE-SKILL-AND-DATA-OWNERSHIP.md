@@ -4,13 +4,13 @@ version: 1.0.0
 phase: 2
 type: adr
 tier: process
-status: stable
-enforcement_state: active
+status: superseded
+enforcement_state: inactive
 created_at: 2026-07-29T00:00:00+07:00
 created_by: ATHER
-last_update: 2026-07-29T00:00:00+07:00
+last_update: 2026-07-30T13:35:00+07:00
 delivery_from: owner-approved GoVibe capability absorption plan
-superseded_by: null
+superseded_by: ADR--GOVIBE-EXTERNAL-MCP-PORTS
 vault_id: GKS-CORE
 source_type: axiomatic
 title: GoVibe Skill and Cognitive Data Ownership
@@ -27,6 +27,10 @@ role: Architecture decision
 ---
 
 # ADR--GOVIBE-SKILL-AND-DATA-OWNERSHIP
+
+> Superseded by `ADR--GOVIBE-EXTERNAL-MCP-PORTS`. The ownership assignments
+> remain historical context; the MSP-facade-only transport decision is no
+> longer active.
 
 ## Status
 

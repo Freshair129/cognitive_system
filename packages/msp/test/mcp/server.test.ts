@@ -8,8 +8,9 @@ describe('createMspMcpServer', () => {
     expect(server).toBeDefined()
   })
 
-  it('registers exactly the 29 MSP-specific tools, no more no less', () => {
+  it('registers exactly the 31 cognitive-system tools, no more no less', () => {
     expect([...REGISTERED_TOOL_NAMES].sort()).toEqual([
+      'gks_code_upsert',
       'msp_backlinks_rebuild',
       'msp_brain_resolve',
       'msp_candidate',
@@ -19,6 +20,7 @@ describe('createMspMcpServer', () => {
       'msp_distill',
       'msp_episode_append',
       'msp_escalate',
+      'msp_evidence_record',
       'msp_expand',
       'msp_identity_beliefs',
       'msp_identity_get',
@@ -42,10 +44,9 @@ describe('createMspMcpServer', () => {
     ])
   })
 
-  it('does not duplicate any gks_* tool names', () => {
+  it('exposes only the approved GKS writer outside the MSP namespace', () => {
     for (const name of REGISTERED_TOOL_NAMES) {
-      expect(name.startsWith('gks_')).toBe(false)
-      expect(name.startsWith('msp_')).toBe(true)
+      expect(name.startsWith('msp_') || name === 'gks_code_upsert').toBe(true)
     }
   })
 
