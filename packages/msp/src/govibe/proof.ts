@@ -10,6 +10,7 @@ const FORBIDDEN = ['symbols', 'nodes', 'edges', 'communities', 'processes', 'pro
 const ALLOWED = new Set([
   'record_id', 'run_id', 'provenance', 'evidence', 'verification', 'actor',
   'timestamp', 'source_hash', 'knowledge_ref',
+  'govibe_batch',
 ])
 
 export type ProofInput = {
@@ -22,6 +23,7 @@ export type ProofInput = {
   timestamp: string
   source_hash: string
   knowledge_ref?: string
+  govibe_batch?: Record<string, unknown>
 } & Record<string, unknown>
 
 export async function appendProof(args: {

@@ -1,6 +1,6 @@
 ---
 id: BLUEPRINT--GOVIBE-CONTEXT-PROOF-BRIDGE
-version: 1.0.0
+version: 2.0.0
 phase: 3
 type: blueprint
 tier: process
@@ -8,13 +8,13 @@ status: stable
 enforcement_state: active
 created_at: 2026-07-29T00:00:00+07:00
 created_by: ATHER
-last_update: 2026-07-29T00:00:00+07:00
+last_update: 2026-07-30T13:35:00+07:00
 delivery_from: owner-approved GoVibe capability absorption plan
 superseded_by: null
 vault_id: GKS-CORE
 source_type: axiomatic
 title: GoVibe Context and Proof Bridge Blueprint
-summary: Specifies deterministic paths, validation, privacy decisions, and MCP handlers for the MSP facade consumed by GoVibe.
+summary: Specifies deterministic paths, validation, and independent GKS/MSP MCP handlers consumed by GoVibe.
 tags: [govibe, msp, gks, blueprint, mcp]
 domain: agent-runtime
 priority: P0
@@ -22,7 +22,7 @@ scale_level: L1
 linked_symbols:
   - file: packages/msp/src/mcp/server.ts
 crosslinks:
-  references: [ADR--GOVIBE-SKILL-AND-DATA-OWNERSHIP]
+  references: [ADR--GOVIBE-EXTERNAL-MCP-PORTS]
   implements: [FEAT--GOVIBE-CONTEXT-PROOF-BRIDGE]
 aliases: [BLUEPRINT--]
 cluster: implementation_flow
@@ -61,13 +61,19 @@ Resolution:
 5. Global identity/security records remain authoritative.
 6. Validate requested knowledge references inside `<workspace>/gks`.
 
-## `msp_knowledge_write`
+## `gks_code_upsert`
 
-Input conforms to `gks-code-knowledge/v1`. The handler requires a safe record ID, non-empty `provenance_ref`, at least one supported knowledge collection, and no proof/evidence fields. It validates nodes, symbols, edges, communities, and processes before writing through the GKS `GraphStore`, then returns a graph `knowledge_ref` plus source hash.
+Input conforms to `govibe-knowledge-batch/v1`. The handler requires schema
+version, idempotency key, run/stage identity, source snapshot hash,
+`provenance_ref`, and no proof fields. It maps atoms/symbols/relations/context
+snapshots into the existing GKS writer and returns `knowledge_ref` plus hash.
 
-## `msp_proof_append`
+## `msp_evidence_record`
 
-Input conforms to `msp-proof/v1`. The handler requires provenance type, authenticated actor, timestamp, source hash, verdict, and optional `knowledge_ref`. It rejects symbol/graph collections and creates an immutable hash-addressed JSON record with an atomic hard-link claim, returning a stable proof reference plus record hash.
+Input conforms to `govibe-proof-batch/v1`. It requires schema version,
+idempotency key, run/stage identity, source snapshot hash, actual verification
+state, and optional `knowledge_ref`. It rejects GKS collections and maps into
+the existing immutable proof writer.
 
 ## Verification
 
@@ -84,3 +90,10 @@ node scripts/msp/init-brain.mjs --dry-run
 - Unsafe path or symlink escape: fail closed.
 - Existing knowledge ID with a different hash: reject as tampering; do not overwrite.
 - Proof append failure: do not report success or a proof reference.
+
+## Changelog
+
+| Version | Date | Summary |
+|---|---|---|
+| 2.0.0 | 2026-07-30 | Added independent `gks_code_upsert` and `msp_evidence_record` compatibility contracts. |
+| 1.0.0 | 2026-07-29 | Defined the initial MSP facade bridge. |

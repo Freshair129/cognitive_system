@@ -19,6 +19,7 @@ import * as projectList from './tools/project-list.js'
 import * as projectRegister from './tools/project-register.js'
 import * as projectResolve from './tools/project-resolve.js'
 import * as proofAppend from './tools/proof-append.js'
+import * as evidenceRecord from './tools/evidence-record.js'
 import * as recallTool from './tools/recall.js'
 import * as remember from './tools/remember.js'
 import * as runTask from './tools/run-task.js'
@@ -31,6 +32,7 @@ import * as symbolSearch from './tools/symbol-search.js'
 import * as symbolTrace from './tools/symbol-trace.js'
 import * as validateTool from './tools/validate.js'
 import * as knowledgeWrite from './tools/knowledge-write.js'
+import * as gksCodeUpsert from './tools/gks-code-upsert.js'
 import * as escalateTool from './tools/escalate.js'
 import * as expandTool from './tools/expand.js'
 import type { ToolHandlerCtx } from './types.js'
@@ -61,7 +63,9 @@ const TOOLS = [
   projectRegister,
   projectResolve,
   proofAppend,
+  evidenceRecord,
   knowledgeWrite,
+  gksCodeUpsert,
   symbolLookup,
   symbolNeighbors,
   symbolImpact,
