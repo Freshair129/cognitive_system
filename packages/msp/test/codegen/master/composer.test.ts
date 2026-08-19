@@ -3,6 +3,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
 import { afterEach, describe, expect, it } from 'vitest'
+import { gksLayout } from '@freshair129/gks'
 
 import {
   composeMasterAtoms,
@@ -28,7 +29,7 @@ interface FixtureOpts {
   type?: string
   status?: string
   body?: string
-  /** Where to place the file relative to <root>/gks/. Default: 'master'. */
+  /** Where to place the file relative to the resolved vault. Default: 'master'. */
   subdir?: string
 }
 
@@ -38,7 +39,8 @@ async function writeFixtureMaster(
   opts: FixtureOpts = {},
 ): Promise<void> {
   const subdir = opts.subdir ?? 'master'
-  const dir = join(root, 'gks', subdir)
+  // Seed the resolved vault — the composer reads gksLayout(root).gks.
+  const dir = join(gksLayout(root).gks, subdir)
   await mkdir(dir, { recursive: true })
   const tier = opts.tier ?? 'master'
   const type = opts.type ?? 'master'

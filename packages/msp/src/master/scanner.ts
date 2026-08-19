@@ -19,6 +19,7 @@
 import { readFile, readdir, stat } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 
+import { gksLayout } from '@freshair129/gks'
 import { parse as parseYaml } from 'yaml'
 
 export interface GenesisBlock {
@@ -56,8 +57,9 @@ export async function findGenesisBlocks(root: string): Promise<GenesisBlock[]> {
   const blocks: GenesisBlock[] = []
 
   const candidates: string[] = []
-  candidates.push(resolve(root, 'gks', 'genesis'))
-  candidates.push(resolve(root, 'gks'))
+  const vault = gksLayout(root).gks
+  candidates.push(resolve(vault, 'genesis'))
+  candidates.push(vault)
 
   // Per-package genesis directories. Best-effort — skip if `packages/` absent.
   const packagesRoot = resolve(root, 'packages')

@@ -3,6 +3,8 @@ import { mkdir, mkdtemp, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
+import { gksLayout } from '@freshair129/gks'
+
 import { enforceScaleGate } from '../../src/cognitive/scale-gate.js'
 import { ScaleLevelGateError } from '../../src/cognitive/types.js'
 
@@ -15,13 +17,16 @@ interface AtomSeed {
 
 async function seed(atoms: AtomSeed[]): Promise<string> {
   const root = await mkdtemp(join(tmpdir(), 'scale-gate-'))
-  await mkdir(join(root, 'gks'), { recursive: true })
-  await mkdir(join(root, 'gks', '00_index'), { recursive: true })
+  // Seed the resolved vault (gksLayout(root).gks), not <root>/gks — the gate
+  // reads where gksLayout points.
+  const vault = gksLayout(root).gks
+  await mkdir(vault, { recursive: true })
+  await mkdir(join(vault, '00_index'), { recursive: true })
   for (const a of atoms) {
-    await mkdir(join(root, 'gks', a.type), { recursive: true })
+    await mkdir(join(vault, a.type), { recursive: true })
     const crosslinks = a.references ? `\ncrosslinks: {"references":${JSON.stringify(a.references)}}` : ''
     const fm = `---\nid: ${a.id}\ntype: ${a.type}\nstatus: ${a.status}\nvault_id: test${crosslinks}\n---\nbody\n`
-    await writeFile(join(root, 'gks', a.type, `${a.id}.md`), fm)
+    await writeFile(join(vault, a.type, `${a.id}.md`), fm)
   }
   return root
 }
@@ -29,7 +34,7 @@ async function seed(atoms: AtomSeed[]): Promise<string> {
 describe('enforceScaleGate', () => {
   it('L1 is a no-op even without any atoms', async () => {
     const root = await mkdtemp(join(tmpdir(), 'scale-gate-l1-'))
-    await mkdir(join(root, 'gks'), { recursive: true })
+    await mkdir(gksLayout(root).gks, { recursive: true })
     await expect(
       enforceScaleGate({ root, blueprintId: 'BLUEPRINT--MISSING', scale: 'L1' }),
     ).resolves.toBeUndefined()

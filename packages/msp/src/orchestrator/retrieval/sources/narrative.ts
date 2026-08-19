@@ -19,6 +19,9 @@ export async function narrativeSource(opts: RecallOptions): Promise<SourceResult
   const root = opts.root ?? process.cwd()
   const timeoutMs = opts.perSourceTimeouts?.narrative ?? DEFAULT_PER_SOURCE_TIMEOUTS.narrative
   
+  // NOTE: deliberately NOT gksLayout(). Machine-written atoms stay under
+  // <root>/gks/ pending the write-boundary fix (agent output must go to the
+  // project store / candidate queue, not the canonical vault).
   const narrativeDir = join(root, 'gks', 'narrative')
   
   try {

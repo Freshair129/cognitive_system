@@ -49,6 +49,9 @@ ${belief.statement}
 - Distilled from hierarchical 8-8-8 memory synthesis.
 `
 
+  // NOTE: deliberately NOT gksLayout(). Machine-written atoms stay under
+  // <root>/gks/ pending the write-boundary fix (agent output must go to the
+  // project store / candidate queue, not the canonical vault).
   const filePath = join(root, 'gks', 'identity', `${belief.id}.md`)
   // Note: Directory is guaranteed to exist by initMemoryStore.
   await writeFile(filePath, content, 'utf8')
@@ -98,6 +101,9 @@ ${narrative.content.patterns_observed.map(p => `- ${p}`).join('\n')}
 - Distilled from ${narrative.source_episodes.length} episodes.
 `
 
+  // NOTE: deliberately NOT gksLayout(). Machine-written atoms stay under
+  // <root>/gks/ pending the write-boundary fix (agent output must go to the
+  // project store / candidate queue, not the canonical vault).
   const filePath = join(root, 'gks', 'narrative', `${narrative.id}.md`)
   // Note: Directory is guaranteed to exist by initMemoryStore.
   await writeFile(filePath, content, 'utf8')

@@ -1,6 +1,7 @@
 import { readFile, readdir, stat } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 
+import { gksLayout } from '@freshair129/gks'
 import { parse as parseYaml } from 'yaml'
 
 import {
@@ -147,9 +148,9 @@ async function findManifestFile(
   root: string,
 ): Promise<string | null> {
   const filename = `GENESIS--${blockId}.md`
-  const canonical = resolve(root, 'gks/genesis', filename)
+  const gksDir = gksLayout(root).gks
+  const canonical = resolve(gksDir, 'genesis', filename)
   if (await pathExists(canonical)) return canonical
-  const gksDir = resolve(root, 'gks')
   if (!(await pathExists(gksDir))) return null
   return scanForFile(gksDir, filename)
 }
@@ -186,7 +187,7 @@ export async function loadManifest(
   const filepath = await findManifestFile(blockId, root)
   if (filepath === null) {
     throw new Error(
-      `loadManifest: GENESIS--${blockId}.md not found under ${resolve(root, 'gks')}`,
+      `loadManifest: GENESIS--${blockId}.md not found under ${gksLayout(root).gks}`,
     )
   }
   let raw: string
@@ -222,9 +223,9 @@ async function findMemberFile(
   root: string,
 ): Promise<string | null> {
   const filename = `${id}.md`
-  const canonical = resolve(root, 'gks', DIMENSION_DIR[dimension], filename)
+  const gksDir = gksLayout(root).gks
+  const canonical = resolve(gksDir, DIMENSION_DIR[dimension], filename)
   if (await pathExists(canonical)) return canonical
-  const gksDir = resolve(root, 'gks')
   if (!(await pathExists(gksDir))) return null
   return scanForFile(gksDir, filename)
 }

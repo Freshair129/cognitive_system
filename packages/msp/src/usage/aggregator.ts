@@ -175,6 +175,9 @@ function dateFromFilename(filename: string): string | null {
 }
 
 async function loadDailies(root: string): Promise<ParsedDaily[]> {
+  // NOTE: deliberately NOT gksLayout(). Machine-written atoms stay under
+  // <root>/gks/ pending the write-boundary fix (agent output must go to the
+  // project store / candidate queue, not the canonical vault).
   const dir = resolve(root, 'gks', 'usage')
   let entries: string[]
   try {

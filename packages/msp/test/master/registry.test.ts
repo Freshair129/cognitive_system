@@ -9,6 +9,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
 import { afterEach, describe, expect, it } from 'vitest'
+import { gksLayout } from '@freshair129/gks'
 
 import {
   appendRegistry,
@@ -40,15 +41,15 @@ describe('readRegistry', () => {
 
   it('returns [] when the file exists but is empty', async () => {
     const root = await freshRoot()
-    await mkdir(join(root, 'gks', 'master'), { recursive: true })
-    await writeFile(join(root, 'gks', 'master', 'registry.jsonl'), '', 'utf8')
+    await mkdir(join(gksLayout(root).gks, 'master'), { recursive: true })
+    await writeFile(join(gksLayout(root).gks, 'master', 'registry.jsonl'), '', 'utf8')
     const entries = await readRegistry(root)
     expect(entries).toEqual([])
   })
 
   it('parses valid JSONL lines into MasterEntry objects', async () => {
     const root = await freshRoot()
-    await mkdir(join(root, 'gks', 'master'), { recursive: true })
+    await mkdir(join(gksLayout(root).gks, 'master'), { recursive: true })
     const lines = [
       JSON.stringify({
         block_id: 'IDENTITY-ENGINE',
@@ -64,7 +65,7 @@ describe('readRegistry', () => {
       '',
     ].join('\n')
     await writeFile(
-      join(root, 'gks', 'master', 'registry.jsonl'),
+      join(gksLayout(root).gks, 'master', 'registry.jsonl'),
       lines,
       'utf8',
     )
@@ -76,7 +77,7 @@ describe('readRegistry', () => {
 
   it('silently skips malformed lines mixed with valid entries', async () => {
     const root = await freshRoot()
-    await mkdir(join(root, 'gks', 'master'), { recursive: true })
+    await mkdir(join(gksLayout(root).gks, 'master'), { recursive: true })
     const lines = [
       'not-json-at-all',
       JSON.stringify({ block_id: 'OK', promoted_at: 'X', status: 'active' }),
@@ -93,7 +94,7 @@ describe('readRegistry', () => {
       }),
     ].join('\n')
     await writeFile(
-      join(root, 'gks', 'master', 'registry.jsonl'),
+      join(gksLayout(root).gks, 'master', 'registry.jsonl'),
       lines,
       'utf8',
     )
@@ -105,13 +106,13 @@ describe('readRegistry', () => {
 describe('appendRegistry', () => {
   it('creates the gks/master/ directory if missing', async () => {
     const root = await freshRoot()
-    expect(existsSync(join(root, 'gks', 'master'))).toBe(false)
+    expect(existsSync(join(gksLayout(root).gks, 'master'))).toBe(false)
     await appendRegistry(root, {
       block_id: 'FOO',
       promoted_at: '2026-05-14T04:00:00.000Z',
       status: 'active',
     })
-    expect(existsSync(join(root, 'gks', 'master', 'registry.jsonl'))).toBe(true)
+    expect(existsSync(join(gksLayout(root).gks, 'master', 'registry.jsonl'))).toBe(true)
   })
 
   it('appends one valid JSONL line per call', async () => {
@@ -128,7 +129,7 @@ describe('appendRegistry', () => {
       status: 'active',
     })
     const raw = await readFile(
-      join(root, 'gks', 'master', 'registry.jsonl'),
+      join(gksLayout(root).gks, 'master', 'registry.jsonl'),
       'utf8',
     )
     const lines = raw.split('\n').filter((l) => l.length > 0)

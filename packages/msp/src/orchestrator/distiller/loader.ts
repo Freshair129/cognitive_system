@@ -14,6 +14,9 @@ export interface LoaderOptions {
  * Loads all Narrative atoms from GKS that have not yet been distilled.
  */
 export async function loadUndistilledNarratives(opts: LoaderOptions): Promise<NarrativeUnit[]> {
+  // NOTE: deliberately NOT gksLayout(). Machine-written atoms stay under
+  // <root>/gks/ pending the write-boundary fix (agent output must go to the
+  // project store / candidate queue, not the canonical vault).
   const narrativeDir = join(opts.root, 'gks', 'narrative')
   
   let files: string[]

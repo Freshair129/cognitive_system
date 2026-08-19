@@ -1,6 +1,7 @@
 import { readFile, readdir, stat } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 
+import { gksLayout } from '@freshair129/gks'
 import { parse as parseYaml } from 'yaml'
 import { enforcePolicy, type PepOptions } from '../../policy/pep.js'
 import { makeResource } from '../../policy/types.js'
@@ -86,10 +87,11 @@ async function pathExists(p: string): Promise<boolean> {
 }
 
 async function findAtomFile(id: string, root: string): Promise<string | null> {
-  const canonical = resolve(root, 'gks/master', `${id}.md`)
+  const gksDir = gksLayout(root).gks
+
+  const canonical = resolve(gksDir, 'master', `${id}.md`)
   if (await pathExists(canonical)) return canonical
 
-  const gksDir = resolve(root, 'gks')
   if (!(await pathExists(gksDir))) return null
   return scanForId(gksDir, `${id}.md`)
 }

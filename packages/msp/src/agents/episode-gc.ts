@@ -65,6 +65,9 @@ export async function gcEpisodes(
     errors: [],
   }
 
+  // NOTE: deliberately NOT gksLayout(). Machine-written atoms stay under
+  // <root>/gks/ pending the write-boundary fix (agent output must go to the
+  // project store / candidate queue, not the canonical vault).
   const episodeDir = resolve(root, 'gks', 'episode')
 
   // Resolve directory; if it doesn't exist there's nothing to GC.

@@ -3,8 +3,12 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { gksLayout } from '@freshair129/gks'
 
 import { loadManifest, loadMembers } from '../../src/genesis/loader.js'
+
+/** The loader reads the resolved vault, not <root>/gks. */
+const vault = (root: string): string => gksLayout(root).gks
 
 interface Fixture {
   root: string
@@ -13,12 +17,12 @@ interface Fixture {
 
 async function makeFixture(): Promise<Fixture> {
   const root = await mkdtemp(join(tmpdir(), 'genesis-loader-'))
-  await mkdir(join(root, 'gks', 'genesis'), { recursive: true })
-  await mkdir(join(root, 'gks', 'cognitive'), { recursive: true })
-  await mkdir(join(root, 'gks', 'algo'), { recursive: true })
-  await mkdir(join(root, 'gks', 'concept'), { recursive: true })
-  await mkdir(join(root, 'gks', 'runbook'), { recursive: true })
-  await mkdir(join(root, 'gks', 'params'), { recursive: true })
+  await mkdir(join(vault(root), 'genesis'), { recursive: true })
+  await mkdir(join(vault(root), 'cognitive'), { recursive: true })
+  await mkdir(join(vault(root), 'algo'), { recursive: true })
+  await mkdir(join(vault(root), 'concept'), { recursive: true })
+  await mkdir(join(vault(root), 'runbook'), { recursive: true })
+  await mkdir(join(vault(root), 'params'), { recursive: true })
   return {
     root,
     cleanup: () => rm(root, { recursive: true, force: true }),
@@ -78,7 +82,7 @@ daci:
 # Foo
 `
     await writeFile(
-      join(root, 'gks', 'genesis', 'GENESIS--FOO.md'),
+      join(vault(root), 'genesis', 'GENESIS--FOO.md'),
       manifestText,
       'utf8',
     )
@@ -112,7 +116,7 @@ members:
 body
 `
     await writeFile(
-      join(root, 'gks', 'genesis', 'GENESIS--BAR.md'),
+      join(vault(root), 'genesis', 'GENESIS--BAR.md'),
       manifestText,
       'utf8',
     )
@@ -133,7 +137,7 @@ body
   it('throws when the frontmatter is malformed', async () => {
     const root = fixture!.root
     await writeFile(
-      join(root, 'gks', 'genesis', 'GENESIS--BAD.md'),
+      join(vault(root), 'genesis', 'GENESIS--BAD.md'),
       'no frontmatter at all',
       'utf8',
     )
@@ -143,7 +147,7 @@ body
   it('falls back to recursive scan when the manifest is not at canonical path', async () => {
     const root = fixture!.root
     // Drop it in gks/master/ instead of gks/genesis/.
-    await mkdir(join(root, 'gks', 'master'), { recursive: true })
+    await mkdir(join(vault(root), 'master'), { recursive: true })
     const manifestText = `---
 id: GENESIS--ELSEWHERE
 type: genesis
@@ -157,7 +161,7 @@ members:
 body
 `
     await writeFile(
-      join(root, 'gks', 'master', 'GENESIS--ELSEWHERE.md'),
+      join(vault(root), 'master', 'GENESIS--ELSEWHERE.md'),
       manifestText,
       'utf8',
     )
@@ -172,17 +176,17 @@ describe('loadMembers', () => {
   it('loads bodies for each declared member from canonical dirs', async () => {
     const root = fixture!.root
     await writeFile(
-      join(root, 'gks', 'cognitive', 'COGNITIVE--A.md'),
+      join(vault(root), 'cognitive', 'COGNITIVE--A.md'),
       atom('COGNITIVE--A', 'cog-body'),
       'utf8',
     )
     await writeFile(
-      join(root, 'gks', 'algo', 'ALGO--B.md'),
+      join(vault(root), 'algo', 'ALGO--B.md'),
       atom('ALGO--B', 'algo-b-body'),
       'utf8',
     )
     await writeFile(
-      join(root, 'gks', 'algo', 'ALGO--C.md'),
+      join(vault(root), 'algo', 'ALGO--C.md'),
       atom('ALGO--C', 'algo-c-body'),
       'utf8',
     )
@@ -215,7 +219,7 @@ describe('loadMembers', () => {
       .mockImplementation(() => true)
 
     await writeFile(
-      join(root, 'gks', 'cognitive', 'COGNITIVE--PRESENT.md'),
+      join(vault(root), 'cognitive', 'COGNITIVE--PRESENT.md'),
       atom('COGNITIVE--PRESENT', 'here'),
       'utf8',
     )

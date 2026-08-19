@@ -1,7 +1,9 @@
 #!/usr/bin/env node
-import { writeFile } from 'node:fs/promises'
+import { mkdir, writeFile } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 import { parseArgs } from 'node:util'
+
+import { gksLayout } from '@freshair129/gks'
 
 import { draftAdrContent } from './adr-engine.js'
 import { getStagedDiff } from '../utils/git.js'
@@ -116,7 +118,9 @@ ${draft.consequences}
 - Hint: ${values.hint || 'None'}
 `
 
-    const filePath = join(root, 'gks', 'adr', `${atomId}.md`)
+    const adrDir = join(gksLayout(root).gks, 'adr')
+    await mkdir(adrDir, { recursive: true })
+    const filePath = join(adrDir, `${atomId}.md`)
     await writeFile(filePath, content)
 
     process.stdout.write(`\n✅ ADR successfully drafted!\n`)

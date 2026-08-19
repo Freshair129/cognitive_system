@@ -19,6 +19,8 @@
 import { appendFile, mkdir, readFile } from 'node:fs/promises'
 import { dirname, resolve } from 'node:path'
 
+import { gksLayout } from '@freshair129/gks'
+
 /**
  * One promotion event captured in the registry.
  *
@@ -40,7 +42,12 @@ export interface MasterEntry {
   readonly status: 'active' | 'archived'
 }
 
-const REGISTRY_RELPATH = 'gks/master/registry.jsonl'
+const REGISTRY_RELPATH = 'master/registry.jsonl'
+
+/** Absolute path to the promoted-block registry inside the resolved vault. */
+function registryPath(root: string): string {
+  return resolve(gksLayout(root).gks, REGISTRY_RELPATH)
+}
 
 /**
  * Read every entry from `<root>/gks/master/registry.jsonl`.
@@ -52,7 +59,7 @@ const REGISTRY_RELPATH = 'gks/master/registry.jsonl'
  * `gks/master/MASTER--*.md` atoms.
  */
 export async function readRegistry(root: string): Promise<MasterEntry[]> {
-  const path = resolve(root, REGISTRY_RELPATH)
+  const path = registryPath(root)
   let raw: string
   try {
     raw = await readFile(path, 'utf8')
@@ -83,7 +90,7 @@ export async function appendRegistry(
   root: string,
   entry: MasterEntry,
 ): Promise<void> {
-  const path = resolve(root, REGISTRY_RELPATH)
+  const path = registryPath(root)
   await mkdir(dirname(path), { recursive: true })
   await appendFile(path, `${JSON.stringify(entry)}\n`, 'utf8')
 }

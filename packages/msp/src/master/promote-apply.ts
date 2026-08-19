@@ -26,6 +26,8 @@
 import { access, readFile, rename, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 
+import { gksLayout } from '@freshair129/gks'
+
 import { appendRegistry } from './registry.js'
 import { buildAliases, lookupType } from '../validator/utils/registry.js'
 
@@ -75,7 +77,8 @@ export async function applyPromotion(
     )
   }
 
-  const masterPath = resolve(root, 'gks', 'master', `${parsed.masterId}.md`)
+  const masterDir = resolve(gksLayout(root).gks, 'master')
+  const masterPath = resolve(masterDir, `${parsed.masterId}.md`)
   if (await pathExists(masterPath)) {
     throw new Error(
       `applyPromotion: target ${masterPath} already exists — re-promotion must go through supersession (MASTER--ATOM-CONTRADICTION-POLICY)`,
@@ -89,7 +92,7 @@ export async function applyPromotion(
   // Ensure parent dir exists. `appendRegistry` mkdir's the same dir; we
   // do it here too so the master file write doesn't ENOENT.
   const { mkdir } = await import('node:fs/promises')
-  await mkdir(resolve(root, 'gks', 'master'), { recursive: true })
+  await mkdir(masterDir, { recursive: true })
   await writeFile(masterPath, finalDoc, 'utf8')
 
   await appendRegistry(root, {

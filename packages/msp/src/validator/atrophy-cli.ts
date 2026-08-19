@@ -97,7 +97,9 @@ async function main(): Promise<number> {
   for (const atom of atomicIndex.values()) {
     if (atom.status === 'superseded') continue
 
-    const fullPath = resolve(root, 'gks', atom.path)
+    // atom.path is repo-root-relative (re-indexer.ts) — resolve against root,
+    // not against the vault directory.
+    const fullPath = resolve(root, atom.path)
     let raw: string
     try {
       raw = await readFile(fullPath, 'utf8')

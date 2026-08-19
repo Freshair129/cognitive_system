@@ -3,14 +3,18 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
 import { describe, expect, it } from 'vitest'
+import { gksLayout } from '@freshair129/gks'
 
 import { rebuildBacklinks } from '../../../src/memory/backlinks/indexer.js'
 
+/** The indexer walks the resolved vault, not <root>/gks. */
+const vault = (root: string): string => gksLayout(root).gks
+
 async function makeRoot(): Promise<string> {
   const dir = await mkdtemp(join(tmpdir(), 'msp-backlinks-'))
-  await mkdir(join(dir, 'gks/concept'), { recursive: true })
-  await mkdir(join(dir, 'gks/adr'), { recursive: true })
-  await mkdir(join(dir, 'gks/feat'), { recursive: true })
+  await mkdir(join(vault(dir), 'concept'), { recursive: true })
+  await mkdir(join(vault(dir), 'adr'), { recursive: true })
+  await mkdir(join(vault(dir), 'feat'), { recursive: true })
   return dir
 }
 
@@ -52,9 +56,9 @@ body
 describe('rebuildBacklinks', () => {
   it('walks gks/ and emits one edge per crosslinks entry', async () => {
     const root = await makeRoot()
-    await writeFile(join(root, 'gks/concept/CONCEPT--FOO.md'), ATOM_C)
-    await writeFile(join(root, 'gks/adr/ADR--FOO.md'), ATOM_A)
-    await writeFile(join(root, 'gks/feat/FEAT--FOO.md'), ATOM_F)
+    await writeFile(join(vault(root), 'concept/CONCEPT--FOO.md'), ATOM_C)
+    await writeFile(join(vault(root), 'adr/ADR--FOO.md'), ATOM_A)
+    await writeFile(join(vault(root), 'feat/FEAT--FOO.md'), ATOM_F)
 
     const r = await rebuildBacklinks({ root })
     expect(r.atomCount).toBe(3)
@@ -72,8 +76,8 @@ describe('rebuildBacklinks', () => {
 
   it('produces byte-identical output across runs (idempotent)', async () => {
     const root = await makeRoot()
-    await writeFile(join(root, 'gks/feat/FEAT--FOO.md'), ATOM_F)
-    await writeFile(join(root, 'gks/adr/ADR--FOO.md'), ATOM_A)
+    await writeFile(join(vault(root), 'feat/FEAT--FOO.md'), ATOM_F)
+    await writeFile(join(vault(root), 'adr/ADR--FOO.md'), ATOM_A)
 
     const a = await rebuildBacklinks({ root })
     const first = await readFile(a.outputPath, 'utf8')
@@ -85,13 +89,13 @@ describe('rebuildBacklinks', () => {
 
   it('--check returns changed=true when file would differ', async () => {
     const root = await makeRoot()
-    await writeFile(join(root, 'gks/feat/FEAT--FOO.md'), ATOM_F)
+    await writeFile(join(vault(root), 'feat/FEAT--FOO.md'), ATOM_F)
 
     // First build to populate the file.
     const built = await rebuildBacklinks({ root })
 
     // Then add another atom and run with --check; should report changed.
-    await writeFile(join(root, 'gks/adr/ADR--FOO.md'), ATOM_A)
+    await writeFile(join(vault(root), 'adr/ADR--FOO.md'), ATOM_A)
     const checked = await rebuildBacklinks({ root, check: true })
     expect(checked.changed).toBe(true)
     // --check must NOT write
@@ -101,7 +105,7 @@ describe('rebuildBacklinks', () => {
 
   it('--dry-run does not write', async () => {
     const root = await makeRoot()
-    await writeFile(join(root, 'gks/feat/FEAT--FOO.md'), ATOM_F)
+    await writeFile(join(vault(root), 'feat/FEAT--FOO.md'), ATOM_F)
     const r = await rebuildBacklinks({ root, dryRun: true })
     expect(r.edgeCount).toBeGreaterThan(0)
     await expect(readFile(r.outputPath)).rejects.toThrow()
@@ -119,10 +123,10 @@ describe('rebuildBacklinks', () => {
 
   it('skips gks/00_index/', async () => {
     const root = await makeRoot()
-    await mkdir(join(root, 'gks/00_index'), { recursive: true })
-    await writeFile(join(root, 'gks/00_index/atomic_index.jsonl'), 'noise')
-    await writeFile(join(root, 'gks/00_index/should-skip.md'), ATOM_F)
-    await writeFile(join(root, 'gks/feat/FEAT--FOO.md'), ATOM_F)
+    await mkdir(join(vault(root), '00_index'), { recursive: true })
+    await writeFile(join(vault(root), '00_index/atomic_index.jsonl'), 'noise')
+    await writeFile(join(vault(root), '00_index/should-skip.md'), ATOM_F)
+    await writeFile(join(vault(root), 'feat/FEAT--FOO.md'), ATOM_F)
     const r = await rebuildBacklinks({ root })
     // FEAT--FOO has 2 edges; should-skip would add 2 more if not skipped
     expect(r.edgeCount).toBe(2)

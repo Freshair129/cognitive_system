@@ -1,6 +1,7 @@
 import 'dotenv/config'
 import express from 'express'
 import { retain, recall } from '@freshair129/gks/memory'
+import { gksLayout } from '@freshair129/gks'
 import { getStore } from './memory.js'
 import { CandidateWriter } from './memory/candidates/writer.js'
 import { CandidateNotFoundError } from './memory/candidates/types.js'
@@ -158,7 +159,7 @@ app.use(express.static(path.join(process.cwd(), 'web', 'dist')))
 
 async function scanAtomsFallback(gksRoot: string) {
   const atoms: any[] = []
-  const gksDir = path.join(gksRoot, 'gks')
+  const gksDir = gksLayout(gksRoot).gks
   let types: string[] = []
   try {
     types = await fs.readdir(gksDir)
@@ -217,7 +218,7 @@ app.get('/api/atoms', async (req, res) => {
     const typeFilter = req.query.type as string | undefined
     const statusFilter = req.query.status as string | undefined
     
-    const indexPath = path.join(getActiveRoot(), 'gks', '00_index', 'atomic_index.jsonl')
+    const indexPath = gksLayout(getActiveRoot()).atomicIndex
     const atoms: any[] = []
     
     try {
@@ -256,7 +257,7 @@ app.get('/api/atoms/:id', async (req, res) => {
       return
     }
     const type = typeMatch[1].toLowerCase()
-    const filePath = path.join(getActiveRoot(), 'gks', type, `${id}.md`)
+    const filePath = path.join(gksLayout(getActiveRoot()).gks, type, `${id}.md`)
     
     const content = await fs.readFile(filePath, 'utf-8')
     
@@ -301,7 +302,7 @@ app.get('/api/atoms/:id', async (req, res) => {
 
 app.get('/api/graph', async (req, res) => {
   try {
-    const indexPath = path.join(getActiveRoot(), 'gks', '00_index', 'atomic_index.jsonl')
+    const indexPath = gksLayout(getActiveRoot()).atomicIndex
     const nodes: any[] = []
     const edges: any[] = []
     let atomEntries: any[] = []
@@ -377,7 +378,7 @@ registerSymbolApi(app, getActiveRoot)
 app.get('/api/hotfixes', async (req, res) => {
   try {
     // Read directly from gks/hotfix/*.md as a simple list
-    const hotfixDir = path.join(getActiveRoot(), 'gks', 'hotfix')
+    const hotfixDir = path.join(gksLayout(getActiveRoot()).gks, 'hotfix')
     let files: string[] = []
     try {
       files = await fs.readdir(hotfixDir)
