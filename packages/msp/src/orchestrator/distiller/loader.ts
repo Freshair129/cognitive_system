@@ -2,6 +2,7 @@ import { readFile, readdir } from 'node:fs/promises'
 import { join } from 'node:path'
 import type { Episode } from '../consolidator/types.js'
 import { parseFile } from '../../validator/parse.js'
+import { coresDir } from './pillar-relation.js'
 import type { NarrativeUnit } from './types.js'
 
 export interface LoaderOptions {
@@ -14,10 +15,8 @@ export interface LoaderOptions {
  * Loads all Narrative atoms from GKS that have not yet been distilled.
  */
 export async function loadUndistilledNarratives(opts: LoaderOptions): Promise<NarrativeUnit[]> {
-  // NOTE: deliberately NOT gksLayout(). Machine-written atoms stay under
-  // <root>/gks/ pending the write-boundary fix (agent output must go to the
-  // project store / candidate queue, not the canonical vault).
-  const narrativeDir = join(opts.root, 'gks', 'narrative')
+  // Narratives are project memory, not vault atoms — see pillar-relation.ts.
+  const narrativeDir = coresDir(opts.root, opts.namespace)
   
   let files: string[]
   try {

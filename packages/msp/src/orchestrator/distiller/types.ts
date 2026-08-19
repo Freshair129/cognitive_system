@@ -10,6 +10,11 @@ export interface DistillOptions {
   dryRun?: boolean
   force?: boolean
   llm?: SlmClient
+  /**
+   * Label for the model behind `llm`, recorded as synthesis provenance.
+   * `SlmClient` is a bare function, so it cannot be introspected.
+   */
+  model?: string
   maxLlmCalls?: number
   llmTimeoutMs?: number
 }
@@ -48,6 +53,39 @@ export interface NarrativeUnit {
     unresolved_questions: string[]
     patterns_observed: string[]
   }
+
+  /** How this narrative was synthesised. Absent on legacy records. */
+  provenance?: SynthesisProvenance
+}
+
+/**
+ * Provenance for a synthesised artifact.
+ *
+ * Distillation output is model-generated inference, not observation. Every
+ * narrative and belief records how it was produced so a reviewer (and any
+ * downstream reader) can tell inference from evidence.
+ */
+export interface SynthesisProvenance {
+  /** How the artifact came to exist. `distilled` = LLM synthesis. */
+  method: 'distilled'
+  /** SLM provider that produced the text (e.g. `ollama`, `gemini`, `mock`). */
+  model: string
+  /** ISO-8601 instant of synthesis. */
+  distilled_at: string
+  /** Ids of the inputs the synthesis consumed. */
+  source_ids: string[]
+}
+
+/**
+ * Human approval record. Absent until a person explicitly approves.
+ *
+ * Per `R-01`: a belief may not influence agent behaviour (the identity
+ * preamble) until it carries one of these. Synthesis never writes it.
+ */
+export interface BeliefApproval {
+  approved_by: string
+  approved_at: string
+  note?: string
 }
 
 /**
@@ -62,4 +100,11 @@ export interface IdentityBelief {
   first_observed_at: string
   times_confirmed: number
   times_contested: number
+  /** How this belief was synthesised. Absent on legacy records. */
+  provenance?: SynthesisProvenance
+  /**
+   * Set only by an explicit human approval action. While absent, the belief
+   * is retained and searchable but MUST NOT reach a system prompt.
+   */
+  approval?: BeliefApproval
 }

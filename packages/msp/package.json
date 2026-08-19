@@ -17,6 +17,7 @@
     "msp-genesis-exec": "./dist/genesis/cli.js",
     "msp-consolidate": "./dist/orchestrator/consolidator/cli.js",
     "msp-candidate": "./dist/memory/candidates/cli.js",
+    "msp-belief": "./dist/memory/belief-cli.js",
     "msp-auth": "./dist/policy/step-up/cli.js",
     "msp-tag": "./dist/policy/classifiers/cli.js",
     "msp-atrophy": "./dist/validator/atrophy-cli.js",

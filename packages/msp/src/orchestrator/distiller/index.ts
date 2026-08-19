@@ -41,25 +41,34 @@ export async function distill(opts: DistillOptions): Promise<DistillResult> {
           console.log(`[distill] Tier 2: synthesizing narrative from ${cleaned.length} episodes...`)
           const summary = await synthesizeNarrative(cleaned, opts.llm, opts.llmTimeoutMs)
 
-          const narrativeId = `NARRATIVE--${Date.now()}` 
+          const narrativeId = `NARRATIVE--${Date.now()}`
+          const distilledAt = new Date().toISOString()
+          const sourceEpisodes = cleaned.map(ep => ({
+            id: 'EPISODE--MOCK',
+            session_id: ep.sessionId,
+            encoding_level: ep.encoding_level || 'L2'
+          }))
           const narrative: NarrativeUnit = {
             id: narrativeId,
             namespace,
-            created_at: new Date().toISOString(),
+            created_at: distilledAt,
             domain: 'meta',
-            epistemic_state: 'confirmed',
+            // Single-pass synthesis is inference, not corroborated fact.
+            epistemic_state: 'hypothesis',
             confidence: 0.8,
             encoding_level: 'L2',
-            source_episodes: cleaned.map(ep => ({
-              id: 'EPISODE--MOCK',
-              session_id: ep.sessionId,
-              encoding_level: ep.encoding_level || 'L2'
-            })),
-            content: summary
+            source_episodes: sourceEpisodes,
+            content: summary,
+            provenance: {
+              method: 'distilled',
+              model: opts.model ?? 'unknown',
+              distilled_at: distilledAt,
+              source_ids: sourceEpisodes.map(ep => ep.session_id),
+            }
           }
 
           if (!opts.dryRun) {
-            await writeNarrativeAtom(root, narrative)
+            await writeNarrativeAtom(root, namespace, narrative)
             await updateMemoryCounters(root, namespace, 'core')
             result.narrativesCreated = 1
           }
@@ -79,19 +88,30 @@ export async function distill(opts: DistillOptions): Promise<DistillResult> {
         const identityResult = await synthesizeIdentity(narratives, opts.llm, opts.llmTimeoutMs)
 
         if (!opts.dryRun) {
+          const distilledAt = new Date().toISOString()
           for (const b of identityResult.beliefs) {
             const beliefId = `BELIEF--${Math.random().toString(36).substring(2, 9).toUpperCase()}`
             const belief: IdentityBelief = {
               id: beliefId,
               statement: b.belief,
               confidence: b.confidence,
-              epistemic_state: 'confirmed',
+              // A belief derived once has been corroborated zero times. It
+              // starts as a hypothesis and is never self-certified as
+              // `confirmed` by the pass that invented it.
+              epistemic_state: 'hypothesis',
               source_narratives: b.evidence_cite,
-              first_observed_at: new Date().toISOString(),
-              times_confirmed: 1,
-              times_contested: 0
+              first_observed_at: distilledAt,
+              times_confirmed: 0,
+              times_contested: 0,
+              provenance: {
+                method: 'distilled',
+                model: opts.model ?? 'unknown',
+                distilled_at: distilledAt,
+                source_ids: b.evidence_cite,
+              }
+              // NB: no `approval` — synthesis never grants it.
             }
-            await writeBeliefAtom(root, belief)
+            await writeBeliefAtom(root, namespace, belief)
             result.beliefsRevised++
           }
           await updateMemoryCounters(root, namespace, 'sphere')
