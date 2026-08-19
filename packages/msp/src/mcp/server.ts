@@ -1,6 +1,10 @@
+import { readdir } from 'node:fs/promises'
+import { join } from 'node:path'
+
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 
 import { readIdentity } from '../identity/store.js'
+import { getPolicySet, loadPolicies, type PolicySet } from '../policy/loader.js'
 import { hydrateSubject } from '../policy/subject.js'
 import { makeContext } from '../policy/types.js'
 
@@ -40,6 +44,42 @@ import type { ToolHandlerCtx } from './types.js'
 export interface ServerOpts {
   /** Project root. Defaults to MSP_ROOT env var or process.cwd(). */
   root?: string
+  /**
+   * Directory holding the ABAC policy packs.
+   * Defaults to `<root>/policies`.
+   */
+  policiesDir?: string
+  /**
+   * Refuse to start when no policy rules could be loaded.
+   *
+   * Off by default so a consumer project without a `policies/` directory
+   * still works (the documented Phase-1 posture is default-permit + shadow
+   * log, per UCF D-7). Turn it on — or set `MSP_REQUIRE_POLICIES=1` — for
+   * any deployment that relies on ABAC actually being in force.
+   */
+  requirePolicies?: boolean
+}
+
+/** Total rule count across every loaded pack. */
+function countRules(policySet: PolicySet): number {
+  return policySet.policies.reduce((n, p) => n + p.rules.length, 0)
+}
+
+/**
+ * Number of policy files in `dir`, or null when the directory cannot be read.
+ *
+ * We check the directory ourselves rather than inferring from `loadPolicies()`:
+ * on ENOENT that function returns the *previously loaded* global unchanged, so
+ * a server pointed at a non-existent directory would otherwise report success
+ * on whatever some earlier caller in the same process happened to load.
+ */
+async function countPolicyFiles(dir: string): Promise<number | null> {
+  try {
+    const files = await readdir(dir)
+    return files.filter((f) => f.endsWith('.yaml') || f.endsWith('.yml')).length
+  } catch {
+    return null
+  }
 }
 
 const TOOLS = [
@@ -78,6 +118,48 @@ const TOOLS = [
 
 export async function createMspMcpServer(opts: ServerOpts = {}): Promise<McpServer> {
   const root = opts.root ?? process.env.MSP_ROOT ?? process.cwd()
+
+  // Load the ABAC packs BEFORE any tool can be invoked.
+  //
+  // `getPolicySet()` is a module-level global that every PEP consults. If it
+  // is never populated, `evaluatePolicy()` matches no rule and falls through
+  // to its default-permit posture — so every control (tenant isolation, PII
+  // blocking, subagent scoping, step-up auth) is silently inert.
+  //
+  // This used to be order-dependent rather than absolute: `msp_expand` builds
+  // a cognitive layer per call, which loads the packs as a side effect, so
+  // whether `msp_recall` was policed depended on whether someone had called
+  // expand first in the same process. Loading here makes the posture
+  // deterministic.
+  const policiesDir = opts.policiesDir ?? join(root, 'policies')
+  const fileCount = await countPolicyFiles(policiesDir)
+  const policySet = fileCount ? await loadPolicies(policiesDir) : null
+  const ruleCount = policySet ? countRules(policySet) : 0
+
+  if (ruleCount === 0 || policySet === null) {
+    const message =
+      `no policy rules loaded from ${policiesDir} — every policy decision ` +
+      `will fall through to permit`
+    if (opts.requirePolicies ?? process.env['MSP_REQUIRE_POLICIES'] === '1') {
+      throw new Error(`[policy] ${message} (MSP_REQUIRE_POLICIES is set)`)
+    }
+    process.stderr.write(`[policy] WARNING: ${message}\n`)
+    // The PDP reads a module-level global. If something else in this process
+    // already populated it, that set stays in force — say so rather than let
+    // the warning imply the server is running unpoliced.
+    const inherited = countRules(getPolicySet())
+    if (inherited > 0) {
+      process.stderr.write(
+        `[policy] WARNING: ${inherited} rule(s) loaded elsewhere in this ` +
+          `process remain in effect\n`,
+      )
+    }
+  } else {
+    process.stderr.write(
+      `[policy] loaded ${policySet.policies.length} pack(s), ${ruleCount} rule(s) ` +
+        `from ${policiesDir} (set v${policySet.version})\n`,
+    )
+  }
 
   // Resolve identity once for the server (assuming stdio/local user)
   const identity = await readIdentity({ root })
