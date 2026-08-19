@@ -24,6 +24,7 @@ import type { RunOptions, RunResult } from '../codegen/types.js'
 import type { Action, RequestContext, Subject } from '../policy/types.js'
 import type { SubagentScope } from '../policy/task-scope.js'
 import type { ResolutionTier } from '../orchestrator/resolution/tier.js'
+import type { PolicyFilteredHit } from '../orchestrator/retrieval/types.js'
 
 import type { StateShift } from './nexusmind.js'
 
@@ -85,6 +86,12 @@ export type CognitiveRecallHit = RetrievalHit & {
 
 export interface CognitiveRecallResult extends Omit<RetrievalResult, 'hits'> {
   hits: CognitiveRecallHit[]
+  /**
+   * Hits dropped by the UCF policy pass — both the one inside `recall()` and
+   * the facade's own pass over the rendered bodies it is about to return.
+   * Empty when nothing was denied.
+   */
+  policy_filtered: PolicyFilteredHit[]
   tookMs: number
   fallback_reasons?: string[]
   stateShifts?: StateShift[]

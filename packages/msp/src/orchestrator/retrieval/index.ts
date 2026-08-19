@@ -16,12 +16,14 @@ import {
   DEFAULT_TOP_K,
   DEFAULT_TOTAL_TIMEOUT_MS,
   DEFAULT_WEIGHTS,
+  type PolicyFilteredHit,
   type RecallOptions,
   type RetrievalHit,
   type RetrievalResult,
   type SourceResult,
 } from './types.js'
 import { enforcePolicy } from '../../policy/pep.js'
+import { AttributeResolver } from '../../policy/resource-attributes.js'
 import { makeResource, type Action, type Subject, type RequestContext } from '../../policy/types.js'
 
 /**
@@ -165,18 +167,27 @@ export async function recall(opts: RecallOptions): Promise<RetrievalResult> {
   }
 
   // Phase E: Enforce Policy (PEP)
+  //
+  // Attributes come from `AttributeResolver` rather than from the hit alone:
+  // only three of the eight sources ever attached any, so before this the
+  // policy a hit received depended on which source won RRF for that atom.
   const filteredHits: RetrievalHit[] = []
+  const policyFiltered: PolicyFilteredHit[] = []
   const pepOpts = { root, subject, action, context }
+  const resolver = new AttributeResolver(root, { classify: opts.classifyHits ?? true })
 
   for (const hit of finalHits) {
-    const attributes = {
-      ...(hit.attributes ?? {}),
-      body: hit.snippet ?? null, 
-    }
-    const resource = makeResource('atom', hit.atomId, {}, attributes)
-    const { permitted } = await enforcePolicy(resource, pepOpts)
+    const { attributes, namespace } = await resolver.resolve(hit)
+    const resource = makeResource('atom', hit.atomId, namespace, attributes)
+    const { permitted, decision } = await enforcePolicy(resource, pepOpts)
     if (permitted) {
       filteredHits.push(hit)
+    } else {
+      policyFiltered.push({
+        atomId: hit.atomId,
+        source: hit.source,
+        ...(decision.rule_id ? { ruleId: decision.rule_id } : {}),
+      })
     }
   }
 
@@ -186,6 +197,7 @@ export async function recall(opts: RecallOptions): Promise<RetrievalResult> {
 
   const result: RetrievalResult = {
     hits: filteredHits,
+    policy_filtered: policyFiltered,
     semantic_available: semanticAvailable,
     obsidian_available: obsidianAvailable,
     rerank_available: rerankAvailable,

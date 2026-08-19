@@ -107,8 +107,32 @@ export interface RetrievalTimings {
   rerank?: number
 }
 
+/**
+ * A hit that survived fusion but was dropped by the policy pass.
+ *
+ * Denied hits used to vanish with no trace in the result, which made a policy
+ * misfire indistinguishable from "nothing matched your query". Reporting them
+ * keeps the drop auditable without putting the denied content back in reach —
+ * only the atom id and the deciding rule are surfaced, never the snippet.
+ */
+export interface PolicyFilteredHit {
+  atomId: string
+  /**
+   * Where the hit came from. A `SourceName` for anything fused by `recall()`;
+   * the cognitive facade also reports its own vocabulary here, including
+   * `atomic` for a hit Nexusmind expanded into rather than one a retrieval
+   * source found. Kept as a plain string because the two layers do not share
+   * a source enum — this field is diagnostic, not something to switch on.
+   */
+  source: string
+  /** Id of the rule that denied the hit, when a rule decided it. */
+  ruleId?: string
+}
+
 export interface RetrievalResult {
   hits: RetrievalHit[]
+  /** Hits dropped by the UCF policy pass (§E). Empty when nothing was denied. */
+  policy_filtered: PolicyFilteredHit[]
   /** True when the GKS vector path was operational (no embedder/backend error). */
   semantic_available: boolean
   /** True when an Obsidian REST client is reachable (for deep-link rendering). */
@@ -183,6 +207,17 @@ export interface RecallOptions {
    * results to a model (e.g. a human-facing CLI listing).
    */
   action?: Action
+
+  /**
+   * §4 — Derive `has_secret` / `pii` from each hit's snippet during the PEP
+   * pass, for atoms whose frontmatter does not already declare them. On by
+   * default.
+   *
+   * Set false for a caller that wants policy to consider only what the vault
+   * explicitly declares — e.g. a benchmark that must not pay for scanning, or
+   * a corpus where the declared attributes are known to be authoritative.
+   */
+  classifyHits?: boolean
 }
 
 /**

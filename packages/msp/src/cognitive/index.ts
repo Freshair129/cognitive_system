@@ -25,6 +25,8 @@ import { evaluatePolicy } from '../policy/pdp.js'
 import { logShadowDecision } from '../policy/shadow-log.js'
 import { handleEscalation } from '../policy/escalation.js'
 import { enforcePolicy } from '../policy/pep.js'
+import { AttributeResolver } from '../policy/resource-attributes.js'
+import type { PolicyFilteredHit } from '../orchestrator/retrieval/types.js'
 import { runNexusmind } from './nexusmind.js'
 import { recall as mspRecall } from '../orchestrator/retrieval/index.js'
 
@@ -144,7 +146,15 @@ export async function createCognitiveLayer(
         }
       }
 
-      const finalHits: CognitiveRecallHit[] = []
+      // Everything the facade is about to hand back gets one policy pass over
+      // the text it will actually return.
+      //
+      // `mspRecall` already ran a PEP pass, but over each hit's *snippet*.
+      // Below, a passing hit's snippet is replaced by `renderByTier(note, …)` —
+      // the atom's rendered body — and Nexusmind expansion appends atoms that
+      // were never recall candidates and so were never checked at all. Both
+      // paths widened what reaches the model after policy had already spoken.
+      const candidates: Array<{ hit: CognitiveRecallHit; declared?: Record<string, any> }> = []
 
       for (const h of result.hits) {
         const note = await store.lookup(h.atomId)
@@ -162,7 +172,7 @@ export async function createCognitiveLayer(
             informationValue: nexus.informationValues.get(h.atomId),
           },
         }
-        finalHits.push(markAuditOnly(hit))
+        candidates.push({ hit: markAuditOnly(hit), ...(h.attributes ? { declared: h.attributes } : {}) })
       }
 
       for (const expandedId of nexus.expandedIds) {
@@ -184,7 +194,31 @@ export async function createCognitiveLayer(
               informationValue: nexus.informationValues.get(note.id),
             },
           }
-          finalHits.push(markAuditOnly(hit))
+          candidates.push({ hit: markAuditOnly(hit) })
+        }
+      }
+
+      const finalHits: CognitiveRecallHit[] = []
+      const policyFiltered: PolicyFilteredHit[] = [...result.policy_filtered]
+      const resolver = new AttributeResolver(root)
+      const pepOpts = { root, subject, action, context }
+
+      for (const { hit, declared } of candidates) {
+        const { attributes, namespace } = await resolver.resolve({
+          atomId: hit.atomId,
+          snippet: hit.snippet,
+          ...(declared ? { attributes: declared } : {}),
+        })
+        const resource = makeResource('atom', hit.atomId, namespace, attributes)
+        const { permitted, decision } = await enforcePolicy(resource, pepOpts)
+        if (permitted) {
+          finalHits.push(hit)
+        } else {
+          policyFiltered.push({
+            atomId: hit.atomId,
+            source: hit.source,
+            ...(decision.rule_id ? { ruleId: decision.rule_id } : {}),
+          })
         }
       }
 
@@ -193,6 +227,7 @@ export async function createCognitiveLayer(
       return {
         query,
         hits: finalHits,
+        policy_filtered: policyFiltered,
         strategy: 'multi',
         tookMs: result.timings.fusion,
         fallback_reasons: result.fallback_reasons,

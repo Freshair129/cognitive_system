@@ -73,6 +73,14 @@ export interface Decision {
   advice: Advice[]
   reasoning: ReasonTrace[]
   ttl_seconds?: number
+  /**
+   * Id of the rule that decided this request — the highest-priority match.
+   *
+   * `reasoning` holds a trace entry for every rule evaluated, matched or not,
+   * so it cannot answer "which rule denied me?" on its own. Absent when no
+   * rule matched and the decision came from the default posture.
+   */
+  rule_id?: string
 }
 
 // Constructors
