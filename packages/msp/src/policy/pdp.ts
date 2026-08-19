@@ -78,6 +78,7 @@ export function evaluatePolicy(
     obligations,
     advice: [],
     reasoning: trace,
+    rule_id: bestMatch.rule.id,
   }
 }
 
