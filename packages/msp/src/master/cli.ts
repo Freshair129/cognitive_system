@@ -20,6 +20,8 @@ import { mkdir, writeFile } from 'node:fs/promises'
 import { isAbsolute, join, resolve } from 'node:path'
 import { parseArgs } from 'node:util'
 
+import { gksLayout } from '@freshair129/gks'
+
 import { applyPromotion } from './promote-apply.js'
 import {
   proposePromotion,
@@ -92,7 +94,7 @@ async function run(opts: CliOptions): Promise<number> {
 
   let written = 0
   if (opts.write) {
-    const inboundDir = resolve(opts.root, 'gks', 'inbound')
+    const inboundDir = resolve(gksLayout(opts.root).gks, 'inbound')
     await mkdir(inboundDir, { recursive: true })
     for (const r of reports) {
       if (!r.proposal.promotable) continue

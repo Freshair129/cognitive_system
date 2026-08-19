@@ -1,6 +1,6 @@
 import { resolve, join } from 'node:path'
 import { mkdir, writeFile } from 'node:fs/promises'
-import { createGenesisGraphBackend } from '@freshair129/gks'
+import { createGenesisGraphBackend, gksLayout } from '@freshair129/gks'
 import { dispatch } from '../../agents/dispatch.js'
 import { parseFile } from '../../validator/parse.js'
 
@@ -28,8 +28,9 @@ export async function distillSkillFromEpisodes(opts: SkillCreatorOpts): Promise<
   const limit = opts.limit ?? 5
   const ns = opts.namespace ?? 'default'
 
-  // 1. Initialize Genesis Graph to find recent successful episodes
-  const dbPath = resolve(root, 'gks')
+  // 1. Initialize Genesis Graph to find recent successful episodes.
+  // The store lives inside the resolved vault, not <root>/gks.
+  const dbPath = gksLayout(root).gks
   const backend = createGenesisGraphBackend({ path: dbPath })
   await backend.load()
 

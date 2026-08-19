@@ -4,7 +4,7 @@ import * as dispatchModule from '../../src/agents/dispatch.js'
 import { resolve, join } from 'node:path'
 import { rm, access, mkdtemp } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
-import { createGenesisGraphBackend } from '@freshair129/gks'
+import { createGenesisGraphBackend, gksLayout } from '@freshair129/gks'
 
 vi.mock('../../src/agents/dispatch.js', () => ({
   dispatch: vi.fn()
@@ -16,7 +16,7 @@ describe('MLL Phase 1: Skill Creator', () => {
     const candidateDir = resolve(root, '.brain/msp/projects/test-mll/candidates')
 
     // Populate graph with root and an episode node
-    const dbPath = resolve(root, 'gks')
+    const dbPath = gksLayout(root).gks
     const backend = createGenesisGraphBackend({ path: dbPath })
     await backend.load()
     await backend.addNode({ id: 'N-ROOT', labels: ['Root'], props: {} })

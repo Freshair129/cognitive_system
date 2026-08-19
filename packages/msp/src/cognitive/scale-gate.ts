@@ -17,6 +17,8 @@
 import { readFile, readdir } from 'node:fs/promises'
 import { join } from 'node:path'
 
+import { gksLayout } from '@freshair129/gks'
+
 import type { ScaleLevel } from './types.js'
 import { ScaleLevelGateError } from './types.js'
 import type { PredicateContext, PredicateResult } from '../validator/proto/types.js'
@@ -75,7 +77,8 @@ export async function enforceScaleGate(input: ScaleGateInput): Promise<void> {
 }
 
 async function loadAtoms(root: string): Promise<IndexEntry[]> {
-  const indexPath = join(root, 'gks', '00_index', 'atomic_index.jsonl')
+  const layout = gksLayout(root)
+  const indexPath = layout.atomicIndex
   try {
     const raw = await readFile(indexPath, 'utf8')
     const out: IndexEntry[] = []
@@ -92,7 +95,7 @@ async function loadAtoms(root: string): Promise<IndexEntry[]> {
   } catch {
     // fall through to directory scan
   }
-  return scanGksDir(join(root, 'gks'))
+  return scanGksDir(layout.gks)
 }
 
 async function scanGksDir(gksDir: string): Promise<IndexEntry[]> {

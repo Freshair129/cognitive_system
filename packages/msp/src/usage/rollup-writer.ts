@@ -136,6 +136,9 @@ async function writeRollup(
   payload: RollupPayload,
 ): Promise<string> {
   const filename = `${id}.md`
+  // NOTE: deliberately NOT gksLayout(). Machine-written atoms stay under
+  // <root>/gks/ pending the write-boundary fix (agent output must go to the
+  // project store / candidate queue, not the canonical vault).
   const absDir = resolve(root, 'gks', 'usage')
   const absPath = join(absDir, filename)
   await mkdir(dirname(absPath), { recursive: true })

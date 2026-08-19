@@ -12,6 +12,7 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { afterEach, describe, expect, it } from 'vitest'
+import { gksLayout } from '@freshair129/gks'
 
 const cliPath = fileURLToPath(new URL('../../src/master/cli.ts', import.meta.url))
 
@@ -42,7 +43,7 @@ async function writeGenesisFixture(
   root: string,
   fx: GenesisFixture,
 ): Promise<void> {
-  const dir = join(root, 'gks', 'genesis')
+  const dir = join(gksLayout(root).gks, 'genesis')
   await mkdir(dir, { recursive: true })
   const lines = [
     '---',
@@ -83,7 +84,7 @@ async function writeStableAtom(
   type: string,
   subdir: string,
 ): Promise<void> {
-  const dir = join(root, 'gks', subdir)
+  const dir = join(gksLayout(root).gks, subdir)
   await mkdir(dir, { recursive: true })
   const body = [
     '---',
@@ -124,7 +125,7 @@ describe('msp-master-propose CLI', () => {
 
   it('exits 1 when no GENESIS atoms are found under --root', async () => {
     const root = await freshRoot()
-    await mkdir(join(root, 'gks'), { recursive: true })
+    await mkdir(gksLayout(root).gks, { recursive: true })
     const r = runCli(['--root', root])
     expect(r.code).toBe(1)
     expect(r.stderr).toContain('no GENESIS atoms found')
@@ -153,7 +154,7 @@ describe('msp-master-propose CLI', () => {
     expect(r.stdout).toMatch(/\byes\b/)
     expect(r.stderr).toContain('1 promotable')
     // No inbound directory created.
-    expect(existsSync(join(root, 'gks', 'inbound'))).toBe(false)
+    expect(existsSync(join(gksLayout(root).gks, 'inbound'))).toBe(false)
   })
 
   it('writes a .proposal.md to gks/inbound/ when --write is set', async () => {
@@ -176,7 +177,7 @@ describe('msp-master-propose CLI', () => {
     expect(r.code).toBe(0)
     expect(r.stderr).toContain('1 proposal(s) written')
 
-    const proposalPath = join(root, 'gks', 'inbound', 'MASTER--FULL.proposal.md')
+    const proposalPath = join(gksLayout(root).gks, 'inbound', 'MASTER--FULL.proposal.md')
     expect(existsSync(proposalPath)).toBe(true)
     const content = await readFile(proposalPath, 'utf8')
     expect(content).toContain('id: MASTER--FULL')
@@ -202,7 +203,7 @@ describe('msp-master-propose CLI', () => {
     expect(r.code).toBe(0)
     expect(r.stderr).toContain('0 proposal(s) written')
     // Inbound is created (mkdir runs unconditionally with --write), but empty.
-    const inboundDir = join(root, 'gks', 'inbound')
+    const inboundDir = join(gksLayout(root).gks, 'inbound')
     expect(existsSync(inboundDir)).toBe(true)
     expect(
       existsSync(join(inboundDir, 'MASTER--SPARSE.proposal.md')),

@@ -8,6 +8,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
 import { afterEach, describe, expect, it } from 'vitest'
+import { gksLayout } from '@freshair129/gks'
 
 import { applyPromotion } from '../../src/master/promote-apply.js'
 import { readRegistry } from '../../src/master/registry.js'
@@ -37,7 +38,7 @@ async function writeProposalFixture(
   root: string,
   fx: ProposalFixture,
 ): Promise<string> {
-  const inbound = join(root, 'gks', 'inbound')
+  const inbound = join(gksLayout(root).gks, 'inbound')
   await mkdir(inbound, { recursive: true })
   const lines = [
     '---',
@@ -77,7 +78,7 @@ describe('applyPromotion', () => {
 
     expect(result.master_id).toBe('MASTER--IDENTITY-ENGINE')
     expect(result.master_path).toContain(
-      join('gks', 'master', 'MASTER--IDENTITY-ENGINE.md'),
+      join('master', 'MASTER--IDENTITY-ENGINE.md'),
     )
     expect(existsSync(result.master_path)).toBe(true)
 
@@ -134,9 +135,9 @@ describe('applyPromotion', () => {
       masterId: 'DUPLICATE',
       blockId: 'DUPLICATE',
     })
-    await mkdir(join(root, 'gks', 'master'), { recursive: true })
+    await mkdir(join(gksLayout(root).gks, 'master'), { recursive: true })
     await writeFile(
-      join(root, 'gks', 'master', 'MASTER--DUPLICATE.md'),
+      join(gksLayout(root).gks, 'master', 'MASTER--DUPLICATE.md'),
       '---\nid: MASTER--DUPLICATE\n---\nexisting',
       'utf8',
     )
@@ -147,7 +148,7 @@ describe('applyPromotion', () => {
 
   it('throws when the proposal frontmatter lacks promoted_from', async () => {
     const root = await freshRoot()
-    const inbound = join(root, 'gks', 'inbound')
+    const inbound = join(gksLayout(root).gks, 'inbound')
     await mkdir(inbound, { recursive: true })
     const proposalPath = join(inbound, 'MASTER--MALFORMED.proposal.md')
     await writeFile(
@@ -170,7 +171,7 @@ describe('applyPromotion', () => {
   it('throws when the proposal file is missing', async () => {
     const root = await freshRoot()
     await expect(
-      applyPromotion(join(root, 'gks', 'inbound', 'nope.md'), root),
+      applyPromotion(join(gksLayout(root).gks, 'inbound', 'nope.md'), root),
     ).rejects.toThrow(/cannot read proposal/)
   })
 

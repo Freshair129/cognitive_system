@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 
+import { gksLayout } from '@freshair129/gks'
 import { parse as parseYaml } from 'yaml'
 
 import { atomicWrite } from './atomic-write.js'
@@ -48,7 +49,7 @@ export async function rebuildBacklinks(opts: RebuildOpts): Promise<RebuildResult
   const root = resolve(opts.root)
   const namespace = opts.namespace ?? DEFAULT_NAMESPACE
   const outputPath = backlinksPath(root, namespace)
-  const gksDir = resolve(root, 'gks')
+  const gksDir = gksLayout(root).gks
 
   const edges: Edge[] = []
   let atomCount = 0

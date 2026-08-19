@@ -2,6 +2,8 @@ import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
 import * as readline from 'node:readline';
 
+import { gksLayout } from '@freshair129/gks';
+
 export interface TaskResolution {
   taskId: string;
   atomId: string | null;
@@ -13,7 +15,7 @@ export interface TaskResolution {
  * the atomic_index.jsonl for an atom that contains the taskId within its `attributes.task_ids` array.
  */
 export async function resolveTaskToAtom(workspaceRoot: string, taskId: string): Promise<TaskResolution> {
-  const indexPath = path.join(workspaceRoot, 'gks', '00_index', 'atomic_index.jsonl');
+  const indexPath = gksLayout(workspaceRoot).atomicIndex;
   
   try {
     const fileHandle = await fs.open(indexPath, 'r');
@@ -32,7 +34,8 @@ export async function resolveTaskToAtom(workspaceRoot: string, taskId: string): 
             return {
               taskId,
               atomId: entry.id,
-              atomPath: entry.path ? path.join(workspaceRoot, 'gks', entry.path) : null
+              // entry.path is repo-root-relative (re-indexer.ts).
+              atomPath: entry.path ? path.join(workspaceRoot, entry.path) : null
             };
           }
         }

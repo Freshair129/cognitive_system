@@ -1,8 +1,9 @@
 import { mkdir, mkdtemp, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { join, relative, sep } from 'node:path'
 
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
+import { gksLayout } from '@freshair129/gks'
 
 import { createObsidianClient } from '../../src/obsidian/client.js'
 import { _resetWarnedForTests, resolveEnv, isLoopback } from '../../src/obsidian/env.js'
@@ -11,8 +12,10 @@ import { makeRestClient, probe, wikilinkTargetFor } from '../../src/obsidian/res
 
 async function fixtureVault(): Promise<string> {
   const root = await mkdtemp(join(tmpdir(), 'msp-obsidian-'))
-  const adr = join(root, 'gks', 'adr')
-  const concept = join(root, 'gks', 'concept')
+  // The filesystem client lists markdown from the resolved vault.
+  const vault = gksLayout(root).gks
+  const adr = join(vault, 'adr')
+  const concept = join(vault, 'concept')
   await mkdir(adr, { recursive: true })
   await mkdir(concept, { recursive: true })
   await writeFile(
@@ -70,10 +73,11 @@ describe('createObsidianClient — filesystem mode', () => {
     expect(await c.search('  ')).toEqual([])
   })
 
-  it('readFile reads gks/<type>/*.md by relative path', async () => {
+  it('readFile reads <vault>/<type>/*.md by repo-relative path', async () => {
     const root = await fixtureVault()
     const c = await createObsidianClient({ root })
-    const body = await c.readFile('gks/adr/ADR--FOO.md')
+    const rel = relative(root, join(gksLayout(root).gks, 'adr', 'ADR--FOO.md')).split(sep).join('/')
+    const body = await c.readFile(rel)
     expect(body).toContain('passport body')
   })
 })

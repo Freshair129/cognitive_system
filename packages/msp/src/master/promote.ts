@@ -12,6 +12,7 @@
 import { readFile, readdir } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 
+import { gksLayout } from '@freshair129/gks'
 import { parse as parseYaml } from 'yaml'
 
 import {
@@ -245,7 +246,7 @@ function pad2(n: number): string {
 export async function buildVaultLookup(root: string): Promise<AtomLookup> {
   const cache = new Map<string, AtomRecord>()
   const roots: string[] = []
-  roots.push(resolve(root, 'gks'))
+  roots.push(gksLayout(root).gks)
   const packagesRoot = resolve(root, 'packages')
   const pkgs = await readdir(packagesRoot, { withFileTypes: true }).catch(
     () => [] as import('node:fs').Dirent[],

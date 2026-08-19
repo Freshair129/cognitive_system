@@ -1,6 +1,5 @@
 import { performance } from 'node:perf_hooks'
-import { createGenesisGraphBackend } from '@freshair129/gks'
-import { resolve } from 'node:path'
+import { createGenesisGraphBackend, gksLayout } from '@freshair129/gks'
 
 import type { SourceHit, SourceResult } from '../types.js'
 
@@ -23,7 +22,10 @@ export interface GraphSourceOptions {
  */
 export async function graphSource(opts: GraphSourceOptions): Promise<SourceResult> {
   const start = performance.now()
-  const dbPath = resolve(opts.root, 'gks') // For now, GKS root is the store
+  // The Genesis Graph store lives inside the resolved vault
+  // (gksLayout.gks — .brain/cognitive-system-knowledge-block by default),
+  // NOT <root>/gks.
+  const dbPath = gksLayout(opts.root).gks
 
   if (opts.candidateAtomIds.length === 0) {
     return {

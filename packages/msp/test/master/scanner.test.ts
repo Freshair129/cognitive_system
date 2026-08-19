@@ -6,6 +6,7 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 
 import { afterEach, describe, expect, it } from 'vitest'
+import { gksLayout } from '@freshair129/gks'
 
 import { findGenesisBlocks } from '../../src/master/scanner.js'
 
@@ -36,9 +37,11 @@ interface GenesisFixture {
 async function writeGenesisFixture(
   root: string,
   fx: GenesisFixture,
-  subdir = 'gks/genesis',
+  subdir = 'genesis',
+  /** When false, `subdir` is resolved against `root` instead of the vault. */
+  underVault = true,
 ): Promise<void> {
-  const dir = join(root, subdir)
+  const dir = underVault ? join(gksLayout(root).gks, subdir) : join(root, subdir)
   await mkdir(dir, { recursive: true })
   const lines: string[] = []
   lines.push('---')
@@ -74,11 +77,12 @@ async function writeGenesisFixture(
 
 async function writeAtom(
   root: string,
+  /** Resolved against the vault (gksLayout(root).gks). */
   subdir: string,
   filename: string,
   frontmatter: Record<string, unknown>,
 ): Promise<void> {
-  const dir = join(root, subdir)
+  const dir = join(gksLayout(root).gks, subdir)
   await mkdir(dir, { recursive: true })
   const lines: string[] = ['---']
   for (const [k, v] of Object.entries(frontmatter)) {
@@ -93,7 +97,7 @@ async function writeAtom(
 describe('findGenesisBlocks', () => {
   it('returns an empty list when the vault has no GENESIS atoms', async () => {
     const root = await freshRoot()
-    await mkdir(join(root, 'gks', 'concept'), { recursive: true })
+    await mkdir(join(gksLayout(root).gks, 'concept'), { recursive: true })
     const blocks = await findGenesisBlocks(root)
     expect(blocks).toEqual([])
   })
@@ -151,7 +155,7 @@ describe('findGenesisBlocks', () => {
 
   it('skips files whose frontmatter is malformed', async () => {
     const root = await freshRoot()
-    const dir = join(root, 'gks', 'genesis')
+    const dir = join(gksLayout(root).gks, 'genesis')
     await mkdir(dir, { recursive: true })
     // Missing closing --- → unparseable.
     await writeFile(
@@ -170,7 +174,7 @@ describe('findGenesisBlocks', () => {
 
   it('skips files with type !== genesis even if filename starts with GENESIS', async () => {
     const root = await freshRoot()
-    await writeAtom(root, 'gks/framework', 'GENESIS--LOOKS-LIKE.md', {
+    await writeAtom(root, 'framework', 'GENESIS--LOOKS-LIKE.md', {
       id: 'GENESIS--LOOKS-LIKE',
       phase: 0,
       type: 'framework',
@@ -178,7 +182,7 @@ describe('findGenesisBlocks', () => {
       title: 'Mislabeled',
       created_at: '2026-05-14T10:00:00.000+07:00',
     })
-    await writeAtom(root, 'gks/concept', 'CONCEPT--ALSO-NOT.md', {
+    await writeAtom(root, 'concept', 'CONCEPT--ALSO-NOT.md', {
       id: 'CONCEPT--ALSO-NOT',
       phase: 1,
       type: 'concept',
@@ -195,7 +199,7 @@ describe('findGenesisBlocks', () => {
     await writeGenesisFixture(root, {
       id: 'GENESIS--PKG-LOCAL',
       concept: ['CONCEPT--A'],
-    }, 'packages/msp/gks/genesis')
+    }, 'packages/msp/gks/genesis', false)
     const blocks = await findGenesisBlocks(root)
     expect(blocks).toHaveLength(1)
     expect(blocks[0]!.genesisId).toBe('GENESIS--PKG-LOCAL')

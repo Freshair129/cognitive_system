@@ -1,13 +1,15 @@
 import { readFile, readdir, stat } from 'node:fs/promises'
 import { extname, join, relative, resolve } from 'node:path'
 
+import { gksLayout } from '@freshair129/gks'
+
 import type { ObsidianClient, SearchHit } from './types.js'
 
 const SEARCH_DIRS = ['concept', 'adr', 'feat', 'blueprint', 'frame', 'framework', 'audit', 'task', 'issues']
 
 async function listMarkdown(root: string): Promise<string[]> {
   const out: string[] = []
-  const gks = resolve(root, 'gks')
+  const gks = gksLayout(root).gks
   let entries: string[]
   try {
     entries = await readdir(gks)

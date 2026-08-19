@@ -1,4 +1,4 @@
-import { createGenesisGraphBackend } from '@freshair129/gks'
+import { createGenesisGraphBackend, gksLayout } from '@freshair129/gks'
 import { resolve } from 'node:path'
 import { readFile } from 'node:fs/promises'
 
@@ -54,7 +54,7 @@ export class GenesisBlockBridge {
    */
   async resolveMembers(blockId: string): Promise<LoadedMembers> {
     const manifest = await loadManifest(blockId, this.root)
-    const dbPath = resolve(this.root, 'gks')
+    const dbPath = gksLayout(this.root).gks
     const backend = createGenesisGraphBackend({ path: dbPath })
 
     // Initialize output structure
@@ -111,7 +111,7 @@ export class GenesisBlockBridge {
           // Resolve file path from the graph props or convention
           // In GKS, conventionally gks/<dim>/<id>.md
           const dim = deriveDimension(id)
-          const filePath = resolve(this.root, 'gks', dim, `${id}.md`)
+          const filePath = resolve(gksLayout(this.root).gks, dim, `${id}.md`)
           
           try {
             const content = await readFile(filePath, 'utf8')
