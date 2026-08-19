@@ -51,7 +51,14 @@ export async function recall(opts: RecallOptions): Promise<RetrievalResult> {
       namespace
     }
   }
-  const action: Action = 'read'
+  // Recall hands its hits back to a model, so the UCF action is
+  // `expose-to-llm` — not `read`. This was the gap that made the protective
+  // packs unreachable: `20-restricted-expose`, `40-pii-block-from-llm` and
+  // `80-security-secrets` all scope their deny rules to `expose-to-llm`, so a
+  // PEP pass labelled `read` matched none of them and every hit fell through
+  // to the baseline permit. Nothing that matched `read` stops matching:
+  // every rule listing `read` also lists `expose-to-llm`.
+  const action: Action = opts.action ?? 'expose-to-llm'
   const context: RequestContext = opts.context ?? { 
     time: new Date(),
     origin: 'internal',

@@ -86,7 +86,11 @@ export async function createCognitiveLayer(
       retrievalOpts: RetrievalOptions & PolicyContext = {},
     ): Promise<CognitiveRecallResult> {
       const subject = retrievalOpts.subject ?? makeSubject('user', 'anonymous')
-      const action = retrievalOpts.action ?? 'recall'
+      // `expose-to-llm`, not `recall`: the hits become model context. The
+      // protective packs scope their deny rules to `expose-to-llm`, so the
+      // old default matched none of them. See the note in
+      // `orchestrator/retrieval/types.ts` on `RecallOptions.action`.
+      const action = retrievalOpts.action ?? 'expose-to-llm'
       const context = retrievalOpts.context ?? makeContext('internal', 'system-recall')
 
       console.debug(`[ucf] 4-tuple: facade.recall | sub:${subject.id} | act:${action} | trace:${context.trace_id}`)
@@ -97,6 +101,7 @@ export async function createCognitiveLayer(
         namespace: opts.defaultNamespace?.tenant_id,
         topK: retrievalOpts.topK,
         subject,
+        action,
         context,
         embedder: await store.embedder(),
         vectorBackend: await store.getVectorStore('atomic'),
@@ -226,7 +231,10 @@ export async function createCognitiveLayer(
 
     async expand(req: ExpandRequest, pOpts?: PolicyContext): Promise<ExpandResult> {
       const subject = pOpts?.subject ?? makeSubject('user', 'anonymous')
-      const action = pOpts?.action ?? 'read'
+      // expand() returns the atom's full body to the caller's model — the
+      // clearest `expose-to-llm` on the surface. Under the old `read` default
+      // the restricted/PII/secret packs could not deny it.
+      const action = pOpts?.action ?? 'expose-to-llm'
       const context = pOpts?.context ?? makeContext('internal', 'system-expand')
       const targetTier = req.to ?? 'FULL'
 

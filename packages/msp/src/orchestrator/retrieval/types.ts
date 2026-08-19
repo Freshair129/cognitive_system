@@ -1,5 +1,5 @@
 import type { ObsidianClient } from '../../obsidian/client.js'
-import type { RequestContext, Subject } from '../../policy/types.js'
+import type { Action, RequestContext, Subject } from '../../policy/types.js'
 
 /**
  * Logical retrieval source name. Each source produces ranked hits which
@@ -170,6 +170,19 @@ export interface RecallOptions {
   subject?: Subject
   /** §3 — UCF Request Context (trace id / time). */
   context?: RequestContext
+  /**
+   * §3 — UCF Action for the PEP pass over the fused hits.
+   *
+   * Defaults to `expose-to-llm`, because that is what recall actually does:
+   * the hits are handed back to a model as context. The protective packs
+   * (`20-restricted-expose`, `40-pii-block-from-llm`, `80-security-secrets`)
+   * key their deny rules on `expose-to-llm` precisely to distinguish
+   * "someone read this locally" from "this entered a model's context".
+   *
+   * Override with `read` only for a caller that genuinely does not feed the
+   * results to a model (e.g. a human-facing CLI listing).
+   */
+  action?: Action
 }
 
 /**
