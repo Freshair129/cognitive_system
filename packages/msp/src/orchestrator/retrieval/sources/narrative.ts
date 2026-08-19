@@ -9,20 +9,22 @@ import {
   DEFAULT_PER_SOURCE_TIMEOUTS,
 } from '../types.js'
 import { parseFile } from '../../../validator/parse.js'
+import { coresDir } from '../../distiller/pillar-relation.js'
+import { DEFAULT_NAMESPACE } from '../types.js'
 
 /**
  * Retrieval source for Narrative atoms (Tier 2).
- * Reads from gks/narrative/ and filters by namespace if possible.
+ *
+ * Narratives are project memory, written by the distiller to
+ * `.brain/msp/projects/<ns>/memory/cores/` — see `pillar-relation.ts` for
+ * why they are not vault atoms.
  */
 export async function narrativeSource(opts: RecallOptions): Promise<SourceResult> {
   const start = performance.now()
   const root = opts.root ?? process.cwd()
   const timeoutMs = opts.perSourceTimeouts?.narrative ?? DEFAULT_PER_SOURCE_TIMEOUTS.narrative
   
-  // NOTE: deliberately NOT gksLayout(). Machine-written atoms stay under
-  // <root>/gks/ pending the write-boundary fix (agent output must go to the
-  // project store / candidate queue, not the canonical vault).
-  const narrativeDir = join(root, 'gks', 'narrative')
+  const narrativeDir = coresDir(root, opts.namespace ?? DEFAULT_NAMESPACE)
   
   try {
     const files = await readdir(narrativeDir)
